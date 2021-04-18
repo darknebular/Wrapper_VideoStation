@@ -11,7 +11,7 @@ sudo mv -n /var/packages/VideoStation/target/bin/ffmpeg /var/packages/VideoStati
 
 # Injecting the script:
 
-sudo wget -O - https://raw.githubusercontent.com/darknebular/ffmpeg-wrapper-pipe/main/ffmpeg-wrapper-pipe > /var/packages/VideoStation/target/bin/ffmpeg
+sudo wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg-wrapper > /var/packages/VideoStation/target/bin/ffmpeg
 
 # Change ownership and mode of the script
 
