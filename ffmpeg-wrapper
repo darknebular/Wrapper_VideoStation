@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# VERSION PIPE CONCEPT. Fork from BenjaminPoncet rev8.0
-rev="4"
+# Fork from code of BenjaminPoncet.
+rev="5"
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -318,8 +318,8 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error openi
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	# _log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
-	_log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE VS"
 	_log "FFMPEG1  = $bin2"
 	_log "FFMPEG2  = $bin1"
@@ -343,8 +343,8 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error openi
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	# _log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
-	_log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = ORIG"
 	_log "FFMPEG   = $bin2"
 
@@ -359,8 +359,8 @@ fi
 stopexectime=`date +%s`
 if test $((stopexectime-startexectime)) -lt 10; then
 	_log "STDOUT   ="
-	# _log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
-	_log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 fi
 
 _log "*** CHILD END ***"
