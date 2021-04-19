@@ -101,6 +101,22 @@ case "$1" in
 		args1vs+=("-i" "$1")
 		args2vs+=("-i" "pipe:0" "-map" "0")
 	;;
+	-vf)
+		shift
+		# if [ "$hwaccel" = "vaapi" ] && [ "$vcodecprofile" = "Main 10" ]; then
+			# scale_w=`echo "${1}" | sed -e 's/.*=w=//g' | sed -e 's/:h=.*//g'`
+			# scale_h=`echo "${1}" | sed -e 's/.*:h=//g'`
+			# if let ${scale_w} AND let ${scale_h}; then
+				# argsnew+=("-vf" "scale_vaapi=w=${scale_w}:h=${scale_h}:format=nv12,hwupload,setsar=sar=1")
+			# else
+				# argsnew+=("-vf" "scale_vaapi=format=nv12,hwupload,setsar=sar=1")
+			# fi
+		# else
+			# argsnew+=("-vf" "$1")
+		# fi
+		args2sv+=("-vf" "$1")
+		args1vs+=("-vf" "$1")
+	;;
 	-vcodec)
 		shift
 		args1sv+=("-vcodec" "copy")
