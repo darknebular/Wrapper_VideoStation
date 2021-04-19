@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # VERSION PIPE CONCEPT. Fork from BenjaminPoncet rev8.0
-rev="1"
+rev="2"
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -242,11 +242,10 @@ else
 
 	$bin1 "${args1sv[@]}" | $bin2 "${args2sv[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
+	childpid=$!
+	_log "CHILDPID = $childpid"
+	wait $childpid
 fi
-
-childpid=$!
-_log "CHILDPID = $childpid"
-wait $childpid
 
 if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
 
