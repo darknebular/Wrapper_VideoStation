@@ -1,7 +1,7 @@
 # Wrapper_VideoStation
-Synology VideoStation ffmpeg wrapper with DTS, EAC3 and TrueHD support via pipes. It enables hardware transcoding from ffmpeg from Synology for video and transcoding DTS, EAC3, AAC from the ffmpeg of the SynoCommunity.
+Synology VideoStation ffmpeg wrapper with DTS, EAC3 and TrueHD support. It enables hardware transcoding from ffmpeg from Synology for video and transcoding DTS, EAC3, AAC from the ffmpeg of the SynoCommunity.
 
-Works fine the OffLine transcoding and tipical extensions like: MKV, MP4, AVI ...
+Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI ...
 
 ********************************************************************
 INSTALL:
