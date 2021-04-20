@@ -3,6 +3,8 @@ Synology VideoStation ffmpeg wrapper with DTS, EAC3 and TrueHD support. It enabl
 
 Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI ...
 
+This wrapper is a fork of BenjaminPoncet with a few changes, fixes in his code.
+
 ********************************************************************
 INSTALL:
 ********************************************************************
