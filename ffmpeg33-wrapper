@@ -231,9 +231,9 @@ case "$1" in
 	*)
 		argsnew+=("$1")
 		if [ "$stream" = "$1" ]; then
-			args1sv+=("-bufsize" "1024k" "pipe:1")
+			args1sv+=("-bufsize" "8192k" "pipe:1")
 			args2sv+=("$1")
-			args1vs+=("-bufsize" "1024k" "pipe:1")
+			args1vs+=("-bufsize" "8192k" "pipe:1")
 			args2vs+=("$1")
 		else
 			args2sv+=("$1")
