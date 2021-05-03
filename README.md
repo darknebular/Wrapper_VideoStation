@@ -93,7 +93,6 @@ wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/mai
 
 sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg33
 
-sudo chmod u+s /var/packages/CodecPack/target/bin/ffmpeg33
 
 
 # Save VideoStation's libsynovte.so
