@@ -272,13 +272,13 @@ else
 	_log "ACODEC   = $acodec"
 	_log "PARAMVS  ="
 	_log_para "$paramvs"
-	_log "MODE     = WRAP"
-	_log "FFMPEG   = $bin2"
+	_log "MODE     = ORIG"
+	_log "FFMPEG   = $bin1"
 	_log "PARAMWP  ="
 	param1=${argsnew[@]}
 	_log_para "$param1"
 
-	$bin2 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin1 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 fi
 
@@ -292,7 +292,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	startexectime=`date +%s`
 	_log "STDOUT   ="
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
-	_log "MODE     = PIPE SV"
+	_log "MODE     = PIPE WRAP-ORIG"
 	_log "FFMPEG1  = $bin2"
 	_log "FFMPEG2  = $bin1"
 	_log "PARAM1   ="
@@ -317,7 +317,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "STDOUT   ="
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
-	_log "MODE     = PIPE VS"
+	_log "MODE     = PIPE ORIG-WRAP"
 	_log "FFMPEG1  = $bin1"
 	_log "FFMPEG2  = $bin2"
 	_log "PARAM1   ="
