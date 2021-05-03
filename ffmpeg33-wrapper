@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fork from code of BenjaminPoncet rev.12. THIS VERSION IS A BETA, FOR TESTING ONLY...
-rev="8"
+rev="9"
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -286,7 +286,7 @@ childpid=$!
 _log "CHILDPID = $childpid"
 wait $childpid
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
 
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
@@ -310,7 +310,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error openi
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
 
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
@@ -335,14 +335,14 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error openi
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
 
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
-	_log "MODE     = WRAP"
+	_log "MODE     = WRAPPER"
 	_log "FFMPEG   = $bin2"
 
 	$bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
