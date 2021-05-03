@@ -250,7 +250,7 @@ startexectime=`date +%s`
 
 if [ "$scodec" = "subrip" ]; then	
 
-	_log "FFMPEG   = $bin2"
+	_log "FFMPEG   = $bin1"
 	_log "CODEC    = $scodec"
 	_log "PARAMVS  ="
 	_log_para "$paramvs"
@@ -259,7 +259,7 @@ if [ "$scodec" = "subrip" ]; then
 
 elif [ "$fcodec" = "mjpeg" ]; then	
 
-	_log "FFMPEG   = $bin2"
+	_log "FFMPEG   = $bin1"
 	_log "CODEC    = $fcodec"
 	_log "PARAMVS  ="
 	_log_para "$paramvs"
@@ -272,8 +272,8 @@ else
 	_log "ACODEC   = $acodec"
 	_log "PARAMVS  ="
 	_log_para "$paramvs"
-	_log "MODE     = ORIG"
-	_log "FFMPEG   = $bin1"
+	_log "MODE     = WRAP"
+	_log "FFMPEG   = $bin2"
 	_log "PARAMWP  ="
 	param1=${argsnew[@]}
 	_log_para "$param1"
@@ -293,8 +293,8 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "STDOUT   ="
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE SV"
-	_log "FFMPEG1  = $bin1"
-	_log "FFMPEG2  = $bin2"
+	_log "FFMPEG1  = $bin2"
+	_log "FFMPEG2  = $bin1"
 	_log "PARAM1   ="
 	param1=${args1sv[@]}
 	_log_para "$param1"
@@ -302,7 +302,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	param2=${args2sv[@]}
 	_log_para "$param2"
 
-	$bin1 "${args1sv[@]}" | $bin2 "${args2sv[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin2 "${args1sv[@]}" | $bin1 "${args2sv[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 	childpid=$!
 	_log "CHILDPID = $childpid"
@@ -318,8 +318,8 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE VS"
-	_log "FFMPEG1  = $bin2"
-	_log "FFMPEG2  = $bin1"
+	_log "FFMPEG1  = $bin1"
+	_log "FFMPEG2  = $bin2"
 	_log "PARAM1   ="
 	param1=${args1vs[@]}
 	_log_para "$param1"
@@ -327,7 +327,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	param2=${args2vs[@]}
 	_log_para "$param2"
 
-	$bin2 "${args1vs[@]}" | $bin1 "${args2vs[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin1 "${args1vs[@]}" | $bin2 "${args2vs[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 	childpid=$!
 	_log "CHILDPID = $childpid"
