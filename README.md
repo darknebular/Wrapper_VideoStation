@@ -89,6 +89,7 @@ sudo vi ffmpeg33
 ----ESC key and then write :wq
 
 sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg33
+sudo chmod u+s /var/packages/CodecPack/target/bin/ffmpeg33
 
 
 # Save VideoStation's libsynovte.so
