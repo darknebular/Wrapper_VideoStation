@@ -7,7 +7,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 
 ********************************************************************
-INSTALL:
+INSTALL: Wrapper standard
 ********************************************************************
 
 # Save VideoStation's ffmpeg
@@ -69,4 +69,22 @@ sudo mv -f /var/packages/VideoStation/target/lib/libsynovte.so.orig /var/package
 sudo rm /var/packages/CodecPack/target/bin/ffmpeg33
 
 sudo mv /var/packages/CodecPack/target/bin/ffmpeg33.orig /var/packages/CodecPack/target/bin/ffmpeg33
+
+
+
+
+************************************************************************
+INSTALL: Wrapper for Advance Codec Pack installed ffmpeg33-wrapper file
+************************************************************************
+# With this wrapper you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
+
+cd /var/packages/CodecPack/target/bin
+sudo mv /var/packages/CodecPack/target/bin/ffmpeg33 /var/packages/CodecPack/target/bin/ffmpeg33.orig
+sudo vi ffmpeg33
+----Push I key and then COPY the content of the file called ffmpeg33-wrapper
+----ESC key and then write :wq
+
+sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg33
+
+
 
