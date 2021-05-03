@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fork from code of BenjaminPoncet rev.12.
-rev="10"
+rev="11"
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -255,7 +255,7 @@ if [ "$scodec" = "subrip" ]; then
 	_log "PARAMVS  ="
 	_log_para "$paramvs"
 	
-	$bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin1 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 elif [ "$fcodec" = "mjpeg" ]; then	
 
@@ -264,7 +264,7 @@ elif [ "$fcodec" = "mjpeg" ]; then
 	_log "PARAMVS  ="
 	_log_para "$paramvs"
 	
-	$bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin1 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 else
 
@@ -278,7 +278,7 @@ else
 	param1=${argsnew[@]}
 	_log_para "$param1"
 
-	$bin1 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin2 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 fi
 
