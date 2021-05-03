@@ -86,5 +86,16 @@ sudo vi ffmpeg33
 
 sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg33
 
+# Save VideoStation's libsynovte.so
+
+sudo cp -n /var/packages/VideoStation/target/lib/libsynovte.so /var/packages/VideoStation/target/lib/libsynovte.so.orig
+
+sudo chown VideoStation:VideoStation /var/packages/VideoStation/target/lib/libsynovte.so.orig
+
+
+# Patch libsynovte.so to authorize DTS, EAC3 and TrueHD
+
+sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/VideoStation/target/lib/libsynovte.so
+
 
 
