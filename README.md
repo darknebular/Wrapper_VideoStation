@@ -76,7 +76,7 @@ sudo mv /var/packages/CodecPack/target/bin/ffmpeg33.orig /var/packages/CodecPack
 ************************************************************************
 INSTALL: Wrapper for Advance Codec Pack installed ffmpeg33-wrapper file
 ************************************************************************
-# With this wrapper you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
+# With this wrapper (ffmpeg33-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
 
 cd /var/packages/CodecPack/target/bin
 sudo mv /var/packages/CodecPack/target/bin/ffmpeg33 /var/packages/CodecPack/target/bin/ffmpeg33.orig
