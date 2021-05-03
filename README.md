@@ -92,6 +92,7 @@ sudo vi ffmpeg33
 wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg33-wrapper > /var/packages/CodecPack/target/bin/ffmpeg33
 
 sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg33
+
 sudo chmod u+s /var/packages/CodecPack/target/bin/ffmpeg33
 
 
