@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fork from code of BenjaminPoncet rev.12.
-rev="11.1"
+rev="11.1AME"
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -292,7 +292,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	startexectime=`date +%s`
 	_log "STDOUT   ="
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
-	_log "MODE     = PIPE ORIG-WRAP"
+	_log "MODE     = PIPE V_ORIG-A_WRAP"
 	_log "FFMPEG1  = $bin1"
 	_log "FFMPEG2  = $bin2"
 	_log "PARAM1   ="
@@ -317,7 +317,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "STDOUT   ="
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
-	_log "MODE     = PIPE WRAP-ORIG"
+	_log "MODE     = PIPE V_WRAP-A_ORIG"
 	_log "FFMPEG1  = $bin2"
 	_log "FFMPEG2  = $bin1"
 	_log "PARAM1   ="
