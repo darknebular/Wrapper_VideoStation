@@ -131,11 +131,11 @@ case "$1" in
 	;;
 	-vb)
     		shift
-		argsnew+=("-vb" "8M")
-		args1sv+=("-vb" "8M")
-		args2sv+=("-vb" "5M")
-		args1vs+=("-vb" "8M")
-		args2vs+=("-vb" "5M")
+		argsnew+=("-vb" "12M")
+		args1sv+=("-vb" "11M")
+		args2sv+=("-vb" "11M")
+		args1vs+=("-vb" "11M")
+		args2vs+=("-vb" "11M")
 	;;
 	-acodec)
 		shift
