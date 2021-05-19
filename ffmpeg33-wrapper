@@ -129,6 +129,14 @@ case "$1" in
 		args1vs+=("-vcodec" "$1")
 		args2vs+=("-vcodec" "copy")
 	;;
+	-vb)
+    		shift
+		argsnew+=("-vb" "$1")
+		args1sv+=("-vb" "$1")
+		args2sv+=("-vb" "5M")
+		args1vs+=("-vb" "$1")
+		args2vs+=("-vb" "5M")
+	;;
 	-acodec)
 		shift
 		if [ "$1" = "libfaac" ]; then
