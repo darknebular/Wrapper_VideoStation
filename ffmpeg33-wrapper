@@ -365,7 +365,7 @@ fi
 stopexectime=`date +%s`
 if test $((stopexectime-startexectime)) -lt 10; then
 	_log "STDOUT   ="
-	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 22 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 fi
 
