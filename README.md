@@ -74,24 +74,24 @@ sudo mv /var/packages/CodecPack/target/bin/ffmpeg33.orig /var/packages/CodecPack
 
 
 ************************************************************************
-INSTALL: Wrapper for Advance Codec Pack installed ffmpeg33-wrapper file
+INSTALL: Wrapper for Advance Codec Pack installed ffmpeg41-wrapper file
 ************************************************************************
-# With this wrapper (ffmpeg33-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
+# With this wrapper (ffmpeg41-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
 
 cd /var/packages/CodecPack/target/bin
 
-sudo mv /var/packages/CodecPack/target/bin/ffmpeg33 /var/packages/CodecPack/target/bin/ffmpeg33.orig
+sudo mv /var/packages/CodecPack/target/bin/ffmpeg33 /var/packages/CodecPack/target/bin/ffmpeg41.orig
 
-sudo vi ffmpeg33
+sudo vi ffmpeg41
 
-----Push I key and then COPY the content of the file called ffmpeg33-wrapper
+----Push I key and then COPY the content of the file called ffmpeg41-wrapper
 
 ----ESC key and then write :wq
 
 # Or you can do this if you don´t want to use VI command:
-wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg33-wrapper > /var/packages/CodecPack/target/bin/ffmpeg33
+wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper > /var/packages/CodecPack/target/bin/ffmpeg41
 
-sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg33
+sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
 
 
 
