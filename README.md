@@ -74,8 +74,9 @@ sudo mv /var/packages/CodecPack/target/bin/ffmpeg33.orig /var/packages/CodecPack
 
 
 ************************************************************************
-INSTALL: Wrapper for Advance Codec Pack installed ffmpeg41-wrapper file 
-DSM 7.0
+# INSTALL: Wrapper for Advance Codec Pack installed ffmpeg41-wrapper file 
+
+# DSM 7.0
 ************************************************************************
 # With this wrapper (ffmpeg41-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
 
