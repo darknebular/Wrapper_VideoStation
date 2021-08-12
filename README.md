@@ -82,18 +82,18 @@ sudo mv /var/packages/CodecPack/target/bin/ffmpeg33.orig /var/packages/CodecPack
 ************************************************************************
 # With this wrapper (ffmpeg41-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
 
-cd /var/packages/CodecPack/target/bin
+1) cd /var/packages/CodecPack/target/bin
 
-sudo mv /var/packages/CodecPack/target/bin/ffmpeg41 /var/packages/CodecPack/target/bin/ffmpeg41.orig
+2) sudo mv /var/packages/CodecPack/target/bin/ffmpeg41 /var/packages/CodecPack/target/bin/ffmpeg41.orig
 
-sudo vi ffmpeg41
+3.a) sudo vi ffmpeg41
 
 ----Push I key and then COPY the content of the file called ffmpeg41-wrapper
 
 ----ESC key and then write :wq
 
 # Or you can do this if you don´t want to use VI command:
-wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper > /var/packages/CodecPack/target/bin/ffmpeg41
+3.b) wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper > /var/packages/CodecPack/target/bin/ffmpeg41
 
 sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
 
@@ -101,14 +101,15 @@ sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
 
 # Save VideoStation's libsynovte.so
 
-sudo cp -n /var/packages/VideoStation/target/lib/libsynovte.so /var/packages/VideoStation/target/lib/libsynovte.so.orig
+4) sudo cp -n /var/packages/VideoStation/target/lib/libsynovte.so /var/packages/VideoStation/target/lib/libsynovte.so.orig
 
-sudo chown VideoStation:VideoStation /var/packages/VideoStation/target/lib/libsynovte.so.orig
+5) sudo chown VideoStation:VideoStation /var/packages/VideoStation/target/lib/libsynovte.so.orig
 
 
 # Patch libsynovte.so to authorize DTS, EAC3 and TrueHD
 
-sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/VideoStation/target/lib/libsynovte.so
+6) sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/VideoStation/target/lib/libsynovte.so
 
+7) sudo synopkg restart VideoStation
 
 
