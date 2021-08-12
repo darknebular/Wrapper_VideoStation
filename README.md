@@ -95,21 +95,21 @@ sudo mv /var/packages/CodecPack/target/bin/ffmpeg33.orig /var/packages/CodecPack
 # Or you can do this if you don´t want to use VI command:
 3.b) wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper > /var/packages/CodecPack/target/bin/ffmpeg41
 
-sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
+4) sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
 
 
 
 # Save VideoStation's libsynovte.so
 
-4) sudo cp -n /var/packages/VideoStation/target/lib/libsynovte.so /var/packages/VideoStation/target/lib/libsynovte.so.orig
+5) sudo cp -n /var/packages/VideoStation/target/lib/libsynovte.so /var/packages/VideoStation/target/lib/libsynovte.so.orig
 
-5) sudo chown VideoStation:VideoStation /var/packages/VideoStation/target/lib/libsynovte.so.orig
+6) sudo chown VideoStation:VideoStation /var/packages/VideoStation/target/lib/libsynovte.so.orig
 
 
 # Patch libsynovte.so to authorize DTS, EAC3 and TrueHD
 
-6) sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/VideoStation/target/lib/libsynovte.so
+7) sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/VideoStation/target/lib/libsynovte.so
 
-7) sudo synopkg restart VideoStation
+8) sudo synopkg restart VideoStation
 
 
