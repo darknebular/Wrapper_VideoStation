@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fork from code of BenjaminPoncet rev.12.
-rev="AME_12.2"
+rev="AME_12.2.1"
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -247,6 +247,7 @@ case "$1" in
 		else
 			args2sv+=("$1")
 			args1vs+=("$1")
+			args2vs+=("$1")
 		fi
 	;;
 esac
