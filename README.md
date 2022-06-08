@@ -22,7 +22,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 3.a) sudo vi ffmpeg41
 
-----Push "i" key and then COPY (right-click) the content of the file called ffmpeg41-wrapper-DSM7_1
+----Push "i" key and then PASTE (right-click) the content of the file called ffmpeg41-wrapper-DSM7_1
 
 ----"ESC" key and then write :wq
 
@@ -87,7 +87,7 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 
 3.a) sudo vi ffmpeg41
 
-----Push I key and then COPY the content of the file called ffmpeg41-wrapper
+----Push I key and then PASTE the content of the file called ffmpeg41-wrapper
 
 ----ESC key and then write :wq
 
