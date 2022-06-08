@@ -12,7 +12,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 # INSTALL: Wrapper for Advance Codec Pack 2.0.X installed with ffmpeg41-wrapper-DSM7_1 file 
 
 ************************************************************************
-# With this wrapper (ffmpeg41-wrapper_DSM7_1 file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary. You will need Putty or other SSH Client in order to connect.
+**With this wrapper (ffmpeg41-wrapper_DSM7_1 file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary. You will need Putty or other SSH Client in order to connect.
 
 1) cd /var/packages/CodecPack/target/pack/bin
 
