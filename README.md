@@ -12,7 +12,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 # INSTALL: Wrapper for Advance Codec Pack 2.0.X installed with ffmpeg41-wrapper-DSM7_1 file 
 
 ************************************************************************
-**With this wrapper (ffmpeg41-wrapper_DSM7_1 file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary. You will need Putty or other SSH Client in order to connect.
+**With this wrapper (ffmpeg41-wrapper_DSM7_1 file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary. You will need Putty or other SSH Client in order to connect.**
 
 1) cd /var/packages/CodecPack/target/pack/bin
 
@@ -26,7 +26,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 ----"ESC" key and then write :wq
 
-**Or you can do this if you don´t want to use VI command:
+**(Or you can do this if you don´t want to use VI command:)**
 
 3.b) sudo wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper-DSM7_1 > /var/packages/CodecPack/target/pack/bin/ffmpeg41
 
@@ -77,11 +77,13 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 # INSTALL: Wrapper for Advance Codec Pack 1.X with installed ffmpeg41-wrapper file 
 
 ************************************************************************
-# With this wrapper (ffmpeg41-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary
+**With this wrapper (ffmpeg41-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary**
 
 1) cd /var/packages/CodecPack/target/bin
 
 2) sudo mv /var/packages/CodecPack/target/bin/ffmpeg41 /var/packages/CodecPack/target/bin/ffmpeg41.orig
+
+**You must select 3.a or 3.b steps:**
 
 3.a) sudo vi ffmpeg41
 
@@ -89,7 +91,7 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 
 ----ESC key and then write :wq
 
-# Or you can do this if you don´t want to use VI command:
+**Or you can do this if you don´t want to use VI command:**
 3.b) wget -O - https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper > /var/packages/CodecPack/target/bin/ffmpeg41
 
 4) sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
