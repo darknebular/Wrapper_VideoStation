@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Fork from code of BenjaminPoncet rev.12.
+# Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes.
 rev="AME_12.3.1"
 
 _log(){
