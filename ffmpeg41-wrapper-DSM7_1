@@ -302,6 +302,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	startexectime=`date +%s`
 	_log "STDOUT   ="
 	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE V_ORIG-A_WRAP"
 	_log "FFMPEG1  = $bin1"
 	_log "FFMPEG2  = $bin2"
