@@ -138,7 +138,7 @@ case "$1" in
 		args1vs+=("-vcodec" "$1")
 		args2vs+=("-vcodec" "copy")
 	;;
-	# Para que el DS-Video mande 5.1 en vez de Estereo se deben de cambiar los $1 del else por copy. 
+	# Para que el DS-Video mande 5.1 en vez de Estereo se deben de cambiar los $1 del else del acodec por copy. 
 	-acodec)
 		shift
 		if [ "$1" = "libfaac" ]; then
