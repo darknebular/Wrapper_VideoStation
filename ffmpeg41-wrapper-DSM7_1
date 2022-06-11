@@ -146,7 +146,7 @@ case "$1" in
 			args1sv+=("-acodec" "aac")
 			args2vs+=("-acodec" "aac")
 		else
-			argsnew+=("-acodec" "$1")
+			argsnew+=("-acodec" "libfdk_aac")
 			args1sv+=("-acodec" "$1")
 			args2vs+=("-acodec" "libfdk_aac")
 		fi
@@ -156,13 +156,13 @@ case "$1" in
 	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se usará bitrate constante a 512k
 	-ab)
 		shift
-		argsnew+=("-ab" "$1")
+		argsnew+=("-b:a" "512k")
 		args1sv+=("-ab" "$1")
 		args2vs+=("-b:a" "512k")
 	;;
 	-ac)
 		shift
-		argsnew+=("-ac" "$1")
+		argsnew+=()
 		args1sv+=("-ac" "$1")
 		args2vs+=()
 	;;
