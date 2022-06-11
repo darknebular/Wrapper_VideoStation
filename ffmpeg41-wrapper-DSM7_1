@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes.
-rev="AME_12.3.1"
+rev="AME_12.3.2"
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -138,6 +138,7 @@ case "$1" in
 		args1vs+=("-vcodec" "$1")
 		args2vs+=("-vcodec" "copy")
 	;;
+	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se convertirá a AAC Surround 5.1
 	-acodec)
 		shift
 		if [ "$1" = "libfaac" ]; then
@@ -147,16 +148,17 @@ case "$1" in
 		else
 			argsnew+=("-acodec" "$1")
 			args1sv+=("-acodec" "$1")
-			args2vs+=("-acodec" "$1")
+			args2vs+=("-acodec" "libfdk_aac")
 		fi
 		args2sv+=("-acodec" "copy")
 		args1vs+=("-acodec" "copy")
 	;;
+	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se usará bitrate constante a 512k
 	-ab)
 		shift
 		argsnew+=("-ab" "$1")
 		args1sv+=("-ab" "$1")
-		args2vs+=("-ab" "$1")
+		args2vs+=("-b:a" "512k")
 	;;
 	-ac)
 		shift
