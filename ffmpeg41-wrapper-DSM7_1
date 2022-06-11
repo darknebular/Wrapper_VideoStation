@@ -4,7 +4,7 @@
 rev="AME_12.3.2"
 # Changes:
 # AME_12.3.1: Initial release for DSM 7.1. Compatible with the new paths of this DSM.
-# AME_12.3.2: Now you will have AC3 5.1 448kbps and compatible with Chromecast.
+# AME_12.3.2: Now you will have AAC 5.1 512kbps in DS-Video (mobile) and Web-Browser, Apple-TV.
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -141,7 +141,7 @@ case "$1" in
 		args1vs+=("-vcodec" "$1")
 		args2vs+=("-vcodec" "copy")
 	;;
-	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se convertirá a AC3 Surround 5.1
+	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se convertirá a AAC Surround 5.1
 	-acodec)
 		shift
 		if [ "$1" = "libfaac" ]; then
@@ -149,19 +149,19 @@ case "$1" in
 			args1sv+=("-acodec" "aac")
 			args2vs+=("-acodec" "aac")
 		else
-			argsnew+=("-acodec" "ac3")
+			argsnew+=("-acodec" "libfdk_aac")
 			args1sv+=("-acodec" "$1")
-			args2vs+=("-acodec" "ac3")
+			args2vs+=("-acodec" "libfdk_aac")
 		fi
 		args2sv+=("-acodec" "copy")
 		args1vs+=("-acodec" "copy")
 	;;
-	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se usará bitrate constante a 448k
+	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se usará bitrate constante a 512k
 	-ab)
 		shift
-		argsnew+=("-b:a" "448k")
+		argsnew+=("-b:a" "512k")
 		args1sv+=("-ab" "$1")
-		args2vs+=("-b:a" "448k")
+		args2vs+=("-b:a" "512k")
 	;;
 	-ac)
 		shift
