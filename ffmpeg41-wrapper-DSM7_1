@@ -290,7 +290,7 @@ else
 	param1=${argsnew[@]}
 	_log_para "$param1"
 
-	$bin1 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin1 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 fi
 
@@ -358,7 +358,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "MODE     = WRAPPER"
 	_log "FFMPEG   = $bin2"
 
-	$bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin2 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 	childpid=$!
 	_log "CHILDPID = $childpid"
