@@ -1,6 +1,6 @@
 # Wrapper_VideoStation for ffmpeg-wrapper. Standard version:
 Synology VideoStation ffmpeg wrapper with DTS, EAC3 and TrueHD support. It enables hardware transcoding from ffmpeg from Synology for video and transcoding DTS, HEVC, EAC3, AAC from the ffmpeg of the SynoCommunity. When you use this SynoCommunity´s ffmpeg, you will have AC3 5.1 Surround.
-I put this codec, because libfdk_aac AAC3 5.1 isn´t compatible with Chromecast.
+I put this codec, because libfdk_aac AAC 5.1 isn´t compatible with Chromecast.
 
 Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI ...
 
