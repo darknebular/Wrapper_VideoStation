@@ -5,7 +5,7 @@ rev="AME_12.3.3"
 # Changes:
 # AME_12.3.1: Initial release for DSM 7.1. Compatible with the new paths of this DSM.
 # AME_12.3.2: Now you will have AAC 5.1 512kbps in DS-Video (mobile), Web-Browsers and Apple-TV.
-# AME_12.3.3: Now you will can select between two audio tracks, 1 in 5.1 AAC and other with MP3 Stereo.
+# AME_12.3.3: Now you will can select between two audio tracks in clients in the case that the wrapper needs to recode from DTS, Eac3, TrueHD. One in 5.1 AAC and other with MP3 Stereo.
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
