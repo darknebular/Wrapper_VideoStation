@@ -165,9 +165,10 @@ case "$1" in
 		args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")
 	;;
 	# Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos pistas de audio (AAC y MP3), siendo la primera a elegir la pista de Stereo.
+	# Excepto en el caso de necesitar también re-codificar el video además del audio, para evitar un uso alto de CPU se ha dejado solamente en 2 canales para aumentar la compatibilidad.
 	-ac)
 		shift
-		argsnew+=()
+		argsnew+=("-ac" "$1")
 		args1sv+=("-ac" "$1")
 		args2vs+=()
 	;;
