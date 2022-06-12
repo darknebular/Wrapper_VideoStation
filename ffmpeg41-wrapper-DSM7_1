@@ -170,7 +170,7 @@ case "$1" in
 		shift
 		argsnew+=("-ac" "$1")
 		args1sv+=("-ac" "$1")
-		args2vs+=()
+		args2vs+=("-ac:1" "$1" "-ac:2" "6")
 	;;
 	-f)
 		shift
