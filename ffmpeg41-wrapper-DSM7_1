@@ -4,7 +4,7 @@
 rev="AME_12.3.2"
 # Changes:
 # AME_12.3.1: Initial release for DSM 7.1. Compatible with the new paths of this DSM.
-# AME_12.3.2: Now you will have AAC 5.1 512kbps in DS-Video (mobile) and Web-Browser, Apple-TV.
+# AME_12.3.2: Now you will have AAC 5.1 512kbps in DS-Video (mobile), Web-Browsers and Apple-TV.
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
