@@ -1,5 +1,5 @@
 # Wrapper_VideoStation for ffmpeg-wrapper. Standard version:
-Synology VideoStation ffmpeg wrapper with DTS, EAC3 and TrueHD support. It enables hardware transcoding from ffmpeg from Synology for video and transcoding DTS, HEVC, EAC3, AAC from the ffmpeg of the SynoCommunity. When you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround.
+Synology VideoStation ffmpeg wrapper with DTS, EAC3 and TrueHD support. It enables hardware transcoding from Synology´s ffmpeg for video and transcoding DTS, HEVC, EAC3, AAC, True HD from the ffmpeg of the SynoCommunity. When you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround.
 I put this codec for quality, you can change libfdk_aac to AC3 that is more compatible with Chromecast.
 
 Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI ...
@@ -13,7 +13,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 # INSTALL: Wrapper for Advance Codec Pack 2.0.X installed with ffmpeg41-wrapper-DSM7_1 file 
 
 ************************************************************************
-**With this wrapper (ffmpeg41-wrapper_DSM7_1 file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.4.2-44 when is 100% necessary. You will need Putty or other SSH Client in order to connect.**
+**With this wrapper (ffmpeg41-wrapper_DSM7_1 file) you will be with the original Synology´s ffmpeg almost time and only you will use the ffmpeg 4.4.2-44 when is 100% necessary. You will need Putty or other SSH Client in order to connect.**
 
 1) cd /var/packages/CodecPack/target/pack/bin
 
