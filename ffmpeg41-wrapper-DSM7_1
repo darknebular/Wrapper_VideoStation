@@ -163,6 +163,7 @@ case "$1" in
 		args1sv+=("-ab" "$1")
 		args2vs+=("-b:a" "512k")
 	;;
+	# Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se debe de añadir ("-ac" "$1") en args2vs y en args2new
 	-ac)
 		shift
 		argsnew+=()
