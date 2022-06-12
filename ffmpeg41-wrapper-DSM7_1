@@ -152,7 +152,7 @@ case "$1" in
 		else
 			argsnew+=("-acodec" "libfdk_aac")
 			args1sv+=("-acodec" "$1")
-			args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")
+			args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")
 		fi
 		args2sv+=("-acodec" "copy")
 		args1vs+=("-acodec" "copy")
@@ -162,9 +162,9 @@ case "$1" in
 		shift
 		argsnew+=("-b:a" "512k")
 		args1sv+=("-ab" "$1")
-		args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")
+		args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")
 	;;
-	# Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos pistas de audio (AAC y MP3)
+	# Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos pistas de audio (AAC y MP3), siendo la primera a elegir la pista de Stereo.
 	-ac)
 		shift
 		argsnew+=()
