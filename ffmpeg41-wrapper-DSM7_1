@@ -326,6 +326,10 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	childpid=$!
 	_log "CHILDPID = $childpid"
 	wait $childpid
+	
+	childpid=$!
+	_log "CHILDPID = $childpid"
+	wait $childpid
 
 fi
 
@@ -352,10 +356,6 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "CHILDPID = $childpid"
 	wait $childpid
 	
-	childpid=$!
-	_log "CHILDPID = $childpid"
-	wait $childpid
-
 fi
 
 if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr; then
