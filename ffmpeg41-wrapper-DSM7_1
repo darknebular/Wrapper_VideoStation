@@ -309,7 +309,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE V_ORIG-A_WRAP"
 	_log "FFMPEG1  = $bin1"
@@ -334,7 +334,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE V_WRAP-A_ORIG"
 	_log "FFMPEG1  = $bin2"
@@ -359,7 +359,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = WRAPPER"
 	_log "FFMPEG   = $bin2"
