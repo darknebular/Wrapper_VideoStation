@@ -326,7 +326,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	childpid=$!
 	_log "CHILDPID = $childpid"
 	wait $childpid
-	
+
 	childpid=$!
 	_log "CHILDPID = $childpid"
 	wait $childpid
