@@ -8,7 +8,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 ************************************************************************
 
-# For DSM 7.1: (VERSION 12.3.2 NOW WITH 5.1 AAC)
+# For DSM 7.1: (VERSION 12.3.3 NOW WITH 5.1 AAC and Multi Audio Track)
 
 # INSTALL: Wrapper for Advance Codec Pack 2.0.X installed with ffmpeg41-wrapper-DSM7_1 file 
 
