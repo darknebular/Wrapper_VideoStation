@@ -50,7 +50,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 
 ********************************************************************
-# UNINSTALL FOR DSM 7.1:
+# UNINSTALL FOR DSM 7.X:
 ********************************************************************
 # Restore VideoStation's ffmpeg, libsynovte.so
 
