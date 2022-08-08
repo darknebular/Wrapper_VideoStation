@@ -122,7 +122,7 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 
 
 ********************************************************************
-INSTALL: Wrapper standard FOR DSM 6.2.X
+# INSTALL: Wrapper standard FOR DSM 6.2.X
 ********************************************************************
 
 # Save VideoStation's ffmpeg
@@ -169,7 +169,7 @@ sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg33
 
 
 ********************************************************************
-UNINSTALL FOR DSM 6.2.X:
+# UNINSTALL FOR DSM 6.2.X:
 ********************************************************************
 # Restore VideoStation's ffmpeg, libsynovte.so
 
