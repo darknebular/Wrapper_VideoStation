@@ -108,7 +108,8 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 ----ESC key and then write :wq
 
 **Or you can do this if you don´t want to use VI command:**
-3.b) sudo touch ffmpeg44 | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper -O /var/packages/CodecPack/target/bin/ffmpeg41 
+
+3.b) sudo touch ffmpeg41 | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper -O /var/packages/CodecPack/target/bin/ffmpeg41 
  
 
 4) sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
