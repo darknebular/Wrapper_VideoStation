@@ -1,4 +1,4 @@
-# Wrapper_VideoStation for ffmpeg-wrapper. Standard version:
+# Wrapper_VideoStation for ffmpeg-wrapper and for DLNA Media Server. Standard version:
 Synology VideoStation ffmpeg wrapper with DTS, EAC3 and TrueHD support. It enables hardware transcoding from Synology´s ffmpeg for video and transcoding DTS, HEVC, EAC3, AAC, True HD from the ffmpeg of the SynoCommunity. When you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround and another audio track 2.0 MP3 Stereo for Chromecast or GoogleTV or other clients that don´t accept 5.1 AAC.
 
 
@@ -35,18 +35,29 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 
 
-# Save VideoStation's libsynovte.so
+# Save VideoStation's libsynovte.so and DLNA Media server´s libsynovte.so
 
 5) sudo cp -n /var/packages/VideoStation/target/lib/libsynovte.so /var/packages/VideoStation/target/lib/libsynovte.so.orig
 
 6) sudo chown VideoStation:VideoStation /var/packages/VideoStation/target/lib/libsynovte.so.orig
 
+7) sudo cp -n /var/packages/MediaServer/target/lib/libsynovte.so /var/packages/MediaServer/target/lib/libsynovte.so.orig
+
+8) sudo chown MediaServer:MediaServer /var/packages/MediaServer/target/lib/libsynovte.so.orig
+
+9) sudo chmod 644 libsynovte.so.orig
+
 
 # Patch libsynovte.so to authorize DTS, EAC3 and TrueHD
 
-7) sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/VideoStation/target/lib/libsynovte.so
+10) sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/VideoStation/target/lib/libsynovte.so
 
-8) sudo synopkg restart VideoStation
+11) sudo sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' /var/packages/MediaServer/target/lib/libsynovte.so
+
+12) sudo synopkg restart VideoStation
+
+
+13) ¡¡¡¡¡ENJOY!!!!!
 
 
 ********************************************************************
@@ -57,6 +68,10 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 sudo rm /var/packages/VideoStation/target/lib/libsynovte.so
 
 sudo mv -f /var/packages/VideoStation/target/lib/libsynovte.so.orig /var/packages/VideoStation/target/lib/libsynovte.so
+
+sudo rm /var/packages/MediaServer/target/lib/libsynovte.so
+
+sudo mv -f /var/packages/MediaServer/target/lib/libsynovte.so.orig /var/packages/MediaServer/target/lib/libsynovte.so
 
 sudo rm /var/packages/CodecPack/target/pack/bin/ffmpeg41
 
