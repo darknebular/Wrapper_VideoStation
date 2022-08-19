@@ -5,7 +5,7 @@ rev="AME_12.3.3"
 # Changes:
 # AME_12.3.1: Initial release for DSM 7.1. Compatible with the new paths of this DSM.
 # AME_12.3.2: Now you will have AAC 5.1 512kbps in DS-Video (mobile), Web-Browsers and Apple-TV.
-# AME_12.3.3: Now you will can select between two audio tracks in clients in the case that the wrapper needs to recode from DTS, Eac3, TrueHD. One in 5.1 AAC and other with MP3 Stereo.
+# AME_12.3.3: Now you will can select between two audio streams in clients in the case that the wrapper needs to recode from DTS, Eac3, TrueHD. One in MP3 Stereo and other with 5.1 AAC.
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
@@ -164,7 +164,7 @@ case "$1" in
 		args1sv+=("-ab" "$1")
 		args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")
 	;;
-	# Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos pistas de audio (AAC y MP3), siendo la primera a elegir la pista de Stereo.
+	# Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos stream de audio (MP3 y AAC) de la misma pista de audio, siendo el primero a elegir la pista de Stereo MP3.
 	# Excepto en el caso de necesitar también re-codificar el video además del audio, para evitar un uso alto de CPU se ha dejado solamente en 2 canales para aumentar la compatibilidad.
 	-ac)
 		shift
