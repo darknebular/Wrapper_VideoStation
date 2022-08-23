@@ -8,12 +8,12 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 ************************************************************************
 
-# For DSM 7.1: (VERSION 12.3.3 NOW WITH 5.1 AAC and Multi Audio Track)
+# For DSM 7.1: (VERSION 12.3.3 NOW WITH 5.1 AAC and Multi Audio Streams)
 
-# INSTALL: Wrapper for Advance Codec Pack 2.0.X installed with ffmpeg41-wrapper-DSM7_1 file 
+# INSTALL: Wrapper for Advance Codec Pack 2.0.X installed with ffmpeg41-wrapper-DSM7_1-12.3.3 file 
 
 ************************************************************************
-**With this wrapper (ffmpeg41-wrapper_DSM7_1 file) you will be with the original Synology´s ffmpeg almost time and only you will use the ffmpeg 4.4.2-44 when is 100% necessary. You will need Putty or other SSH Client in order to connect.**
+**With this wrapper (ffmpeg41-wrapper_DSM7_1-12.3.3 file) you will be with the original Synology´s ffmpeg almost time and only you will use the ffmpeg 4.4.2-XX when is 100% necessary. You will need Putty or other SSH Client in order to connect.**
 
 1) cd /var/packages/CodecPack/target/pack/bin
 
@@ -23,13 +23,13 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 3.a) sudo vi ffmpeg41
 
-----Push "i" key and then PASTE (right-click) the content of the file called ffmpeg41-wrapper-DSM7_1
+----Push "i" key and then PASTE (right-click) the content of the file called ffmpeg41-wrapper-DSM7_1-12.3.3
 
 ----"ESC" key and then write :wq
 
 **(Or you can do this if you don´t want to use VI command:)**
 
-3.b) sudo touch ffmpeg41 | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper-DSM7_1 -O /var/packages/CodecPack/target/pack/bin/ffmpeg41
+3.b) sudo touch ffmpeg41 | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper-DSM7_1-12.3.3 -O /var/packages/CodecPack/target/pack/bin/ffmpeg41
 
 4) sudo chmod 755 /var/packages/CodecPack/target/pack/bin/ffmpeg41
 
@@ -93,7 +93,7 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 # INSTALL: Wrapper for Advance Codec Pack 1.X with installed ffmpeg41-wrapper file 
 
 ************************************************************************
-**With this wrapper (ffmpeg41-wrapper file) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary**
+**With this wrapper (ffmpeg41-wrapper-DSM7_0-12.2.1) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary**
 
 1) cd /var/packages/CodecPack/target/bin
 
@@ -103,13 +103,13 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 
 3.a) sudo vi ffmpeg41
 
-----Push I key and then PASTE the content of the file called ffmpeg41-wrapper
+----Push I key and then PASTE the content of the file called ffmpeg41-wrapper-DSM7_0-12.2.1
 
 ----ESC key and then write :wq
 
 **Or you can do this if you don´t want to use VI command:**
 
-3.b) sudo touch ffmpeg41 | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper -O /var/packages/CodecPack/target/bin/ffmpeg41 
+3.b) sudo touch ffmpeg41 | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg41-wrapper-DSM7_0-12.2.1 -O /var/packages/CodecPack/target/bin/ffmpeg41 
  
 
 4) sudo chmod 755 /var/packages/CodecPack/target/bin/ffmpeg41
@@ -139,7 +139,7 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 
 
 ********************************************************************
-# INSTALL: Wrapper standard FOR DSM 6.2.X
+# INSTALL: Wrapper standard FOR DSM 6.2.X (DEPRECATED)
 ********************************************************************
 
 # Save VideoStation's ffmpeg
@@ -148,7 +148,7 @@ sudo mv -n /var/packages/VideoStation/target/bin/ffmpeg /var/packages/VideoStati
 
 # Injecting the script:
 
- sudo touch ffmpeg | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg-wrapper -O /var/packages/VideoStation/target/bin/ffmpeg 
+ sudo touch ffmpeg | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg-wrapper-DSM6_X-12.1 -O /var/packages/VideoStation/target/bin/ffmpeg 
 
 # Change ownership and mode of the script
 
