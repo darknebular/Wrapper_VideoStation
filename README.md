@@ -8,7 +8,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 ************************************************************************
 
-# For DSM 7.1: (VERSION 12.3.3 NOW WITH 5.1 AAC and Multi Audio Streams)
+# INSTALL: For DSM 7.1: (VERSION 12.3.3 NOW WITH 5.1 AAC and Multi Audio Streams)
 
 # INSTALL: Wrapper for Advance Codec Pack 2.0.X installed with ffmpeg41-wrapper-DSM7_1-12.3.3 file 
 
@@ -88,9 +88,9 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 
 ************************************************************************
 
-# For DSM 7.0:
+# INSTALL: For DSM 7.0: (DEPRECATED)
 
-# INSTALL: Wrapper for Advance Codec Pack 1.X with installed ffmpeg41-wrapper file 
+# INSTALL: Wrapper for Advance Codec Pack 1.X with installed ffmpeg41-wrapper-DSM7_0-12.2.1 file 
 
 ************************************************************************
 **With this wrapper (ffmpeg41-wrapper-DSM7_0-12.2.1) you will be with the original ffmpeg almost time and only you will use the ffmpeg 4.31 when is 100% necessary**
