@@ -2,6 +2,9 @@
 
 # Fork from code of BenjaminPoncet rev.12.
 rev="AME_12.1.1"
+# Changes:
+# VS_12.1: Initial release and changed some logging options and variables names for better undertand. Fix the offline transcoding. (Deprecated)
+# AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
 
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
