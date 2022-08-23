@@ -61,7 +61,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 
 ********************************************************************
-# UNINSTALL FOR DSM 7.X:
+# UNINSTALL FOR DSM 7.1:
 ********************************************************************
 # Restore VideoStation's ffmpeg, libsynovte.so
 
@@ -132,7 +132,22 @@ sudo mv /var/packages/CodecPack/target/pack/bin/ffmpeg41.orig /var/packages/Code
 
 
 
+********************************************************************
+# UNINSTALL FOR DSM 7.0:
+********************************************************************
+# Restore VideoStation's ffmpeg, libsynovte.so
 
+sudo rm /var/packages/VideoStation/target/lib/libsynovte.so
+
+sudo mv -f /var/packages/VideoStation/target/lib/libsynovte.so.orig /var/packages/VideoStation/target/lib/libsynovte.so
+
+sudo rm /var/packages/MediaServer/target/lib/libsynovte.so
+
+sudo mv -f /var/packages/MediaServer/target/lib/libsynovte.so.orig /var/packages/MediaServer/target/lib/libsynovte.so
+
+sudo rm /var/packages/CodecPack/target/bin/ffmpeg41
+
+sudo mv /var/packages/CodecPack/target/bin/ffmpeg41.orig /var/packages/CodecPack/target/bin/ffmpeg41
 
 
 
