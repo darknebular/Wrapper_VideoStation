@@ -91,19 +91,20 @@ function check_version() {
 function install() {
   info "${BLUE}==================== Installation: Start ===================="
 
-for losorig in "${all_files[@]}"; do
-	if [[ -f "$losorig" ]]; then
-		info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
-		while true; do
-		read -p "Do you wish to uninstall this old wrapper? " yn
-		case $yn in
-        [Yy]* ) uninstall_old; break;;
-        [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
-		esac
-        	done
-	fi
-    	if [[ ! -f "$losorig" ]]; then
+# Chequeador de la existencia de otros wrappers instalados para evitar problemas. Función en desarrollo.
+# for losorig in "${all_files[@]}"; do
+#	if [[ -f "$losorig" ]]; then
+#		info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
+#		while true; do
+#		read -p "Do you wish to uninstall this old wrapper? " yn
+#		case $yn in
+#        [Yy]* ) uninstall_old; break;;
+#        [Nn]* ) exit;;
+#        * ) echo "Please answer yes or no.";;
+#		esac
+#        	done
+#	fi
+#    	if [[ ! -f "$losorig" ]]; then
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
     mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
