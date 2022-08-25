@@ -92,8 +92,9 @@ function install() {
   info "${BLUE}==================== Installation: Start ===================="
 
 # Chequeador de la existencia de otros wrappers instalados para evitar problemas. Función en desarrollo.
+
 # for losorig in "${all_files[@]}"; do
-#	if [[ -f "$losorig" ]]; then
+# if [[ -f "$losorig" ]]; then
 #		info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
 #		while true; do
 #		read -p "Do you wish to uninstall this old wrapper? " yn
@@ -107,7 +108,7 @@ function install() {
 #    	if [[ ! -f "$losorig" ]]; then
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
-    mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
+    	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
 	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
 	touch ${cp_bin_path}/ffmpeg41 
 	  info "${YELLOW}Injection of the ffmpeg41 wrapper."
@@ -135,7 +136,7 @@ function install() {
 	
 	restart_packages
 	
-#	fi
+# fi
 done
 
   echo ""
