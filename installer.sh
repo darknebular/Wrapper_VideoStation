@@ -1,12 +1,15 @@
 #!/bin/bash
 
+version="SCPT_1.0"
+# Changes:
+# SCPT_1.0: Initial release of the automatic installer script for DMS 7.X.
+
 ###############################
 # VARIABLES
 ###############################
 
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
-version="1.0"
 setup="install"
 dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
 RED="\u001b[31m"
@@ -98,8 +101,9 @@ for losorig in "${all_files[@]}"; do
         [Nn]* ) exit;;
         * ) echo "Please answer yes or no.";;
 		esac
-        done
-    else
+        	done
+	fi
+    	if [[ ! -f "$losorig" ]]; then
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
     mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
