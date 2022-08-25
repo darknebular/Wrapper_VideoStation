@@ -61,7 +61,7 @@ function check_dependencias() {
   done
 }
 function welcome() {
-  info "FFMPEG WRAPPER INSTALLER v$version"
+  info "FFMPEG WRAPPER INSTALLER version: $version"
 
   welcome=$(curl -s -L "$repo_url/main/welcome.txt")
   if [ "${#welcome}" -ge 1 ]; then
