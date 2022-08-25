@@ -135,7 +135,7 @@ function install() {
 	
 	restart_packages
 	
-	fi
+#	fi
 done
 
   echo ""
