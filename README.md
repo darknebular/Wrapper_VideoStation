@@ -11,7 +11,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 # VideoStation and MediaServer FFMPEG-Wrapper, now with Installer: 
 
-This installer is designed to simplify the installation steps from this [Gist](https://gist.github.com/BenjaminPoncet/bbef9edc1d0800528813e75c1669e57e) (huge thanks to [Benjamin Poncet](https://github.com/BenjaminPoncet)) and enable **DTS**, **EAC3** and **TrueHD** support to Synology VideoStation by replacing the ffmpeg library files by a wrapper using SynoCommunity ffmpeg, only when It´s necessary.
+This installer is designed to simplify the installation steps and enable **DTS**, **EAC3** and **TrueHD** support to Synology VideoStation by replacing the ffmpeg library files by a wrapper using SynoCommunity ffmpeg, only when It´s necessary.
 
 
 ## Dependencies
@@ -20,10 +20,11 @@ This installer is designed to simplify the installation steps from this [Gist](h
 - SynoCommunity ffmpeg 4.2.1-23 (and above) ([help](https://synocommunity.com/#easy-install))
 
 ## Supported / Unsupported scenarios
-- [DTS or EAC3 or TrueHD] + [Any non HEVC standard video format]: ✅
-- [no DTS, no EAC3, no TrueHD] + [HEVC]: ✅
-- [DTS or EAC3 or TrueHD] + [HEVC]: ✅
-- [DSM 7.X]: ✅
+- DTS or EAC3 or TrueHD + Any non standard video format: ✅
+- no DTS, no EAC3, no TrueHD + HEVC: ✅
+- DTS or EAC3 or TrueHD + HEVC: ✅
+- DSM 7.X: ✅
+- DSM 6.2: ⚠️ The installer doesn´t support this version, you will need do a Manual procedure.
 
 ## Instructions
 - Check that you meet the required 
