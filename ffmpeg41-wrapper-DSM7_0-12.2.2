@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # Fork from code of BenjaminPoncet rev.12.
-rev="AME_12.2.1"
+rev="AME_12.2.2"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
-# AME_12.2.1: Initial release for DSM 7.0. Compatible with the new paths of this DSM. Fix the order and the use of the binaries. Added some missing variables in the wrapper and improvements. (Deprecated)
-
+# AME_12.2.1: Initial release for DSM 7.0. Compatible with the new paths of this DSM. Fix the order and the use of the binaries. Added some missing variables in the wrapper and improvements. (Deprecated, migrate to 12.2.2)
+# AME_12.2.2: Now with 2 audio streamS for DSM 7.0 (One in MP3 Stereo and other with 5.1 AAC). Chromecast Supported.
 _log(){
 	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
 }
@@ -107,7 +107,7 @@ case "$1" in
 		args1sv+=("-i" "$1")
 		args2sv+=("-i" "pipe:0" "-map" "0")
 		args1vs+=("-i" "$1")
-		args2vs+=("-i" "pipe:0" "-map" "0")
+		args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
 	;;
 	-vf)
 		shift
@@ -149,24 +149,27 @@ case "$1" in
 			args1sv+=("-acodec" "aac")
 			args2vs+=("-acodec" "aac")
 		else
-			argsnew+=("-acodec" "$1")
+			argsnew+=("-acodec" "libfdk_aac")
 			args1sv+=("-acodec" "$1")
-			args2vs+=("-acodec" "$1")
+			args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")
 		fi
 		args2sv+=("-acodec" "copy")
 		args1vs+=("-acodec" "copy")
 	;;
+	# En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se usará bitrate constante a 512k para AAC y 256k para MP3 Stereo
 	-ab)
 		shift
 		argsnew+=("-ab" "$1")
 		args1sv+=("-ab" "$1")
 		args2vs+=("-ab" "$1")
 	;;
+	# Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos stream de audio (MP3 y AAC) de la misma pista de audio, siendo el primero a elegir la pista de Stereo MP3.
+	# Excepto en el caso de necesitar también re-codificar el video además del audio, para evitar un uso alto de CPU se ha dejado solamente en 2 canales para aumentar la compatibilidad.
 	-ac)
 		shift
 		argsnew+=("-ac" "$1")
 		args1sv+=("-ac" "$1")
-		args2vs+=("-ac" "$1")
+		args2vs+=("-ac:1" "$1" "-ac:2" "6")
 	;;
 	-f)
 		shift
@@ -292,7 +295,7 @@ else
 	param1=${argsnew[@]}
 	_log_para "$param1"
 
-	$bin1 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin1 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 fi
 
@@ -305,7 +308,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE V_ORIG-A_WRAP"
 	_log "FFMPEG1  = $bin1"
 	_log "FFMPEG2  = $bin2"
@@ -329,7 +332,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = PIPE V_WRAP-A_ORIG"
 	_log "FFMPEG1  = $bin2"
@@ -354,12 +357,12 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 	_log "*** CHILD END ***"
 	startexectime=`date +%s`
 	_log "STDOUT   ="
-	_log_para "`tail -n 15 /tmp/ffmpeg-${streamid}.stderr`"
+	_log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
 	# _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 	_log "MODE     = WRAPPER"
 	_log "FFMPEG   = $bin2"
 
-	$bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+	$bin2 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 	childpid=$!
 	_log "CHILDPID = $childpid"
