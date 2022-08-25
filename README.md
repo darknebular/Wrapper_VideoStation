@@ -27,7 +27,7 @@ This installer is designed to simplify the installation steps and enable **DTS**
 - DSM 6.2: ⚠️ The installer doesn´t support this version, you will need do a Manual procedure.
 
 ## Instructions
-- Check that you meet the required 
+- Check that you meet the required dependencies
 - Install SynoCommunity ffmpeg ([help](https://synocommunity.com/#easy-install))
 - Connect to your NAS using SSH (admin user required) ([help](https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General_Setup/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet))
 - Use the command `sudo -i` to switch to root user
