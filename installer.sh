@@ -137,7 +137,7 @@ function install() {
 	restart_packages
 	
 # fi
-done
+# done
 
   echo ""
   info "${BLUE}==================== Installation: Complete ===================="
