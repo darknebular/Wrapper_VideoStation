@@ -1,9 +1,9 @@
-\u001b[36mSynology VideoStation and MediaServer ffmpeg wrapper with DTS, EAC3 and TrueHD support. 
-\u001b[31mIt enables hardware transcoding from Synology´s ffmpeg for video and transcoding DTS, HEVC, EAC3, AAC, True HD from the ffmpeg of the SynoCommunity. 
-\u001b[31mWhen you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround and another audio track 2.0 MP3 Stereo for Chromecast or GoogleTV or other \u001b[31mclients that don´t accept 5.1 AAC.
+Synology VideoStation and MediaServer ffmpeg wrapper with DTS, EAC3 and TrueHD support. 
+It enables hardware transcoding from Synology´s ffmpeg for video and transcoding DTS, HEVC, EAC3, AAC, True HD from the ffmpeg of the SynoCommunity. 
+When you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround and another audio track 2.0 MP3 Stereo for Chromecast or GoogleTV or other clients that don´t accept 5.1 AAC.
 
-\u001b[33mWorks fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI... Works fine the thumbnails in VideoStation.
+Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI... Works fine the thumbnails in VideoStation.
 
-\u001b[31mThis wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and some improvements in his code. The latest version is 12.3.3 for DSM 7.1 and 12.2.2 for DSM 7.0.
-\u001b[31mYou will have full control of each parameter. The only wrapper of Internet with 5.1 AAC support, ENJOY!!!
+This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and some improvements in his code. The latest version is 12.3.3 for DSM 7.1 and 12.2.2 for DSM 7.0.
+You will have full control of each parameter. The only wrapper of Internet with 5.1 AAC support, ENJOY!!!
 
