@@ -1,11 +1,12 @@
 <p align="center">
   <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/logo.png?raw=true" height=200px alt="logo">
 </p>
+
 # Wrapper for VideoStation and DLNA MediaServer for DTS, EAC3 and TrueHD with AAC 5.1:
 Synology VideoStation and MediaServer ffmpeg wrapper with DTS, EAC3 and TrueHD support. It enables hardware transcoding from Synology´s ffmpeg for video and transcoding DTS, HEVC, EAC3, AAC, True HD from the ffmpeg of the SynoCommunity. When you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround and another audio track MP3 2.0 256kbps Stereo for Chromecast or GoogleTV or other clients that don´t accept 5.1 AAC.
 
 
-Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI ...
+Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI... Works fine the thumbnails in VideoStation.
 
 This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and some improvements in his code.
 
