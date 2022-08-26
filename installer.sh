@@ -135,11 +135,11 @@ else
 	
 	restart_packages
 	
+	info "${BLUE}==================== Installation: Complete ===================="
 fi
 done
 
   echo ""
-  info "${BLUE}==================== Installation: Complete ===================="
 
 }
 
@@ -164,7 +164,9 @@ function uninstall_old() {
 
   echo ""
   info "${BLUE}==================== Uninstallation of old wrappers in the system: Complete ===================="
+  echo ""
   info "${BLUE}====================Continuing with installation of the new wrapper...===================="
+  echo ""
   
   install
 }
