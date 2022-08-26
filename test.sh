@@ -106,12 +106,13 @@ function config_C() {
 }
 
 function start() {
-      
+   echo ""   
    echo -e "${BLUE}This is the interactive menu, please choose your selection"
-   echo -e "${BLUE}Install) Install the wrapper for VideoStation and DLNA MediaServer"
-   echo -e "${BLUE}Uninstall) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
-   echo -e "${BLUE}Config) Change the config of this wrapper for change the order of the audio codecs"
-   echo -e "${BLUE}Exit) Exit from this installer."
+   echo ""
+   echo -e "${BLUE}I) Install the wrapper for VideoStation and DLNA MediaServer"
+   echo -e "${BLUE}U) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
+   echo -e "${BLUE}C) Change the config of this wrapper for change the order of the audio codecs"
+   echo -e "${BLUE}E) Exit from this installer."
         while true; do
 	echo -e "${GREEN}"
         read -p "Please, What option wish to use? " iuce
