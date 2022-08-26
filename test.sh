@@ -106,8 +106,7 @@ function config_C() {
 }
 
 function start() {
-   welcome
-   
+      
    echo -e "${BLUE}This is the interactive menu, please choose your selection"
    echo -e "${BLUE}Install) Install the wrapper for VideoStation and DLNA MediaServer"
    echo -e "${BLUE}Uninstall) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
@@ -237,7 +236,7 @@ function configurator() {
    echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It do transcoding (DEFAULT)"
    echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It do transcoding" 
    echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It do transcoding. This is the behaviour of VideoStation without wrappers."
-   echo -e "${BLUE}D) Exit from this configurator."
+   echo -e "${BLUE}D) Exit from this configurator menu and return to main menu."
    	while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcd
@@ -245,7 +244,7 @@ function configurator() {
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
 	[Cc] ) config_C; break;;
-	[Dd] ) exit 1; break;;
+	[Dd] ) start; break;;
         * ) echo "Please answer with the correct option writing: A or B or C or D.";;
         esac
         done
@@ -268,6 +267,8 @@ clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
 echo -e "${BLUE}====================This wrapper installer is only avalaible for "${supported_versions[@]}" only===================="
 echo ""
+
+welcome
 
 check_dependencias
 
