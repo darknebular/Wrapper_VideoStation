@@ -107,7 +107,7 @@ function config_C() {
 
 function start() {
    echo ""   
-   echo -e "${GREEN}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
+   echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
    echo ""
    echo -e "${BLUE}I) Install the wrapper for VideoStation and DLNA MediaServer"
    echo -e "${BLUE}U) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
@@ -136,10 +136,10 @@ function install() {
 for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
-        while true; do
 	echo ""
 	echo -e "${BLUE}YES) The installer will uninstall the old patch or wrapper."
         echo -e "${BLUE}NO) Exit from the installer menu and return to main menu."
+        while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this old wrapper? " yn
         case $yn in
