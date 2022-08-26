@@ -311,7 +311,7 @@ done
 # start
 clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
-echo -e "${BLUE}====================This wrapper installer is only avalaible for "${supported_versions[@]}" only===================="
+echo -e "${BLUE}====================This wrapper installer is only avalaible for DSM "${supported_versions[@]}" only===================="
 echo ""
 echo ""
 
@@ -321,19 +321,19 @@ check_dependencias
 
 if check_version "$dsm_version" " " 7.0; then
    info "${BLUE}You are running DSM $dsm_version"
-   info "${BLUE}7.0 is supported for this installer and the installer will tuned for your DSM"
+   info "${BLUE}DSM 7.0 is supported for this installer and the installer will tuned for your DSM"
    cp_bin_path=/var/packages/CodecPack/target/bin
    injector="0-12.2.2"
-   info "${BLUE}7.0 is using this path: $cp_bin_path"
-   info "${BLUE}7.0 is using this injector: $injector"
+   info "${BLUE}DSM 7.0 is using this path: $cp_bin_path"
+   info "${BLUE}DSM 7.0 is using this injector: $injector"
 fi
 if check_version "$dsm_version" " " 7.1; then
    info "${BLUE}You are running DSM $dsm_version"
-   info "${BLUE}7.1 is supported for this installer and the installer will tuned for your DSM"
+   info "${BLUE}DSM 7.1 is supported for this installer and the installer will tuned for your DSM"
    cp_bin_path=/var/packages/CodecPack/target/pack/bin
    injector="1-12.3.3"
-   info "${BLUE}7.1 is using this path: $cp_bin_path"
-   info "${BLUE}7.1 is using this injector: $injector"
+   info "${BLUE}DSM 7.1 is using this path: $cp_bin_path"
+   info "${BLUE}DSM 7.1 is using this injector: $injector"
 else
  error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the manual procedure."
  exit 1
