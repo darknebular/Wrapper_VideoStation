@@ -178,7 +178,7 @@ else
 	chmod 755 ${cp_bin_path}/ffmpeg41
 	info "${YELLOW}Ensuring the existence of the log file."
 	touch /tmp/ffmpeg.log
-	info "${YELLOW}Delete old log file for ensure that the wrapper starts with a perfectly empty log file."
+	info "${YELLOW}Ensuring that the wrapper starts with a perfectly empty log file."
 	rm /tmp/ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
