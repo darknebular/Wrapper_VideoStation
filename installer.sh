@@ -240,7 +240,7 @@ else
 	info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
 	sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg
 	info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
-	sed -i 's/bin1=/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig/bin1=/var/packages/MediaServer/target/bin/ffmpeg/gi' $ms_path/bin/ffmpeg
+	sed -i 's/"bin1=/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig"/"bin1=/var/packages/MediaServer/target/bin/ffmpeg"/gi' $ms_path/bin/ffmpeg
         info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 	
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
@@ -369,7 +369,7 @@ function configurator() {
    info "${BLUE}==================== Configuration: Complete ===================="
   else
    info "${RED}Actually you haven't any wrapper installed and this codec configurator shouldn't change anything."
-   info "${BLUE}Please, install the wrapper first and then you will can change the audio´s streams order."
+   info "${BLUE}Please, install the Wrapper first and then you will can change the audio´s streams order."
    start
  fi
    done
