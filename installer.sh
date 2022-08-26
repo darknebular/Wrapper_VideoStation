@@ -135,9 +135,9 @@ function install() {
 
 for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
-        info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
+        info "${RED}Actually you have a old patch applied in your system, please uninstall older wrapper first."
 	echo ""
-	echo -e "${BLUE}YES) The installer will uninstall the old patch or wrapper."
+	echo -e "${BLUE}YES) The installer will Uninstall the OLD patch or Wrapper."
         echo -e "${BLUE}NO) Exit from the installer menu and return to main menu."
         while true; do
 	echo -e "${GREEN}"
@@ -240,6 +240,8 @@ function uninstall() {
 }
 
 function configurator() {
+   for losorig in "$all_files"; do
+   if [[ -f "$losorig" ]]; then
    echo ""
    info "${BLUE}==================== Configuration: Start ===================="
    echo ""
@@ -262,6 +264,8 @@ function configurator() {
         done
    
    info "${BLUE}==================== Configuration: Complete ===================="
+   fi
+   done
 }
 
 ################################
