@@ -128,7 +128,7 @@ function start() {
    echo -e "${BLUE}I) Install the wrapper for VideoStation and DLNA MediaServer"
    echo -e "${BLUE}U) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
    echo -e "${BLUE}C) Change the config of this wrapper for change the order of the audio codecs"
-   echo -e "${BLUE}E) Exit from this installer."
+   echo -e "${BLUE}E) EXIT from this installer."
         while true; do
 	echo -e "${GREEN}"
         read -p "Please, What option wish to use? " iuce
