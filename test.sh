@@ -198,8 +198,8 @@ function configurator() {
    echo -e "${GREEN}2) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps" 
 	while true; do
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " 12
-        case $yn in
-        1 ) uninstall_old; break;;
+        case $12 in
+        1 ) echo "LLAMADA A FUNCION"; break;;
         2 ) exit;;
         * ) echo "Please answer with the correct option writing: 1 or 2.";;
         esac
