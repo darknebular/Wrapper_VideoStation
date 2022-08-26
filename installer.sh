@@ -158,6 +158,10 @@ else
 	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
+	info "${YELLOW}Ensuring the existence of the log file."
+	touch /tmp/ffmpeg.log
+	info "${YELLOW}Delete old log file for ensure that the wrapper starts with a perfectly empty log file."
+	rm /tmp/ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
@@ -179,13 +183,14 @@ else
 	
 	restart_packages
 	
+	info "${GREEN}Installed correctly the Wrapper"
+	
 	info "${BLUE}==================== Installation: Complete ===================="
 	
 fi
 done
 
-  echo ""
-
+echo ""
 }
 
 function uninstall_old() {
@@ -207,6 +212,7 @@ function uninstall_old() {
       mv -T -f "$filename" "${filename::-5}"
   done
 
+  info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
   info "${BLUE}==================== Uninstallation of old wrappers in the system: Complete ===================="
   echo ""
@@ -231,9 +237,11 @@ function uninstall() {
       info "Restoring CodecPack's $filename"
       mv -T -f "$filename" "${filename::-5}"
     done
-
+  info "${YELLOW}Delete old log file."
+	rm /tmp/ffmpeg.log
 
   restart_packages
+  info "${GREEN}Uninstalled correctly the Wrapper"
 
   echo ""
   info "${BLUE}==================== Uninstallation: Complete ===================="
