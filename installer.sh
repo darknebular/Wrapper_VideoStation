@@ -291,7 +291,8 @@ function configurator() {
    
    info "${BLUE}==================== Configuration: Complete ===================="
   else
-   error "${RED}Actually you haven't any wrapper installed and this codec configurator shouldn't change anything."
+   info "${RED}Actually you haven't any wrapper installed and this codec configurator shouldn't change anything."
+   info "${BLUE}Please, install the wrapper first and then you will change the audio´s streams order."
    start
  fi
    done
