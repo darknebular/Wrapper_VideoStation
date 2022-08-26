@@ -87,12 +87,15 @@ function check_version() {
 }
 function config_A() {
     info "${YELLOW}Restoring the default codecs order of this Wrapper."
-    echo "$injector  ${cp_bin_path}"
+    
 #	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
 }
 
 function config_B() {
     info "${YELLOW}Changing the default codecs order of this Wrapper."
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41PRUEBAS
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41PRUEBAS
+    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41PRUEBAS
 }
 
 function config_C() {
@@ -206,9 +209,9 @@ function uninstall() {
 function configurator() {
    info "${BLUE}==================== Configuration: Start ===================="
    echo -e "${YELLOW}REMEMBER: If you change the order you will have ALWAYS AAC 5.1 512kbps in first audio stream in VideoStation and DLNA and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
-   echo -e "${GREEN}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It do transcoding (DEFAULT)"
-   echo -e "${GREEN}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It do transcoding" 
-   echo -e "${GREEN}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It do transcoding. This is the behaviour of VideoStation without wrappers."
+   echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It do transcoding (DEFAULT)"
+   echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It do transcoding" 
+   echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It do transcoding. This is the behaviour of VideoStation without wrappers."
    	while true; do
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abc
         case $abc in
