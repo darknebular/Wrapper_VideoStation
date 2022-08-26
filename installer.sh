@@ -264,7 +264,10 @@ function configurator() {
         done
    
    info "${BLUE}==================== Configuration: Complete ===================="
-   fi
+  else
+   info "${RED}Actually you haven't any wrapper installed and this codec configurator shouldn't change anything."
+   start
+ fi
    done
 }
 
