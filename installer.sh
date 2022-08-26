@@ -1,8 +1,9 @@
 #!/bin/bash
 
-version="SCPT_1.0"
+version="SCPT_1.1"
 # Changes:
-# SCPT_1.0: Initial release of the automatic installer script for DMS 7.X.
+# SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
+# SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added.
 
 ###############################
 # VARIABLES
@@ -23,7 +24,8 @@ ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
-all_files=("$ms_libsynovte_file" "vs_libsynovte_file" "$cp_bin_path/ffmpeg41.orig")
+all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig")
+
 
 ###############################
 # FUNCIONES
@@ -91,21 +93,18 @@ function check_version() {
 function install() {
   info "${BLUE}==================== Installation: Start ===================="
 
-# Chequeador de la existencia de otros wrappers instalados para evitar problemas. Función en desarrollo.
-
-# for losorig in "${all_files[@]}"; do
-# if [[ -f "$losorig" ]]; then
-#		info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
-#		while true; do
-#		read -p "Do you wish to uninstall this old wrapper? " yn
-#		case $yn in
-#        [Yy]* ) uninstall_old; break;;
-#        [Nn]* ) exit;;
-#        * ) echo "Please answer yes or no.";;
-#		esac
-#        	done
-#	fi
-#    	if [[ ! -f "$losorig" ]]; then
+for losorig in "$all_files"; do
+if [[ -f "$losorig" ]]; then
+        info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
+        while true; do
+        read -p "Do you wish to uninstall this old wrapper? " yn
+        case $yn in
+        [Yy]* ) uninstall_old; break;;
+        [Nn]* ) exit;;
+        * ) echo "Please answer yes or no.";;
+        esac
+        done
+else
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
     	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
@@ -136,13 +135,14 @@ function install() {
 	
 	restart_packages
 	
-# fi
-# done
+fi
+done
 
   echo ""
   info "${BLUE}==================== Installation: Complete ===================="
 
 }
+
 function uninstall_old() {
   info "${BLUE}==================== Uninstallation of old wrappers in the system: Start ===================="
 
