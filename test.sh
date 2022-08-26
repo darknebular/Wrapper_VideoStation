@@ -1,9 +1,10 @@
 #!/bin/bash
 
-version="SCPT_1.1"
+version="SCPT_1.2"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
-# SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added.
+# SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
+# SCPT_1.2: Added a configurator tool for select the codecs
 
 ###############################
 # VARIABLES
@@ -84,7 +85,6 @@ function check_version() {
     done
     return 1
 }
-
 
 ################################
 # PROCEDIMIENTOS DEL PATCH
@@ -190,13 +190,20 @@ function uninstall() {
   info "${BLUE}==================== Uninstallation: Complete ===================="
 }
 
+function configurator() {
+   info "${BLUE}==================== Configuration: Start ===================="
+   
+   
+   info "${BLUE}==================== Configuration: Complete ===================="
+}
+
 ################################
 # EJECUCIÓN
 ################################
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|uninstall]" >&2; exit 1;;
+    *) echo "usage: $0 [-s install|uninstall|config]" >&2; exit 1;;
   esac
 done
 
@@ -235,4 +242,5 @@ fi
 case "$setup" in
   install) install;;
   uninstall) uninstall;;
+  config) configurator;;
 esac
