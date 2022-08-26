@@ -300,5 +300,5 @@ case "$setup" in
   install) install;;
   uninstall) uninstall;;
   config) configurator;;
-  info) welcome;;
+  info) exit 1;;
 esac
