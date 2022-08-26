@@ -85,6 +85,17 @@ function check_version() {
     done
     return 1
 }
+function config_A() {
+    info "${YELLOW}Restoring the default codecs order of this Wrapper"
+    echo "$injector  ${cp_bin_path}"
+#	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+}
+function config_B() {
+    
+}
+function config_C() {
+    
+}
 
 ################################
 # PROCEDIMIENTOS DEL PATCH
@@ -193,15 +204,17 @@ function uninstall() {
 function configurator() {
    info "${BLUE}==================== Configuration: Start ===================="
    info "${BLUE}Actually you have two audio streams, first MP3 2.0 256kbps and second 5.1 AAC 512kbps."
-   info "${YELLOW}REMEMBER: If you change the order you will have ALWAYS AAC 5.1 512kbps in first audio stream in VideoStation and DLNA and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
-   echo -e "${GREEN}A) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps" 
-   echo -e "${GREEN}B) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps" 
-	while true; do
-        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " ab
-        case $ab in
-        [Aa] ) echo "LLAMADA A FUNCION"; break;;
-        [Bb] ) exit;;
-        * ) echo "Please answer with the correct option writing: A or B.";;
+   echo -e "${YELLOW}REMEMBER: If you change the order you will have ALWAYS AAC 5.1 512kbps in first audio stream in VideoStation and DLNA and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
+   echo -e "${GREEN}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (DEFAULT)"
+   echo -e "${GREEN}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps" 
+   echo -e "${GREEN}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps. This is the behaviour of VideoStation without wrappers."
+   	while true; do
+        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abc
+        case $abc in
+        [Aa] ) config_A; break;;
+        [Bb] ) config_B; break;;
+	[Cc] ) config_C; break;;
+        * ) echo "Please answer with the correct option writing: A or B or C.";;
         esac
         done
    
