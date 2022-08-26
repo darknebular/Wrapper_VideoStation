@@ -10,7 +10,7 @@ Works fine the OffLine transcoding and the streaming of tipical extensions like:
 
 This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and some improvements in his code.
 
-# VideoStation and MediaServer FFMPEG-Wrapper, now with Installer: 
+# VideoStation and MediaServer FFMPEG-Wrapper, now with Installer and Codecs CONFIGURATOR: 
 
 This installer is designed to simplify the installation steps and enable **DTS**, **EAC3** and **TrueHD** support to Synology VideoStation by replacing the ffmpeg library files by a wrapper using SynoCommunity ffmpeg, only when It´s necessary.
 
@@ -46,7 +46,9 @@ With options:
 | Flags        | Required | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
 | install      | No       | The default flag, this install the patch.                                       |                            
-| uninstall    | No       | This flag uninstall the patch.                                                  |      
+| uninstall    | No       | This flag uninstall the patch.                                                  |
+| config       | No       | Change the behaviour of the audio codecs                                        |
+| info         | No       | Show the general info of the installer                                          |
 
 
 
