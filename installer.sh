@@ -172,6 +172,7 @@ function start() {
    echo -e "${BLUE}I) Install the wrapper for VideoStation and DLNA MediaServer"
    echo -e "${BLUE}U) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
    echo -e "${BLUE}C) Change the config of this wrapper for change the order of the audio codecs in VIDEO-STATION and DLNA."
+   echo ""
    echo -e "${BLUE}E) EXIT from this installer."
         while true; do
 	echo -e "${GREEN}"
@@ -350,6 +351,7 @@ function configurator() {
    echo -e "${BLUE}D) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA. (DEFAULT ORDER DLNA)"
    echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA."
    echo -e "${BLUE}F) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in DLNA. This is the behaviour of DLNA without wrappers. (This option installs the simplest_wrapper in DLNA MediaServer)."
+   echo ""
    echo -e "${BLUE}Z) Exit from this Configurator menu and return to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
