@@ -276,7 +276,7 @@ function configurator() {
    echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding. (DEFAULT ORDER)"
    echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding." 
    echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding. This is the behaviour of VideoStation without wrappers."
-   echo -e "${BLUE}D) Exit from this configurator menu and return to main menu."
+   echo -e "${BLUE}D) Exit from this Configurator menu and return to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcd
