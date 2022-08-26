@@ -1,11 +1,13 @@
 #!/bin/bash
 
-version="SCPT_1.3"
+version="SCPT_1.5"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
 # SCPT_1.2: Added a configurator tool for select the codecs. (Deprecated migrated to SCPT_1.3)
-# SCPT_1.3: Added a interactive menu when you don´t especify any Flag in bash command or you are using basic launch.
+# SCPT_1.3: Added a interactive menu when you don´t especify any Flag in bash command or you are using basic launch. (Deprecated migrated to SCPT_1.4)
+# SCPT_1.4: Fixed a bug: when you select simplest_wrapper with only MP3 2.0 and then try to change the order of the audio codecs you will have a error. (Deprecated migrated to SCPT_1.5)
+# SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems.
 
 ###############################
 # VARIABLES
@@ -45,14 +47,14 @@ function error() {
 
 function restart_packages() {
   if [[ -d $cp_bin_path ]]; then
-    info "${YELLOW}Restarting CodecPack..."
+    info "${GREEN}Restarting CodecPack..."
     synopkg restart CodecPack
   fi
 
-  info "${YELLOW}Restarting VideoStation..."
+  info "${GREEN}Restarting VideoStation..."
   synopkg restart VideoStation
   
-  info "${YELLOW}Restarting MediaServer..."
+  info "${GREEN}Restarting MediaServer..."
   synopkg restart MediaServer
 }
 
@@ -87,22 +89,36 @@ function check_version() {
     return 1
 }
 function config_A() {
-    info "${YELLOW}Restoring the default codecs order of this Wrapper."
+    info "${YELLOW}Restoring the default audio´s codecs and stream´s order of this wrapper."
     
     wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+    info "${GREEN}Waiting for consolidate the download of the wrapper."
+    sleep 2
+    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbp and 2) AAC 5.1 512kbps."
 }
 
 function config_B() {
+    info "${YELLOW}Changing to use this audio´s codecs and stream´s order of this wrapper."
+    
+    wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+    info "${GREEN}Waiting for consolidate the download of the wrapper."
+    sleep 2
     info "${YELLOW}Changing the default codecs order of this Wrapper."
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41
+    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps."
 }
 
 function config_C() {
     info "${YELLOW}Changing to use ALWAYS MP3 2.0 128kbps."
+    info "${YELLOW}Applying the simplest wrapper."
     
     wget $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41
+        
+    info "${GREEN}Waiting for consolidate the download of the simplest wrapper."
+    sleep 2
+    info "${GREEN}Sucesfully changed the audio to a unique audio stream: 1) MP3 2.0 128kbps."
 }
 
 function start() {
@@ -156,6 +172,8 @@ else
 	touch ${cp_bin_path}/ffmpeg41 
 	  info "${YELLOW}Injection of the ffmpeg41 wrapper."
 	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+	  info "${GREEN}Waiting for consolidate the download of the wrapper."
+        sleep 2
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
 	info "${YELLOW}Ensuring the existence of the log file."
