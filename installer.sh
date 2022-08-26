@@ -1,9 +1,11 @@
 #!/bin/bash
 
-version="SCPT_1.1"
+version="SCPT_1.3"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
-# SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added.
+# SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
+# SCPT_1.2: Added a configurator tool for select the codecs. (Deprecated migrated to SCPT_1.3)
+# SCPT_1.3: Added a interactive menu when you don´t especify any Flag in bash command or you are using basic launch.
 
 ###############################
 # VARIABLES
@@ -11,7 +13,7 @@ version="SCPT_1.1"
 
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
-setup="install"
+setup="start"
 dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
@@ -84,7 +86,45 @@ function check_version() {
     done
     return 1
 }
+function config_A() {
+    info "${YELLOW}Restoring the default codecs order of this Wrapper."
+    
+    wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+}
 
+function config_B() {
+    info "${YELLOW}Changing the default codecs order of this Wrapper."
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41
+    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41
+}
+
+function config_C() {
+    info "${YELLOW}Changing to use ALWAYS MP3 2.0 128kbps."
+    
+    wget $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41
+}
+
+function start() {
+   echo ""   
+   echo -e "${GREEN}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
+   echo ""
+   echo -e "${BLUE}I) Install the wrapper for VideoStation and DLNA MediaServer"
+   echo -e "${BLUE}U) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
+   echo -e "${BLUE}C) Change the config of this wrapper for change the order of the audio codecs"
+   echo -e "${BLUE}E) Exit from this installer."
+        while true; do
+	echo -e "${GREEN}"
+        read -p "Please, What option wish to use? " iuce
+        case $iuce in
+        [Ii]* ) install;;
+        [Uu]* ) uninstall;;
+	[Cc]* ) configurator;;
+	[Ee]* ) exit;;
+        * ) echo "Please answer I or Install | U or Uninstall | C or Config | E or Exit.";;
+        esac
+        done
+}
 
 ################################
 # PROCEDIMIENTOS DEL PATCH
@@ -97,10 +137,14 @@ for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
         while true; do
-        read -p "Do you wish to uninstall this old wrapper? " yn
+	echo ""
+	echo -e "${BLUE}YES) The installer will uninstall the old patch or wrapper."
+        echo -e "${BLUE}NO) Exit from the installer menu and return to main menu."
+	echo -e "${GREEN}"
+        read -p "Do you wish to Uninstall this old wrapper? " yn
         case $yn in
         [Yy]* ) uninstall_old; break;;
-        [Nn]* ) exit;;
+        [Nn]* ) start;;
         * ) echo "Please answer yes or no.";;
         esac
         done
@@ -135,11 +179,11 @@ else
 	
 	restart_packages
 	
-	info "${BLUE}==================== Installation: Complete ===================="
 fi
 done
 
   echo ""
+  info "${BLUE}==================== Installation: Complete ===================="
 
 }
 
@@ -165,7 +209,9 @@ function uninstall_old() {
   echo ""
   info "${BLUE}==================== Uninstallation of old wrappers in the system: Complete ===================="
   echo ""
+  echo ""
   info "${BLUE}====================Continuing with installation of the new wrapper...===================="
+  echo ""
   echo ""
   
   install
@@ -192,13 +238,36 @@ function uninstall() {
   info "${BLUE}==================== Uninstallation: Complete ===================="
 }
 
+function configurator() {
+   echo ""
+   info "${BLUE}==================== Configuration: Start ===================="
+   echo -e "${YELLOW}REMEMBER: If you change the order you will have ALWAYS AAC 5.1 512kbps in first audio stream in VideoStation and DLNA and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
+   echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It do transcoding (DEFAULT)"
+   echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It do transcoding" 
+   echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It do transcoding. This is the behaviour of VideoStation without wrappers."
+   echo -e "${BLUE}D) Exit from this configurator menu and return to main menu."
+   	while true; do
+	echo -e "${GREEN}"
+        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcd
+        case $abcd in
+        [Aa] ) config_A; break;;
+        [Bb] ) config_B; break;;
+	[Cc] ) config_C; break;;
+	[Dd] ) start; break;;
+        * ) echo "Please answer with the correct option writing: A or B or C or D.";;
+        esac
+        done
+   
+   info "${BLUE}==================== Configuration: Complete ===================="
+}
+
 ################################
 # EJECUCIÓN
 ################################
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|uninstall]" >&2; exit 1;;
+    *) echo "usage: $0 [-s install|uninstall|config|info]" >&2; exit 1;;
   esac
 done
 
@@ -207,6 +276,8 @@ clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
 echo -e "${BLUE}====================This wrapper installer is only avalaible for "${supported_versions[@]}" only===================="
 echo ""
+echo ""
+
 welcome
 
 check_dependencias
@@ -235,6 +306,9 @@ fi
 
 
 case "$setup" in
+  start) start;;
   install) install;;
   uninstall) uninstall;;
+  config) configurator;;
+  info) exit 1;;
 esac
