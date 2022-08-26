@@ -88,7 +88,7 @@ function check_version() {
 function config_A() {
     info "${YELLOW}Restoring the default codecs order of this Wrapper."
     
-#	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+    wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41PRUEBAS
 }
 
 function config_B() {
@@ -100,6 +100,8 @@ function config_B() {
 
 function config_C() {
     info "${YELLOW}Changing to use ALWAYS MP3 2.0 128kbps."
+    
+    wget $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41PRUEBAS
 }
 
 ################################
