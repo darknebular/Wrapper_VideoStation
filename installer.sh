@@ -135,10 +135,10 @@ function install() {
 
 for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
-        info "${RED}Actually you have a old patch applied in your system, please uninstall older wrapper first."
+        info "${RED}Actually you have a old patch applied in your system, please Uninstall older wrapper first."
 	echo ""
 	echo -e "${BLUE}YES) The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${BLUE}NO) Exit from the installer menu and return to main menu."
+        echo -e "${BLUE}NO) Exit from the installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this old wrapper? " yn
