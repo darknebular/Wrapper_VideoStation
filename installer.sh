@@ -96,6 +96,7 @@ function config_A() {
     info "${GREEN}Waiting for consolidate the download of the wrapper."
     sleep 2
     info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbp and 2) AAC 5.1 512kbps in VIDEO-STATION."
+    echo ""
 }
 
 function config_B() {
@@ -109,6 +110,7 @@ function config_B() {
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41
     info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
+    echo ""
 }
 
 function config_C() {
@@ -120,6 +122,7 @@ function config_C() {
     info "${GREEN}Waiting for consolidate the download of the simplest wrapper."
     sleep 2
     info "${GREEN}Sucesfully changed the audio to a unique audio stream: 1) MP3 2.0 128kbps in VIDEO-STATION."
+    echo ""
 }
 
 function config_D() {
@@ -137,6 +140,7 @@ function config_D() {
 	info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
 	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg
         info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
+	echo ""
 }
 
 function config_E() {
@@ -154,6 +158,7 @@ function config_E() {
 	info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
 	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg
         info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
+	echo ""
 }
 
 function config_F() {
@@ -163,6 +168,7 @@ function config_F() {
     info "${GREEN}Waiting for consolidate the download of the simplest wrapper."
     sleep 2
     info "${GREEN}Sucesfully changed the audio to a Unique audio´s stream: 1) MP3 2.0 128kbps in DLNA MediaServer."
+    echo ""
 }
 
 function start() {
@@ -182,7 +188,7 @@ function start() {
         [Uu]* ) uninstall;;
 	[Cc]* ) configurator;;
 	[Ee]* ) exit;;
-        * ) echo "Please answer I or Install | U or Uninstall | C or Config | E or Exit.";;
+        * ) echo -e "${YELLOW}Please answer I or Install | U or Uninstall | C or Config | E or Exit.";;
         esac
         done
 }
@@ -206,7 +212,7 @@ if [[ -f "$losorig" ]]; then
         case $yn in
         [Yy]* ) uninstall_old; break;;
         [Nn]* ) start;;
-        * ) echo "Please answer YES = (Uninstall the OLD wrapper) or NO = (Return to MAIN Menu).";;
+        * ) echo -e "${YELLOW}Please answer YES = (Uninstall the OLD wrapper) or NO = (Return to MAIN Menu).";;
         esac
         done
 else
@@ -365,7 +371,7 @@ function configurator() {
 	[Ee] ) config_E; break;;
 	[Ff] ) config_F; break;;
 	[Zz] ) start; break;;
-        * ) echo "Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;
+        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;
         esac
         done
    
