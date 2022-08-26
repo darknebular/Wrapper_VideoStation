@@ -203,11 +203,10 @@ function uninstall() {
 
 function configurator() {
    info "${BLUE}==================== Configuration: Start ===================="
-   info "${BLUE}Actually you have two audio streams, first MP3 2.0 256kbps and second 5.1 AAC 512kbps."
    echo -e "${YELLOW}REMEMBER: If you change the order you will have ALWAYS AAC 5.1 512kbps in first audio stream in VideoStation and DLNA and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
-   echo -e "${GREEN}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (DEFAULT)"
-   echo -e "${GREEN}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps" 
-   echo -e "${GREEN}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps. This is the behaviour of VideoStation without wrappers."
+   echo -e "${GREEN}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It do transcoding (DEFAULT)"
+   echo -e "${GREEN}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It do transcoding" 
+   echo -e "${GREEN}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It do transcoding. This is the behaviour of VideoStation without wrappers."
    	while true; do
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abc
         case $abc in
