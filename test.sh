@@ -101,39 +101,39 @@ if [[ -f "$losorig" ]]; then
         case $yn in
         [Yy]* ) uninstall_old; break;;
         [Nn]* ) exit;;
-        * ) echo "Please answer yes or no.";;
+        * ) echo "Please answer yes or no."; break;;
         esac
         done
 else
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
-    	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
+#    	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
 	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
-	touch ${cp_bin_path}/ffmpeg41 
+#	touch ${cp_bin_path}/ffmpeg41 
 	  info "${YELLOW}Injection of the ffmpeg41 wrapper."
-	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+#	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
-	chmod 755 ${cp_bin_path}/ffmpeg41
+#	chmod 755 ${cp_bin_path}/ffmpeg41
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
-	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig
+#	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig
 	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig"
-	chown VideoStation:VideoStation $vs_libsynovte_file.orig
+#	chown VideoStation:VideoStation $vs_libsynovte_file.orig
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file
+#	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file
 	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
 	
 	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
-	cp -n $ms_libsynovte_file $ms_libsynovte_file.orig
+#	cp -n $ms_libsynovte_file $ms_libsynovte_file.orig
 	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig"
-	chown MediaServer:MediaServer $ms_libsynovte_file.orig
-	chmod 644 $ms_libsynovte_file.orig
+#	chown MediaServer:MediaServer $ms_libsynovte_file.orig
+#	chmod 644 $ms_libsynovte_file.orig
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file
+#	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file
 	info "${GREEN}Modified correctly the file $ms_libsynovte_file"
 	
-	restart_packages
+#	restart_packages
 	
 fi
 done
