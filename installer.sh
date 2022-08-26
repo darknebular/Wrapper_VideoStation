@@ -135,7 +135,7 @@ function config_D() {
 	info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
 	sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg
 	info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
-	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg#gi' $ms_path/bin/ffmpeg
+	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg
         info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
 }
 
@@ -152,7 +152,7 @@ function config_E() {
 	info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
 	sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg
 	info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
-	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg#gi' $ms_path/bin/ffmpeg
+	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg
         info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
 }
 
@@ -241,7 +241,7 @@ else
 	info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
 	sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg
 	info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
-	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg#gi' $ms_path/bin/ffmpeg
+	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg
         info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 	
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
@@ -328,6 +328,7 @@ function uninstall() {
       mv -T -f "$filename" "${filename::-5}"
     done
   info "${YELLOW}Delete old log file."
+	touch /tmp/ffmpeg.log
 	rm /tmp/ffmpeg.log
 
   restart_packages
