@@ -101,7 +101,7 @@ if [[ -f "$losorig" ]]; then
         case $yn in
         [Yy]* ) uninstall_old; break;;
         [Nn]* ) exit;;
-        * ) echo "Please answer yes or no."; break;;
+        * ) echo "Please answer yes or no.";;
         esac
         done
 else
