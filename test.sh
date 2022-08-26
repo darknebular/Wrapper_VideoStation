@@ -91,10 +91,10 @@ function config_A() {
 #	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
 }
 function config_B() {
-    
+    info "${YELLOW}Changing the default codecs order of this Wrapper"
 }
 function config_C() {
-    
+    info "${YELLOW}Changing to use ALWAYS MP3 2.0 128kbps"
 }
 
 ################################
