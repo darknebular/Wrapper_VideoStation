@@ -106,6 +106,8 @@ function config_C() {
 }
 
 function start() {
+   welcome
+   
    echo -e "${BLUE}This is the interactive menu, please choose your selection"
    echo -e "${BLUE}Install) Install the wrapper for VideoStation and DLNA MediaServer"
    echo -e "${BLUE}Uninstall) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
@@ -266,7 +268,6 @@ clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
 echo -e "${BLUE}====================This wrapper installer is only avalaible for "${supported_versions[@]}" only===================="
 echo ""
-welcome
 
 check_dependencias
 
