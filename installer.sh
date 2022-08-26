@@ -1,13 +1,14 @@
 #!/bin/bash
 
-version="SCPT_1.5"
+version="SCPT_1.6"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
 # SCPT_1.2: Added a configurator tool for select the codecs. (Deprecated migrated to SCPT_1.3)
 # SCPT_1.3: Added a interactive menu when you don´t especify any Flag in bash command or you are using basic launch. (Deprecated migrated to SCPT_1.4)
 # SCPT_1.4: Fixed a bug: when you select simplest_wrapper with only MP3 2.0 and then try to change the order of the audio codecs you will have a error. (Deprecated migrated to SCPT_1.5)
-# SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems.
+# SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems. (Deprecated migrated to SCPT_1.6)
+# SCPT_1.6: Added a independent audio´s streams for DLNA.
 
 ###############################
 # VARIABLES
@@ -28,7 +29,7 @@ ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
-all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig")
+all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig")
 
 
 ###############################
@@ -89,16 +90,16 @@ function check_version() {
     return 1
 }
 function config_A() {
-    info "${YELLOW}Restoring the default audio´s codecs and stream´s order of this wrapper."
+    info "${YELLOW}Restoring the default audio´s codecs and stream´s order of this wrapper in VIDEO-STATION."
     
     wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
     info "${GREEN}Waiting for consolidate the download of the wrapper."
     sleep 2
-    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbp and 2) AAC 5.1 512kbps."
+    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbp and 2) AAC 5.1 512kbps in VIDEO-STATION."
 }
 
 function config_B() {
-    info "${YELLOW}Changing to use this audio´s codecs and stream´s order of this wrapper."
+    info "${YELLOW}Changing to use this audio´s codecs and stream´s order of this wrapper in VIDEO-STATION."
     
     wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
     info "${GREEN}Waiting for consolidate the download of the wrapper."
@@ -107,18 +108,57 @@ function config_B() {
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41
-    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps."
+    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
 }
 
 function config_C() {
-    info "${YELLOW}Changing to use ALWAYS MP3 2.0 128kbps."
+    info "${YELLOW}Changing to use ALWAYS MP3 2.0 128kbps in VIDEO-STATION."
     info "${YELLOW}Applying the simplest wrapper."
     
     wget $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41
         
     info "${GREEN}Waiting for consolidate the download of the simplest wrapper."
     sleep 2
-    info "${GREEN}Sucesfully changed the audio to a unique audio stream: 1) MP3 2.0 128kbps."
+    info "${GREEN}Sucesfully changed the audio to a unique audio stream: 1) MP3 2.0 128kbps in VIDEO-STATION."
+}
+
+function config_D() {
+    info "${YELLOW}Restoring the default audio´s codecs and stream´s order of this wrapper in DLNA MediaServer."
+	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg
+	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
+	chmod 755 $ms_path/bin/ffmpeg
+	chown MediaServer:MediaServer $ms_path/bin/ffmpeg
+	info "${YELLOW}Restoring the default codecs order of this Wrapper in DLNA MediaServer."
+        sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg
+        sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg
+        sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg
+	info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
+	sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg
+        info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
+}
+
+function config_E() {
+    info "${YELLOW}Changing to use this audio´s codecs and stream´s order of this wrapper in DLNA MediaServer."
+	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg
+	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
+	chmod 755 $ms_path/bin/ffmpeg
+	chown MediaServer:MediaServer $ms_path/bin/ffmpeg
+	info "${YELLOW}Changing the default codecs order of this Wrapper in DLNA MediaServer."
+        sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' $ms_path/bin/ffmpeg
+        sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' $ms_path/bin/ffmpeg
+        sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' $ms_path/bin/ffmpeg
+	info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
+	sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg
+        info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
+}
+
+function config_F() {
+    info "${YELLOW}Changing to use ALWAYS MP3 2.0 128kbps in DLNA MediaServer."
+	wget $repo_url/main/simplest_wrapper -O $ms_path/bin/ffmpeg
+        
+    info "${GREEN}Waiting for consolidate the download of the simplest wrapper."
+    sleep 2
+    info "${GREEN}Sucesfully changed the audio to a unique audio stream: 1) MP3 2.0 128kbps in DLNA MediaServer."
 }
 
 function start() {
@@ -127,7 +167,7 @@ function start() {
    echo ""
    echo -e "${BLUE}I) Install the wrapper for VideoStation and DLNA MediaServer"
    echo -e "${BLUE}U) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
-   echo -e "${BLUE}C) Change the config of this wrapper for change the order of the audio codecs"
+   echo -e "${BLUE}C) Change the config of this wrapper for change the order of the audio codecs in VIDEO-STATION and DLNA."
    echo -e "${BLUE}E) EXIT from this installer."
         while true; do
 	echo -e "${GREEN}"
@@ -182,6 +222,21 @@ else
 	rm /tmp/ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
+	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
+	mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig
+	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
+	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg
+	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
+	chmod 755 $ms_path/bin/ffmpeg
+	chown MediaServer:MediaServer $ms_path/bin/ffmpeg
+	info "${YELLOW}Changing the default codecs order of this Wrapper in DLNA MediaServer."
+        sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg
+        sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg
+        sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg
+	info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
+	sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg
+        info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
+	
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
 	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig
 	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig"
@@ -224,6 +279,11 @@ function uninstall_old() {
     info "${YELLOW}Restoring VideoStation's $filename"
     mv -T -f "$filename" "${filename::-5}"
   done
+  
+  find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
+    info "${YELLOW}Restoring MediaServer's $filename"
+    mv -T -f "$filename" "${filename::-5}"
+  done
 
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "Restoring CodecPack's $filename"
@@ -250,6 +310,11 @@ function uninstall() {
   
   info "${YELLOW}Restoring MediaServer´s libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
+  
+  find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
+  info "${YELLOW}Restoring MediaServer's $filename"
+  mv -T -f "$filename" "${filename::-5}"
+  done
 
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "Restoring CodecPack's $filename"
@@ -271,21 +336,27 @@ function configurator() {
    echo ""
    info "${BLUE}==================== Configuration: Start ===================="
    echo ""
-   echo -e "${YELLOW}REMEMBER: If you change the order you will have ALWAYS AAC 5.1 512kbps in first audio stream in VideoStation and DLNA and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
+   echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
    echo ""
-   echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding. (DEFAULT ORDER)"
-   echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding." 
-   echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding. This is the behaviour of VideoStation without wrappers. (This option installs the simplest_wrapper)."
-   echo -e "${BLUE}D) Exit from this Configurator menu and return to MAIN menu."
+   echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+   echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+   echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in VIDEO-STATION. This is the behaviour of VideoStation without wrappers. (This option installs the simplest_wrapper in VIDEO-STATION)."
+   echo -e "${BLUE}D) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA. (DEFAULT ORDER DLNA)"
+   echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA."
+   echo -e "${BLUE}F) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in DLNA. This is the behaviour of DLNA without wrappers. (This option installs the simplest_wrapper in DLNA MediaServer)."
+   echo -e "${BLUE}Z) Exit from this Configurator menu and return to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
-        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcd
-        case $abcd in
+        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcdefz
+        case $abcdefz in
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
 	[Cc] ) config_C; break;;
-	[Dd] ) start; break;;
-        * ) echo "Please answer with the correct option writing: A or B or C or D.";;
+	[Dd] ) config_D; break;;
+	[Ee] ) config_E; break;;
+	[Ff] ) config_F; break;;
+	[Zz] ) start; break;;
+        * ) echo "Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;
         esac
         done
    
