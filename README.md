@@ -41,7 +41,7 @@ This installer is designed to simplify the installation steps and enable **DTS**
 Basic command:  
 `bash <(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")`   
 With options:  
-`bash <(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh") -s uninstall`
+`bash <(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh") -s <Flags>`
 
 | Flags        | Required | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
