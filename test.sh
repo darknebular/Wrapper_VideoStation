@@ -147,20 +147,20 @@ function uninstall_old() {
   info "${BLUE}==================== Uninstallation of old wrappers in the system: Start ===================="
 
   info "${YELLOW}Restoring VideoStation´s libsynovte.so"
-  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
+#  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
   info "${YELLOW}Restoring MediaServer´s libsynovte.so"
-  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
+#  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
-  find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring VideoStation's $filename"
-    mv -T -f "$filename" "${filename::-5}"
-  done
+#  find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
+#    info "${YELLOW}Restoring VideoStation's $filename"
+#    mv -T -f "$filename" "${filename::-5}"
+#  done
 
-  find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
+#  find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "Restoring CodecPack's $filename"
-      mv -T -f "$filename" "${filename::-5}"
-  done
+#      mv -T -f "$filename" "${filename::-5}"
+#  done
 
   echo ""
   info "${BLUE}==================== Uninstallation of old wrappers in the system: Complete ===================="
@@ -173,18 +173,18 @@ function uninstall() {
   info "${BLUE}==================== Uninstallation: Start ===================="
 
   info "${YELLOW}Restoring VideoStation´s libsynovte.so"
-  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
+#  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
   info "${YELLOW}Restoring MediaServer´s libsynovte.so"
-  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
+#  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
-  find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
+#  find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "Restoring CodecPack's $filename"
-      mv -T -f "$filename" "${filename::-5}"
-    done
+#      mv -T -f "$filename" "${filename::-5}"
+#    done
 
 
-  restart_packages
+ # restart_packages
 
   echo ""
   info "${BLUE}==================== Uninstallation: Complete ===================="
