@@ -1,10 +1,11 @@
 #!/bin/bash
 
-version="SCPT_1.2"
+version="SCPT_1.3"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
-# SCPT_1.2: Added a configurator tool for select the codecs
+# SCPT_1.2: Added a configurator tool for select the codecs. (Deprecated migrated to SCPT_1.3)
+# SCPT_1.3: Added a interactive menu when you don´t especify any Flag in bash command.
 
 ###############################
 # VARIABLES
@@ -12,7 +13,7 @@ version="SCPT_1.2"
 
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
-setup="install"
+setup="start"
 dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
@@ -104,6 +105,25 @@ function config_C() {
     wget $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41PRUEBAS
 }
 
+function start() {
+   echo -e "${BLUE}This is the interactive menu, please choose your selection"
+   echo -e "${BLUE}Install) Install the wrapper for VideoStation and DLNA MediaServer"
+   echo -e "${BLUE}Uninstall) Uninstall the wrapper for VideoStation and DLNA MediaServer" 
+   echo -e "${BLUE}Config) Change the config of this wrapper for change the order of the audio codecs"
+   echo -e "${BLUE}Exit) Exit from this installer."
+        while true; do
+	echo -e "${GREEN}"
+        read -p "Please, What option wish to use? " iuce
+        case $iuce in
+        [Ii]* ) install;;
+        [Uu]* ) uninstall;;
+	[Cc]* ) configurator;;
+	[Ee]* ) exit;;
+        * ) echo "Please answer I or Install | U or Uninstall | C or Config | E or Exit.";;
+        esac
+        done
+}
+
 ################################
 # PROCEDIMIENTOS DEL PATCH
 ################################
@@ -115,6 +135,7 @@ for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${YELLOW}Actually you have a old patch applied in your system, please uninstall older wrapper first."
         while true; do
+	echo -e "${GREEN}"
         read -p "Do you wish to uninstall this old wrapper? " yn
         case $yn in
         [Yy]* ) uninstall_old; break;;
@@ -214,13 +235,16 @@ function configurator() {
    echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It do transcoding (DEFAULT)"
    echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It do transcoding" 
    echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It do transcoding. This is the behaviour of VideoStation without wrappers."
+   echo -e "${BLUE}D) Exit from this configurator."
    	while true; do
-        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abc
-        case $abc in
+	echo -e "${GREEN}"
+        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcd
+        case $abcd in
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
 	[Cc] ) config_C; break;;
-        * ) echo "Please answer with the correct option writing: A or B or C.";;
+	[Dd] ) exit 1; break;;
+        * ) echo "Please answer with the correct option writing: A or B or C or D.";;
         esac
         done
    
@@ -233,7 +257,7 @@ function configurator() {
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|uninstall|config]" >&2; exit 1;;
+    *) echo "usage: $0 [-s install|uninstall|config|info]" >&2; exit 1;;
   esac
 done
 
@@ -270,7 +294,9 @@ fi
 
 
 case "$setup" in
+  start) start;;
   install) install;;
   uninstall) uninstall;;
   config) configurator;;
+  info) welcome;;
 esac
