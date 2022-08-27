@@ -98,6 +98,7 @@ function config_A() {
     sleep 2
     info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbp and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
+    
 }
 
 function config_B() {
@@ -112,6 +113,7 @@ function config_B() {
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41
     info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
+    
 }
 
 function config_C() {
@@ -124,6 +126,7 @@ function config_C() {
     sleep 2
     info "${GREEN}Sucesfully changed the audio to a unique audio stream: 1) MP3 2.0 128kbps in VIDEO-STATION."
     echo ""
+    
 }
 
 function config_D() {
@@ -142,6 +145,7 @@ function config_D() {
 	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg
         info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
 	echo ""
+	
 }
 
 function config_E() {
@@ -160,6 +164,7 @@ function config_E() {
 	sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg
         info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
 	echo ""
+	
 }
 
 function config_F() {
@@ -170,6 +175,7 @@ function config_F() {
     sleep 2
     info "${GREEN}Sucesfully changed the audio to a Unique audio´s stream: 1) MP3 2.0 128kbps in DLNA MediaServer."
     echo ""
+    
 }
 
 function start() {
@@ -202,6 +208,11 @@ function start() {
 
 function install() {
   info "${BLUE}==================== Installation of the Advanced Wrapper: START ===================="
+  echo ""
+   info "${BLUE}You are running DSM $dsm_version"
+   info "${BLUE}DSM $dsm_version is supported for this installer and the installer will tuned for your DSM"
+   info "${BLUE}DSM $dsm_version is using this path: $cp_bin_path"
+   info "${BLUE}DSM $dsm_version is using this injector: $injector"
 
 for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
@@ -389,7 +400,12 @@ function configurator() {
 
 function install_simple() {
   info "${BLUE}==================== Installation of the Simplest Wrapper: START ===================="
-
+  echo ""
+   info "${BLUE}You are running DSM $dsm_version"
+   info "${BLUE}DSM $dsm_version is supported for this installer and the installer will tuned for your DSM"
+   info "${BLUE}DSM $dsm_version is using this path: $cp_bin_path"
+   info "${BLUE}DSM $dsm_version is using this injector: Simple"
+   
 for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
@@ -483,22 +499,14 @@ welcome
 check_dependencias
 
 if check_version "$dsm_version" " " 7.0; then
-   info "${BLUE}You are running DSM $dsm_version"
-   info "${BLUE}DSM 7.0 is supported for this installer and the installer will tuned for your DSM"
    cp_bin_path=/var/packages/CodecPack/target/bin
    injector="0-12.2.2"
-   info "${BLUE}DSM 7.0 is using this path: $cp_bin_path"
-   info "${BLUE}DSM 7.0 is using this injector: $injector"
 fi
 if check_version "$dsm_version" " " 7.1; then
-   info "${BLUE}You are running DSM $dsm_version"
-   info "${BLUE}DSM 7.1 is supported for this installer and the installer will tuned for your DSM"
    cp_bin_path=/var/packages/CodecPack/target/pack/bin
    injector="1-12.3.3"
-   info "${BLUE}DSM 7.1 is using this path: $cp_bin_path"
-   info "${BLUE}DSM 7.1 is using this injector: $injector"
 else
- error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the manual procedure."
+ error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
  exit 1
 fi
 
