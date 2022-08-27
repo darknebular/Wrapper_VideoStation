@@ -438,7 +438,7 @@ if [[ "$check_firma" == "$firma" ]]; then
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
    start
 fi
-done
+
 }
 
 function install_simple() {
