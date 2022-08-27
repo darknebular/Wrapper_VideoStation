@@ -221,7 +221,7 @@ if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
 	echo -e "${BLUE}YES) The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${BLUE}NO) Exit from the installer menu and return to MAIN MENU."
+        echo -e "${PURPLE}NO) EXIT from the installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
@@ -331,6 +331,42 @@ function uninstall_old() {
   
 }
 
+function uninstall_old_simple() {
+  info "${BLUE}==================== Uninstallation of old wrappers in the system: START ===================="
+
+  info "${YELLOW}Restoring VideoStation´s libsynovte.so"
+  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
+  
+  info "${YELLOW}Restoring MediaServer´s libsynovte.so"
+  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
+
+  find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
+    info "${YELLOW}Restoring VideoStation's $filename"
+    mv -T -f "$filename" "${filename::-5}"
+  done
+  
+  find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
+    info "${YELLOW}Restoring MediaServer's $filename"
+    mv -T -f "$filename" "${filename::-5}"
+  done
+
+  find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
+      info "Restoring CodecPack's $filename"
+      mv -T -f "$filename" "${filename::-5}"
+  done
+
+  info "${GREEN}Uninstalled correctly the old Wrapper"
+  echo ""
+  info "${BLUE}==================== Uninstallation of old wrappers in the system: COMPLETE ===================="
+  echo ""
+  echo ""
+  info "${BLUE}====================CONTINUING With installation of the new wrapper...===================="
+  echo ""
+  
+  install_simple
+  
+}
+
 function uninstall() {
   info "${BLUE}==================== Uninstallation all wrappers: START ===================="
 
@@ -419,12 +455,12 @@ if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
 	echo -e "${BLUE}YES) The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${BLUE}NO) Exit from the installer menu and return to MAIN MENU."
+        echo -e "${PURPLE}NO) EXIT from the installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
         case $yn in
-        [Yy]* ) uninstall_old; break;;
+        [Yy]* ) uninstall_old_simple; break;;
         [Nn]* ) start;;
         * ) echo -e "${YELLOW}Please answer YES = (Uninstall the OLD wrapper) or NO = (Return to MAIN Menu).";;
         esac
