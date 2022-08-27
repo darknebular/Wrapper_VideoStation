@@ -398,8 +398,8 @@ function uninstall() {
 
 function configurator() {
 if [[ "$check_firma" == "$firma" ]]; then   
-   for losorig in "$all_files"; do
-   if [[ -f "$losorig" ]]; then
+#   for losorig in "$all_files"; do
+#   if [[ -f "$losorig" ]]; then
 
 #     find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
 #  	elif [[ "$check_firma" == "$firma" ]]; then
@@ -432,9 +432,6 @@ if [[ "$check_firma" == "$firma" ]]; then
         done
    
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
-
-     fi
-     
 
   else
    info "${RED}Actually you haven´t the Advanced Wrapper installed and this codec configurator can't change anything."
