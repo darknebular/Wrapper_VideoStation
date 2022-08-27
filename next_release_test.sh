@@ -21,7 +21,7 @@ setup="start"
 dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
-BLUE_DARK="\u001B[34m"
+PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
 supported_versions=("7.0" "7.1")
@@ -189,7 +189,7 @@ function start() {
    echo -e "${BLUE}U) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
    echo -e "${BLUE}C) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
    echo ""
-   echo -e "${BLUE_DARK}Z) EXIT from this installer."
+   echo -e "${PURPLE}Z) EXIT from this Installer."
         while true; do
 	echo -e "${GREEN}"
         read -p "Please, What option wish to use? " isucz
@@ -378,7 +378,7 @@ function configurator() {
         echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA."
         echo -e "${BLUE}F) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in DLNA. This is the behaviour of DLNA without wrappers. (This option installs the simplest_wrapper in DLNA MediaServer)."
         echo ""
-        echo -e "${BLUE_DARK}Z) Exit from this Configurator menu and return to MAIN menu."
+        echo -e "${PURPLE}Z) RETURN to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcdefz
