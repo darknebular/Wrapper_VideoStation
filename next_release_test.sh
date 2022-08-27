@@ -220,8 +220,8 @@ for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE}YES) The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE}NO) EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE}( YES ) = The installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE}( NO ) = EXIT from the installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
@@ -397,8 +397,9 @@ function uninstall() {
 }
 
 function configurator() {
+if [[ "$check_firma" == "$firma" ]]; then   
    for losorig in "$all_files"; do
-   if [[ -f "$losorig" ]] || [ $firma -eq $check_firma ]; then
+   if [[ -f "$losorig" ]]; then
 
 #     find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
 #  	elif [[ "$check_firma" == "$firma" ]]; then
@@ -432,14 +433,15 @@ function configurator() {
    
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
 
-
+     fi
+     done
 
   else
    info "${RED}Actually you haven´t the Advanced Wrapper installed and this codec configurator can't change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
    start
- fi
-   done
+fi
+done
 }
 
 function install_simple() {
@@ -454,8 +456,8 @@ for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE}YES) The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE}NO) EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE}( YES ) = The installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE}( NO ) = EXIT from the installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
