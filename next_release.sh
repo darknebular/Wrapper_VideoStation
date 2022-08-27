@@ -182,10 +182,10 @@ function start() {
    echo ""   
    echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
    echo ""
-   echo -e "${BLUE}I) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support)"
-   echo -e "${BLUE}S) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, not configurable)"
-   echo -e "${BLUE}U) Uninstall all the wrappers for VideoStation and DLNA MediaServer" 
-   echo -e "${BLUE}C) Change the config of this wrapper for change the order of the audio´s codecs in VIDEO-STATION and DLNA."
+   echo -e "${BLUE}I) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
+   echo -e "${BLUE}S) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
+   echo -e "${BLUE}U) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+   echo -e "${BLUE}C) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
    echo ""
    echo -e "${BLUE}E) EXIT from this installer."
         while true; do
@@ -361,19 +361,22 @@ function uninstall() {
 function configurator() {
    for losorig in "$all_files"; do
    if [[ -f "$losorig" ]]; then
-   echo ""
-   info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
-   echo ""
-   echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
-   echo ""
-   echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-   echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-   echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in VIDEO-STATION. This is the behaviour of VideoStation without wrappers. (This option installs the simplest_wrapper in VIDEO-STATION)."
-   echo -e "${BLUE}D) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA. (DEFAULT ORDER DLNA)"
-   echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA."
-   echo -e "${BLUE}F) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in DLNA. This is the behaviour of DLNA without wrappers. (This option installs the simplest_wrapper in DLNA MediaServer)."
-   echo ""
-   echo -e "${BLUE}Z) Exit from this Configurator menu and return to MAIN menu."
+     find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
+  	if [[ $line = # DarkNebular´s Advanced Wrapper ]]; then
+   
+        echo ""
+        info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
+        echo ""
+        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
+        echo ""
+        echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+        echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+        echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in VIDEO-STATION. This is the behaviour of VideoStation without wrappers. (This option installs the simplest_wrapper in VIDEO-STATION)."
+        echo -e "${BLUE}D) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA. (DEFAULT ORDER DLNA)"
+        echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA."
+        echo -e "${BLUE}F) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in DLNA. This is the behaviour of DLNA without wrappers. (This option installs the simplest_wrapper in DLNA MediaServer)."
+        echo ""
+        echo -e "${BLUE}Z) Exit from this Configurator menu and return to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcdefz
@@ -390,9 +393,15 @@ function configurator() {
         done
    
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+        else 
+	info "${RED}Actually you haven't the Advanced Wrapper installed and this codec configurator can't change anything."
+        info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
+        start
+        fi
+   done
   else
-   info "${RED}Actually you haven't any wrapper installed and this codec configurator shouldn't change anything."
-   info "${BLUE}Please, install the Wrapper first and then you will can change the audio´s streams order."
+   info "${RED}Actually you haven't any Wrapper installed and this codec configurator can't change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
    start
  fi
    done
