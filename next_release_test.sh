@@ -434,7 +434,7 @@ if [[ "$check_firma" == "$firma" ]]; then
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
 
      fi
-     done
+     
 
   else
    info "${RED}Actually you haven´t the Advanced Wrapper installed and this codec configurator can't change anything."
