@@ -361,8 +361,8 @@ function uninstall() {
 function configurator() {
    for losorig in "$all_files"; do
    if [[ -f "$losorig" ]]; then
-     find $cp_bin_path -type f -name "ffmpeg41" | while read -r linea; do
-  	if [[ $linea = $firma ]]; then
+     find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
+  	elif [[ $line == *"DarkNebular"* ]]; then
    
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
@@ -393,14 +393,11 @@ function configurator() {
         done
    
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
-        else 
-	info "${RED}Actually you haven't the Advanced Wrapper installed and this codec configurator can't change anything."
-        info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
-        start
-        fi
-   done
+
+
+
   else
-   info "${RED}Actually you haven't any Wrapper installed and this codec configurator can't change anything."
+   info "${RED}Actually you haven´t the Advanced Wrapper installed and this codec configurator can't change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
    start
  fi
