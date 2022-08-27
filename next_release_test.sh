@@ -21,6 +21,7 @@ setup="start"
 dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
+BLUE_DARK="\u001B[34m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
 supported_versions=("7.0" "7.1")
@@ -188,17 +189,17 @@ function start() {
    echo -e "${BLUE}U) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
    echo -e "${BLUE}C) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
    echo ""
-   echo -e "${BLUE}E) EXIT from this installer."
+   echo -e "${BLUE_DARK}Z) EXIT from this installer."
         while true; do
 	echo -e "${GREEN}"
-        read -p "Please, What option wish to use? " isuce
-        case $isuce in
+        read -p "Please, What option wish to use? " isucz
+        case $isucz in
         [Ii]* ) install;;
         [Ss]* ) install_simple;;
         [Uu]* ) uninstall;;
-	      [Cc]* ) configurator;;
-      	[Ee]* ) exit;;
-        * ) echo -e "${YELLOW}Please answer I or Install | S or Simple | U or Uninstall | C or Config | E or Exit.";;
+	[Cc]* ) configurator;;
+      	[Zz]* ) exit;;
+        * ) echo -e "${YELLOW}Please answer I or Install | S or Simple | U or Uninstall | C or Config | Z or Exit.";;
         esac
         done
 }
@@ -361,11 +362,10 @@ function uninstall() {
 
 function configurator() {
    for losorig in "$all_files"; do
-   if [[ -f "$losorig" ]]; then
+   if [[ -f "$losorig" ]] || [ $firma -eq $check_firma ]; then
+
 #     find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
 #  	elif [[ "$check_firma" == "$firma" ]]; then
-echo "$check_firma"
-echo "$firma"
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
         echo ""
@@ -378,7 +378,7 @@ echo "$firma"
         echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA."
         echo -e "${BLUE}F) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in DLNA. This is the behaviour of DLNA without wrappers. (This option installs the simplest_wrapper in DLNA MediaServer)."
         echo ""
-        echo -e "${BLUE}Z) Exit from this Configurator menu and return to MAIN menu."
+        echo -e "${BLUE_DARK}Z) Exit from this Configurator menu and return to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcdefz
