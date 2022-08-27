@@ -362,7 +362,7 @@ function configurator() {
    for losorig in "$all_files"; do
    if [[ -f "$losorig" ]]; then
      find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
-  	if [[ $line == *"DarkNebular´s"* ]]; then
+  	if [[ $line == *"DarkNebular"* ]]; then
    
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
