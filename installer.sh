@@ -120,7 +120,7 @@ function config_C() {
     sed -i 's/"512k"/"640k"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"6"/""/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"6"/""/gi' $ms_path/bin/ffmpeg
-    info "${GREEN}Sucesfully changed the 5.1 audio codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer."
+    info "${GREEN}Sucesfully changed the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
     
 }
@@ -153,7 +153,7 @@ function config_F() {
     sed -i 's/"640k"/"512k"/gi' $ms_path/bin/ffmpeg
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/""/"6"/gi' $ms_path/bin/ffmpeg
-    info "${GREEN}Sucesfully changed the 5.1 audio codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
+    info "${GREEN}Sucesfully changed the 5.1 audio´s codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
     
 }
@@ -392,10 +392,10 @@ if [[ "$check_firma" == "$firma" ]]; then
 	echo ""
         echo -e "${BLUE}( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
         echo -e "${BLUE}( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-        echo -e "${BLUE}( C ) Change the 5.1 audio codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+        echo -e "${BLUE}( C ) Change the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
         echo -e "${BLUE}( D ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
         echo -e "${BLUE}( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
-        echo -e "${BLUE}( F ) Change the 5.1 audio codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+        echo -e "${BLUE}( F ) Change the 5.1 audio´s codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
         echo ""
         echo -e "${PURPLE}( Z ) RETURN to MAIN menu."
    	while true; do
