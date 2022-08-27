@@ -397,6 +397,7 @@ function uninstall() {
 }
 
 function configurator() {
+clear
 if [[ "$check_firma" == "$firma" ]]; then   
 #   for losorig in "$all_files"; do
 #   if [[ -f "$losorig" ]]; then
@@ -410,10 +411,10 @@ if [[ "$check_firma" == "$firma" ]]; then
         echo ""
         echo -e "${BLUE}A) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
         echo -e "${BLUE}B) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-        echo -e "${BLUE}C) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in VIDEO-STATION. This is the behaviour of VideoStation without wrappers. (This option installs the simplest_wrapper in VIDEO-STATION)."
-        echo -e "${BLUE}D) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA. (DEFAULT ORDER DLNA)"
-        echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA."
-        echo -e "${BLUE}F) ONLY ONE AUDIO STREAM MP3 2.0 128kbps when It needs to do transcoding in DLNA. This is the behaviour of DLNA without wrappers. (This option installs the simplest_wrapper in DLNA MediaServer)."
+        echo -e "${BLUE}C) Change the audio codec from AAC to AC3 independently of its order in VIDEO-STATION."
+        echo -e "${BLUE}D) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+        echo -e "${BLUE}E) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
+        echo -e "${BLUE}F) Change the audio codec from AAC to AC3 independently of its order in DLNA MediaServer."
         echo ""
         echo -e "${PURPLE}Z) RETURN to MAIN menu."
    	while true; do
