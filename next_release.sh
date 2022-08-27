@@ -31,7 +31,7 @@ vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig")
-
+firma="# DarkNebular´s Advanced Wrapper"
 
 ###############################
 # FUNCIONES
@@ -362,7 +362,7 @@ function configurator() {
    for losorig in "$all_files"; do
    if [[ -f "$losorig" ]]; then
      find $cp_bin_path -type f -name "ffmpeg41" | while read -r linea; do
-  	if [[ $linea == *DarkNebular* ]]; then
+  	if [[ $linea == $firma ]]; then
    
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
