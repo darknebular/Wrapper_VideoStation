@@ -363,7 +363,7 @@ function configurator() {
    for losorig in "$all_files"; do
    if [[ -f "$losorig" ]]; then
 #     find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
-  	elif [[ $check_firma == "$firma" ]]; then
+  	elif [[ "$check_firma" == "$firma" ]]; then
    
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
