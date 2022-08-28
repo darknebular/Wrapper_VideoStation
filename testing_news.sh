@@ -163,12 +163,12 @@ function start() {
    echo ""   
    echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
    echo ""
-   echo -e "${BLUE}( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
-   echo -e "${BLUE}( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-   echo -e "${BLUE}( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
-   echo -e "${BLUE}( C ) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
+   echo -e "${BLUE}[ I ] Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
+   echo -e "${BLUE}[ S ] Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
+   echo -e "${BLUE}[ U ] Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+   echo -e "${BLUE}[ C ] Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
    echo ""
-   echo -e "${PURPLE}( Z ) EXIT from this Installer."
+   echo -e "${PURPLE}[ Z ] EXIT from this Installer."
         while true; do
 	echo -e "${GREEN}"
         read -p "Please, What option wish to use? " isucz
@@ -200,8 +200,8 @@ for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE}( YES ) = The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE}( NO ) = EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE}[ YES ] = The installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE}[ NO ] = EXIT from the installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
@@ -271,11 +271,12 @@ else
 	echo ""   
    echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
    echo ""
-   echo -e "${BLUE}( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
-   echo -e "${BLUE}( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-   echo -e "${BLUE}( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
-   echo -e "${BLUE}( C ) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
+   echo -e "${BLUE}[ I ] Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
+   echo -e "${BLUE}[ S ] Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
+   echo -e "${BLUE}[ U ] Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+   echo -e "${BLUE}[ C ] Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
    echo ""
+   echo -e "${PURPLE}[ Z ] EXIT from this Installer."
 fi
 done
 
@@ -399,14 +400,14 @@ if [[ "$check_firma" == "$firma" ]]; then
         echo ""
         echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
         echo ""
-        echo -e "${BLUE}( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-        echo -e "${BLUE}( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-        echo -e "${BLUE}( C ) Change the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
-        echo -e "${BLUE}( D ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-        echo -e "${BLUE}( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
-        echo -e "${BLUE}( F ) Change the 5.1 audio´s codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+        echo -e "${BLUE}[ A ] FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+        echo -e "${BLUE}[ B ] FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+        echo -e "${BLUE}[ C ] Change the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+        echo -e "${BLUE}[ D ] FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+        echo -e "${BLUE}[ E ] FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
+        echo -e "${BLUE}[ F ] Change the 5.1 audio´s codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
         echo ""
-        echo -e "${PURPLE}( Z ) RETURN to MAIN menu."
+        echo -e "${PURPLE}[ Z ] RETURN to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
