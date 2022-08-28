@@ -393,7 +393,7 @@ if [[ "$check_firma" == "$firma" ]]; then
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
         echo ""
-        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
+        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won´t work"
         echo -e "${BLUE}Now you can change the audio codec from from AAC 512kbps to AC3 640kbps independently of its audio´s streams."
 	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
 	echo ""
@@ -427,7 +427,7 @@ if [[ "$check_firma" == "$firma" ]]; then
    exit 1
    
   else
-   info "${RED}Actually you haven´t the Advanced Wrapper installed and this codec configurator can't change anything."
+   info "${RED}Actually you haven´t the Advanced Wrapper installed and this codec configurator can´t change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
    start
 fi
