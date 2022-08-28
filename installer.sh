@@ -113,7 +113,7 @@ function config_B() {
 }
 
 function config_C() {
-    info "${YELLOW}Changing the 5.1 audio codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+    info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"libfdk_aac"/"ac3"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"libfdk_aac"/"ac3"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"512k"/"640k"/gi' ${cp_bin_path}/ffmpeg41
@@ -146,7 +146,7 @@ function config_E() {
 }
 
 function config_F() {
-    info "${YELLOW}Changing the 5.1 audio codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+    info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"ac3"/"libfdk_aac"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41
@@ -390,6 +390,9 @@ if [[ "$check_firma" == "$firma" ]]; then
         echo -e "${BLUE}Now you can change the audio codec from from AAC 512kbps to AC3 640kbps independently of its audio´s streams."
 	echo -e "${BLUE}AC3 640kbps has a little bit less queality than AAC but is more compatible with LEGACY devices."
 	echo ""
+        echo ""
+        echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
+        echo ""
         echo -e "${BLUE}( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
         echo -e "${BLUE}( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
         echo -e "${BLUE}( C ) Change the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
@@ -400,7 +403,7 @@ if [[ "$check_firma" == "$firma" ]]; then
         echo -e "${PURPLE}( Z ) RETURN to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
-        read -p "Do you wish to change the order of these audio stream in the actual wrapper? " abcdefz
+        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
         case $abcdefz in
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
