@@ -114,7 +114,7 @@ function config_B() {
 }
 
 function config_C() {
-    info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+    info "${YELLOW}Changing the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"libfdk_aac"/"ac3"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"libfdk_aac"/"ac3"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"512k"/"640k"/gi' ${cp_bin_path}/ffmpeg41
@@ -147,7 +147,7 @@ function config_E() {
 }
 
 function config_F() {
-    info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+    info "${YELLOW}Changing the 5.1 audio´s codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"ac3"/"libfdk_aac"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41
