@@ -447,8 +447,8 @@ for losorig in "$all_files"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE}( YES ) = The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE}( NO ) = EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE}[ YES ] = The installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE}[ NO ] = EXIT from the installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
