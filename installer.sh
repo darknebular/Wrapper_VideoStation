@@ -368,7 +368,7 @@ function uninstall() {
 	rm /tmp/ffmpeg.log
 
   restart_packages
-  info "${GREEN}Uninstalled correctly all the Wrappers in DLNA MediaServer and VideoStation."
+  info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
 
   echo ""
   info "${BLUE}==================== Uninstallation all wrappers: COMPLETE ===================="
@@ -378,17 +378,13 @@ function uninstall() {
 function configurator() {
 clear
 if [[ "$check_firma" == "$firma" ]]; then   
-#   for losorig in "$all_files"; do
-#   if [[ -f "$losorig" ]]; then
 
-#     find $cp_bin_path -type f -name "ffmpeg41" | while read -r line; do
-#  	elif [[ "$check_firma" == "$firma" ]]; then
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
         echo ""
         echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
         echo -e "${BLUE}Now you can change the audio codec from from AAC 512kbps to AC3 640kbps independently of its audio´s streams."
-	echo -e "${BLUE}AC3 640kbps has a little bit less queality than AAC but is more compatible with LEGACY devices."
+	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
 	echo ""
         echo ""
         echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
