@@ -293,17 +293,17 @@ function uninstall_old() {
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring VideoStation's $filename"
+    info "${YELLOW}Restoring VideoStation´s $filename"
     mv -T -f "$filename" "${filename::-5}"
   done
   
   find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring MediaServer's $filename"
+    info "${YELLOW}Restoring MediaServer´s $filename"
     mv -T -f "$filename" "${filename::-5}"
   done
 
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "Restoring CodecPack's $filename"
+      info "Restoring CodecPack´s $filename"
       mv -T -f "$filename" "${filename::-5}"
   done
 
@@ -329,17 +329,17 @@ function uninstall_old_simple() {
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring VideoStation's $filename"
+    info "${YELLOW}Restoring VideoStation´s $filename"
     mv -T -f "$filename" "${filename::-5}"
   done
   
   find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring MediaServer's $filename"
+    info "${YELLOW}Restoring MediaServer´s $filename"
     mv -T -f "$filename" "${filename::-5}"
   done
 
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "Restoring CodecPack's $filename"
+      info "Restoring CodecPack´s $filename"
       mv -T -f "$filename" "${filename::-5}"
   done
 
@@ -366,12 +366,12 @@ function uninstall() {
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
   find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-  info "${YELLOW}Restoring MediaServer's $filename"
+  info "${YELLOW}Restoring MediaServer´s $filename"
   mv -T -f "$filename" "${filename::-5}"
   done
 
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "Restoring CodecPack's $filename"
+      info "Restoring CodecPack´s $filename"
       mv -T -f "$filename" "${filename::-5}"
     done
   info "${YELLOW}Delete old log file."
@@ -394,7 +394,7 @@ if [[ "$check_firma" == "$firma" ]]; then
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
         echo ""
         echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won´t work"
-        echo -e "${BLUE}Now you can change the audio codec from from AAC 512kbps to AC3 640kbps independently of its audio´s streams."
+        echo -e "${BLUE}Now you can change the audio´s codec from from AAC 512kbps to AC3 640kbps independently of its audio´s streams."
 	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
 	echo ""
         echo ""
@@ -531,7 +531,7 @@ echo -e "${BLUE}====================This wrapper installer is only avalaible for
 echo ""
 echo ""
 
-if [[ $EUID != 0 ]]; then
+if [[ $EUID -ne 0 ]]; then
   error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write [ sudo -i ] and try again with the installer."
   exit 1
 fi
