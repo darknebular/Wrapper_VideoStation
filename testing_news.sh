@@ -530,7 +530,7 @@ echo -e "${BLUE}====================This wrapper installer is only avalaible for
 echo ""
 echo ""
 
-if [[ $EUID -ne 0 ]]; then
+if [[ $EUID != 0 ]]; then
   error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write [ sudo -i ] and try again with the installer."
   exit 1
 fi
