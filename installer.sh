@@ -187,6 +187,7 @@ function start() {
 ################################
 
 function install() {
+  clear
   info "${BLUE}==================== Installation of the Advanced Wrapper: START ===================="
   echo ""
    info "${BLUE}You are running DSM $dsm_version"
@@ -266,7 +267,14 @@ else
 	info "${GREEN}Installed correctly the Advanced Wrapper"
 	
 	info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ===================="
-	
+	echo ""   
+   echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
+   echo ""
+   echo -e "${BLUE}( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
+   echo -e "${BLUE}( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
+   echo -e "${BLUE}( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+   echo -e "${BLUE}( C ) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
+   echo ""
 fi
 done
 
@@ -346,6 +354,7 @@ function uninstall_old_simple() {
 }
 
 function uninstall() {
+  clear
   info "${BLUE}==================== Uninstallation all wrappers: START ===================="
 
   info "${YELLOW}Restoring VideoStation´s libsynovte.so"
@@ -424,6 +433,7 @@ fi
 }
 
 function install_simple() {
+  clear
   info "${BLUE}==================== Installation of the Simplest Wrapper: START ===================="
   echo ""
    info "${BLUE}You are running DSM $dsm_version"
@@ -495,7 +505,7 @@ else
 	info "${GREEN}Installed correctly the Simplest Wrapper"
 	
 	info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ===================="
-	
+	exit 1
 fi
 done
 
