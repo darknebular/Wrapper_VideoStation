@@ -16,7 +16,7 @@ version="SCPT_1.8"
 # VARIABLES
 ###############################
 
-dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
+# dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
 dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
@@ -27,11 +27,4 @@ GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
 supported_versions=("7.0" "7.1")
 injector="1-12.3.3"
-vs_path=/var/packages/VideoStation/target
-ms_path=/var/packages/MediaServer/target
-vs_libsynovte_file="$vs_path/lib/libsynovte.so"
-ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-cp_bin_path=/var/packages/CodecPack/target/pack/bin
-all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig")
-firma="DkNbul"
-check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
+
