@@ -465,9 +465,9 @@ clear
    exit 1
 
 #  else
-   info "${RED}Actually You HAVE NOT ANY WRAPPER INSTALLED and this codec Configurator can not change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
-   start
+#   info "${RED}Actually You HAVE NOT ANY WRAPPER INSTALLED and this codec Configurator can not change anything."
+#   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+#   start
 # fi
 
 }
