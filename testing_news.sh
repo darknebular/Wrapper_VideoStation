@@ -34,8 +34,8 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbul"
-check_amrif_1="&1"
-check_amrif_1="&1"
+check_amrif_1=""
+check_amrif_2=""
 
 for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
