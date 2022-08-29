@@ -10,7 +10,7 @@ version="SCPT_1.8"
 # SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems. (Deprecated migrated to SCPT_1.6)
 # SCPT_1.6: Added a independent audio's streams for DLNA. (Deprecated migrated to SCPT_1.7)
 # SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. (Deprecated migrated to SCPT_1.8)
-# SCPT_1.8: Added a logging of the Installation's process and consolidate with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation.
+# SCPT_1.8: Added a logging of the Installation's process and consolidate with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
 
 ###############################
 # VARIABLES
@@ -270,14 +270,7 @@ else
 	
 	info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ===================="
 	echo ""   
-#   echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
-#   echo ""
-#   echo -e "${BLUE}[ I ] Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
-#   echo -e "${BLUE}[ S ] Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-#   echo -e "${BLUE}[ U ] Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
-#   echo -e "${BLUE}[ C ] Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA."
-#   echo ""
-#   echo -e "${PURPLE}[ Z ] EXIT from this Installer."
+
         start
 fi
 done
@@ -292,9 +285,12 @@ function uninstall_old() {
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
+  
+  if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
   info "${YELLOW}Restoring VideoStation's TransProfile If it has been modified in the past."
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
-  
+  fi
+    
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
@@ -332,8 +328,10 @@ function uninstall_old_simple() {
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
+  if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
   info "${YELLOW}Restoring VideoStation's TransProfile If it has been modified in the past."
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
+  fi
   
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
