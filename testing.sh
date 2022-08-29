@@ -71,9 +71,10 @@ function check_dependencias() {
      error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
 
    fi
+   exit 1
   done
 
-exit 1
+
 }
 function welcome() {
   info "FFMPEG WRAPPER INSTALLER version: $version"
