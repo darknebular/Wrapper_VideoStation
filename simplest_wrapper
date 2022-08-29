@@ -14,7 +14,7 @@ rev="AME_S_1.0"
 
 pid=$$
 stderrfile="/tmp/ffmpeg-$pid.stderr"
-logfile="/tmp/ffmpeg.log"
+logfile="/tmp/wrapper_ffmpeg.log"
 
 #########################
 # FUNCIONES
