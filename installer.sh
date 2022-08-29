@@ -588,7 +588,7 @@ echo ""
 echo ""
 
 if [[ $EUID -ne 0 ]]; then
-  error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write ("${PURPLE}" sudo -i "${RED}") and try again with the installer."
+  error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write ("${PURPLE}" sudo -i "${RED}") and try again with the Installer."
   exit 1
 fi
 
