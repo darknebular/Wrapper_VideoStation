@@ -270,14 +270,15 @@ else
 	
 	info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ===================="
 	echo ""   
-   echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
-   echo ""
-   echo -e "${BLUE}[ I ] Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
-   echo -e "${BLUE}[ S ] Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-   echo -e "${BLUE}[ U ] Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
-   echo -e "${BLUE}[ C ] Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA."
-   echo ""
-   echo -e "${PURPLE}[ Z ] EXIT from this Installer."
+#   echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
+#   echo ""
+#   echo -e "${BLUE}[ I ] Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
+#   echo -e "${BLUE}[ S ] Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
+#   echo -e "${BLUE}[ U ] Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+#   echo -e "${BLUE}[ C ] Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA."
+#   echo ""
+#   echo -e "${PURPLE}[ Z ] EXIT from this Installer."
+        start
 fi
 done
 
