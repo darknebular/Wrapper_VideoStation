@@ -11,7 +11,7 @@ version="SCPT_1.8"
 # SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems. (Deprecated migrated to SCPT_1.6)
 # SCPT_1.6: Added a independent audio's streams for DLNA. (Deprecated migrated to SCPT_1.7)
 # SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. (Deprecated migrated to SCPT_1.8)
-# SCPT_1.8: Consolidate log file with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
+# SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
 
 ##############################################################
 
@@ -256,7 +256,7 @@ else
         sleep 2
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
-	info "${YELLOW}Ensuring the existence of the new log file wrapper_ffmpeg."
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
 	touch /tmp/wrapper_ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
