@@ -15,7 +15,7 @@ version="SCPT_1.8"
 
 ##############################################################
 
-exec 2>/tmp/wrapper_ffmpeg.log
+
 ###############################
 # VARIABLES
 ###############################
@@ -44,7 +44,7 @@ firma="DkNbulDkNbul"
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" 2>/tmp/wrapper_ffmpeg.log
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
