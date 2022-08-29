@@ -87,7 +87,8 @@ for dependencia in "${dependencias[@]}"; do
         echo -e "${GREEN}Package &dependencia is Installed."
     fi
     done
-
+done
+exit 1
 
 
 }
