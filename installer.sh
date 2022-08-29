@@ -1,15 +1,20 @@
 #!/bin/bash
 
-version="SCPT_1.7"
+##############################################################
+version="SCPT_1.8"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
 # SCPT_1.2: Added a configurator tool for select the codecs. (Deprecated migrated to SCPT_1.3)
-# SCPT_1.3: Added a interactive menu when you don´t especify any Flag in bash command or you are using basic launch. (Deprecated migrated to SCPT_1.4)
+# SCPT_1.3: Added a interactive menu when you do not especify any Flag in bash command or you are using basic launch. (Deprecated migrated to SCPT_1.4)
 # SCPT_1.4: Fixed a bug: when you select simplest_wrapper with only MP3 2.0 and then try to change the order of the audio codecs you will have a error. (Deprecated migrated to SCPT_1.5)
 # SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems. (Deprecated migrated to SCPT_1.6)
-# SCPT_1.6: Added a independent audio´s streams for DLNA. (Deprecated migrated to SCPT_1.7)
-# SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. 
+# SCPT_1.6: Added a independent audio's streams for DLNA. (Deprecated migrated to SCPT_1.7)
+# SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. (Deprecated migrated to SCPT_1.8)
+# SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
+
+##############################################################
+
 
 ###############################
 # VARIABLES
@@ -31,9 +36,8 @@ ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
-all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig")
-firma="DkNbul"
-check_firma=$(sed -n '3p' $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "´sAdvancedWrapper")
+all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
+firma="DkNbulDkNbul"
 
 ###############################
 # FUNCIONES
@@ -50,11 +54,10 @@ function error() {
 }
 
 function restart_packages() {
-  if [[ -d $cp_bin_path ]]; then
-    info "${GREEN}Restarting CodecPack..."
-    synopkg restart CodecPack
-  fi
-
+  
+  info "${GREEN}Restarting CodecPack..."
+  synopkg restart CodecPack
+  
   info "${GREEN}Restarting VideoStation..."
   synopkg restart VideoStation
   
@@ -65,7 +68,7 @@ function restart_packages() {
 function check_dependencias() {
   for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/$dependencia" ]]; then
-      error "Missing $dependencia package, please install it and re-run the patcher setup."
+      error "MISSING $dependencia Package, please Install It and re-run the Installer again."
       exit 1
     fi
   done
@@ -93,81 +96,112 @@ function check_version() {
     return 1
 }
 function config_A() {
+    if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION."
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41
-    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
-    
+   
+   else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+   fi
 }
 
 function config_B() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION."
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41
-    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
-    
+else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi
 }
 
 function config_C() {
-    info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+if [[ "$check_amrif" == "$firma" ]]; then  
+    info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"libfdk_aac"/"ac3"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"libfdk_aac"/"ac3"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"512k"/"640k"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"512k"/"640k"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"6"/""/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"6"/""/gi' $ms_path/bin/ffmpeg
-    info "${GREEN}Sucesfully changed the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer."
+    info "${GREEN}Sucesfully changed the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
-    
+ else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi   
 }
 
 function config_D() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer."
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg
-    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
     echo ""
-	
+else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi	
 }
 
 function config_E() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer."
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' $ms_path/bin/ffmpeg
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' $ms_path/bin/ffmpeg
     sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' $ms_path/bin/ffmpeg
-    info "${GREEN}Sucesfully changed the audio stream´s order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
     echo ""
-	
+else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi	
 }
 
 function config_F() {
-    info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+if [[ "$check_amrif" == "$firma" ]]; then  
+    info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"ac3"/"libfdk_aac"/gi' $ms_path/bin/ffmpeg
     sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"640k"/"512k"/gi' $ms_path/bin/ffmpeg
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/""/"6"/gi' $ms_path/bin/ffmpeg
-    info "${GREEN}Sucesfully changed the 5.1 audio´s codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
+    info "${GREEN}Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
-    
+ else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi  
 }
 
 function start() {
    echo ""   
    echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
    echo ""
-   echo -e "${BLUE}( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
-   echo -e "${BLUE}( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-   echo -e "${BLUE}( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
-   echo -e "${BLUE}( C ) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
+   echo -e "${BLUE} ( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
+   echo -e "${BLUE} ( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
+   echo -e "${BLUE} ( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+   echo -e "${BLUE} ( C ) Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA."
    echo ""
-   echo -e "${PURPLE}( Z ) EXIT from this Installer."
+   echo -e "${PURPLE} ( Z ) EXIT from this Installer."
         while true; do
 	echo -e "${GREEN}"
         read -p "Please, What option wish to use? " isucz
@@ -187,7 +221,7 @@ function start() {
 ################################
 
 function install() {
-  clear
+  
   info "${BLUE}==================== Installation of the Advanced Wrapper: START ===================="
   echo ""
    info "${BLUE}You are running DSM $dsm_version"
@@ -195,12 +229,12 @@ function install() {
    info "${BLUE}DSM $dsm_version is using this path: $cp_bin_path"
    info "${BLUE}DSM $dsm_version is using this injector: $injector"
 
-for losorig in "$all_files"; do
+for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE}( YES ) = The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE}( NO ) = EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE} ( YES ) = The Installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE} ( NO ) = EXIT from the Installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
@@ -216,16 +250,14 @@ else
     	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
 	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
 	touch ${cp_bin_path}/ffmpeg41 
-	  info "${YELLOW}Injection of the ffmpeg41 wrapper."
-	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: $injector."
+	wget -q $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
 	  info "${GREEN}Waiting for consolidate the download of the wrapper."
         sleep 2
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
-	info "${YELLOW}Ensuring the existence of the log file."
-	touch /tmp/ffmpeg.log
-	info "${YELLOW}Ensuring that the wrapper starts with a perfectly empty log file."
-	rm /tmp/ffmpeg.log
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
+	touch /tmp/wrapper_ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
@@ -235,7 +267,7 @@ else
 	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
 	chmod 755 $ms_path/bin/ffmpeg
 	chown MediaServer:MediaServer $ms_path/bin/ffmpeg
-	info "${YELLOW}Changing the default codecs order of this Wrapper in DLNA MediaServer."
+	info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer."
         sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg
         sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg
         sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg
@@ -268,13 +300,8 @@ else
 	
 	info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ===================="
 	echo ""   
-   echo -e "${YELLOW}THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:"
-   echo ""
-   echo -e "${BLUE}( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
-   echo -e "${BLUE}( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-   echo -e "${BLUE}( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
-   echo -e "${BLUE}( C ) Change the config of the Advanced Wrapper for change the audio´s codecs in VIDEO-STATION and DLNA."
-   echo ""
+
+        start
 fi
 done
 
@@ -282,12 +309,19 @@ echo ""
 }
 
 function uninstall_old() {
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: START ===================="
+  clear
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ===================="
 
-  info "${YELLOW}Restoring VideoStation´s libsynovte.so"
+  info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
-  info "${YELLOW}Restoring MediaServer´s libsynovte.so"
+  
+  if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
+  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
+  mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
+  fi
+    
+  info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
@@ -305,9 +339,18 @@ function uninstall_old() {
       mv -T -f "$filename" "${filename::-5}"
   done
 
+   info "${YELLOW}Delete old log file ffmpeg."
+   touch /tmp/ffmpeg.log
+   rm /tmp/ffmpeg.log
+  
+   info "${YELLOW}Delete new log file wrapper_ffmpeg."
+   touch /tmp/wrapper_ffmpeg.log
+   rm /tmp/wrapper_ffmpeg.log
+  
+  
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: COMPLETE ===================="
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
   echo ""
   echo ""
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...===================="
@@ -318,12 +361,18 @@ function uninstall_old() {
 }
 
 function uninstall_old_simple() {
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: START ===================="
+  clear
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ===================="
 
-  info "${YELLOW}Restoring VideoStation´s libsynovte.so"
+  info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
-  info "${YELLOW}Restoring MediaServer´s libsynovte.so"
+  if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
+  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
+  mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
+  fi
+  
+  info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
@@ -340,10 +389,20 @@ function uninstall_old_simple() {
       info "Restoring CodecPack's $filename"
       mv -T -f "$filename" "${filename::-5}"
   done
+  
+ 
+   info "${YELLOW}Delete old log file ffmpeg."
+   touch /tmp/ffmpeg.log
+   rm /tmp/ffmpeg.log
+  
+   info "${YELLOW}Delete new log file wrapper_ffmpeg."
+   touch /tmp/wrapper_ffmpeg.log
+   rm /tmp/wrapper_ffmpeg.log
+  
 
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: COMPLETE ===================="
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
   echo ""
   echo ""
   info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...===================="
@@ -355,12 +414,12 @@ function uninstall_old_simple() {
 
 function uninstall() {
   clear
-  info "${BLUE}==================== Uninstallation all wrappers: START ===================="
+  info "${BLUE}==================== Uninstallation the Wrapper: START ===================="
 
-  info "${YELLOW}Restoring VideoStation´s libsynovte.so"
+  info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
-  info "${YELLOW}Restoring MediaServer´s libsynovte.so"
+  info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
   find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
@@ -372,40 +431,41 @@ function uninstall() {
       info "Restoring CodecPack's $filename"
       mv -T -f "$filename" "${filename::-5}"
     done
-  info "${YELLOW}Delete old log file."
-	touch /tmp/ffmpeg.log
-	rm /tmp/ffmpeg.log
+  info "${YELLOW}Delete new log file wrapper_ffmpeg."
+	touch /tmp/wrapper_ffmpeg.log
+	rm /tmp/wrapper_ffmpeg.log
 
   restart_packages
   info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
 
   echo ""
-  info "${BLUE}==================== Uninstallation all wrappers: COMPLETE ===================="
+  info "${BLUE}==================== Uninstallation the Wrapper: COMPLETE ===================="
   exit 1
 }
 
 function configurator() {
 clear
-if [[ "$check_firma" == "$firma" ]]; then   
+for losorig in "${all_files[@]}"; do
+if [[ -f "$losorig" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
         echo ""
-        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast won't work"
-        echo -e "${BLUE}Now you can change the audio codec from from AAC 512kbps to AC3 640kbps independently of its audio´s streams."
+        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
+        echo -e "${BLUE}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
 	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
 	echo ""
         echo ""
         echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
         echo ""
-        echo -e "${BLUE}( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-        echo -e "${BLUE}( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-        echo -e "${BLUE}( C ) Change the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
-        echo -e "${BLUE}( D ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-        echo -e "${BLUE}( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
-        echo -e "${BLUE}( F ) Change the 5.1 audio´s codec from AC3 640kbps to AAC 512kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer."
+        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+        echo -e "${BLUE} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
+        echo -e "${BLUE} ( D ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+        echo -e "${BLUE} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
+        echo -e "${BLUE} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
         echo ""
-        echo -e "${PURPLE}( Z ) RETURN to MAIN menu."
+        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
@@ -423,17 +483,18 @@ if [[ "$check_firma" == "$firma" ]]; then
    
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
    exit 1
-   
-  else
-   info "${RED}Actually you haven´t the Advanced Wrapper installed and this codec configurator can't change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio´s streams order."
+
+else
+   info "${RED}Actually You HAVEN'T ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
+done
 
 }
 
 function install_simple() {
-  clear
+  
   info "${BLUE}==================== Installation of the Simplest Wrapper: START ===================="
   echo ""
    info "${BLUE}You are running DSM $dsm_version"
@@ -441,12 +502,12 @@ function install_simple() {
    info "${BLUE}DSM $dsm_version is using this path: $cp_bin_path"
    info "${BLUE}DSM $dsm_version is using this injector: Simple"
    
-for losorig in "$all_files"; do
+for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE}( YES ) = The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE}( NO ) = EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE} ( YES ) = The Installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE} ( NO ) = EXIT from the Installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
@@ -462,16 +523,14 @@ else
     	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
 	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
 	touch ${cp_bin_path}/ffmpeg41 
-	  info "${YELLOW}Injection of the ffmpeg41 wrapper."
-	wget $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41
+	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: Simplest."
+	wget -q $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41
 	  info "${GREEN}Waiting for consolidate the download of the wrapper."
         sleep 2
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
-	info "${YELLOW}Ensuring the existence of the log file."
-	touch /tmp/ffmpeg.log
-	info "${YELLOW}Ensuring that the wrapper starts with a perfectly empty log file."
-	rm /tmp/ffmpeg.log
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
+	touch /tmp/wrapper_ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
@@ -522,16 +581,28 @@ while getopts s: flag; do
   esac
 done
 
-# start
 clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
 echo -e "${BLUE}====================This wrapper installer is only avalaible for DSM "${supported_versions[@]}" only===================="
 echo ""
 echo ""
 
+if [[ $EUID -ne 0 ]]; then
+  error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write ("${PURPLE}" sudo -i "${RED}") and try again with the installer."
+  exit 1
+fi
+
 welcome
 
 check_dependencias
+
+if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
+check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
+fi
+if [[ -f "$ms_path/bin/ffmpeg.orig" ]]; then
+check_amrif_2=$(sed -n '3p' < $ms_path/bin//ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
+fi
+check_amrif="$check_amrif_1$check_amrif_2"
 
 if check_version "$dsm_version" " " 7.0; then
    cp_bin_path=/var/packages/CodecPack/target/bin
@@ -544,7 +615,6 @@ else
  error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
  exit 1
 fi
-
 
 
 
