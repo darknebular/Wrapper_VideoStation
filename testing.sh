@@ -72,7 +72,7 @@ function check_dependencias() {
     
 #  done
   
-   for [[ ! -d "/var/packages/${dependencia[@]}" ]]; do
+   while [[ ! -d "/var/packages/${dependencia[@]}" ]]; do
 #     error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
 
 #   fi
