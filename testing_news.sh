@@ -41,7 +41,7 @@ firma="DkNbul"
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" 1>&3
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" | tee /dev/fd/3
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
