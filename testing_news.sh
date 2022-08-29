@@ -225,9 +225,7 @@ else
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
 	info "${YELLOW}Ensuring the existence of the log file."
-	touch /tmp/ffmpeg.log
-	info "${YELLOW}Ensuring that the wrapper starts with a perfectly empty log file."
-	rm /tmp/ffmpeg.log
+	touch /tmp/wrapper_ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
@@ -309,6 +307,15 @@ function uninstall_old() {
       mv -T -f "$filename" "${filename::-5}"
   done
 
+   info "${YELLOW}Delete old log file ffmpeg."
+   touch /tmp/ffmpeg.log
+   rm /tmp/ffmpeg.log
+  
+   info "${YELLOW}Delete log file wrapper_ffmpeg."
+   touch /tmp/wrapper_ffmpeg.log
+   rm /tmp/wrapper_ffmpeg.log
+  
+  
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
@@ -350,6 +357,16 @@ function uninstall_old_simple() {
       info "Restoring CodecPack's $filename"
       mv -T -f "$filename" "${filename::-5}"
   done
+  
+ 
+   info "${YELLOW}Delete old log file ffmpeg."
+   touch /tmp/ffmpeg.log
+   rm /tmp/ffmpeg.log
+  
+   info "${YELLOW}Delete log file wrapper_ffmpeg."
+   touch /tmp/wrapper_ffmpeg.log
+   rm /tmp/wrapper_ffmpeg.log
+  
 
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
@@ -382,9 +399,9 @@ function uninstall() {
       info "Restoring CodecPack's $filename"
       mv -T -f "$filename" "${filename::-5}"
     done
-  info "${YELLOW}Delete old log file."
-	touch /tmp/ffmpeg.log
-	rm /tmp/ffmpeg.log
+  info "${YELLOW}Delete log file."
+	touch /tmp/wrapper_ffmpeg.log
+	rm /tmp/wrapper_ffmpeg.log
 
   restart_packages
   info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
@@ -479,9 +496,7 @@ else
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
 	info "${YELLOW}Ensuring the existence of the log file."
-	touch /tmp/ffmpeg.log
-	info "${YELLOW}Ensuring that the wrapper starts with a perfectly empty log file."
-	rm /tmp/ffmpeg.log
+	touch /tmp/wrapper_ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
