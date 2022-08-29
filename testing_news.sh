@@ -12,6 +12,7 @@ version="SCPT_1.8"
 # SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. (Deprecated migrated to SCPT_1.8)
 # SCPT_1.8: Added a logging of the Installation's process and consolidate with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
 
+exec 1
 ###############################
 # VARIABLES
 ###############################
@@ -44,7 +45,7 @@ check_amrif="$check_amrif_1$check_amrif_2"
 
 function log() {
   echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
-  echo 1>>wrapper_ffmpeg.log
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2">>wrapper_ffmpeg.log
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
