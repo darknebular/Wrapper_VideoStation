@@ -13,11 +13,11 @@ rev="AME_12.3.3"
 # AME_12.3.3: Now you will can select between two audio streams in clients in the case that the wrapper needs to recode from DTS, EAC3, TrueHD. One in MP3 Stereo and other with 5.1 AAC. Fix the Chromecast Support.
 
 _log(){
-	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
+	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/wrapper_ffmpeg.log
 }
 
 _log_para(){
-	echo "$1" | fold -w 120 | sed "s/^.*$/$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} -          = &/" >> /tmp/ffmpeg.log
+	echo "$1" | fold -w 120 | sed "s/^.*$/$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} -          = &/" >> /tmp/wrapper_ffmpeg.log
 }
 
 _term(){
