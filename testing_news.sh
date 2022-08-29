@@ -280,7 +280,7 @@ echo ""
 
 function uninstall_old() {
   clear
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: START ===================="
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ===================="
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
@@ -311,7 +311,7 @@ function uninstall_old() {
 
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: COMPLETE ===================="
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
   echo ""
   echo ""
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...===================="
@@ -323,7 +323,7 @@ function uninstall_old() {
 
 function uninstall_old_simple() {
   clear
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: START ===================="
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ===================="
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
@@ -353,7 +353,7 @@ function uninstall_old_simple() {
 
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
-  info "${BLUE}==================== Uninstallation of old wrappers in the system: COMPLETE ===================="
+  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
   echo ""
   echo ""
   info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...===================="
@@ -365,7 +365,7 @@ function uninstall_old_simple() {
 
 function uninstall() {
   clear
-  info "${BLUE}==================== Uninstallation all wrappers: START ===================="
+  info "${BLUE}==================== Uninstallation the Wrapper: START ===================="
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
@@ -390,13 +390,13 @@ function uninstall() {
   info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
 
   echo ""
-  info "${BLUE}==================== Uninstallation all wrappers: COMPLETE ===================="
+  info "${BLUE}==================== Uninstallation the Wrapper: COMPLETE ===================="
   exit 1
 }
 
 function configurator() {
 clear
-if [[ "$check_amrif_1" == "$firma" ]] || [[ "$check_amrif_2" == "$firma" ]]; then   
+if [[ "$check_amrif_1" == "$firma" ]] && [[ "$check_amrif_2" == "$firma" ]]; then   
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
