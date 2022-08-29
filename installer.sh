@@ -38,6 +38,7 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbulDkNbul"
+npacks="0"
 
 ###############################
 # FUNCIONES
@@ -66,12 +67,21 @@ function restart_packages() {
 }
 
 function check_dependencias() {
-  for dependencia in "${dependencias[@]}"; do
+ 
+for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
-      exit 1
+      error "MISSING $dependencia Package, please Install It and RE-RUN the Installer again."
+    let "npacks=npacks+1"
+#   else
+#    echo -e "${GREEN}You have installed $dependencia Package."
+
     fi
   done
+if [[ "&npacks" != "0" ]]; then
+error "At least you need $npacks package to Install, please Install the dependencies and RE-RUN the Installer again."
+exit 1
+fi
+
 }
 function welcome() {
   info "FFMPEG WRAPPER INSTALLER version: $version"
