@@ -48,9 +48,11 @@ function log() {
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
+  log "${BLUE}INFO" "${YELLOW}$1">>wrapper_ffmpeg.log
 }
 function error() {
   log "${RED}ERROR" "${RED}$1"
+  log "${RED}ERROR" "${RED}$1">>wrapper_ffmpeg.log
 }
 
 function restart_packages() {
