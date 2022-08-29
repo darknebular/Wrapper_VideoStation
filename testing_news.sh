@@ -11,7 +11,7 @@ version="SCPT_1.8"
 # SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems. (Deprecated migrated to SCPT_1.6)
 # SCPT_1.6: Added a independent audio's streams for DLNA. (Deprecated migrated to SCPT_1.7)
 # SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. (Deprecated migrated to SCPT_1.8)
-# SCPT_1.8: Added a logging of the Installation's process and consolidate with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
+# SCPT_1.8: Consolidate log file with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
 
 ##############################################################
 
@@ -44,7 +44,7 @@ firma="DkNbulDkNbul"
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" 2>>/tmp/wrapper_ffmpeg.log
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
@@ -54,11 +54,10 @@ function error() {
 }
 
 function restart_packages() {
-  if [[ -d $cp_bin_path ]]; then
-    info "${GREEN}Restarting CodecPack..."
-    synopkg restart CodecPack
-  fi
-
+  
+  info "${GREEN}Restarting CodecPack..."
+  synopkg restart CodecPack
+  
   info "${GREEN}Restarting VideoStation..."
   synopkg restart VideoStation
   
@@ -69,7 +68,7 @@ function restart_packages() {
 function check_dependencias() {
   for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/$dependencia" ]]; then
-      error "Missing $dependencia package, please install it and re-run the patcher setup."
+      error "MISSING $dependencia Package, please Install It and re-run the Installer again."
       exit 1
     fi
   done
@@ -107,7 +106,7 @@ function config_A() {
    
    else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
    fi
 }
@@ -122,7 +121,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
     echo ""
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
 }
@@ -140,7 +139,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
     echo ""
  else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi   
 }
@@ -155,7 +154,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
     echo ""
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi	
 }
@@ -170,7 +169,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
     echo ""
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi	
 }
@@ -188,7 +187,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
     echo ""
  else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi  
 }
@@ -234,8 +233,8 @@ for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE} ( YES ) = The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE} ( NO ) = EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE} ( YES ) = The Installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE} ( NO ) = EXIT from the Installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
@@ -257,7 +256,7 @@ else
         sleep 2
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
-	info "${YELLOW}Ensuring the existence of the log file."
+	info "${YELLOW}Ensuring the existence of the new log file wrapper_ffmpeg."
 	touch /tmp/wrapper_ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
@@ -268,7 +267,7 @@ else
 	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
 	chmod 755 $ms_path/bin/ffmpeg
 	chown MediaServer:MediaServer $ms_path/bin/ffmpeg
-	info "${YELLOW}Changing the default codecs order of this Wrapper in DLNA MediaServer."
+	info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer."
         sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg
         sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg
         sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg
@@ -344,7 +343,7 @@ function uninstall_old() {
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
-   info "${YELLOW}Delete log file wrapper_ffmpeg."
+   info "${YELLOW}Delete new log file wrapper_ffmpeg."
    touch /tmp/wrapper_ffmpeg.log
    rm /tmp/wrapper_ffmpeg.log
   
@@ -396,7 +395,7 @@ function uninstall_old_simple() {
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
-   info "${YELLOW}Delete log file wrapper_ffmpeg."
+   info "${YELLOW}Delete new log file wrapper_ffmpeg."
    touch /tmp/wrapper_ffmpeg.log
    rm /tmp/wrapper_ffmpeg.log
   
@@ -432,7 +431,7 @@ function uninstall() {
       info "Restoring CodecPack's $filename"
       mv -T -f "$filename" "${filename::-5}"
     done
-  info "${YELLOW}Delete log file wrapper_ffmpeg."
+  info "${YELLOW}Delete new log file wrapper_ffmpeg."
 	touch /tmp/wrapper_ffmpeg.log
 	rm /tmp/wrapper_ffmpeg.log
 
@@ -507,8 +506,8 @@ for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
-	echo -e "${BLUE} ( YES ) = The installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE} ( NO ) = EXIT from the installer menu and return to MAIN MENU."
+	echo -e "${BLUE} ( YES ) = The Installer will Uninstall the OLD patch or Wrapper."
+        echo -e "${PURPLE} ( NO ) = EXIT from the Installer menu and return to MAIN MENU."
         while true; do
 	echo -e "${GREEN}"
         read -p "Do you wish to Uninstall this OLD wrapper? " yn
@@ -530,7 +529,7 @@ else
         sleep 2
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	chmod 755 ${cp_bin_path}/ffmpeg41
-	info "${YELLOW}Ensuring the existence of the log file."
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
 	touch /tmp/wrapper_ffmpeg.log
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
@@ -582,7 +581,6 @@ while getopts s: flag; do
   esac
 done
 
-# start
 clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
 echo -e "${BLUE}====================This wrapper installer is only avalaible for DSM "${supported_versions[@]}" only===================="
@@ -617,7 +615,6 @@ else
  error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
  exit 1
 fi
-
 
 
 
