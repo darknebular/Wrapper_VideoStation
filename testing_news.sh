@@ -36,7 +36,7 @@ all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ff
 firma="DkNbulDkNbul"
 #check_amrif_1="NULL"
 #check_amrif_2="NULL"
-check_amrif=$check_amrif_1$check_amrif_2
+
 
 ###############################
 # FUNCIONES
@@ -579,6 +579,7 @@ fi
 if [[ -f "$ms_path/bin/ffmpeg.orig" ]]; then
 check_amrif_2=$(sed -n '3p' < $ms_path/bin//ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
+check_amrif=$check_amrif_1$check_amrif_2
 
 if check_version "$dsm_version" " " 7.0; then
    cp_bin_path=/var/packages/CodecPack/target/bin
