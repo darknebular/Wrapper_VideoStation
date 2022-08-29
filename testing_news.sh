@@ -38,7 +38,7 @@ check_amrif_1="NULL"
 check_amrif_2="NULL"
 check_amrif="$check_amrif_1$check_amrif_2"
 
-exec > >(tee /tmp/wrapper_ffmpeg.log) 2>&1
+exec 2>&1 > >(tee /tmp/wrapper_ffmpeg.log) 
 ###############################
 # FUNCIONES
 ###############################
