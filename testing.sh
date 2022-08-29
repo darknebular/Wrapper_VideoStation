@@ -81,9 +81,9 @@ function check_dependencias() {
 
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      echo True
+      echo -e "${GREEN}Package &dependencia Installed"
     else
-        echo False
+        echo -e "${RED}MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
     fi
     done
 
