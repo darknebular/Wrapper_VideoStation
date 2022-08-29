@@ -197,7 +197,7 @@ function install() {
    info "${BLUE}DSM $dsm_version is using this path: $cp_bin_path"
    info "${BLUE}DSM $dsm_version is using this injector: $injector"
 
-for losorig in "$all_files"; do
+for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
 	echo ""
@@ -215,11 +215,11 @@ if [[ -f "$losorig" ]]; then
 else
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
-    	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
+#    	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig
 	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
-	touch ${cp_bin_path}/ffmpeg41 
+#	touch ${cp_bin_path}/ffmpeg41 
 	  info "${YELLOW}Injection of the ffmpeg41 wrapper."
-	wget $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
+	wget -q $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41
 	  info "${GREEN}Waiting for consolidate the download of the wrapper."
         sleep 2
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
@@ -231,9 +231,9 @@ else
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
-	mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig
+#	mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig
 	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
-	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg
+#	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg
 	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
 	chmod 755 $ms_path/bin/ffmpeg
 	chown MediaServer:MediaServer $ms_path/bin/ffmpeg
@@ -248,23 +248,23 @@ else
         info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 	
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
-	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig
+#	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig
 	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig"
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file
+#	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file
 	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
 	
 	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
-	cp -n $ms_libsynovte_file $ms_libsynovte_file.orig
+#	cp -n $ms_libsynovte_file $ms_libsynovte_file.orig
 	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig"
 	chown MediaServer:MediaServer $ms_libsynovte_file.orig
 	chmod 644 $ms_libsynovte_file.orig
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file
+#	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file
 	info "${GREEN}Modified correctly the file $ms_libsynovte_file"
 	
-	restart_packages
+#	restart_packages
 	
 	info "${GREEN}Installed correctly the Advanced Wrapper"
 	
