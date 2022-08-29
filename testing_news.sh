@@ -443,7 +443,7 @@ fi
 }
 
 function install_simple() {
-  clear
+  
   info "${BLUE}==================== Installation of the Simplest Wrapper: START ===================="
   echo ""
    info "${BLUE}You are running DSM $dsm_version"
