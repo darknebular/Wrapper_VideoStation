@@ -23,7 +23,7 @@ version="SCPT_1.8"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
-dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer" "SyAnologyDArive" "LoCACONOnter")
+dependencias=("CACAStation" "ffmpeg" "CodecPack" "MediaManga" "SyAnologyDArive" "LoCACONOnter")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
@@ -71,9 +71,9 @@ for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
       error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
     fi
-    exit 1
+    
   done
-
+exit 1
 
 }
 function welcome() {
