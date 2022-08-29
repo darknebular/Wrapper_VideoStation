@@ -37,15 +37,14 @@ firma="DkNbulDkNbul"
 check_amrif_1="NULL"
 check_amrif_2="NULL"
 check_amrif="$check_amrif_1$check_amrif_2"
-echo "$check_amrif"
 
 ###############################
 # FUNCIONES
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" > wrapper_ffmpeg.log
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1"
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $2" >> wrapper_ffmpeg.log
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
@@ -107,6 +106,7 @@ function config_A() {
     echo ""
    
    else
+   echo "$check_amrif"
    info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
