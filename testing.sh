@@ -67,13 +67,14 @@ function restart_packages() {
 
 function check_dependencias() {
   for dependencia in "${dependencias[@]}"; do
-#   for [[ ! -d "/var/packages/${dependencias[@]}" ]]; do
-#while true; do
+   for [[ ! -d "/var/packages/${dependencia[@]}" ]]; do
+
       error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
    done
-      exit 1
+      
 #    fi
-#  done
+  done
+  exit 1
 }
 function welcome() {
   info "FFMPEG WRAPPER INSTALLER version: $version"
