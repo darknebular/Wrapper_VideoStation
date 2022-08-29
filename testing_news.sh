@@ -435,7 +435,7 @@ if [[ "$check_amrif_1" == "$firma" ]] && [[ "$check_amrif_2" == "$firma" ]]; the
    exit 1
    
   else
-   info "${RED}Actually you have not the Advanced Wrapper installed and this codec configurator can not change anything."
+   info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator can not change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
