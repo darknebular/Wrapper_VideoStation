@@ -425,8 +425,8 @@ function uninstall() {
 
 function configurator() {
 clear
-for losorig in "${all_files[@]}"; do
-if [[ -f "$losorig" ]]; then
+#for losorig in "${all_files[@]}"; do
+if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
@@ -469,7 +469,6 @@ else
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
-done
 
 }
 
