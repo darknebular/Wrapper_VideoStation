@@ -80,7 +80,7 @@ function check_dependencias() {
 #  done
 
 for dependencia in "${dependencias[@]}"; do
-    [ ! -d "/var/packages/${dependencia[@]}" ] || return 1
+    [ ! -d "/var/packages/${dependencia[@]}" ] || return true
     while true; do
 	      echo -e "${RED}MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
     done
