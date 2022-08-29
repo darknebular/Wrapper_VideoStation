@@ -38,13 +38,13 @@ check_amrif_1="NULL"
 check_amrif_2="NULL"
 check_amrif="$check_amrif_1$check_amrif_2"
 
-exec 3>&1 1>>wrapper_ffmpeg.log 2>&1
+exec > >(tee /tmp/wrapper_ffmpeg.log) 2>&1
 ###############################
 # FUNCIONES
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" | tee /dev/fd/3
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
