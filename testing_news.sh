@@ -105,7 +105,7 @@ function config_A() {
     echo ""
    
    else
-   echo "$check_amrif"
+   info "$check_amrif"
    info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
