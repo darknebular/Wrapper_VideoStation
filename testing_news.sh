@@ -37,7 +37,7 @@ firma="DkNbulDkNbul"
 check_amrif_1="NULL"
 check_amrif_2="NULL"
 check_amrif="$check_amrif_1$check_amrif_2"
-
+echo "$check_amrif"
 ###############################
 # FUNCIONES
 ###############################
