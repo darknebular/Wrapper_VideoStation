@@ -424,8 +424,8 @@ function uninstall() {
 
 function configurator() {
 clear
-for losorig in "${all_files[@]}"; do
-if [[ -f "$losorig" ]]; then
+# for losorig in "${all_files[@]}"; do
+# if [[ -f "$losorig" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
@@ -463,11 +463,11 @@ if [[ -f "$losorig" ]]; then
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
    exit 1
 
-  else
+#  else
    info "${RED}Actually You HAVE NOT ANY WRAPPER INSTALLED and this codec Configurator can not change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
-fi
+# fi
 
 }
 
