@@ -1,5 +1,6 @@
 #!/bin/bash
 
+##################################################
 # Simplest wrapper. This wrapper works with the Video Station´s Transcoding Profiles and always will be using MP3 2.0 96kbps or 128kbps when transcoding.
 # It derives all parameters to the SynoCommunity´s ffmpeg.
 
@@ -7,7 +8,7 @@ rev="AME_S_1.0"
 # Changes:
 # AME_S_1.0: Initial release of the simplest wrapper. Fork from AlexPresso.
 
-#########################
+##################################################
 # VARIABLES
 
 
@@ -16,6 +17,8 @@ stderrfile="/tmp/ffmpeg-$pid.stderr"
 logfile="/tmp/ffmpeg.log"
 
 #########################
+# FUNCIONES
+
 function log() {
   echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$1] $2" >> $logfile
 }
@@ -37,6 +40,8 @@ function endprocess() {
   rm -f "$stderrfile"
   exit 1
 }
+#########################
+# EJECUCION
 
 trap endprocess SIGTERM
 trap handle_error ERR
