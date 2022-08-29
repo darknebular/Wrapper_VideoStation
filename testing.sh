@@ -81,11 +81,11 @@ function check_dependencias() {
 
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      result=False
-        break
+      echo True
+    else
+        echo False
     fi
-done
-echo "$result"
+    done
 
 
 
