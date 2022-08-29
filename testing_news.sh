@@ -12,6 +12,7 @@ version="SCPT_1.8"
 # SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. (Deprecated migrated to SCPT_1.8)
 # SCPT_1.8: Added a logging of the Installation's process and consolidate with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Unistall process.
 
+exec 2>/tmp/wrapper_ffmpeg.log
 ###############################
 # VARIABLES
 ###############################
@@ -34,16 +35,13 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbulDkNbul"
-#check_amrif_1="NULL"
-#check_amrif_2="NULL"
-
 
 ###############################
 # FUNCIONES
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" 2>/tmp/wrapper_ffmpeg.log
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
@@ -105,24 +103,29 @@ function config_A() {
     echo ""
    
    else
-   info "$check_amrif"
-   info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
    fi
 }
 
 function config_B() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION."
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
-    
+else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi
 }
 
 function config_C() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"libfdk_aac"/"ac3"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"libfdk_aac"/"ac3"/gi' $ms_path/bin/ffmpeg
@@ -132,30 +135,45 @@ function config_C() {
     sed -i 's/"6"/""/gi' $ms_path/bin/ffmpeg
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
-    
+ else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi   
 }
 
 function config_D() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer."
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg
     sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
     echo ""
-	
+else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi	
 }
 
 function config_E() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer."
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' $ms_path/bin/ffmpeg
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' $ms_path/bin/ffmpeg
     sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' $ms_path/bin/ffmpeg
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
     echo ""
-	
+else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi	
 }
 
 function config_F() {
+if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/"ac3"/"libfdk_aac"/gi' $ms_path/bin/ffmpeg
@@ -165,7 +183,11 @@ function config_F() {
     sed -i 's/""/"6"/gi' $ms_path/bin/ffmpeg
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
-    
+ else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi  
 }
 
 function start() {
@@ -461,7 +483,7 @@ if [[ -f "$losorig" ]]; then
    exit 1
 
 else
-   info "${RED}Actually You HAVE NOT ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
