@@ -34,8 +34,8 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbulDkNbul"
-check_amrif_1="NULL"
-check_amrif_2="NULL"
+#check_amrif_1="NULL"
+#check_amrif_2="NULL"
 check_amrif=$check_amrif_1$check_amrif_2
 
 ###############################
