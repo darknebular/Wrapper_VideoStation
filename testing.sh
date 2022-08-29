@@ -69,9 +69,11 @@ function check_dependencias() {
   for dependencia in "${dependencias[@]}"; do
    if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
      error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
+     done
+     check_dependencias
    fi
     
-  done
+#  done
   exit 1
 }
 function welcome() {
