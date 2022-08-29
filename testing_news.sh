@@ -33,7 +33,10 @@ vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
-firma="DkNbul"
+firma="DkNbulDkNbul"
+check_amrif_1="NULL"
+check_amrif_2="NULL"
+check_amrif="$check_amrif_1$check_amrif_2"
 
 ###############################
 # FUNCIONES
@@ -94,18 +97,19 @@ function check_version() {
     return 1
 }
 function config_A() {
-#    if [[ "$check_amrif_1" == "$firma" ]] && [[ "$check_amrif_2" == "$firma" ]]; then  
+    if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION."
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
-#    else
-#   info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator can not change anything."
-#   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   
+   else
+   info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
-#fi
+   fi
 }
 
 function config_B() {
@@ -417,8 +421,8 @@ function uninstall() {
 
 function configurator() {
 clear
-#for losorig in "${all_files[@]}"; do
-if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
+for losorig in "${all_files[@]}"; do
+if [[ -f "$losorig" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
@@ -457,10 +461,11 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
    exit 1
 
 else
-   info "${RED}Actually You HAVE NOT ANY WRAPPER INSTALLED and this codec Configurator can not change anything."
+   info "${RED}Actually You HAVE NOT ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
+done
 
 }
 
