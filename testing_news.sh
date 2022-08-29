@@ -297,7 +297,7 @@ function uninstall_old() {
   
   
   if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
-  info "${YELLOW}Restoring VideoStation's TransProfile If it has been modified in the past."
+  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
   fi
     
@@ -348,7 +348,7 @@ function uninstall_old_simple() {
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
   if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
-  info "${YELLOW}Restoring VideoStation's TransProfile If it has been modified in the past."
+  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
   fi
   
