@@ -34,8 +34,14 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbul"
+check_amrif_1="&1"
+check_amrif_1="&1"
+
+for losorig in "${all_files[@]}"; do
+if [[ -f "$losorig" ]]; then
 check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 check_amrif_2=$(sed -n '3p' < $ms_path/bin//ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
+fi
 
 ###############################
 # FUNCIONES
@@ -95,13 +101,18 @@ function check_version() {
     return 1
 }
 function config_A() {
+    if [[ "$check_amrif_1" == "$firma"]] || [["$check_amrif_2" == "$firma"]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION."
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41
     sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
-    
+    else
+   info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator can not change anything."
+   info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
+   start
+fi
 }
 
 function config_B() {
@@ -413,7 +424,8 @@ function uninstall() {
 
 function configurator() {
 clear
-if [[ "$check_amrif_1" == "$firma"]] || [["$check_amrif_2" == "$firma"]]; then   
+for losorig in "${all_files[@]}"; do
+if [[ -f "$losorig" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
@@ -450,7 +462,7 @@ if [[ "$check_amrif_1" == "$firma"]] || [["$check_amrif_2" == "$firma"]]; then
    
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
    exit 1
-   
+
   else
    info "${RED}Actually You HAVE NOT THE ADVANCED WRAPPER INSTALLED and this codec Configurator can not change anything."
    info "${BLUE}Please, install the Advanced Wrapper first and then you will can change the audio's streams order."
