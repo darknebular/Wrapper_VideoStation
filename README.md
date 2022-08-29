@@ -42,9 +42,10 @@ You will can change the order of the audio codecs in the wrapper, install the mo
 
 ## Usage
 Basic command:  
-`bash <(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")`   
+`bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/testing_news.sh")"`
+
 With options:  
-`bash <(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh") -s <Flags>`
+`bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/testing_news.sh")" -- -s <Flags>`
 
 | Flags        | Required | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
