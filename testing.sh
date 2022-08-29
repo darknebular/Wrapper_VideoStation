@@ -67,12 +67,10 @@ function restart_packages() {
 
 function check_dependencias() {
   for dependencia in "${dependencias[@]}"; do
-   for [[ ! -d "/var/packages/${dependencia[@]}" ]]; do
-
-      error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
-   done
-      
-#    fi
+   if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
+     error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
+   fi
+    
   done
   exit 1
 }
