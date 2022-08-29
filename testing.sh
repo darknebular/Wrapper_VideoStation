@@ -66,18 +66,18 @@ function restart_packages() {
 }
 
 function check_dependencias() {
-#  for dependencia in "${dependencias[@]}"; do
-find "/var/packages/" -name "${dependencias[@]}" | while read -r paquete; do
-    error "MISSING ${paquete[@]} Package, please Install It and RE-RUN the Installer again."
+  for dependencia in "${dependencias[@]}"; do
+#find "/var/packages/" -name "${dependencias[@]}" | while read -r paquete; do
+#    error "MISSING ${paquete[@]} Package, please Install It and RE-RUN the Installer again."
     
-  done
+#  done
   
-#   if [[ ! -d "/var/packages/${dependencias[@]}" ]]; then
+   for [[ ! -d "/var/packages/${dependencia[@]}" ]]; do
 #     error "MISSING ${dependencia[@]} Package, please Install It and RE-RUN the Installer again."
 
 #   fi
    exit 1
-#  done
+  done
 
 
 }
