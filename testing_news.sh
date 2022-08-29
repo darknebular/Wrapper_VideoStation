@@ -42,7 +42,7 @@ check_amrif_2=$(sed -n '3p' < $ms_path/bin//ffmpeg | tr -d "# " | tr -d "\´sAdv
 ###############################
 
 function log() {
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" >> /tmp/wrapper_ffmpeg.log
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
@@ -399,7 +399,7 @@ function uninstall() {
       info "Restoring CodecPack's $filename"
       mv -T -f "$filename" "${filename::-5}"
     done
-  info "${YELLOW}Delete log file."
+  info "${YELLOW}Delete log file wrapper_ffmpeg."
 	touch /tmp/wrapper_ffmpeg.log
 	rm /tmp/wrapper_ffmpeg.log
 
