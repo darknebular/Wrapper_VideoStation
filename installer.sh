@@ -413,7 +413,7 @@ function uninstall_old_simple() {
 }
 
 function uninstall() {
-  clear
+  
   info "${BLUE}==================== Uninstallation the Wrapper: START ===================="
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
