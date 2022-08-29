@@ -32,7 +32,7 @@ ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
-all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig")
+all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbul"
 check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 check_amrif_2=$(sed -n '3p' < $ms_path/bin//ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
@@ -290,6 +290,9 @@ function uninstall_old() {
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
+  info "${YELLOW}Restoring VideoStation's TransProfile If it has been modified in the past."
+  mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
+  
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
 
@@ -325,6 +328,9 @@ function uninstall_old_simple() {
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
+  
+  info "${YELLOW}Restoring VideoStation's TransProfile If it has been modified in the past."
+  mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile"
   
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
