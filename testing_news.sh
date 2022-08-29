@@ -44,7 +44,7 @@ echo "$check_amrif"
 
 function log() {
   echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
-  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2">>wrapper_ffmpeg.log
+#  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2">>wrapper_ffmpeg.log
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
