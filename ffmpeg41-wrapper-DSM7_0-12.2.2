@@ -9,11 +9,11 @@ rev="AME_12.2.2"
 # AME_12.2.1: Initial release for DSM 7.0. Compatible with the new paths of this DSM. Fix the order and the use of the binaries. Added some missing variables in the wrapper and improvements. (Deprecated, migrate to 12.2.2)
 # AME_12.2.2: Now with 2 audio streamS for DSM 7.0 (One in MP3 Stereo and other with 5.1 AAC). Chromecast Supported.
 _log(){
-	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/ffmpeg.log
+	echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/wrapper_ffmpeg.log
 }
 
 _log_para(){
-	echo "$1" | fold -w 120 | sed "s/^.*$/$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} -          = &/" >> /tmp/ffmpeg.log
+	echo "$1" | fold -w 120 | sed "s/^.*$/$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} -          = &/" >> /tmp/wrapper_ffmpeg.log
 }
 
 _term(){
