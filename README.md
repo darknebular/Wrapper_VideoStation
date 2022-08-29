@@ -47,7 +47,7 @@ Basic command:
 With options:  
 `bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s <Flags>`
 
-| <Flags>      | Required | Description                                                                     |
+| Flags      | Required | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
 | install      | No       | The default flag, this install the patch.                                       |                            
 | uninstall    | No       | This flag uninstall the patch.                                                  |
