@@ -189,7 +189,7 @@ function start() {
 ################################
 
 function install() {
-  clear
+  
   info "${BLUE}==================== Installation of the Advanced Wrapper: START ===================="
   echo ""
    info "${BLUE}You are running DSM $dsm_version"
@@ -285,6 +285,7 @@ echo ""
 }
 
 function uninstall_old() {
+  clear
   info "${BLUE}==================== Uninstallation of old wrappers in the system: START ===================="
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
@@ -324,6 +325,7 @@ function uninstall_old() {
 }
 
 function uninstall_old_simple() {
+  clear
   info "${BLUE}==================== Uninstallation of old wrappers in the system: START ===================="
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
