@@ -413,7 +413,7 @@ function uninstall() {
 
 function configurator() {
 clear
-if [[ "$check_amrif_1" == "$firma" ]] && [[ "$check_amrif_2" == "$firma" ]] && [[ -f "${all_files[@]}" ]]; then   
+if [[ "$check_amrif_1" == "$firma" && "$check_amrif_2" == "$firma"]]; then   
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
