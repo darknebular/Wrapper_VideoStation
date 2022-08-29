@@ -38,21 +38,20 @@ check_amrif_1="NULL"
 check_amrif_2="NULL"
 check_amrif="$check_amrif_1$check_amrif_2"
 echo "$check_amrif"
+
 ###############################
 # FUNCIONES
 ###############################
 
 function log() {
   echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2"
-#  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2">>wrapper_ffmpeg.log
+  echo -e  "${GREEN}[$(date '+%Y-%m-%d %H:%M:%S')] $1: $2" > wrapper_ffmpeg.log
 }
 function info() {
   log "${BLUE}INFO" "${YELLOW}$1"
-  log "${BLUE}INFO" "${YELLOW}$1">>wrapper_ffmpeg.log
 }
 function error() {
   log "${RED}ERROR" "${RED}$1"
-  log "${RED}ERROR" "${RED}$1">>wrapper_ffmpeg.log
 }
 
 function restart_packages() {
