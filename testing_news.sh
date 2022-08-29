@@ -36,7 +36,7 @@ all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ff
 firma="DkNbulDkNbul"
 check_amrif_1="NULL"
 check_amrif_2="NULL"
-check_amrif="$check_amrif_1$check_amrif_2"
+check_amrif=$check_amrif_1$check_amrif_2
 
 ###############################
 # FUNCIONES
