@@ -211,7 +211,7 @@ function start() {
    echo ""
    echo -e "${BLUE} ( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
    echo -e "${BLUE} ( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-   echo -e "${BLUE} ( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+   echo -e "${BLUE} ( U ) Uninstall the Simplest or the Advanced Wrappers for VideoStation and DLNA MediaServer." 
    echo -e "${BLUE} ( C ) Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA."
    echo ""
    echo -e "${PURPLE} ( Z ) EXIT from this Installer."
@@ -428,7 +428,7 @@ function uninstall_old_simple() {
 function uninstall() {
   for losorig in "${all_files[@]}"; do
   if [[ -f "$losorig" ]]; then
-  info "${BLUE}==================== Uninstallation the Wrapper: START ===================="
+  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: START ===================="
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
@@ -453,7 +453,7 @@ function uninstall() {
   info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
 
   echo ""
-  info "${BLUE}==================== Uninstallation the Wrapper: COMPLETE ===================="
+  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ===================="
   exit 1
   
   else
