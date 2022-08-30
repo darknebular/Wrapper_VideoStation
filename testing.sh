@@ -77,7 +77,7 @@ for dependencia in "${dependencias[@]}"; do
 
     fi
   done
- if [[ "&npacks" \> "0" ]]; then
+ if [[ &npacks \> 0 ]]; then
  error "At least you need $npacks package to Install, please Install the dependencies and RE-RUN the Installer again."
  exit 1
  fi
