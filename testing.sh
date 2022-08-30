@@ -423,37 +423,37 @@ function uninstall_old_simple() {
 }
 
 function uninstall() {
-  for losorig in "${all_files[@]}"; do
-  if [[ -f "$losorig" ]]; then
-  info "${BLUE}==================== Uninstallation the Wrapper: START ===================="
+#  for losorig in "${all_files[@]}"; do
+#  if [[ -f "$losorig" ]]; then
+#  info "${BLUE}==================== Uninstallation the Wrapper: START ===================="
 
-  info "${YELLOW}Restoring VideoStation's libsynovte.so"
-  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
+#  info "${YELLOW}Restoring VideoStation's libsynovte.so"
+#  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
-  info "${YELLOW}Restoring MediaServer's libsynovte.so"
-  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
+#  info "${YELLOW}Restoring MediaServer's libsynovte.so"
+#  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
-       find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-       info "${YELLOW}Restoring MediaServer's $filename"
-       mv -T -f "$filename" "${filename::-5}"
-       done
+#       find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
+#       info "${YELLOW}Restoring MediaServer's $filename"
+#       mv -T -f "$filename" "${filename::-5}"
+#       done
 
-      find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "Restoring CodecPack's $filename"
-      mv -T -f "$filename" "${filename::-5}"
-      done
-  info "${YELLOW}Delete new log file wrapper_ffmpeg."
-	touch /tmp/wrapper_ffmpeg.log
-	rm /tmp/wrapper_ffmpeg.log
+#      find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
+#      info "Restoring CodecPack's $filename"
+#      mv -T -f "$filename" "${filename::-5}"
+#      done
+#  info "${YELLOW}Delete new log file wrapper_ffmpeg."
+#	touch /tmp/wrapper_ffmpeg.log
+#	rm /tmp/wrapper_ffmpeg.log
 
-  restart_packages
-  info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
+#  restart_packages
+#  info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
 
-  echo ""
-  info "${BLUE}==================== Uninstallation the Wrapper: COMPLETE ===================="
-  exit 1
+#  echo ""
+#  info "${BLUE}==================== Uninstallation the Wrapper: COMPLETE ===================="
+#  exit 1
   
-  else
+#  else
   info "${YELLOW}Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything."
   start
   
