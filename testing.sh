@@ -24,7 +24,7 @@ version="SCPT_1.9"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
-dependencias=("cacacaca" "beeeee" "CodecPack" "MediaServer")
+dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
@@ -38,7 +38,7 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbulDkNbul"
-npacks="0"
+declare -i control=0
 
 ###############################
 # FUNCIONES
@@ -72,15 +72,18 @@ for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
       error "MISSING $dependencia Package."
     let "npacks=npacks+1"
-#   else
-#    info "${GREEN}You have installed $dependencia Package."
 
     fi
-  done
- if [[ &npacks \> 0 ]]; then
- error "At least you need $npacks package to Install, please Install the dependencies and RE-RUN the Installer again."
- exit 1
- fi
+done
+
+if [[ npacks -eq control ]]; then
+echo -e  "${GREEN}You have ALL necessary packages Installed, GOOD."
+fi
+#else
+if [[ npacks -ne control ]]; then
+echo -e  "${RED}At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again."
+exit 1
+fi
 
 }
 function welcome() {
@@ -208,7 +211,7 @@ function start() {
    echo ""
    echo -e "${BLUE} ( I ) Install the Advanced Wrapper for VideoStation and DLNA MediaServer. (With 5.1 and 2.0 support, configurable)"
    echo -e "${BLUE} ( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer. (Only 2.0 support, NOT configurable)"
-   echo -e "${BLUE} ( U ) Uninstall all the wrappers for VideoStation and DLNA MediaServer." 
+   echo -e "${BLUE} ( U ) Uninstall the Simplest or the Advanced Wrappers for VideoStation and DLNA MediaServer." 
    echo -e "${BLUE} ( C ) Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA."
    echo ""
    echo -e "${PURPLE} ( Z ) EXIT from this Installer."
@@ -423,39 +426,40 @@ function uninstall_old_simple() {
 }
 
 function uninstall() {
-#  for losorig in "${all_files[@]}"; do
-#  if [[ -f "$losorig" ]]; then
-#  info "${BLUE}==================== Uninstallation the Wrapper: START ===================="
+  for losorig in "${all_files[@]}"; do
+  if [[ -f "$losorig" ]]; then
+  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: START ===================="
 
-#  info "${YELLOW}Restoring VideoStation's libsynovte.so"
-#  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
+  info "${YELLOW}Restoring VideoStation's libsynovte.so"
+  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
-#  info "${YELLOW}Restoring MediaServer's libsynovte.so"
-#  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
+  info "${YELLOW}Restoring MediaServer's libsynovte.so"
+  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
-#       find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-#       info "${YELLOW}Restoring MediaServer's $filename"
-#       mv -T -f "$filename" "${filename::-5}"
-#       done
+       find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
+       info "${YELLOW}Restoring MediaServer's $filename"
+       mv -T -f "$filename" "${filename::-5}"
+       done
 
-#      find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-#      info "Restoring CodecPack's $filename"
-#      mv -T -f "$filename" "${filename::-5}"
-#      done
-#  info "${YELLOW}Delete new log file wrapper_ffmpeg."
-#	touch /tmp/wrapper_ffmpeg.log
-#	rm /tmp/wrapper_ffmpeg.log
+      find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
+      info "Restoring CodecPack's $filename"
+      mv -T -f "$filename" "${filename::-5}"
+      done
+  info "${YELLOW}Delete new log file wrapper_ffmpeg."
+	touch /tmp/wrapper_ffmpeg.log
+	rm /tmp/wrapper_ffmpeg.log
 
-#  restart_packages
-#  info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
+  restart_packages
+  info "${GREEN}Uninstalled correctly all Wrappers in DLNA MediaServer and VideoStation."
 
-#  echo ""
-#  info "${BLUE}==================== Uninstallation the Wrapper: COMPLETE ===================="
-#  exit 1
+  echo ""
+  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ===================="
+  exit 1
   
-#  else
-  info "${YELLOW}Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything."
-  start
+  else
+  
+  info "${RED}Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything."
+  exit 1
   
   fi
   done
@@ -600,7 +604,7 @@ while getopts s: flag; do
 done
 
 clear
-echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
+echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.===================="
 echo -e "${BLUE}====================This Wrapper Installer is only avalaible for DSM 7.0 and above only===================="
 echo ""
 echo ""
@@ -613,6 +617,12 @@ fi
 welcome
 
 check_dependencias
+
+# If exists this directory, It will change the paths and variables. Inspiried by AlexPresso. 
+if [[ -d /var/packages/CodecPack/target/pack ]]; then
+  cp_bin_path=/var/packages/CodecPack/target/pack/bin
+  injector="1-12.3.3"
+fi
 
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
@@ -627,18 +637,6 @@ if check_version "$dsm_version" " " 6.2; then
    error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
  exit 1
 fi
-if [[ -d /var/packages/CodecPack/target/pack ]]; then
-  cp_bin_path=/var/packages/CodecPack/target/pack/bin
-   injector="1-12.3.3"
-fi
-
-#if check_version "$dsm_version" " " 7.1; then
-#   cp_bin_path=/var/packages/CodecPack/target/pack/bin
-#   injector="1-12.3.3"
-#else
-# error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
-# exit 1
-#fi
 
 
 
