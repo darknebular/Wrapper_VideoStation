@@ -23,7 +23,7 @@ You will can change the order of the audio codecs in the wrapper, install the mo
 - Video Station 2.4.6-1594 (and above)
 - SynoCommunity ffmpeg 4.2.1-23 (and above) ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 2.0.0-3040 (and above)
-- MediaServer 1.1.0-0201 (and above)
+- MediaServer 1.1.0-0201 (and above) (It will be OPTIONAL in a future release)
 
 ## Supported / Unsupported scenarios
 - DTS or EAC3 or TrueHD + Any non standard video format: ✅
