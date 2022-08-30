@@ -618,6 +618,12 @@ welcome
 
 check_dependencias
 
+# If exists this directory, It will change the paths and variables. Inspiried by AlexPresso. 
+if [[ -d /var/packages/CodecPack/target/pack ]]; then
+  cp_bin_path=/var/packages/CodecPack/target/pack/bin
+  injector="1-12.3.3"
+fi
+
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
@@ -632,11 +638,6 @@ if check_version "$dsm_version" " " 6.2; then
  exit 1
 fi
 
-# If exists this directory, It will change the paths. Inspiried by AlexPresso. 
-if [[ -d /var/packages/CodecPack/target/pack ]]; then
-  cp_bin_path=/var/packages/CodecPack/target/pack/bin
-  injector="1-12.3.3"
-fi
 
 
 case "$setup" in
