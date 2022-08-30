@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.8"
+version="SCPT_1.9"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -11,7 +11,8 @@ version="SCPT_1.8"
 # SCPT_1.5: Fixed a bug: when you have a low connection to Internet that could have problems. (Deprecated migrated to SCPT_1.6)
 # SCPT_1.6: Added a independent audio's streams for DLNA. (Deprecated migrated to SCPT_1.7)
 # SCPT_1.7: Added a independent installer for simplest_wrapper in MAIN menu. Added new configuration options in configurator_menu. Now you can change from AAC 512kbps to AC3 640kbps and vice versa. (Deprecated migrated to SCPT_1.8)
-# SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Uninstall process.
+# SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Uninstall process. (Deprecated migrated to SCPT_1.9)
+# SCPT_1.9: Modify the compatibility for all 7.x DSMs and not only 7.0 and 7.1.
 
 ##############################################################
 
@@ -29,13 +30,12 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-supported_versions=("7.0" "7.1")
-injector="1-12.3.3"
+injector="0-12.2.2"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-cp_bin_path=/var/packages/CodecPack/target/pack/bin
+cp_bin_path=/var/packages/CodecPack/target/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbulDkNbul"
 npacks="0"
@@ -70,10 +70,10 @@ function check_dependencias() {
  
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      error "MISSING $dependencia Package, please Install It and RE-RUN the Installer again."
+      error "MISSING $dependencia Package."
     let "npacks=npacks+1"
 #   else
-#    echo -e "${GREEN}You have installed $dependencia Package."
+#    info "${GREEN}You have installed $dependencia Package."
 
     fi
   done
@@ -601,7 +601,7 @@ done
 
 clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
-echo -e "${BLUE}====================This wrapper installer is only avalaible for DSM "${supported_versions[@]}" only===================="
+echo -e "${BLUE}====================This Wrapper Installer is only avalaible for DSM 7.0 and above only===================="
 echo ""
 echo ""
 
@@ -622,17 +622,23 @@ check_amrif_2=$(sed -n '3p' < $ms_path/bin//ffmpeg | tr -d "# " | tr -d "\´sAdv
 fi
 check_amrif="$check_amrif_1$check_amrif_2"
 
-if check_version "$dsm_version" " " 7.0; then
-   cp_bin_path=/var/packages/CodecPack/target/bin
-   injector="0-12.2.2"
-fi
-if check_version "$dsm_version" " " 7.1; then
-   cp_bin_path=/var/packages/CodecPack/target/pack/bin
-   injector="1-12.3.3"
-else
- error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
+
+if check_version "$dsm_version" " " 6.2; then
+   error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
  exit 1
 fi
+if [[ -d /var/packages/CodecPack/target/pack ]]; then
+  cp_bin_path=/var/packages/CodecPack/target/pack/bin
+   injector="1-12.3.3"
+fi
+
+#if check_version "$dsm_version" " " 7.1; then
+#   cp_bin_path=/var/packages/CodecPack/target/pack/bin
+#   injector="1-12.3.3"
+#else
+# error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
+# exit 1
+#fi
 
 
 
