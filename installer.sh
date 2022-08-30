@@ -38,7 +38,7 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbulDkNbul"
-npacks="0"
+declare -i control=0
 
 ###############################
 # FUNCIONES
@@ -71,16 +71,21 @@ function check_dependencias() {
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
       error "MISSING $dependencia Package."
+
     let "npacks=npacks+1"
-#   else
-#    info "${GREEN}You have installed $dependencia Package."
 
     fi
-  done
-# if [[ "&npacks" -gt "0" ]]; then
-# error "At least you need $npacks package to Install, please Install the dependencies and RE-RUN the Installer again."
-# exit 1
-# fi
+done
+
+if [[ npacks -eq control ]]; then
+echo -e  "${GREEN}You have ALL necessary packages Installed, GOOD."
+fi
+#else
+if [[ npacks -ne control ]]; then
+echo -e  "${RED}At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again."
+exit 1
+fi
+
 
 }
 function welcome() {
@@ -600,7 +605,7 @@ while getopts s: flag; do
 done
 
 clear
-echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.X by Dark Nebular.===================="
+echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.===================="
 echo -e "${BLUE}====================This Wrapper Installer is only avalaible for DSM 7.0 and above only===================="
 echo ""
 echo ""
@@ -627,19 +632,12 @@ if check_version "$dsm_version" " " 6.2; then
    error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
  exit 1
 fi
+
+# If exists this directory, It will change the paths. Inspiried by AlexPresso. 
 if [[ -d /var/packages/CodecPack/target/pack ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
-   injector="1-12.3.3"
+  injector="1-12.3.3"
 fi
-
-#if check_version "$dsm_version" " " 7.1; then
-#   cp_bin_path=/var/packages/CodecPack/target/pack/bin
-#   injector="1-12.3.3"
-#else
-# error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
-# exit 1
-#fi
-
 
 
 case "$setup" in
