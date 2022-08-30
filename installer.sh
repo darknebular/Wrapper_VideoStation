@@ -71,7 +71,6 @@ function check_dependencias() {
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
       error "MISSING $dependencia Package."
-
     let "npacks=npacks+1"
 
     fi
@@ -85,7 +84,6 @@ if [[ npacks -ne control ]]; then
 echo -e  "${RED}At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again."
 exit 1
 fi
-
 
 }
 function welcome() {
