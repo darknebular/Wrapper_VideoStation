@@ -24,7 +24,7 @@ version="SCPT_1.9"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
-dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer")
+dependencias=("VideoStation" "ffmpeg" "CodecPack" "MediaServer" "CacaStation" "ExpresoMediaNoche")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
