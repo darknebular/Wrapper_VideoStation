@@ -457,9 +457,9 @@ function uninstall() {
   exit 1
   
   else
-  clear
+  
   info "${RED}Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything."
-  start
+  exit 1
   
   fi
   done
