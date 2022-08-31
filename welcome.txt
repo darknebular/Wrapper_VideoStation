@@ -16,4 +16,4 @@ Works fine the OffLine transcoding and the streaming of tipical extensions like:
 The latest version is 12.2.2 for DSM 7.0 and 12.3.3 for DSM 7.1 and above.
 You will have full control of each Audio's codecs parameter using the Configuration TOOL for the Advanced Wrapper Mode. The only Wrapper of Internet with 5.1 AAC support and with a Configurator TOOL.
 
-====================      ¡¡¡¡¡ENJOY!!!!!     ====================
+============================================================      ¡¡¡¡¡ENJOY!!!!!     ============================================================
