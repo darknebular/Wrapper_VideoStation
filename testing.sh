@@ -1,7 +1,7 @@
 #!/bin/bash
 ##TESTING DON'T USE IT
 ##############################################################
-version="SCPT_1.10"
+version="SCPT_1.11"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -452,11 +452,7 @@ function uninstall_old() {
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
-   info "${YELLOW}Delete new log file wrapper_ffmpeg."
-   touch /tmp/wrapper_ffmpeg.log
-   rm "$logfile"
-  
-  
+     
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
@@ -512,10 +508,7 @@ function uninstall_old_simple() {
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
-   info "${YELLOW}Delete new log file wrapper_ffmpeg."
-   touch /tmp/wrapper_ffmpeg.log
-   rm "$logfile"
-  
+    
 
   info "${GREEN}Uninstalled correctly the old Wrapper"
   echo ""
@@ -535,24 +528,23 @@ function uninstall() {
   for losorig in "${all_files[@]}"; do
   if [[ -f "$losorig" ]]; then
   info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: START ===================="
-  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: START ====================" >> $logfile
-
+  
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
-  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file" 2>> $logfile
+  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
   if [[ -d "$ms_path" ]]; then
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
-  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
+  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
        find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
        info "${YELLOW}Restoring MediaServer's $filename"
-       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
+       mv -T -f "$filename" "${filename::-5}"
        done
   fi
 
       find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "Restoring CodecPack's $filename"
-      mv -T -f "$filename" "${filename::-5}" 2>> $logfile
+      mv -T -f "$filename" "${filename::-5}"
       done
   info "${YELLOW}Delete new log file wrapper_ffmpeg."
 	touch /tmp/wrapper_ffmpeg.log
@@ -564,7 +556,6 @@ function uninstall() {
 
   echo ""
   info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ===================="
-  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ====================" >> $logfile
   exit 1
   
   else
