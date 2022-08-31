@@ -23,7 +23,9 @@ You will can change the order of the audio codecs in the wrapper, install the mo
 - Video Station 2.4.6-1594 (and above)
 - SynoCommunity ffmpeg 4.2.1-23 (and above) ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 2.0.0-3040 (and above)
-- MediaServer 1.1.0-0201 (and above) (It will be OPTIONAL in a future release)
+
+## Optional Dependencies
+- MediaServer 1.1.0-0201 (and above) (OPTIONAL)
 
 ## Supported / Unsupported scenarios
 - DTS or EAC3 or TrueHD + Any non standard video format: ✅
@@ -47,7 +49,7 @@ Basic command:
 With options:  
 `bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s <Flags>`
 
-| Flags      | Required | Description                                                                     |
+| Flags       | Required  | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
 | install      | No       | The default flag, this install the patch.                                       |                            
 | uninstall    | No       | This flag uninstall the patch.                                                  |
