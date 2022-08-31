@@ -1,7 +1,7 @@
 #!/bin/bash
-echo "$check_amrif"
+
 ##############################################################
-version="SCPT_1.11.beta $check_amrif"
+version="SCPT_1.11.beta"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
