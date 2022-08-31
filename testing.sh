@@ -348,8 +348,9 @@ else
 fi
 done
 for losorig in "${all_files[@]}"; do
-	if [[ ! -f "$losorig" ]]; then
-	elif [[ -d "$ms_path" ]]; then
+if [ ! -f "$losorig" ] && [ -d "$ms_path" ]; then
+#	if [[ ! -f "$losorig" ]]; then
+#	elif [[ -d "$ms_path" ]]; then
 		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
 		mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig
 		info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
@@ -378,7 +379,7 @@ for losorig in "${all_files[@]}"; do
 		
 		info "${GREEN}Installed correctly the Advanced Wrapper in Media Server."
    
-   	fi
+fi
 done
 	
 restart_packages
