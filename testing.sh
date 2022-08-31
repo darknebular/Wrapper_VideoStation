@@ -347,8 +347,8 @@ else
 	
 fi
 done
-for losorig in "${all_files[@]}"; do
-if [ ! -f "$losorig" ] && [ -d "$ms_path" ]; then
+
+if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
 
 		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
 		mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig
@@ -379,7 +379,7 @@ if [ ! -f "$losorig" ] && [ -d "$ms_path" ]; then
 		info "${GREEN}Installed correctly the Advanced Wrapper in Media Server."
    
 fi
-done
+
 	
 restart_packages
 
@@ -650,8 +650,7 @@ else
 fi
 done
 
-for losorig in "${all_files[@]}"; do
-if [ ! -f "$losorig" ] && [ -d "$ms_path" ]; then
+if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
 
 	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
 	mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig
@@ -674,7 +673,7 @@ if [ ! -f "$losorig" ] && [ -d "$ms_path" ]; then
 	info "${GREEN}Installed correctly the Simplest Wrapper in Media Server."
    
 fi
-done
+
 	
 restart_packages
 
