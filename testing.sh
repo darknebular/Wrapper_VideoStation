@@ -1,7 +1,7 @@
 #!/bin/bash
 ##TESTING DON'T USE IT
 ##############################################################
-version="SCPT_1.11"
+version="SCPT_1.10_beta"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -365,7 +365,8 @@ else
 	
 	info "${GREEN}Installed correctly the Advanced Wrapper in VideoStation."
 	
-	
+	break
+		
 fi
 done
 
@@ -398,7 +399,7 @@ if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
 		info "${GREEN}Modified correctly the file $ms_libsynovte_file"
 		
 		info "${GREEN}Installed correctly the Advanced Wrapper in Media Server."
-   
+		   
 fi
 
 	
@@ -668,9 +669,9 @@ else
 	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
 	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
 	
-		info "${GREEN}Installed correctly the Simplest Wrapper in Video Station."
+	info "${GREEN}Installed correctly the Simplest Wrapper in Video Station."
 	
-	
+	break
 fi
 done
 
@@ -698,14 +699,13 @@ if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
    
 fi
 
-	
 restart_packages
-
 
 echo ""
 info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ===================="
 info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ====================" >> $logfile
 exit 1
+
 }
 
 ################################
