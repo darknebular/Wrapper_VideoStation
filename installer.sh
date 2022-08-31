@@ -570,6 +570,49 @@ function uninstall() {
 
 function configurator() {
 clear
+
+for losorig in "${all_files[@]}"; do
+if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ "$check_amrif" == "$firma2" ]; then
+
+        echo ""
+        info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
+	info "${BLUE}==================== Configuration of the Advanced Wrapper: START ====================" >> $logfile
+        echo ""
+        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
+        echo -e "${BLUE}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
+	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
+	echo ""
+        echo ""
+        echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
+        echo ""
+        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+        echo -e "${YELLOW} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
+        echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+        echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
+        echo -e "${YELLOW} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
+        echo ""
+        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
+   	while true; do
+	echo -e "${GREEN}"
+        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
+        case $abcdefz in
+        [Aa] ) config_A; break;;
+        [Bb] ) config_B; break;;
+	[Cc] ) config_C; break;;
+	[Dd] ) config_D; break;;
+	[Ee] ) config_E; break;;
+	[Ff] ) config_F; break;;
+	[Zz] ) start; break;;
+        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;
+        esac
+        done
+   
+   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+   exit 1
+fi
+
 for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
 
