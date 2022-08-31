@@ -762,7 +762,6 @@ done
 
 clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.===================="
-echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.====================" >> $logfile
 echo -e "${BLUE}====================This Wrapper Installer is only avalaible for DSM 7.0 and above only===================="
 echo ""
 echo ""
