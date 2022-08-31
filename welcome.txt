@@ -8,7 +8,8 @@ When the Wrapper needs to transcoding you will have 2 audio's streams from the S
 - In  VIDEO-STATION   = [1) MP3 2.0 256kbp  AND 2) AAC 5.1 512kbps.] (by default)*
 *(For Chromecast or Google TV or other clients that don´t accept 5.1 AAC neither multi audio's stream support).
 
-Now, You can change the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer using the Configurator TOOL embedded into the installer.sh. (AC3 is more compatible with legacy 5.1 devices).
+Now, You can change the 5.1 audio´s codec from AAC 512kbps to AC3 640kbps independently of its audio´s streams order in VIDEO-STATION and DLNA MediaServer using the Configurator TOOL embedded into the installer.sh. 
+(AC3 is more compatible with legacy 5.1 devices).
 
 Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI... Works fine the thumbnails in VideoStation.
 
