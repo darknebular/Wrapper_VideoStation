@@ -24,7 +24,7 @@ You will can change the order of the audio codecs in the wrapper, install the mo
 - SynoCommunity ffmpeg 4.2.1-23 (and above) ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 2.0.0-3040 (and above)
 
-## Optional Dependencies
+## Optional Packages
 - MediaServer 1.1.0-0201 (and above) (OPTIONAL)
 
 ## Supported / Unsupported scenarios
