@@ -547,8 +547,8 @@ function uninstall() {
       mv -T -f "$filename" "${filename::-5}"
       done
   info "${YELLOW}Delete new log file wrapper_ffmpeg."
-	touch /tmp/wrapper_ffmpeg.log
-	rm /tmp/wrapper_ffmpeg.log
+	touch "$logfile"
+	rm "$logfile"
 
   restart_packages
   
