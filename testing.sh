@@ -1,5 +1,5 @@
 #!/bin/bash
-TESTING DON'T USE IT
+##TESTING DON'T USE IT
 ##############################################################
 version="SCPT_1.10"
 # Changes:
