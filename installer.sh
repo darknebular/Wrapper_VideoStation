@@ -612,8 +612,7 @@ if [[ "$check_amrif" == "$firma2" ]]; then
    exit 1
 fi
 
-for losorig in "${all_files[@]}"; do
-if [[ -f "$losorig" ]]; then
+if [[ "$check_amrif" == "$firma" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
@@ -658,7 +657,7 @@ else
    info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
-done
+
 
 }
 
