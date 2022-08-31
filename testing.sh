@@ -1,5 +1,5 @@
 #!/bin/bash
-
+echo "$check_amrif"
 ##############################################################
 version="SCPT_1.11.beta"
 # Changes:
