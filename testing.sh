@@ -734,7 +734,6 @@ if check_version "$dsm_version" " " 6.2; then
 fi
 
 
-
 case "$setup" in
   start) start;;
   install) install;;
