@@ -571,8 +571,7 @@ function uninstall() {
 function configurator() {
 clear
 
-for losorig in "${all_files[@]}"; do
-if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ "$check_amrif" == "$firma2" ]; then
+if [[ "$check_amrif" == "$firma2" ]]; then 
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
