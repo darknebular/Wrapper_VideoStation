@@ -327,8 +327,16 @@ function check_root() {
 fi
 }
 
+function check_licence_AME() {
+if [[ ! -f /var/packages/CodecPack/enabled ]]; then
+error "You haven't the licence loaded in Advanced Media Extension package. Please load this licence and try again with the Installer."
+error "You haven't the licence loaded in Advanced Media Extension package. Please load this licence and try again with the Installer." >> $logfile
+exit 1
+fi
+}
+
 function corrector() {
-   # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. Inspired in a comment from AlexPresso. 
+   # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. 
 if [[ -d /var/packages/CodecPack/target/pack ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="1-12.3.3"
@@ -855,6 +863,8 @@ done
 titulo
 
 check_root
+
+check_licence_AME
 
 welcome
 
