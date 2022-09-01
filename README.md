@@ -22,7 +22,7 @@ You will can change the order of the audio codecs in the wrapper, install the mo
 - DSM 7.0-41890 (and above)
 - Video Station 2.4.6-1594 (and above)
 - SynoCommunity ffmpeg 4.2.1-23 (and above) ([help](https://synocommunity.com/#easy-install))
-- Advanced Media Extensions 1.0.0-50001 (and above). (Open it to load the licence.)
+- Advanced Media Extensions 1.0.0-50001 (and above). (Open It to load the licence.)
 
 ## Optional Packages
 - MediaServer 1.1.0-0201 (and above) (OPTIONAL)
