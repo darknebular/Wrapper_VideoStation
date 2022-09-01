@@ -61,15 +61,18 @@ function error() {
 function restart_packages() {
   
   info "${GREEN}Restarting CodecPack..."
-  synopkg restart CodecPack
+  info "${GREEN}Restarting CodecPack..." >> $logfile
+  synopkg restart CodecPack 2>> $logfile
   
   info "${GREEN}Restarting VideoStation..."
-  synopkg restart VideoStation
+  info "${GREEN}Restarting VideoStation..." >> $logfile
+  synopkg restart VideoStation 2>> $logfile
   
   
   if [[ -d "$ms_path" ]]; then
   info "${GREEN}Restarting MediaServer..."
-  synopkg restart MediaServer
+  info "${GREEN}Restarting MediaServer..." >> $logfile
+  synopkg restart MediaServer 2>> $logfile
   fi
 
 }
