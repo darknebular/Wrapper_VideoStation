@@ -477,8 +477,7 @@ info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ====================" >> $logfile
 echo ""   
 
-start
-echo ""
+exit 1
 }
 
 function uninstall_old() {
