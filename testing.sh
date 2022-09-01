@@ -329,8 +329,8 @@ fi
 
 function check_licence_AME() {
 if [[ ! -f /var/packages/CodecPack/enabled ]]; then
-error "You haven't the licence loaded in Advanced Media Extension package. Please load this licence and try again with the Installer."
-error "You haven't the licence loaded in Advanced Media Extension package. Please load this licence and try again with the Installer." >> $logfile
+error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer."
+error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer." >> $logfile
 exit 1
 fi
 }
