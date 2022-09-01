@@ -864,11 +864,11 @@ titulo
 
 check_root
 
-check_licence_AME
-
 welcome
 
 check_dependencias
+
+check_licence_AME
 
 corrector
 
