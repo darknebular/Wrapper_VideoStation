@@ -656,8 +656,7 @@ if [[ "$check_amrif" == "$firma2" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
-	info "${BLUE}==================== Configuration of the Advanced Wrapper: START ====================" >> $logfile
-        echo ""
+	echo ""
         echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
         echo -e "${BLUE}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
 	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
@@ -697,8 +696,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
-	info "${BLUE}==================== Configuration of the Advanced Wrapper: START ====================" >> $logfile
-        echo ""
+	echo ""
         echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
         echo -e "${BLUE}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
 	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
