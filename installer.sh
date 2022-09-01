@@ -14,7 +14,7 @@ version="SCPT_1.11"
 # SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Uninstall process. (Deprecated migrated to SCPT_1.9)
 # SCPT_1.9: Modify the compatibility for all 7.x DSMs and not only 7.0 and 7.1. (Deprecated migrated to SCPT_1.10)
 # SCPT_1.10: Now the Installer Script is independent of the existence of DLNA Media Server, DLNA MediaServer is a optional package. Now You can see the installation logs and the Wrapper logs in: /tmp/wrapper_ffmpeg.log.(Deprecated migrated to SCPT_1.11)
-# SCPT_1.11: Adding the function for checking keys and expand error logs. Minimal changes. Improvements in the Configurator Tool menu when It's launched if you haven't MediaServer Installed.
+# SCPT_1.11: Adding the function for checking keys and expand error logs. Minimal changes. Improvements in the Configurator Tool menu when It's launched if you haven't MediaServer Installed. Added a checker of the existence of a licence in AME Package.
 
 ##############################################################
 
@@ -327,8 +327,16 @@ function check_root() {
 fi
 }
 
+function check_licence_AME() {
+if [[ ! -f /var/packages/CodecPack/enabled ]]; then
+error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer."
+error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer." >> $logfile
+exit 1
+fi
+}
+
 function corrector() {
-   # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. Inspired in a comment from AlexPresso. 
+   # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. 
 if [[ -d /var/packages/CodecPack/target/pack ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="1-12.3.3"
@@ -859,6 +867,8 @@ check_root
 welcome
 
 check_dependencias
+
+check_licence_AME
 
 corrector
 
