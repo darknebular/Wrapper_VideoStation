@@ -308,6 +308,7 @@ function start() {
         esac
         done
 }
+
 function titulo() {
    clear
 echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.===================="
@@ -315,12 +316,14 @@ echo -e "${BLUE}====================This Wrapper Installer is only avalaible for
 echo ""
 echo ""
 }
+
 function check_root() {
    if [[ $EUID -ne 0 ]]; then
   error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write ("${PURPLE}" sudo -i "${RED}") and try again with the Installer."
   exit 1
 fi
 }
+
 function corrector() {
    # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. Inspired in a comment from AlexPresso. 
 if [[ -d /var/packages/CodecPack/target/pack ]]; then
@@ -328,21 +331,24 @@ if [[ -d /var/packages/CodecPack/target/pack ]]; then
   injector="1-12.3.3"
 fi
 }
+
 function check_firmas() {
   
-  # CHEQUEOS DE FIRMAS
+# CHEQUEOS DE FIRMAS
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
-check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
+eval check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
-if [[ -f "$ms_path/bin/ffmpeg.orig" ]]; then
-check_amrif_2=$(sed -n '3p' < $ms_path/bin/ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
-else
+if [[ ! -f "$ms_path/bin/ffmpeg.orig" ]]; then
 check_amrif_2="ar"
+else
+eval check_amrif_2=$(sed -n '3p' < $ms_path/bin/ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
 check_amrif="$check_amrif_1$check_amrif_2"
+
 }
+
 function check_unsupported() {
    if check_version "$dsm_version" " " 6.2; then
    error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
