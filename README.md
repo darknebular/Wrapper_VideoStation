@@ -32,7 +32,8 @@ You will can change the order of the audio codecs in the wrapper, install the mo
 - no DTS, no EAC3, no TrueHD + HEVC: ✅
 - DTS or EAC3 or TrueHD + HEVC: ✅
 - DSM 7.X: ✅
-- DSM 6.2: ⚠️ The installer doesn´t support this version, you will need do a Manual procedure.
+- DSM 6.2: ⚠️ The installer doesn´t support this version, you will need do a Manual procedure. 
+(In low powered devices you only will have remux of the audio.)
 
 ## Instructions
 - Check that you meet the required dependencies
