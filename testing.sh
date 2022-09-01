@@ -14,7 +14,7 @@ version="SCPT_1.11.beta"
 # SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Uninstall process. (Deprecated migrated to SCPT_1.9)
 # SCPT_1.9: Modify the compatibility for all 7.x DSMs and not only 7.0 and 7.1. (Deprecated migrated to SCPT_1.10)
 # SCPT_1.10: Now the Installer Script is independent of the existence of DLNA Media Server, DLNA MediaServer is a optional package. Now You can see the installation logs and the Wrapper logs in: /tmp/wrapper_ffmpeg.log.(Deprecated migrated to SCPT_1.11)
-# SCPT_1.11: Adding the function for checking and expand error logs. Minimal changes. Fixed a bug: The Configurator menu doesn't launch if you haven't MediaServer Installed.
+# SCPT_1.11: Adding the function for checking and expand error logs. Minimal changes. Improvement the Configurator menu when It's launched if you haven't MediaServer Installed.
 
 ##############################################################
 
@@ -96,7 +96,7 @@ fi
 
 }
 function welcome() {
-  info "FFMPEG WRAPPER INSTALLER version: $version"
+  echo -e "${YELLOW}FFMPEG WRAPPER INSTALLER version: $version"
 
   welcome=$(curl -s -L "$repo_url/main/welcome.txt")
   if [ "${#welcome}" -ge 1 ]; then
@@ -352,6 +352,7 @@ check_amrif="$check_amrif_1$check_amrif_2"
 function check_unsupported() {
    if check_version "$dsm_version" " " 6.2; then
    error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
+   error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure." >> $logfile
  exit 1
 fi
 }
@@ -389,14 +390,17 @@ if [[ -f "$losorig" ]]; then
 else
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
+	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig." >> $logfile
 	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig 2>> $logfile
 	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
 	touch ${cp_bin_path}/ffmpeg41
-		  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: $injector."
+	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: $injector."
+	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: $injector." >> $logfile
 	wget -q $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41 2>> $logfile
 	 info "${GREEN}Waiting for consolidate the download of the wrapper."
         sleep 3
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
+	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
 	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
 	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
 	touch "$logfile"
@@ -405,10 +409,13 @@ else
 	
 	
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
+	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig." >> $logfile
 	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig"
+	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig" >> $logfile
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
+	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
 	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
 	
@@ -422,28 +429,37 @@ done
 if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
 
 		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
+		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer." >> $logfile
 		mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig 2>> $logfile
 		info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
+		info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer." >> $logfile
 		cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg 2>> $logfile
 		info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
+		info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA." >> $logfile
 		chmod 755 $ms_path/bin/ffmpeg 2>> $logfile
 		chown MediaServer:MediaServer $ms_path/bin/ffmpeg 2>> $logfile
 		info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer."
+		info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer." >> $logfile
         sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
         sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
         sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg 2>> $logfile
 		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
+		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer." >> $logfile
 		sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg 2>> $logfile
 		info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
+		info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer." >> $logfile
 		sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg 2>> $logfile
         
 		
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
+		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." >> $logfile
 		cp -n $ms_libsynovte_file $ms_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig"
+	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig" >> $logfile
 		chown MediaServer:MediaServer $ms_libsynovte_file.orig 2>> $logfile
 		chmod 644 $ms_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
+	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
 		info "${GREEN}Modified correctly the file $ms_libsynovte_file"
 		
@@ -468,37 +484,44 @@ function uninstall_old() {
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ====================" >> $logfile
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
+  info "${YELLOW}Restoring VideoStation's libsynovte.so" >> $logfile
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file" 2>> $logfile
   
   
   if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
   info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
+  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past." >> $logfile
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile" 2>> $logfile
   fi
   
   
   if [[ -d "$ms_path" ]]; then
     info "${YELLOW}Restoring MediaServer's libsynovte.so"
+    info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
     mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
   
     find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring MediaServer's $filename"
+    info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
     done
   fi
   
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring VideoStation's $filename"
+    info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "Restoring CodecPack's $filename"
+      info "Restoring CodecPack's $filename" >> $logfile
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
 
    info "${YELLOW}Delete old log file ffmpeg."
+   info "${YELLOW}Delete old log file ffmpeg." >> $logfile
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
@@ -523,19 +546,23 @@ function uninstall_old_simple() {
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ====================" >> $logfile
 
   info "${YELLOW}Restoring VideoStation's libsynovte.so"
+  info "${YELLOW}Restoring VideoStation's libsynovte.so" >> $logfile
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file" 2>> $logfile
   
   if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
   info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
+  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past." >> $logfile
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile" 2>> $logfile
   fi
   
   if [[ -d "$ms_path" ]]; then
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
+  info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
   
   find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring MediaServer's $filename"
+    info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   fi
@@ -543,6 +570,7 @@ function uninstall_old_simple() {
 
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring VideoStation's $filename"
+    info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
@@ -550,11 +578,13 @@ function uninstall_old_simple() {
 
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "Restoring CodecPack's $filename"
+      info "Restoring CodecPack's $filename" >> $logfile
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
  
    info "${YELLOW}Delete old log file ffmpeg."
+   info "${YELLOW}Delete old log file ffmpeg." >> $logfile
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
@@ -740,24 +770,30 @@ if [[ -f "$losorig" ]]; then
 else
   
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
+	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig." >> $logfile
     	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig 2>> $logfile
 	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
 	touch ${cp_bin_path}/ffmpeg41 
 	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: Simplest."
+	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: Simplest." >> $logfile
 	wget -q $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41 2>> $logfile
 	  info "${GREEN}Waiting for consolidate the download of the wrapper."
         sleep 3
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
+	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
 	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
 	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
 	touch "$logfile"
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 		
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
+	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig." >> $logfile
 	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig"
+	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig" >> $logfile
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
+	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
 	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
 	
@@ -770,20 +806,26 @@ done
 if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
 
 	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
+	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer." >> $logfile
 	mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig 2>> $logfile
 	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
+	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer." >> $logfile
 	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg 2>> $logfile
 	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
+	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA." >> $logfile
 	chmod 755 $ms_path/bin/ffmpeg 2>> $logfile
 	chown MediaServer:MediaServer $ms_path/bin/ffmpeg 2>> $logfile
 	info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
+	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." >> $logfile
 	cp -n $ms_libsynovte_file $ms_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig"
+	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig" >> $logfile
 	chown MediaServer:MediaServer $ms_libsynovte_file.orig 2>> $logfile
 	chmod 644 $ms_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
+	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
 	info "${GREEN}Modified correctly the file $ms_libsynovte_file"
 	
