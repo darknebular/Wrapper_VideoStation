@@ -336,13 +336,13 @@ function check_firmas() {
   
 # CHEQUEOS DE FIRMAS
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
-eval check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
+check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
 if [[ ! -f "$ms_path/bin/ffmpeg.orig" ]]; then
 check_amrif_2="ar"
 else
-eval check_amrif_2=$(sed -n '3p' < $ms_path/bin/ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
+check_amrif_2=$(sed -n '3p' < $ms_path/bin/ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
 check_amrif="$check_amrif_1$check_amrif_2"
