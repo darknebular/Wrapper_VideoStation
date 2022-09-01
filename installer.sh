@@ -39,7 +39,7 @@ ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
 firma="DkNbulDkNbul"
-firma2="DkNbulDkNbular"
+firma2="DkNbular"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 
