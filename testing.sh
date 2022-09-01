@@ -14,7 +14,7 @@ version="SCPT_1.11.beta"
 # SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Uninstall process. (Deprecated migrated to SCPT_1.9)
 # SCPT_1.9: Modify the compatibility for all 7.x DSMs and not only 7.0 and 7.1. (Deprecated migrated to SCPT_1.10)
 # SCPT_1.10: Now the Installer Script is independent of the existence of DLNA Media Server, DLNA MediaServer is a optional package. Now You can see the installation logs and the Wrapper logs in: /tmp/wrapper_ffmpeg.log.(Deprecated migrated to SCPT_1.11)
-# SCPT_1.11: Adding the function for checking and expand error logs. Minimal changes.
+# SCPT_1.11: Adding the function for checking and expand error logs. Minimal changes. Fixed a bug: The Configurator menu doesn't launch if you haven't MediaServer Installed.
 
 ##############################################################
 
@@ -336,7 +336,7 @@ check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAd
 fi
 
 if [[ -f "$ms_path/bin/ffmpeg.orig" ]]; then
-check_amrif_2=$(sed -n '3p' < $ms_path/bin//ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
+check_amrif_2=$(sed -n '3p' < $ms_path/bin/ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
 else
 check_amrif_2="ar"
 fi
