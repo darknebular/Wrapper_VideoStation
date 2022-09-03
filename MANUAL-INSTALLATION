@@ -18,7 +18,7 @@ sudo mv -n /var/packages/VideoStation/target/bin/ffmpeg /var/packages/VideoStati
 
 # Injecting the script:
 
- sudo touch ffmpeg | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg-wrapper-DSM6_X-12.1.1 -O /var/packages/VideoStation/target/bin/ffmpeg 
+ sudo touch ffmpeg | sudo wget https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/ffmpeg-wrapper-DSM6_X-12.1 -O /var/packages/VideoStation/target/bin/ffmpeg 
 
 # Change ownership and mode of the script
 
