@@ -348,7 +348,7 @@ fi
 if [[ ! -f "$ms_path/bin/ffmpeg.KEY" ]]; then
 check_amrif_2="ar"
 else
-check_amrif_2="DkNbul"
+check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
 check_amrif="$check_amrif_1$check_amrif_2"
@@ -438,7 +438,7 @@ if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
 		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
 		touch $ms_path/bin/ffmpeg.KEY
-		sed -i '3i # DarkNebular´s Advanced Wrapper' $ms_path/bin/ffmpeg.KEY 2>> $logfile
+		echo -e "# DarkNebular´s Advanced Wrapper" >> $ms_path/bin/ffmpeg.KEY
 		info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
@@ -808,7 +808,7 @@ if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
 	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
 	touch $ms_path/bin/ffmpeg.KEY
-	sed -i '3i # DarkNebular´s Advanced Wrapper' $ms_path/bin/ffmpeg.KEY 2>> $logfile
+	echo -e "# DarkNebular´s Simplest Wrapper" >> $ms_path/bin/ffmpeg.KEY
 	info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
