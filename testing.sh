@@ -731,8 +731,8 @@ if [[ "$check_amrif" == "$firma" ]]; then
    exit 1
 
 else
-   info "${RED}Actually You HAVEN'T ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${RED}Actually You HAVEN'T ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
    info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
