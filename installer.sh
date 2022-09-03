@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.11"
+version="SCPT_1.12"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -14,7 +14,8 @@ version="SCPT_1.11"
 # SCPT_1.8: Modify the log file and consolidation with the wrapper itself. Check if the user is using root account. Added the possibility that someone change TransProfiles in VideoStation. Fixed a bucle in old Uninstall process. (Deprecated migrated to SCPT_1.9)
 # SCPT_1.9: Modify the compatibility for all 7.x DSMs and not only 7.0 and 7.1. (Deprecated migrated to SCPT_1.10)
 # SCPT_1.10: Now the Installer Script is independent of the existence of DLNA Media Server, DLNA MediaServer is a optional package. Now You can see the installation logs and the Wrapper logs in: /tmp/wrapper_ffmpeg.log.(Deprecated migrated to SCPT_1.11)
-# SCPT_1.11: Adding the function for checking keys and expand error logs. Minimal changes. Improvements in the Configurator Tool menu when It's launched if you haven't MediaServer Installed. Added a checker of the existence of a licence in AME Package.
+# SCPT_1.11: Adding the function for checking keys and expand error logs. Minimal changes. Improvements in the Configurator Tool menu when It's launched if you haven't MediaServer Installed. Added a checker of the existence of a licence in AME Package. (Deprecated migrated to SCPT_1.12)
+# SCPT_1.12: Now the audio's codecs are independent between VideoStation and Media Station. Added the new wrapper in the installer.
 
 ##############################################################
 
@@ -32,13 +33,13 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-injector="0-12.2.2"
+injector="0-12.2.3"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/bin
-all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
+all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig" "$vs_path/bin/ffmpeg.orig")
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 declare -i control=0
@@ -126,7 +127,7 @@ function config_A() {
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
    
@@ -137,7 +138,7 @@ function config_A() {
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
    
@@ -157,7 +158,7 @@ info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3
 info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
 fi
@@ -167,7 +168,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
 else
@@ -194,11 +195,8 @@ if [[ "$check_amrif" == "$firma" ]]; then
     info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer." >> $logfile
     sed -i 's/"libfdk_aac"/"ac3"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"libfdk_aac"/"ac3"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/"512k"/"640k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"512k"/"640k"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/"6"/""/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"6"/""/gi' $ms_path/bin/ffmpeg 2>> $logfile
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
  else
@@ -221,9 +219,9 @@ fi
 if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer."
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer." >> $logfile
-    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg 2>> $logfile
+    sed -i 's/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
     echo ""
 else
@@ -245,9 +243,9 @@ fi
 if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer."
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer." >> $logfile
-    sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' $ms_path/bin/ffmpeg 2>> $logfile
+    sed -i 's/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vsms+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
     echo ""
 else
@@ -273,11 +271,8 @@ if [[ "$check_amrif" == "$firma" ]]; then
     info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer." >> $logfile
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"ac3"/"libfdk_aac"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"640k"/"512k"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/""/"6"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
  else
@@ -339,7 +334,7 @@ function corrector() {
    # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. 
 if [[ -d /var/packages/CodecPack/target/pack ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
-  injector="1-12.3.3"
+  injector="1-12.3.4"
 fi
 }
 
@@ -350,10 +345,10 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
-if [[ ! -f "$ms_path/bin/ffmpeg.orig" ]]; then
+if [[ ! -f "$ms_path/bin/ffmpeg.KEY" ]]; then
 check_amrif_2="ar"
 else
-check_amrif_2=$(sed -n '3p' < $ms_path/bin/ffmpeg | tr -d "# " | tr -d "\´sAdvancedWrapper")
+check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
 check_amrif="$check_amrif_1$check_amrif_2"
@@ -413,8 +408,9 @@ else
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
 	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
-	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg and its access."
 	touch "$logfile"
+	chmod 755 "$logfile"
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	
@@ -437,30 +433,13 @@ else
 fi
 done
 
-if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
+if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 
-		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
-		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer." >> $logfile
-		mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig 2>> $logfile
-		info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
-		info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer." >> $logfile
-		cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
-		info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA." >> $logfile
-		chmod 755 $ms_path/bin/ffmpeg 2>> $logfile
-		chown MediaServer:MediaServer $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer."
-		info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer." >> $logfile
-        sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-        sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-        sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
-		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer." >> $logfile
-		sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
-		info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer." >> $logfile
-		sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg 2>> $logfile
-        
+		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
+		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+		touch $ms_path/bin/ffmpeg.KEY
+		echo -e "# DarkNebular´s Advanced Wrapper" >> $ms_path/bin/ffmpeg.KEY
+		info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." >> $logfile
@@ -509,6 +488,10 @@ function uninstall_old() {
     info "${YELLOW}Restoring MediaServer's libsynovte.so"
     info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
     mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
+    
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+    rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
   
     find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring MediaServer's $filename"
@@ -570,6 +553,10 @@ function uninstall_old_simple() {
   info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
   
+  info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+    rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
+  
   find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring MediaServer's $filename"
     info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
@@ -626,6 +613,10 @@ function uninstall() {
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
+  info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+    rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
+    
        find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
        info "${YELLOW}Restoring MediaServer's $filename"
        mv -T -f "$filename" "${filename::-5}"
@@ -740,8 +731,8 @@ if [[ "$check_amrif" == "$firma" ]]; then
    exit 1
 
 else
-   info "${RED}Actually You HAVEN'T ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
-   info "${RED}Actually You HAVEN'T ANY WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
    info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
    start
 fi
@@ -790,8 +781,9 @@ else
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
 	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
-	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg and its access."
 	touch "$logfile"
+	chmod 755 "$logfile"
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 		
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
@@ -811,18 +803,12 @@ else
 fi
 done
 
-if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
+if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 
-	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
-	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer." >> $logfile
-	mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig 2>> $logfile
-	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
-	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer." >> $logfile
-	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg 2>> $logfile
-	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
-	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA." >> $logfile
-	chmod 755 $ms_path/bin/ffmpeg 2>> $logfile
-	chown MediaServer:MediaServer $ms_path/bin/ffmpeg 2>> $logfile
+	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
+	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+	touch $ms_path/bin/ffmpeg.KEY
+	echo -e "# DarkNebular´s Simplest Wrapper" >> $ms_path/bin/ffmpeg.KEY
 	info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
