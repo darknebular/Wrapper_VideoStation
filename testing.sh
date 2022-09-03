@@ -39,7 +39,7 @@ ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/bin
-all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig")
+all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig" "$vs_path/bin/ffmpeg.orig")
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 declare -i control=0
@@ -345,7 +345,7 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
-if [[ ! -f "$ms_path/bin/ffmpeg.orig" ]]; then
+if [[ ! -f "$ms_path/bin/ffmpeg.KEY" ]]; then
 check_amrif_2="ar"
 else
 check_amrif_2="DkNbul"
@@ -433,25 +433,13 @@ else
 fi
 done
 
-if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
+if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 
-		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
-		info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer." >> $logfile
-		mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig 2>> $logfile
-		info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
-		info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer." >> $logfile
-		cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
-		info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA." >> $logfile
-		chmod 755 $ms_path/bin/ffmpeg 2>> $logfile
-		chown MediaServer:MediaServer $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
-		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer." >> $logfile
-		sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer."
-		info "${YELLOW}Correcting of the paths of this Wrapper in DLNA MediaServer." >> $logfile
-		sed -i 's#/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig#/var/packages/MediaServer/target/bin/ffmpeg.orig#gi' $ms_path/bin/ffmpeg 2>> $logfile
-        
+		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
+		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+		touch $ms_path/bin/ffmpeg.KEY
+		sed -i '3i # DarkNebular´s Advanced Wrapper' $ms_path/bin/ffmpeg.KEY 2>> $logfile
+		info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." >> $logfile
@@ -500,6 +488,10 @@ function uninstall_old() {
     info "${YELLOW}Restoring MediaServer's libsynovte.so"
     info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
     mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
+    
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+    rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
   
     find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring MediaServer's $filename"
@@ -561,6 +553,10 @@ function uninstall_old_simple() {
   info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
   
+  info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+    rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
+  
   find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
     info "${YELLOW}Restoring MediaServer's $filename"
     info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
@@ -617,6 +613,10 @@ function uninstall() {
   info "${YELLOW}Restoring MediaServer's libsynovte.so"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
+  info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+    rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
+    
        find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
        info "${YELLOW}Restoring MediaServer's $filename"
        mv -T -f "$filename" "${filename::-5}"
@@ -803,18 +803,12 @@ else
 fi
 done
 
-if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
+if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 
-	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer."
-	info "${YELLOW}Backup the original ffmpeg as ffmpeg.orig in DLNA MediaServer." >> $logfile
-	mv -n $ms_path/bin/ffmpeg $ms_path/bin/ffmpeg.orig 2>> $logfile
-	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer."
-	info "${YELLOW}Reuse of the ffmpeg41 wrapper in DLNA MediaServer." >> $logfile
-	cp ${cp_bin_path}/ffmpeg41 $ms_path/bin/ffmpeg 2>> $logfile
-	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA."
-	info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA." >> $logfile
-	chmod 755 $ms_path/bin/ffmpeg 2>> $logfile
-	chown MediaServer:MediaServer $ms_path/bin/ffmpeg 2>> $logfile
+	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
+	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
+	touch $ms_path/bin/ffmpeg.KEY
+	sed -i '3i # DarkNebular´s Advanced Wrapper' $ms_path/bin/ffmpeg.KEY 2>> $logfile
 	info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
