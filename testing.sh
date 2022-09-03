@@ -127,7 +127,7 @@ function config_A() {
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
    
@@ -138,7 +138,7 @@ function config_A() {
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
     echo ""
    
@@ -158,7 +158,7 @@ info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3
 info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
 fi
@@ -168,7 +168,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
 else
@@ -195,11 +195,8 @@ if [[ "$check_amrif" == "$firma" ]]; then
     info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer." >> $logfile
     sed -i 's/"libfdk_aac"/"ac3"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"libfdk_aac"/"ac3"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/"512k"/"640k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"512k"/"640k"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/"6"/""/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"6"/""/gi' $ms_path/bin/ffmpeg 2>> $logfile
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
  else
@@ -222,9 +219,9 @@ fi
 if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer."
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer." >> $logfile
-    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg 2>> $logfile
+    sed -i 's/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
     echo ""
 else
@@ -246,9 +243,9 @@ fi
 if [[ "$check_amrif" == "$firma" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer."
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer." >> $logfile
-    sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-    sed -i 's/("-b:a:0" "512k" "-b:a:1" "256k")/("-b:a:0" "256k" "-b:a:1" "512k")/gi' $ms_path/bin/ffmpeg 2>> $logfile
+    sed -i 's/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vsms+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
     echo ""
 else
@@ -274,11 +271,8 @@ if [[ "$check_amrif" == "$firma" ]]; then
     info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
     info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer." >> $logfile
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"ac3"/"libfdk_aac"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/"640k"/"512k"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    sed -i 's/""/"6"/gi' $ms_path/bin/ffmpeg 2>> $logfile
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
     echo ""
  else
@@ -414,8 +408,9 @@ else
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
 	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
-	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg and its access."
 	touch "$logfile"
+	chmod 755 "$logfile"
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 	
 	
@@ -450,11 +445,6 @@ if [ ! -f "$ms_path/bin/ffmpeg.orig" ] && [ -d "$ms_path" ]; then
 		info "${YELLOW}Fixing permissions of the ffmpeg wrapper for the DLNA." >> $logfile
 		chmod 755 $ms_path/bin/ffmpeg 2>> $logfile
 		chown MediaServer:MediaServer $ms_path/bin/ffmpeg 2>> $logfile
-		info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer."
-		info "${YELLOW}Changing the default audio's codecs order of this Wrapper in DLNA MediaServer." >> $logfile
-        sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-        sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' $ms_path/bin/ffmpeg 2>> $logfile
-        sed -i 's/("-b:a:0" "256k" "-b:a:1" "512k")/("-b:a:0" "512k" "-b:a:1" "256k")/gi' $ms_path/bin/ffmpeg 2>> $logfile
 		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer."
 		info "${YELLOW}Correcting of the version of this Wrapper in DLNA MediaServer." >> $logfile
 		sed -i 's/rev="AME_12/rev="MS_12/gi' $ms_path/bin/ffmpeg 2>> $logfile
@@ -791,8 +781,9 @@ else
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
 	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
-	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg."
+	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg and its access."
 	touch "$logfile"
+	chmod 755 "$logfile"
 	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
 		
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
