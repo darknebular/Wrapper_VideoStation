@@ -8,7 +8,7 @@ rev="AME_12.2.3"
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
 # AME_12.2.1: Initial release for DSM 7.0. Compatible with the new paths of this DSM. Fix the order and the use of the binaries. Added some missing variables in the wrapper and improvements. (Deprecated, migrate to 12.2.2)
 # AME_12.2.2: Now with 2 audio streamS for DSM 7.0 (One in MP3 Stereo and other with 5.1 AAC). Chromecast Supported. (Deprecated, migrate to 12.2.3)
-# AME_12.2.3: Now the audio's codecs are independent between VideoStation and Media Station.
+# AME_12.2.3: Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code.
 
 
 _log(){
@@ -33,7 +33,7 @@ pid=$$
 paramvs=$@
 stream="${@: -1}"
 streamid="FFM$pid"
-bin1=/var/packages/CodecPack/target/bin/ffmpeg41.orig
+bin1=/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig
 bin2=/var/packages/ffmpeg/target/bin/ffmpeg
 args=()
 
@@ -62,11 +62,16 @@ case "$1" in
                 fcodec="$1"
                 args+=("-f" "$1")
         ;;
-         pipe:6)
+        -y)
+                shift
+                y="OfflineTranscoding"
+                args+=("-y" "$1")
+        ;;
+        pipe:6)
         shift
         pipe="pipe_6"
         args+=("pipe:6")
-    ;;
+        ;;
         -map)
                 shift
                 args+=("-map" "$1")
@@ -92,8 +97,6 @@ _log "MOVIE    = $movie"
 set -- "${args[@]}"
 
 argsnew=()
-args1sv=()
-args2sv=()
 args1vs=()
 args2vs=()
 args1vsms=()
@@ -106,25 +109,20 @@ case "$1" in
         -ss)
                 shift
                 argsnew+=("-ss" "$1")
-                args1sv+=("-ss" "$1")
-                args1sv+=("-noaccurate_seek")
                 args1vs+=("-ss" "$1")
                 args1vsms+=("-ss" "$1")
                 args1vs+=("-noaccurate_seek")
                 args1vsms+=("-noaccurate_seek")
-                args2sv+=("-analyzeduration" "10000000")
                 args2vs+=("-analyzeduration" "10000000")
                 args2vsms+=("-analyzeduration" "10000000")
         ;;
         -i)
                 shift
                 argsnew+=("-i" "$1")
-                args1sv+=("-i" "$1")
-                args2sv+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args1vs+=("-i" "$1")
                 args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args1vsms+=("-i" "$1")
-        args2vsms+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2vsms+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
         ;;
         -vf)
                 shift
@@ -139,7 +137,6 @@ case "$1" in
                 else
                         argsnew+=("-vf" "$1")
                 fi
-                args2sv+=("-vf" "$1")
                 args1vs+=("-vf" "$1")
                 args1vsms+=("-vf" "$1")
         ;;
@@ -147,39 +144,32 @@ case "$1" in
         -vb)
                 shift
                 argsnew+=("-vb" "$1")
-                args1sv+=("-vb" "$1")
-                args2sv+=("-vb" "$1")
                 args1vs+=("-vb" "$1")
                 args2vs+=("-vb" "$1")
                 args1vsms+=("-vb" "$1")
-        args2vsms+=("-vb" "$1")
+                args2vsms+=("-vb" "$1")
         ;;
         -vcodec)
                 shift
                 argsnew+=("-vcodec" "$1")
-                args1sv+=("-vcodec" "copy")
-                args2sv+=("-vcodec" "$1")
                 args1vs+=("-vcodec" "$1")
                 args2vs+=("-vcodec" "copy")
                 args1vsms+=("-vcodec" "$1")
-        args2vsms+=("-vcodec" "copy")
+                args2vsms+=("-vcodec" "copy")
         ;;
         # En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se convertirá a AAC Surround 5.1 Y MP3 Stereo
         -acodec)
                 shift
                 if [ "$1" = "libfaac" ]; then
                         argsnew+=("-acodec" "aac")
-                        args1sv+=("-acodec" "aac")
                         args2vs+=("-acodec" "aac")
                         args2vsms+=("-acodec" "aac")
                 else
                         argsnew+=("-acodec" "libfdk_aac")
-                        args1sv+=("-acodec" "$1")
                         args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")
                         args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")
-                        args2sv+=("-c:a:0" "$1" "-c:a:1" "aac")
+                        
                 fi
-                args1sv+=("-acodec" "copy")
                 args1vs+=("-acodec" "copy")
                 args1vsms+=("-acodec" "copy")
         ;;
@@ -187,124 +177,104 @@ case "$1" in
         -ab)
                 shift
                 argsnew+=("-b:a" "512k")
-                args1sv+=("-ab" "$1")
                 args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")
                 args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")
-                args2sv+=("-b:a:0" "256k" "-b:a:1" "512k")
-
+                
         ;;
         # Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos stream de audio (MP3 y AAC) de la misma pista de audio, siendo el primero a elegir la pista de Stereo MP3.
         # Excepto en el caso de necesitar también re-codificar el video además del audio, para evitar un uso alto de CPU se ha dejado solamente en 2 canales para aumentar la compatibilidad.
         -ac)
                 shift
                 argsnew+=("-ac" "$1")
-                args1sv+=("-ac" "$1")
                 args2vs+=("-ac:1" "$1" "-ac:2" "6")
                 args2vsms+=("-ac:1" "6" "-ac:2" "$1")
-                args2sv+=("-ac:1" "$1" "-ac:2" "6")
 
         ;;
         -f)
                 shift
                 argsnew+=("-f" "$1")
-                args1sv+=("-f" "mpegts")
-                args2sv+=("-f" "$1")
                 args1vs+=("-f" "mpegts")
                 args2vs+=("-f" "$1")
                 args1vsms+=("-f" "mpegts")
-        args2vsms+=("-f" "$1")
+                args2vsms+=("-f" "$1")
         ;;
         -segment_format)
                 shift
                 argsnew+=("-segment_format" "$1")
                 args2vs+=("-segment_format" "$1")
                 args2vsms+=("-segment_format" "$1")
-                args2sv+=("-segment_format" "$1")
         ;;
         -segment_list_type)
                 shift
                 argsnew+=("-segment_list_type" "$1")
                 args2vs+=("-segment_list_type" "$1")
                 args2vsms+=("-segment_list_type" "$1")
-                args2sv+=("-segment_list_type" "$1")
         ;;
         -hls_seek_time)
                 shift
                 argsnew+=("-hls_seek_time" "$1")
                 args2vs+=("-hls_seek_time" "$1")
                 args2vsms+=("-hls_seek_time" "$1")
-                args2sv+=("-hls_seek_time" "$1")
         ;;
         -segment_time)
                 shift
                 argsnew+=("-segment_time" "$1")
                 args2vs+=("-segment_time" "$1")
                 args2vsms+=("-segment_time" "$1")
-                args2sv+=("-segment_time" "$1")
         ;;
         -segment_time_delta)
                 shift
                 argsnew+=("-segment_time_delta" "$1")
                 args2vs+=("-segment_time_delta" "$1")
                 args2vsms+=("-segment_time_delta" "$1")
-                args2sv+=("-segment_time_delta" "$1")
         ;;
         -segment_start_number)
                 shift
                 argsnew+=("-segment_start_number" "$1")
                 args2vs+=("-segment_start_number" "$1")
                 args2vsms+=("-segment_start_number" "$1")
-                args2sv+=("-segment_start_number" "$1")
         ;;
         -individual_header_trailer)
                 shift
                 argsnew+=("-individual_header_trailer" "$1")
                 args2vs+=("-individual_header_trailer" "$1")
                 args2vsms+=("-individual_header_trailer" "$1")
-                args2sv+=("-individual_header_trailer" "$1")
         ;;
         -avoid_negative_ts)
                 shift
                 argsnew+=("-avoid_negative_ts" "$1")
                 args2vs+=("-avoid_negative_ts" "$1")
                 args2vsms+=("-avoid_negative_ts" "$1")
-                args2sv+=("-avoid_negative_ts" "$1")
         ;;
         -break_non_keyframes)
                 shift
                 argsnew+=("-break_non_keyframes" "$1")
                 args2vs+=("-break_non_keyframes" "$1")
                 args2vsms+=("-break_non_keyframes" "$1")
-                args2sv+=("-break_non_keyframes" "$1")
         ;;
         -max_muxing_queue_size)
                 shift
                 args2vs+=("-max_muxing_queue_size" "$1")
                 args2vsms+=("-max_muxing_queue_size" "$1")
-                args2sv+=("-max_muxing_queue_size" "$1")
         ;;
         -map)
                 shift
                 argsnew+=("-map" "$1")
-                args1sv+=("-map" "$1")
                 args1vs+=("-map" "$1")
                 args1vsms+=("-map" "$1")
         ;;
         *)
                 argsnew+=("$1")
                 if [ "$stream" = "$1" ]; then
-                        args1sv+=("-bufsize" "8192k" "pipe:1")
-                        args2sv+=("$1")
                         args1vs+=("-bufsize" "8192k" "pipe:1")
                         args2vs+=("$1")
                         args1vsms+=("-bufsize" "8192k" "pipe:1")
             args2vsms+=("$1")
                 else
-                        args2sv+=("$1")
                         args1vs+=("$1")
                         args2vs+=("$1")
                         args1vsms+=("$1")
-            args2vsms+=("$1")
+                        args2vsms+=("$1")
                 fi
         ;;
 esac
@@ -314,6 +284,20 @@ done
 sed -i -e "s/{\"PID\":${pid},\"hardware_transcode\":true,/{\"PID\":${pid},\"hardware_transcode\":false,/" /tmp/VideoStation/enabled
 
 startexectime=`date +%s`
+
+if [ "$y" = "OfflineTranscoding" ]; then
+_log "VCODEC   = $vcodec ($vcodecprofile)"
+        _log "ACODEC   = $acodec"
+        _log "PARAMVS  ="
+        _log_para "$paramvs"
+        _log "MODE     = OFFLINE_TRANSCODING-VS"
+        _log "FFMPEG   = $bin2"
+        _log "PARAMWP  ="
+        param1=${args[@]}
+        _log_para "$param1"
+
+        $bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+fi
 
 if [ "$scodec" = "subrip" ]; then
 
@@ -385,8 +369,8 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
         _log "STDOUT   ="
         _log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
         # _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
-        _log "MODE     = PIPE V_ORIG-A_WRAP-VS"
-        _log "FFMPEG1  = $bin1"
+        _log "MODE     = PIPE V_WRAP-A_WRAP-VS"
+        _log "FFMPEG1  = $bin2"
         _log "FFMPEG2  = $bin2"
         _log "PARAM1   ="
         param1=${args1vs[@]}
@@ -395,7 +379,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
         param2=${args2vs[@]}
         _log_para "$param2"
 
-        $bin1 "${args1vs[@]}" | $bin2 "${args2vs[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+        $bin2 "${args1vs[@]}" | $bin2 "${args2vs[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
         childpid=$!
         _log "CHILDPID = $childpid"
@@ -409,33 +393,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
         startexectime=`date +%s`
         _log "STDOUT   ="
         _log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
-        # _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
-        _log "MODE     = PIPE V_WRAP-A_ORIG-VS"
-        _log "FFMPEG1  = $bin2"
-        _log "FFMPEG2  = $bin1"
-        _log "PARAM1   ="
-        param1=${args1sv[@]}
-        _log_para "$param1"
-        _log "PARAM2   ="
-        param2=${args2sv[@]}
-        _log_para "$param2"
-
-        $bin2 "${args1sv[@]}" | $bin1 "${args2sv[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
-
-        childpid=$!
-        _log "CHILDPID = $childpid"
-        wait $childpid
-
-fi
-
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:6: Broken pipe" /tmp/ffmpeg-${streamid}.stderr; then
-
-        _log "*** CHILD END ***"
-        startexectime=`date +%s`
-        _log "STDOUT   ="
-        _log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
-        # _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
-        _log "MODE     = WRAPPER-VS"
+        _log "MODE     = WRAPPER_SINGLE-VS"
         _log "FFMPEG   = $bin2"
 
         $bin2 "${argsnew[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
