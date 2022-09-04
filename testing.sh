@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.14.BETA2"
+version="SCPT_1.14.BETA3"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -535,7 +535,9 @@ fi
 
 if [[ -f "$ms_path/bin/ffmpeg.KEY" ]]; then
 check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
-else
+fi
+
+if [[ ! -f "$ms_path/bin/ffmpeg.KEY" ]]; then
 check_amrif_2="ar"
 fi
 
