@@ -302,15 +302,6 @@ _log "VCODEC   = $vcodec ($vcodecprofile)"
 
         $bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
-                childpid=$!
-        _log "CHILDPID = $childpid"
-        wait $childpid
-
-        _log "*** CHILD END ***"
-        _log "*** PROCESS END ***"
-
-         rm /tmp/ffmpeg-*.stderr
-
 fi
 
 if [ "$scodec" = "subrip" ] && [ "$y" != "OffTrans" ]; then
