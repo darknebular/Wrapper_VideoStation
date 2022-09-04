@@ -155,7 +155,7 @@ function config_A() {
    else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    
    start
    
@@ -192,7 +192,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    
    start
 fi
@@ -220,7 +220,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
  else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    
    start
 fi   
@@ -228,9 +228,9 @@ fi
 
 function config_D() {
 if [[ "$check_amrif" == "$firma2" ]]; then 
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA Media Server and this codec Configurator CAN'T change anything."
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA Media Server and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." >> $logfile
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    start
 fi
 
@@ -249,16 +249,16 @@ if [[ "$check_amrif" == "$firma" ]]; then
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    start
 fi	
 }
 
 function config_E() {
 if [[ "$check_amrif" == "$firma2" ]]; then 
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA Media Server and this codec Configurator CAN'T change anything."
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA Media Server and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." >> $logfile
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    start
 fi
 
@@ -277,7 +277,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    start
 fi	
 }
@@ -304,7 +304,58 @@ if [[ "$check_amrif" == "$firma" ]]; then
  else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   start
+fi  
+}
+
+function config_G() {
+if [[ "$check_amrif" == "$firma2" ]]; then 
+info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
+    sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+    echo ""
+fi
+
+if [[ "$check_amrif" == "$firma" ]]; then  
+info "${YELLOW}Changing to use only a unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}Changing to use only a unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
+    sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+    echo ""
+ else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   start
+fi  
+}
+
+function config_H() {
+if [[ "$check_amrif" == "$firma2" ]]; then 
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." >> $logfile
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   start
+fi
+
+if [[ "$check_amrif" == "$firma" ]]; then  
+info "${YELLOW}Changing to use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}Changing to use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
+    sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+    echo ""
+ else
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
+   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    start
 fi  
 }
@@ -685,6 +736,7 @@ if [[ "$check_amrif" == "$firma2" ]]; then
         echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
         echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
 	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
+	echo -e "${GREEN}Changing the audio stream's order automatically will put again 2 audio Streams."
 	echo ""
         echo ""
         echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
@@ -695,20 +747,24 @@ if [[ "$check_amrif" == "$firma2" ]]; then
         echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
         echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
         echo -e "${YELLOW} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
+	echo -e "${BLUE} ( G ) Use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+	echo -e "${RED} ( H ) Use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
-        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
-        case $abcdefz in
+        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefghz
+        case $abcdefghz in
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
 	[Cc] ) config_C; break;;
 	[Dd] ) config_D; break;;
 	[Ee] ) config_E; break;;
 	[Ff] ) config_F; break;;
+	[Gg] ) config_G; break;;
+	[Hh] ) config_H; break;;
 	[Zz] ) start; break;;
-        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;
+        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu).";;
         esac
         done
    
@@ -725,6 +781,7 @@ if [[ "$check_amrif" == "$firma" ]]; then
         echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
         echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
 	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
+	echo -e "${GREEN}Changing the audio stream's order automatically will put again 2 audio Streams."
 	echo ""
         echo ""
         echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
@@ -735,20 +792,24 @@ if [[ "$check_amrif" == "$firma" ]]; then
         echo -e "${BLUE} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
         echo -e "${BLUE} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
         echo -e "${BLUE} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
+	echo -e "${BLUE} ( G ) Use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+	echo -e "${BLUE} ( H ) Use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
-        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
-        case $abcdefz in
+        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefghz
+        case $abcdefghz in
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
 	[Cc] ) config_C; break;;
 	[Dd] ) config_D; break;;
 	[Ee] ) config_E; break;;
 	[Ff] ) config_F; break;;
+	[Gg] ) config_G; break;;
+	[Hh] ) config_H; break;;
 	[Zz] ) start; break;;
-        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;
+        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu).";;
         esac
         done
    
