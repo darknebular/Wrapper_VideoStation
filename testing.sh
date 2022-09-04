@@ -148,7 +148,9 @@ function config_A() {
     sed -i 's/args2vs+=("-b:a" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
     echo ""
-   
+     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+     exit 1   
     fi
 	
 	if [[ "$check_amrif" == "$firma" ]]; then  
@@ -211,6 +213,9 @@ info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps
     sed -i 's/args2vs+=("-b:a" "256k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+    exit 1   
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
@@ -255,6 +260,9 @@ info "${YELLOW}Changing the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in
     sed -i 's/"6"/""/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION."
     echo ""
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+    exit 1  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
@@ -363,6 +371,9 @@ info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION."
     echo ""
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+    exit 1  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
@@ -403,6 +414,9 @@ info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (th
     sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
     echo ""
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+    exit 1  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
