@@ -403,6 +403,7 @@ info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (th
     sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
     echo ""
+    break
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
