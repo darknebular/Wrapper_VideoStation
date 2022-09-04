@@ -400,8 +400,8 @@ fi
 
 function config_G() {
 if [[ "$check_amrif" == "$firma2" ]]; then 
-info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
+info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
     sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -418,7 +418,7 @@ info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (th
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+    info "${GREEN}Sucesfully changed to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
     echo ""
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
@@ -426,8 +426,8 @@ info "${YELLOW}Changing to use only a Unique Audio's Stream in VIDEO-STATION (th
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-info "${YELLOW}Changing to use only a unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-info "${YELLOW}Changing to use only a unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
+info "${YELLOW}Changing to use only an unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}Changing to use only an unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
     sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -444,7 +444,7 @@ info "${YELLOW}Changing to use only a unique Audio's Stream in VIDEO-STATION (th
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+    info "${GREEN}Sucesfully changed to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
     echo ""
  else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
@@ -463,8 +463,8 @@ if [[ "$check_amrif" == "$firma2" ]]; then
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-info "${YELLOW}Changing to use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
-info "${YELLOW}Changing to use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
+info "${YELLOW}Changing to use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}Changing to use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
     sed -i 's/args2vsms+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vsms+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     
     sed -i 's/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vsms+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -481,7 +481,7 @@ info "${YELLOW}Changing to use only a Unique Audio's Stream in DLNA MediaServer 
     sed -i 's/args2vsms+=("-ac:1" "$1" "-ac:2" "")/args2vsms+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/args2vsms+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "" "-ac:2" "$1")/args2vsms+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed to use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+    info "${GREEN}Sucesfully changed to use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
     echo ""
  else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
@@ -878,8 +878,8 @@ if [[ "$check_amrif" == "$firma2" ]]; then
         echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
         echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
         echo -e "${YELLOW} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
-	echo -e "${BLUE} ( G ) Use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-	echo -e "${RED} ( H ) Use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+	echo -e "${BLUE} ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+	echo -e "${RED} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
@@ -923,8 +923,8 @@ if [[ "$check_amrif" == "$firma" ]]; then
         echo -e "${BLUE} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
         echo -e "${BLUE} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
         echo -e "${BLUE} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
-	echo -e "${BLUE} ( G ) Use only a Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-	echo -e "${BLUE} ( H ) Use only a Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+	echo -e "${BLUE} ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+	echo -e "${BLUE} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
