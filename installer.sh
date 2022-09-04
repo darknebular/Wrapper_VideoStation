@@ -17,7 +17,7 @@ version="SCPT_1.14"
 # SCPT_1.11: Adding the function for checking keys and expand error logs. Minimal changes. Improvements in the Configurator Tool menu when It's launched if you haven't MediaServer Installed. Added a checker of the existence of a licence in AME Package. (Deprecated migrated to SCPT_1.12)
 # SCPT_1.12: Now the audio's codecs are independent between VideoStation and Media Station. Added the new wrapper in the installer. (Deprecated migrated to SCPT_1.13)
 # SCPT_1.13: Fixed aesthetic flaws in the texts of Configurator Tool Menu. (Deprecated migrated to SCPT_1.14)
-# SCPT_1.14: Added two new options in Configurator Tool, now you can change to use a unique audio's stream for low powered devices.
+# SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices.
 
 ##############################################################
 
