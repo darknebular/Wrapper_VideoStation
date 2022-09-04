@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.12"
+version="SCPT_1.13"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -15,7 +15,8 @@ version="SCPT_1.12"
 # SCPT_1.9: Modify the compatibility for all 7.x DSMs and not only 7.0 and 7.1. (Deprecated migrated to SCPT_1.10)
 # SCPT_1.10: Now the Installer Script is independent of the existence of DLNA Media Server, DLNA MediaServer is a optional package. Now You can see the installation logs and the Wrapper logs in: /tmp/wrapper_ffmpeg.log.(Deprecated migrated to SCPT_1.11)
 # SCPT_1.11: Adding the function for checking keys and expand error logs. Minimal changes. Improvements in the Configurator Tool menu when It's launched if you haven't MediaServer Installed. Added a checker of the existence of a licence in AME Package. (Deprecated migrated to SCPT_1.12)
-# SCPT_1.12: Now the audio's codecs are independent between VideoStation and Media Station. Added the new wrapper in the installer.
+# SCPT_1.12: Now the audio's codecs are independent between VideoStation and Media Station. Added the new wrapper in the installer. (Deprecated migrated to SCPT_1.13)
+# SCPT_1.13: Fixed aesthetic flaws in the texts of Configurator Tool Menu. 
 
 ##############################################################
 
@@ -123,23 +124,31 @@ function check_version() {
 }
 function config_A() {
     if [[ "$check_amrif" == "$firma2" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION."
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION." >> $logfile
+    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
+    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
+    
+    sed -i 's/args2vs+=("-c:a:0" "ac3" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "ac3")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "640k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
     echo ""
    
     fi
 	
 	if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION."
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in VIDEO-STATION." >> $logfile
+    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
+    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in VIDEO-STATION."
+    
+    sed -i 's/args2vs+=("-c:a:0" "ac3" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "ac3")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "640k" "-b:a:1" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
     echo ""
    
    else
@@ -154,22 +163,30 @@ function config_A() {
 
 function config_B() {
 if [[ "$check_amrif" == "$firma2" ]]; then  
-info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION."
-info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
+info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION."
+info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
+    
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "ac3")/args2vs+=("-c:a:0" "ac3" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac:1" "" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/args2vs+=("-b:a:0" "640k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION."
-    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
+    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION."
+    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in VIDEO-STATION."
+    
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "ac3")/args2vs+=("-c:a:0" "ac3" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac:1" "" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/args2vs+=("-b:a:0" "640k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in VIDEO-STATION."
     echo ""
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
@@ -217,12 +234,16 @@ if [[ "$check_amrif" == "$firma2" ]]; then
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer."
-    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer." >> $logfile
+    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer."
+    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer." >> $logfile
     sed -i 's/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps and 2) MP3 2.0 256kbps in DLNA MediaServer."
+    
+    sed -i 's/args2vsms+=("-c:a:0" "$1" "-c:a:1" "ac3")/args2vsms+=("-c:a:0" "ac3" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-ac:1" "$1" "-ac:2" "")/args2vsms+=("-ac:1" "" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-b:a:0" "256k" "-b:a:1" "640k")/args2vsms+=("-b:a:0" "640k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in DLNA MediaServer."
     echo ""
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
@@ -241,12 +262,16 @@ if [[ "$check_amrif" == "$firma2" ]]; then
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer."
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps in DLNA MediaServer." >> $logfile
+    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in DLNA MediaServer."
+    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in DLNA MediaServer." >> $logfile
     sed -i 's/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vsms+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps in DLNA MediaServer."
+    
+    sed -i 's/args2vsms+=("-c:a:0" "ac3" "-c:a:1" "$1")/args2vsms+=("-c:a:0" "$1" "-c:a:1" "ac3")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-ac:1" "" "-ac:2" "$1")/args2vsms+=("-ac:1" "$1" "-ac:2" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vsms+=("-b:a:0" "640k" "-b:a:1" "256k")/args2vsms+=("-b:a:0" "256k" "-b:a:1" "640k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in DLNA MediaServer."
     echo ""
 else
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
@@ -656,18 +681,18 @@ if [[ "$check_amrif" == "$firma2" ]]; then
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
 	echo ""
-        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
-        echo -e "${BLUE}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
-	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
+        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
+        echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
+	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
 	echo ""
         echo ""
         echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
         echo ""
-        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
         echo -e "${YELLOW} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
-        echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-        echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
+        echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+        echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
         echo -e "${YELLOW} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
@@ -696,18 +721,18 @@ if [[ "$check_amrif" == "$firma" ]]; then
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
 	echo ""
-        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
-        echo -e "${BLUE}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
-	echo -e "${BLUE}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
+        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
+        echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
+	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
 	echo ""
         echo ""
         echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
         echo ""
-        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
         echo -e "${BLUE} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
-        echo -e "${BLUE} ( D ) FIRST STREAM= AAC 5.1 512kbps, SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-        echo -e "${BLUE} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps when It needs to do transcoding in DLNA MediaServer."
+        echo -e "${BLUE} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+        echo -e "${BLUE} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
         echo -e "${BLUE} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
