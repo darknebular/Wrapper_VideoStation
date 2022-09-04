@@ -33,7 +33,7 @@ pid=$$
 paramvs=$@
 stream="${@: -1}"
 streamid="FFM$pid"
-bin1=/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig
+bin1=/var/packages/CodecPack/target/bin/ffmpeg41.orig
 bin2=/var/packages/ffmpeg/target/bin/ffmpeg
 args=()
 
@@ -168,7 +168,7 @@ case "$1" in
                         argsnew+=("-acodec" "libfdk_aac")
                         args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")
                         args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")
-                        
+
                 fi
                 args1vs+=("-acodec" "copy")
                 args1vsms+=("-acodec" "copy")
@@ -179,7 +179,7 @@ case "$1" in
                 argsnew+=("-b:a" "512k")
                 args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")
                 args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")
-                
+
         ;;
         # Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos stream de audio (MP3 y AAC) de la misma pista de audio, siendo el primero a elegir la pista de Stereo MP3.
         # Excepto en el caso de necesitar también re-codificar el video además del audio, para evitar un uso alto de CPU se ha dejado solamente en 2 canales para aumentar la compatibilidad.
@@ -269,7 +269,7 @@ case "$1" in
                         args1vs+=("-bufsize" "8192k" "pipe:1")
                         args2vs+=("$1")
                         args1vsms+=("-bufsize" "8192k" "pipe:1")
-            args2vsms+=("$1")
+                                            args2vsms+=("$1")
                 else
                         args1vs+=("$1")
                         args2vs+=("$1")
@@ -297,9 +297,10 @@ _log "VCODEC   = $vcodec ($vcodecprofile)"
         _log_para "$param1"
 
         $bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+
 fi
 
-if [ "$scodec" = "subrip" ]; then
+if [ "$scodec" = "subrip" ] && [ "$y" != "OffTrans" ]; then
 
         _log "FFMPEG   = $bin1"
         _log "CODEC    = $scodec"
@@ -362,7 +363,7 @@ if [ "$pipe" = "pipe_6" ]; then
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:6: Broken pipe" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:6: Broken pipe" /tmp/ffmpeg-${streamid}.stderr || [ "$y" != "OffTrans" ]; then
 
         _log "*** CHILD END ***"
         startexectime=`date +%s`
@@ -387,7 +388,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:6: Broken pipe" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:6: Broken pipe" /tmp/ffmpeg-${streamid}.stderr || [ "$y" != "OffTrans" ]; then
 
         _log "*** CHILD END ***"
         startexectime=`date +%s`
