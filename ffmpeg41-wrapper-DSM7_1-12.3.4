@@ -68,7 +68,7 @@ case "$1" in
         ;;
         -y)
                 shift
-                y="OfflineTranscoding"
+                y="OffTrans"
                 args+=("-y" "$1")
         ;;
         pipe:6)
@@ -289,12 +289,12 @@ sed -i -e "s/{\"PID\":${pid},\"hardware_transcode\":true,/{\"PID\":${pid},\"hard
 
 startexectime=`date +%s`
 
-if [ "$y" = "OfflineTranscoding" ]; then
+if [ "$y" = "OffTrans" ]; then
 _log "VCODEC   = $vcodec ($vcodecprofile)"
         _log "ACODEC   = $acodec"
         _log "PARAMVS  ="
         _log_para "$paramvs"
-        _log "MODE     = OFFLINE_TRANSCODING-VS"
+        _log "MODE     = OFF_TRANS-VS"
         _log "FFMPEG   = $bin2"
         _log "PARAMWP  ="
         param1=${args[@]}
