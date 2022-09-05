@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.14"
+version="SCPT_1.15"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -17,7 +17,8 @@ version="SCPT_1.14"
 # SCPT_1.11: Adding the function for checking keys and expand error logs. Minimal changes. Improvements in the Configurator Tool menu when It's launched if you haven't MediaServer Installed. Added a checker of the existence of a licence in AME Package. (Deprecated migrated to SCPT_1.12)
 # SCPT_1.12: Now the audio's codecs are independent between VideoStation and Media Station. Added the new wrapper in the installer. (Deprecated migrated to SCPT_1.13)
 # SCPT_1.13: Fixed aesthetic flaws in the texts of Configurator Tool Menu. (Deprecated migrated to SCPT_1.14)
-# SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices.
+# SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices. (Deprecated migrated to SCPT_1.15)
+# SCPT_1.15: Added the new wrapper's version in the installer.
 
 ##############################################################
 
@@ -35,7 +36,7 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-injector="0-12.2.3"
+injector="0-12.2.4"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
@@ -542,7 +543,7 @@ function corrector() {
    # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. 
 if [[ -d /var/packages/CodecPack/target/pack ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
-  injector="1-12.3.4"
+  injector="1-12.3.5"
 fi
 }
 
