@@ -511,7 +511,7 @@ function start() {
         [Uu]* ) uninstall;;
 	[Cc]* ) configurator;;
       	[Zz]* ) exit;;
-        * ) echo -e "${YELLOW}Please answer I or Install | S or Simple | U or Uninstall | C or Config | Z or Exit.";;
+        * ) echo -e "${YELLOW}Please answer I or Install | S or Simple | U or Uninstall | C or Config | Z for Exit.";;
         esac
         done
 }
