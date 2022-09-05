@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/logo.png?raw=true" height=200px alt="logo">
+  <img src="https://github.com/darknebular/Wrapper_VideoStation/images/blob/main/logo.png?raw=true" height=200px alt="logo">
 </p>
 
 ## THE MOST ADVANCED WRAPPER, THE FIRST AND UNIQUE WRAPPER IN INTERNET HAVING 5.1 TRANSCODING. YOU WILL HAVE FULL CONTROL OF THE CODEC USING THE CONFIGURATOR TOOL INTO THE INSTALLER.
