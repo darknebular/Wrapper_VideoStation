@@ -9,7 +9,7 @@ rev="AME_12.2.4"
 # AME_12.2.1: Initial release for DSM 7.0. Compatible with the new paths of this DSM. Fix the order and the use of the binaries. Added some missing variables in the wrapper and improvements. (Deprecated, migrate to 12.2.2)
 # AME_12.2.2: Now with 2 audio streamS for DSM 7.0 (One in MP3 Stereo and other with 5.1 AAC). Chromecast Supported. (Deprecated, migrate to 12.2.3)
 # AME_12.2.3: Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.2.4)
-# AME_12.2.4: Logging options when all is derived to Community's ffmpeg.
+# AME_12.2.4: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station.
 
 
 _log(){
@@ -65,7 +65,7 @@ case "$1" in
         ;;
         -y)
                 shift
-                y="OfflineTranscoding"
+                y="OffEnable"
                 args+=("-y" "$1")
         ;;
         pipe:6)
@@ -286,12 +286,12 @@ sed -i -e "s/{\"PID\":${pid},\"hardware_transcode\":true,/{\"PID\":${pid},\"hard
 
 startexectime=`date +%s`
 
-if [ "$y" = "OfflineTranscoding" ]; then
+if [ "$y" = "OffEnable" ]; then
 _log "VCODEC   = $vcodec ($vcodecprofile)"
         _log "ACODEC   = $acodec"
         _log "PARAMVS  ="
         _log_para "$paramvs"
-        _log "MODE     = OFFLINE_TRANSCODING-VS"
+        _log "MODE     = OFF_TRANSCO-VS"
         _log "FFMPEG   = $bin2"
         _log "PARAMWP  ="
         param1=${args[@]}
@@ -371,8 +371,8 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
         _log "STDOUT   ="
         _log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
         # _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
-        _log "MODE     = PIPE V_WRAP-A_WRAP-VS"
-        _log "FFMPEG1  = $bin2"
+        _log "MODE     = PIPE V_ORIG-A_WRAP-VS"
+        _log "FFMPEG1  = $bin1"
         _log "FFMPEG2  = $bin2"
         _log "PARAM1   ="
         param1=${args1vs[@]}
@@ -381,7 +381,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
         param2=${args2vs[@]}
         _log_para "$param2"
 
-        $bin2 "${args1vs[@]}" | $bin2 "${args2vs[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+        $bin1 "${args1vs[@]}" | $bin2 "${args2vs[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
         childpid=$!
         _log "CHILDPID = $childpid"
