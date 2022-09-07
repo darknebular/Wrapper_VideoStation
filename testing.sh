@@ -598,11 +598,17 @@ function language() {
 
 function language_A() {
 LANG="0"
+clear
+titulo
+welcome
 start
 }
 
 function language_B() {
 LANG="1"
+clear
+titulo
+welcome
 start
 }
 
