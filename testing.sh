@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.17"
+version="SCPT_1.17_BETA"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -86,7 +86,7 @@ function restart_packages() {
 
 function check_dependencias() {
  
- text_ckck_depen2=("You have ALL necessary packages Installed, GOOD." "Tienes TODOS los paquetes necesarios ya instalados, BIEN.")
+ text_ckck_depen2=("You have ALL $npacks necessary packages Installed, GOOD." "Tienes TODOS los $npacks paquetes necesarios ya instalados, BIEN.")
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
       error "MISSING $dependencia Package." 
