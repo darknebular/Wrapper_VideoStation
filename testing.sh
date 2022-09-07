@@ -49,7 +49,7 @@ firma="DkNbulDkNbul"
 firma2="DkNbular"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
-LANG="1"
+LANG="0"
 
 ###############################
 # FUNCIONES
