@@ -109,7 +109,7 @@ fi
 function welcome() {
   echo -e "${YELLOW}FFMPEG WRAPPER INSTALLER version: $version"
 
-  welcome=$(curl -s -L "$repo_url/main/welcome.txt")
+  welcome=$(curl -s -L "$repo_url/main/texts/welcome_$LANG.txt")
   if [ "${#welcome}" -ge 1 ]; then
     echo ""
     echo -e "${GREEN}	$welcome"
