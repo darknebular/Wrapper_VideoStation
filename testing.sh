@@ -547,7 +547,7 @@ if [[ -d /var/packages/CodecPack/target/pack ]]; then
   injector="1-12.3.5"
 fi
 
-if [[ "$dsm_version" == 7.1.* ]]; then
+if [[ "$dsm_version" == 7.1* ]]; then
 info "Pruebas de matching de versiones. Saltará con cualquier 7.1.x."
 
 fi
