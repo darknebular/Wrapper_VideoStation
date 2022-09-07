@@ -1,0 +1,18 @@
+==================== Wrapper para VideoStation y DLNA MediaServer para DTS, EAC3 y TrueHD con transcodificación a AAC 5.1: ====================
+Synology VideoStation y MediaServer ffmpeg wrapper con compatibilidad con DTS, EAC3 y TrueHD.
+Permite la transcodificación de hardware desde ffmpeg de Synology para video y la transcodificación de DTS, HEVC, EAC3, AAC, True HD desde el ffmpeg de SynoCommunity.
+
+Cuando el Wrapper necesite transcodificar, tendrá 2 audio streams de la MISMA pista:
+- En DLNA MediaServer = [1) AAC 5.1 512kbps Y 2) MP3 2.0 256kbps.] (por defecto)
+- En VIDEO-STATION = [1) MP3 2.0 256kbp Y 2) AAC 5.1 512kbps.] (por defecto)*
+*(Para Chromecast o Google TV u otros clientes que no acepten 5.1 AAC ni soporte multi audio stream).
+
+Ahora, puede cambiar el códec de audio 5.1 de AAC 512 kbps a AC3 640 kbps independientemente del orden de las transmisiones de audio en VIDEO-STATION y DLNA MediaServer utilizando la HERRAMIENTA de configuración integrada en el instalador.
+(AC3 es más compatible con dispositivos heredados 5.1).
+
+Funciona bien la transcodificación OffLine y el streaming de extensiones típicas como: MKV, MP4, AVI... Funciona bien las miniaturas en VideoStation.
+
+La última versión es 12.2.4 para DSM 7.0 y 12.3.5 para DSM 7.1 y superior.
+Tendrá el control total de cada parámetro de los códecs de audio utilizando la HERRAMIENTA de configuración para el Advanced Wrapper. El único Wrapper de Internet con soporte 5.1 AAC y con HERRAMIENTA de Configuración.
+
+============================================================ ¡¡¡¡¡DISFRUTAD!!!!! ============================================================
