@@ -43,7 +43,7 @@ ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/bin
-all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "$cp_bin_path/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig" "$vs_path/bin/ffmpeg.orig")
+all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "/var/packages/CodecPack/target/bin/ffmpeg41.orig" "/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig" "$vs_path/bin/ffmpeg.orig")
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 declare -i control=0
@@ -545,6 +545,10 @@ function corrector() {
 if [[ -d /var/packages/CodecPack/target/pack ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="1-12.3.5"
+fi
+
+if check_version "7.1.9" " " 7.1.*; then
+echo "version 7.1"
 fi
 }
 
