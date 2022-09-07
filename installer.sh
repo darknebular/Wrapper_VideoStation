@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.15"
+version="SCPT_1.16"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -18,7 +18,8 @@ version="SCPT_1.15"
 # SCPT_1.12: Now the audio's codecs are independent between VideoStation and Media Station. Added the new wrapper in the installer. (Deprecated migrated to SCPT_1.13)
 # SCPT_1.13: Fixed aesthetic flaws in the texts of Configurator Tool Menu. (Deprecated migrated to SCPT_1.14)
 # SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices. (Deprecated migrated to SCPT_1.15)
-# SCPT_1.15: Added the new wrapper's version in the installer.
+# SCPT_1.15: Added the new wrapper's version in the installer. (Deprecated migrated to SCPT_1.16)
+# SCPT_1.16: Improvement in the Licence's checker of the AME.
 
 ##############################################################
 
@@ -532,7 +533,7 @@ fi
 }
 
 function check_licence_AME() {
-if [[ ! -f /var/packages/CodecPack/enabled ]]; then
+if [[ ! -f /usr/syno/etc/codec/activation.conf ]]; then
 error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer."
 error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer." >> $logfile
 exit 1
