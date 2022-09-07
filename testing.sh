@@ -573,8 +573,8 @@ function language() {
         echo ""
         echo -e "${BLUE} ( A ) English."
         echo -e "${BLUE} ( B ) Castellano." 
-        echo -e "${YELLOW} ( C ) português."
-        echo -e "${RED} ( D ) Français."
+        echo -e "${YELLOW} ( C ) portugues."
+        echo -e "${RED} ( D ) Francais."
         echo -e "${RED} ( E ) Deutsch."
         echo -e "${YELLOW} ( F ) Italiano."
 	echo -e "${Becho ""
@@ -591,11 +591,14 @@ function language() {
 	[Ff] ) language_F; break;;
 	[Zz] ) start; break;;
         * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;  
-
+        esac
+	done
 }
+
 function language_A() {
 LANG="0"
 }
+
 function language_B() {
 LANG="1"
 }
