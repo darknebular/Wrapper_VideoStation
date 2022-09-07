@@ -86,7 +86,7 @@ function restart_packages() {
 
 function check_dependencias() {
  
- text_ckck_depen2=("You have ALL $npacks necessary packages Installed, GOOD." "Tienes TODOS los $npacks paquetes necesarios ya instalados, BIEN.")
+ text_ckck_depen2=("You have ALL necessary $injector packages Installed, GOOD." "Tienes TODOS los paquetes necesarios ya instalados, BIEN.")
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
       error "MISSING $dependencia Package." 
