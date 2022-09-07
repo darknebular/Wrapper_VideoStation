@@ -547,8 +547,8 @@ if [[ -d /var/packages/CodecPack/target/pack ]]; then
   injector="1-12.3.5"
 fi
 
-if check_version "7.1.9" " " 7.1.*; then
-echo "version 7.1"
+if check_version "$dsm_version" " " 7.*; then
+echo "version 7 y algo"
 fi
 }
 
