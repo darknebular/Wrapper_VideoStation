@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.16_BETA"
+version="SCPT_1.16_BETA2"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -547,8 +547,9 @@ if [[ -d /var/packages/CodecPack/target/pack ]]; then
   injector="1-12.3.5"
 fi
 
-if check_version "$dsm_version" " " 7.*; then
-echo "version 7 y algo"
+if [[ "$dsm_version" == 7.* ]]; then
+info "Pruebas de matching de versiones. Saltará con cualquier 7.x."
+
 fi
 }
 
