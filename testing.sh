@@ -493,18 +493,20 @@ function start() {
    echo -e "${BLUE} ( S ) Install the Simplest Wrapper for VideoStation and DLNA MediaServer (If exist). (Only 2.0 support, NOT configurable)"
    echo -e "${BLUE} ( U ) Uninstall the Simplest or the Advanced Wrappers for VideoStation and DLNA MediaServer." 
    echo -e "${BLUE} ( C ) Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA."
+   echo -e "${BLUE} ( L ) Change the LANGUAGE in this Installer."
    echo ""
    echo -e "${PURPLE} ( Z ) EXIT from this Installer."
         while true; do
 	echo -e "${GREEN}"
-        read -p "Please, What option wish to use? " isucz
-        case $isucz in
+        read -p "Please, What option wish to use? " isuclz
+        case $isuclz in
         [Ii]* ) install;;
         [Ss]* ) install_simple;;
         [Uu]* ) uninstall;;
 	[Cc]* ) configurator;;
+	[Ll]* ) language;;
       	[Zz]* ) exit;;
-        * ) echo -e "${YELLOW}Please answer I or Install | S or Simple | U or Uninstall | C or Config | Z for Exit.";;
+        * ) echo -e "${YELLOW}Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | Z for Exit.";;
         esac
         done
 }
@@ -566,6 +568,37 @@ check_amrif="$check_amrif_1$check_amrif_2"
 
 }
 
+function language() {
+ echo -e "${YELLOW}PLEASE CHOOSE YOUR LANGUAGE:"
+        echo ""
+        echo -e "${BLUE} ( A ) English."
+        echo -e "${BLUE} ( B ) Castellano." 
+        echo -e "${YELLOW} ( C ) português."
+        echo -e "${RED} ( D ) Français."
+        echo -e "${RED} ( E ) Deutsch."
+        echo -e "${YELLOW} ( F ) Italiano."
+	echo -e "${Becho ""
+        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
+   	while true; do
+	echo -e "${GREEN}"
+        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
+        case $abcdefz in
+        [Aa] ) language_A; break;;
+        [Bb] ) language_B; break;;
+	[Cc] ) language_C; break;;
+	[Dd] ) language_D; break;;
+	[Ee] ) language_E; break;;
+	[Ff] ) language_F; break;;
+	[Zz] ) start; break;;
+        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;  
+
+}
+function language_A() {
+LANG="0"
+}
+function language_B() {
+LANG="1"
+}
 
 ################################
 # PROCEDIMIENTOS DEL PATCH
