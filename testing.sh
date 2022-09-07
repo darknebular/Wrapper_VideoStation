@@ -570,19 +570,23 @@ check_amrif="$check_amrif_1$check_amrif_2"
 
 function language() {
  clear
- echo -e "${YELLOW}PLEASE CHOOSE YOUR LANGUAGE:"
-        echo ""
+ text_language_1=("PLEASE, CHOOSE YOUR LANGUAGE:" "POR FAVOR, ELIGE TU IDIOMA:" "ESCOLHA O SEU IDIOMA:" "S'IL VOUS PLAÎT CHOISISSEZ VOTRE LANGUE:" "BITTE WÄHLEN SIE IHRE SPRACHE:" "SCEGLI LA TUA LINGUA:")
+ echo -e "${YELLOW}${text_language_1[$LANG]}"
+ text_language_2=("RETURN to MAIN menu." "VOLVER al MENU Principal." "VOLTAR ao MENU Principal." "RETOUR au MENU Principal." "ZURÜCK zum Hauptmenü." "INDIETRO al menù principale.")
+ text_language_3=("Do you wish to change the language in this Installer?" "¿Deseas cambiar el idioma en este Instalador?" "Deseja alterar o idioma deste Instalador?" "Voulez-vous changer la langue de ce programme d'installation ?" "Möchten Sie die Sprache in diesem Installationsprogramm ändern?" "Vuoi cambiare la lingua in questo programma di installazione?")
+ text_language_4=("Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: A o B o C o D o E o F. Escribe Z (para volver al menú PRINCIPAL)." "Por favor responda com a opção correta escrevendo: A ou B ou C ou D ou E ou F. Escreva Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en écrivant : A ou B ou C ou D ou E ou F. Écrivez Z (pour retourner au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Schreibweise: A oder B oder C oder D oder E oder F. Schreiben Sie Z (für die Rückkehr zum HAUPTMENÜ)." "Rispondi con l'opzione corretta scrivendo: A o B o C o D o E o F. Scrivi Z (per tornare al menu PRINCIPALE).")
+	echo ""
         echo -e "${BLUE} ( A ) English."
         echo -e "${BLUE} ( B ) Castellano." 
-        echo -e "${YELLOW} ( C ) portugues."
-        echo -e "${RED} ( D ) Francais."
-        echo -e "${RED} ( E ) Deutsch."
-        echo -e "${YELLOW} ( F ) Italiano."
+        echo -e "${BLUE} ( C ) Português."
+        echo -e "${BLUE} ( D ) Français."
+        echo -e "${BLUE} ( E ) Deutsch."
+        echo -e "${BLUE} ( F ) Italiano."
 	echo -e ""
-        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
+        echo -e "${PURPLE} ( Z ) ${text_language_2[$LANG]}"
    	while true; do
 	echo -e "${GREEN}"
-        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefz
+        read -p "${text_language_3[$LANG]}" abcdefz
         case $abcdefz in
         [Aa] ) language_A; break;;
         [Bb] ) language_B; break;;
@@ -591,7 +595,7 @@ function language() {
 	[Ee] ) language_E; break;;
 	[Ff] ) language_F; break;;
 	[Zz] ) start; break;;
-        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu).";;  
+        * ) echo -e "${YELLOW}${text_language_4[$LANG]}";;  
         esac
 	done
 }
@@ -601,6 +605,10 @@ LANG="0"
 clear
 titulo
 welcome
+check_dependencias
+check_licence_AME
+check_versions
+check_firmas
 start
 }
 
@@ -609,6 +617,54 @@ LANG="1"
 clear
 titulo
 welcome
+check_dependencias
+check_licence_AME
+check_versions
+check_firmas
+start
+}
+function language_C() {
+LANG="2"
+clear
+titulo
+welcome
+check_dependencias
+check_licence_AME
+check_versions
+check_firmas
+start
+}
+function language_D() {
+LANG="3"
+clear
+titulo
+welcome
+check_dependencias
+check_licence_AME
+check_versions
+check_firmas
+start
+}
+function language_E() {
+LANG="4"
+clear
+titulo
+welcome
+check_dependencias
+check_licence_AME
+check_versions
+check_firmas
+start
+}
+function language_F() {
+LANG="5"
+clear
+titulo
+welcome
+check_dependencias
+check_licence_AME
+check_versions
+check_firmas
 start
 }
 
