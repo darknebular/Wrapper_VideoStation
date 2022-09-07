@@ -19,7 +19,7 @@ version="SCPT_1.16"
 # SCPT_1.13: Fixed aesthetic flaws in the texts of Configurator Tool Menu. (Deprecated migrated to SCPT_1.14)
 # SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices. (Deprecated migrated to SCPT_1.15)
 # SCPT_1.15: Added the new wrapper's version in the installer. (Deprecated migrated to SCPT_1.16)
-# SCPT_1.16: Improvement in the Licence's checker of the AME.
+# SCPT_1.16: Improvement in the Licence checker of the AME. Ensuring that the Installer will only patching DSM 7.0.X and 7.1.X legit.
 
 ##############################################################
 
@@ -113,18 +113,7 @@ function welcome() {
     echo ""
   fi
 }
-function check_version() {
-    DSM=$1
-    DELIMITER=$2
-    VALUE=$3
-    LIST_WHITESPACES=`echo $DSM | tr "$DELIMITER" " "`
-    for xdsm in $LIST_WHITESPACES; do
-        if [ "$xdsm" = "$VALUE" ]; then
-            return 0
-        fi
-    done
-    return 1
-}
+
 function config_A() {
     if [[ "$check_amrif" == "$firma2" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
@@ -534,17 +523,26 @@ fi
 
 function check_licence_AME() {
 if [[ ! -f /usr/syno/etc/codec/activation.conf ]]; then
-error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer."
-error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer." >> $logfile
+error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer."
+error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer." >> $logfile
 exit 1
 fi
 }
 
-function corrector() {
-   # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. 
-if [[ -d /var/packages/CodecPack/target/pack ]]; then
-  cp_bin_path=/var/packages/CodecPack/target/pack/bin
+function check_versions() {
+
+if [[ "$dsm_version" == 7.0* ]]; then
+cp_bin_path=/var/packages/CodecPack/target/bin
+  injector="0-12.2.4"
+fi
+
+if [[ "$dsm_version" == 7.1* ]]; then
+cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="1-12.3.5"
+else
+error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
+error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
+ exit 1
 fi
 }
 
@@ -565,13 +563,6 @@ check_amrif="$check_amrif_1$check_amrif_2"
 
 }
 
-function check_unsupported() {
-   if check_version "$dsm_version" " " 6.2; then
-   error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
-   error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure." >> $logfile
- exit 1
-fi
-}
 
 ################################
 # PROCEDIMIENTOS DEL PATCH
@@ -1076,11 +1067,9 @@ check_dependencias
 
 check_licence_AME
 
-corrector
+check_versions
 
 check_firmas
-
-check_unsupported
 
 
 case "$setup" in
