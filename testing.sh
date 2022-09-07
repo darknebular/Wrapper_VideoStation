@@ -569,6 +569,7 @@ check_amrif="$check_amrif_1$check_amrif_2"
 }
 
 function language() {
+ clear
  echo -e "${YELLOW}PLEASE CHOOSE YOUR LANGUAGE:"
         echo ""
         echo -e "${BLUE} ( A ) English."
@@ -577,7 +578,7 @@ function language() {
         echo -e "${RED} ( D ) Francais."
         echo -e "${RED} ( E ) Deutsch."
         echo -e "${YELLOW} ( F ) Italiano."
-	echo -e "${Becho ""
+	echo -e ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
 	echo -e "${GREEN}"
@@ -597,10 +598,12 @@ function language() {
 
 function language_A() {
 LANG="0"
+start
 }
 
 function language_B() {
 LANG="1"
+start
 }
 
 ################################
