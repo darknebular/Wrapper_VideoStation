@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.16_BETA3"
+version="SCPT_1.16_BETA4"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -113,18 +113,7 @@ function welcome() {
     echo ""
   fi
 }
-function check_version() {
-    DSM=$1
-    DELIMITER=$2
-    VALUE=$3
-    LIST_WHITESPACES=`echo $DSM | tr "$DELIMITER" " "`
-    for xdsm in $LIST_WHITESPACES; do
-        if [ "$xdsm" = "$VALUE" ]; then
-            return 0
-        fi
-    done
-    return 1
-}
+
 function config_A() {
     if [[ "$check_amrif" == "$firma2" ]]; then  
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
@@ -534,22 +523,33 @@ fi
 
 function check_licence_AME() {
 if [[ ! -f /usr/syno/etc/codec/activation.conf ]]; then
-error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer."
-error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, load this licence and try again with the Installer." >> $logfile
+error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer."
+error "You HAVEN'T the licence loaded in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer." >> $logfile
 exit 1
 fi
 }
 
 function check_versions() {
-   # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. 
-if [[ -d /var/packages/CodecPack/target/pack ]]; then
-  cp_bin_path=/var/packages/CodecPack/target/pack/bin
-  injector="1-12.3.5"
+#   # If exists this directory, It will change the paths and variables. The DSM 7.1 and future releases will be using this path. 
+#if [[ -d /var/packages/CodecPack/target/pack ]]; then
+#  cp_bin_path=/var/packages/CodecPack/target/pack/bin
+#  injector="1-12.3.5"
+#fi
+
+if [[ "$dsm_version" == 7.0* ]]; then
+info "Pruebas de matching de versiones. Saltará con cualquier 7.0.x."
+cp_bin_path=/var/packages/CodecPack/target/bin
+  injector="0-12.2.4"
 fi
 
 if [[ "$dsm_version" == 7.1* ]]; then
 info "Pruebas de matching de versiones. Saltará con cualquier 7.1.x."
-
+cp_bin_path=/var/packages/CodecPack/target/pack/bin
+  injector="1-12.3.5"
+else
+error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
+error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure." >> $logfile
+ exit 1
 fi
 }
 
@@ -570,13 +570,6 @@ check_amrif="$check_amrif_1$check_amrif_2"
 
 }
 
-function check_unsupported() {
-   if check_version "$dsm_version" " " 6.2; then
-   error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure."
-   error "Your DSM Version $dsm_version is NOT supported using this installer. Please use the MANUAL Procedure." >> $logfile
- exit 1
-fi
-}
 
 ################################
 # PROCEDIMIENTOS DEL PATCH
@@ -1084,8 +1077,6 @@ check_licence_AME
 check_versions
 
 check_firmas
-
-check_unsupported
 
 
 case "$setup" in
