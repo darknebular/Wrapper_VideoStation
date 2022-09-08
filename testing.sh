@@ -68,7 +68,7 @@ function error() {
 function restart_packages() {
   text_restart_1=("Restarting CodecPack..." "Reiniciando CodecPack..." "Reiniciando o CodecPack..." "Redémarrage de CodecPack..." "CodecPack wird neu gestartet..." "Riavvio CodecPack...")
   text_restart_2=("Restarting VideoStation..." "Reiniciando VideoStation..." "Reiniciando o VideoStation..." "Redémarrage de VideoStation..." "VideoStation wird neu gestartet..." "Riavvio VideoStation...")
-  text_restart_2=("Restarting MediaServer..." "Reiniciando MediaServer..." "Reiniciando o MediaServer..." "Redémarrage de MediaServer..." "MediaServer wird neu gestartet..." "Riavvio MediaServer...")
+  text_restart_3=("Restarting MediaServer..." "Reiniciando MediaServer..." "Reiniciando o MediaServer..." "Redémarrage de MediaServer..." "MediaServer wird neu gestartet..." "Riavvio MediaServer...")
   
   info "${GREEN}${text_restart_1[$LANG]}"
   info "${GREEN}Restarting CodecPack..." >> $logfile
