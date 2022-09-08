@@ -66,18 +66,21 @@ function error() {
 }
 
 function restart_packages() {
+  text_restart_1=("Restarting CodecPack..." "Reiniciando CodecPack..." "Reiniciando o CodecPack..." "Redémarrage de CodecPack..." "CodecPack wird neu gestartet..." "Riavvio CodecPack...")
+  text_restart_2=("Restarting VideoStation..." "Reiniciando VideoStation..." "Reiniciando o VideoStation..." "Redémarrage de VideoStation..." "VideoStation wird neu gestartet..." "Riavvio VideoStation...")
+  text_restart_2=("Restarting MediaServer..." "Reiniciando MediaServer..." "Reiniciando o MediaServer..." "Redémarrage de MediaServer..." "MediaServer wird neu gestartet..." "Riavvio MediaServer...")
   
-  info "${GREEN}Restarting CodecPack..."
+  info "${GREEN}${text_restart_1[$LANG]}"
   info "${GREEN}Restarting CodecPack..." >> $logfile
   synopkg restart CodecPack 2>> $logfile
   
-  info "${GREEN}Restarting VideoStation..."
+  info "${GREEN}${text_restart_2[$LANG]}"
   info "${GREEN}Restarting VideoStation..." >> $logfile
   synopkg restart VideoStation 2>> $logfile
   
   
   if [[ -d "$ms_path" ]]; then
-  info "${GREEN}Restarting MediaServer..."
+  info "${GREEN}${text_restart_3[$LANG]}"
   info "${GREEN}Restarting MediaServer..." >> $logfile
   synopkg restart MediaServer 2>> $logfile
   fi
@@ -85,11 +88,12 @@ function restart_packages() {
 }
 
 function check_dependencias() {
- 
- text_ckck_depen2=("You have ALL necessary packages Installed, GOOD." "Tienes TODOS los paquetes necesarios ya instalados, BIEN.")
+ text_ckck_depen1=("MISSING $dependencia Package." "FALTA el paquete $dependencia" "pacote $dependencia está FALTANDO" "le paquet $dependencia est MANQUANT" "Paket $dependencia fehlt" "il pacchetto $dependencia è MANCANTE")
+ text_ckck_depen2=("You have ALL necessary packages Installed, GOOD." "Tienes TODOS los paquetes necesarios ya instalados, BIEN." "Você tem TODOS os pacotes necessários já instalados, BOM." "Vous avez TOUS les packages nécessaires déjà installés, BON." "Sie haben ALLE notwendigen Pakete bereits installiert, GUT." "Hai già installato TUTTI i pacchetti necessari, BUONO.")
+text_ckck_depen3=("At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again." "Al menos necesitas $npacks paquete/s por instalar, por favor, Instala las dependencias y EJECUTA el Instalador otra vez." "Você precisa de pelo menos $npacks pacote(s) para instalar, por favor, instale as dependências e execute o instalador novamente." "Vous avez besoin d'au moins $npacks package(s) pour l'installation, veuillez installer les dépendances et exécuter à nouveau le programme d'installation." "Sie benötigen mindestens $npacks-Pakete zur Installation, bitte installieren Sie die Abhängigkeiten und führen Sie das Installationsprogramm erneut aus." "Sono necessari almeno $npacks pacchetti per l'installazione, installare le dipendenze ed eseguire nuovamente il programma di installazione.")
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      error "MISSING $dependencia Package." 
+      error "${text_ckck_depen1[$LANG]}" 
       error "MISSING $dependencia Package." >> $logfile
     let "npacks=npacks+1"
 
@@ -101,13 +105,14 @@ echo -e  "${GREEN}${text_ckck_depen2[$LANG]}"
 fi
 #else
 if [[ npacks -ne control ]]; then
-echo -e  "${RED}At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again."
+echo -e  "${RED}${text_ckck_depen3[$LANG]}"
 exit 1
 fi
 
 }
 function welcome() {
-  echo -e "${YELLOW}FFMPEG WRAPPER INSTALLER version: $version"
+  text_welcome_1=("FFMPEG WRAPPER INSTALLER version: $version" "INSTALADOR DEL FFMPEG WRAPPER version: $version" "FFMPEG WRAPPER INSTALLER versão: $version" "Version de l'INSTALLATEUR D'EMBALLAGE FFMPEG : $version" "FFMPEG WRAPPER INSTALLER-Version: $version" "FFMPEG WRAPPER INSTALLER versione: $version")
+  echo -e "${YELLOW}${text_welcome_1[$LANG]}"
 
   welcome=$(curl -s -L "$repo_url/main/texts/welcome_$LANG.txt")
   if [ "${#welcome}" -ge 1 ]; then
@@ -118,8 +123,11 @@ function welcome() {
 }
 
 function config_A() {
+    text_configA_1=("Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION." "Cambiando para usar PRIMER FLUJO= MP3 2.0 256kbps, SEGUNDO FLUJO= AAC 5.1 512kbps (o AC3 5.1 640kbps) en VIDEO-STATION." "Mudando para usar FIRST STREAM= MP3 2.0 256kbps, SECOND STREAM= AAC 5.1 512kbps (ou AC3 5.1 640kbps) na VIDEO-STATION." "Commutation pour utiliser PREMIER FLUX = MP3 2.0 256kbps, SECOND FLUX = AAC 5.1 512kbps (ou AC3 5.1 640kbps) sur VIDEO-STATION." "Umschalten zur Verwendung des ERSTEN STREAM= MP3 2.0 256 kbps, ZWEITER STREAM= AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) auf VIDEO-STATION." "Passaggio all'uso del PRIMO STREAM= MP3 2.0 256 kbps, SECONDO STREAM= AAC 5.1 512 kbps (o AC3 5.1 640 kbps) su VIDEO-STATION.")
+    text_configA_2=("Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION." "Cambiado correctamente el orden de los flujos de audio a: 1) MP3 2.0 256kbps y 2) AAC 5.1 512kbps (o AC3 5.1 640kbps) en VIDEO-STATION." "Alterou corretamente a ordem dos fluxos de áudio para: 1) MP3 2.0 256kbps e 2) AAC 5.1 512kbps (ou AC3 5.1 640kbps) no VIDEO-STATION." "Changement correct de l'ordre des flux audio en : 1) MP3 2.0 256kbps et 2) AAC 5.1 512kbps (ou AC3 5.1 640kbps) sur VIDEO-STATION." "Die Reihenfolge der Audiostreams wurde auf VIDEO-STATION korrekt geändert in: 1) MP3 2.0 256 kbps und 2) AAC 5.1 512 kbps (oder AC3 5.1 640 kbps)." "Modificato correttamente l'ordine dei flussi audio in: 1) MP3 2.0 256kbps e 2) AAC 5.1 512kbps (o AC3 5.1 640kbps) su VIDEO-STATION.")
+    text_configA_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
     if [[ "$check_amrif" == "$firma2" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
+    info "${YELLOW}${text_configA_1[$LANG]}"
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -141,15 +149,15 @@ function config_A() {
     sed -i 's/args2vs+=("-b:a" "640k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a" "512k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
+    info "${GREEN}${text_configA_2[$LANG]}"
     echo ""
-     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+     info "${BLUE}${text_configA_3[$LANG]}"
      info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
      exit 1   
     fi
 	
 	if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
+    info "${YELLOW}${text_configA_1[$LANG]}"
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION." >> $logfile
     sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -171,7 +179,7 @@ function config_A() {
     sed -i 's/args2vs+=("-b:a" "640k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a" "512k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-b:a" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in VIDEO-STATION."
+    info "${GREEN}${text_configA_2[$LANG]}"
     echo ""
    
    else
