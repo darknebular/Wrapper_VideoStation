@@ -200,7 +200,7 @@ text_configB_1=("Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kb
 text_configB_2=("Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in VIDEO-STATION." "Cambiado correctamente el orden de los flujos de audio a: 1) AAC 5.1 512kbps (o AC3 5.1 640kbps) y 2) MP3 2.0 256kbps en VIDEO-STATION." "Alterou corretamente a ordem dos fluxos de áudio para: 1) AAC 5.1 512kbps (ou AC3 5.1 640kbps) e 2) MP3 2.0 256kbps no VIDEO-STATION." "Changement correct de l'ordre des flux audio en : 1) AAC 5.1 512kbps (ou AC3 5.1 640kbps) et 2) MP3 2.0 256kbps sur VIDEO-STATION." "Die Reihenfolge der Audiostreams wurde auf VIDEO-STATION korrekt geändert in: 1) AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) und 2) MP3 2.0 256 kbps." "Modificato correttamente l'ordine dei flussi audio in: 1) AAC 5.1 512kbps (o AC3 5.1 640kbps) e 2) MP3 2.0 256kbps su VIDEO-STATION.")
 text_configB_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
 text_configB_4=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
-text_configB_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's strMP3 2.0 256kbpseams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+text_configB_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
     
 
 if [[ "$check_amrif" == "$firma2" ]]; then  
@@ -307,15 +307,21 @@ fi
 }
 
 function config_D() {
+text_configD_1=("Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer." "Cambiando para usar PRIMER FLUJO= AAC 5.1 512kbps (o AC3 5.1 640kbps), SEGUNDO FLUJO= MP3 2.0 256kbps en DLNA MediaServer." "Mudando para usar FIRST STREAM= AAC 5.1 512kbps (ou AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps na DLNA MediaServer." "Commutation pour utiliser PREMIER FLUX = AAC 5.1 512kbps (ou AC3 5.1 640kbps), SECOND FLUX = MP3 2.0 256kbps sur DLNA MediaServer." "Umschalten zur Verwendung des ERSTEN STREAM= AAC 5.1 512 kbps (oder AC3 5.1 640 kbps), ZWEITER STREAM= MP3 2.0 256 kbps auf DLNA MediaServer." "Passaggio all'uso del PRIMO STREAM= AAC 5.1 512 kbps (o AC3 5.1 640 kbps), SECONDO STREAM= MP3 2.0 256 kbps su DLNA MediaServer.")
+text_configD_2=("Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in DLNA MediaServer." "Cambiado correctamente el orden de los flujos de audio a: 1) AAC 5.1 512kbps (o AC3 5.1 640kbps) y 2) MP3 2.0 256kbps en DLNA MediaServer." "Alterou corretamente a ordem dos fluxos de áudio para: 1) AAC 5.1 512kbps (ou AC3 5.1 640kbps) e 2) MP3 2.0 256kbps no DLNA MediaServer." "Changement correct de l'ordre des flux audio en : 1) AAC 5.1 512kbps (ou AC3 5.1 640kbps) et 2) MP3 2.0 256kbps sur DLNA MediaServer." "Die Reihenfolge der Audiostreams wurde auf DLNA MediaServer korrekt geändert in: 1) AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) und 2) MP3 2.0 256 kbps." "Modificato correttamente l'ordine dei flussi audio in: 1) AAC 5.1 512kbps (o AC3 5.1 640kbps) e 2) MP3 2.0 256kbps su DLNA MediaServer.")
+text_configD_3=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configD_4=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+text_configD_5=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO en DLNA MediaServer y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O ADVANCED WRAPPER INSTALADO no DLNA MediaServer e este Codec Configurator NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS ADVANCED WRAPPER INSTALLÉ sur DLNA MediaServer et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit KEINEN ADVANCED WRAPPER auf dem DLNA MediaServer INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI WRAPPER AVANZATO INSTALLATO su DLNA MediaServer e questo configuratore di codec NON PUÒ modificare nulla.")    
+
 if [[ "$check_amrif" == "$firma2" ]]; then 
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configD_5[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   info "${BLUE}${text_configD_4[$LANG]}"
    start
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer."
+    info "${YELLOW}${text_configD_1[$LANG]}"
     info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps in DLNA MediaServer." >> $logfile
     sed -i 's/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -337,26 +343,33 @@ if [[ "$check_amrif" == "$firma" ]]; then
     sed -i 's/args2vsms+=("-b:a" "640k")/args2vsms+=("-b:a:0" "640k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-b:a" "512k")/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-b:a" "256k")/args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in DLNA MediaServer."
+    info "${GREEN}${text_configD_2[$LANG]}"
     echo ""
 else
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configD_3[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   info "${BLUE}${text_configD_4[$LANG]}"
    start
 fi	
 }
 
 function config_E() {
+text_configE_1=("Changing to use FIRST STREAM= MP3 2.0 256kbps, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in DLNA MediaServer." "Cambiando para usar PRIMER FLUJO= MP3 2.0 256kbps, SEGUNDO FLUJO= AAC 5.1 512kbps (o AC3 5.1 640kbps) en DLNA MediaServer." "Mudando para usar FIRST STREAM= MP3 2.0 256kbps, SECOND STREAM= AAC 5.1 512kbps (o AC3 5.1 640kbps) na DLNA MediaServer." "Commutation pour utiliser PREMIER FLUX = MP3 2.0 256kbps, SECOND FLUX = AAC 5.1 512kbps (ou AC3 5.1 640kbps) sur DLNA MediaServer." "Umschalten zur Verwendung des ERSTEN STREAM= MP3 2.0 256 kbps, ZWEITER STREAM= AAC 5.1 512kbps (ou AC3 5.1 640kbps) auf DLNA MediaServer." "Passaggio all'uso del PRIMO STREAM= MP3 2.0 256 kbps, SECONDO STREAM= AAC 5.1 512 kbps (o AC3 5.1 640 kbps) su DLNA MediaServer.")
+text_configE_2=("Sucesfully changed the audio stream's order to: 1) AAC 5.1 512kbps (or AC3 5.1 640kbps) and 2) MP3 2.0 256kbps in DLNA MediaServer." "Cambiado correctamente el orden de los flujos de audio a: 1) AAC 5.1 512kbps (o AC3 5.1 640kbps) y 2) MP3 2.0 256kbps en DLNA MediaServer." "Alterou corretamente a ordem dos fluxos de áudio para: 1) AAC 5.1 512kbps (ou AC3 5.1 640kbps) e 2) MP3 2.0 256kbps no DLNA MediaServer." "Changement correct de l'ordre des flux audio en : 1) AAC 5.1 512kbps (ou AC3 5.1 640kbps) et 2) MP3 2.0 256kbps sur DLNA MediaServer." "Die Reihenfolge der Audiostreams wurde auf DLNA MediaServer korrekt geändert in: 1) AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) und 2) MP3 2.0 256 kbps." "Modificato correttamente l'ordine dei flussi audio in: 1) AAC 5.1 512kbps (o AC3 5.1 640kbps) e 2) MP3 2.0 256kbps su DLNA MediaServer.")
+text_configE_3=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configE_4=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+text_configE_5=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO en DLNA MediaServer y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O ADVANCED WRAPPER INSTALADO no DLNA MediaServer e este Codec Configurator NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS ADVANCED WRAPPER INSTALLÉ sur DLNA MediaServer et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit KEINEN ADVANCED WRAPPER auf dem DLNA MediaServer INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI WRAPPER AVANZATO INSTALLATO su DLNA MediaServer e questo configuratore di codec NON PUÒ modificare nulla.")    
+
+
 if [[ "$check_amrif" == "$firma2" ]]; then 
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configE_5[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   info "${BLUE}${text_configE_4[$LANG]}"
    start
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in DLNA MediaServer."
+    info "${YELLOW}${text_configE_1[$LANG]}"
     info "${YELLOW}Changing to use FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) in DLNA MediaServer." >> $logfile
     sed -i 's/args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vsms+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/args2vsms+=("-ac:1" "$1" "-ac:2" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -381,9 +394,9 @@ if [[ "$check_amrif" == "$firma" ]]; then
     info "${GREEN}Sucesfully changed the audio stream's order to: 1) MP3 2.0 256kbps and 2) AAC 5.1 512kbps (or AC3 5.1 640kbps) in DLNA MediaServer."
     echo ""
 else
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configE_3[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   info "${BLUE}${text_configE_4[$LANG]}"
    start
 fi	
 }
