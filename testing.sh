@@ -20,7 +20,7 @@ version="SCPT_1.17_ALPHA"
 # SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices. (Deprecated migrated to SCPT_1.15)
 # SCPT_1.15: Added the new wrapper's version in the installer. (Deprecated migrated to SCPT_1.16)
 # SCPT_1.16: Improvement in the Licence checker of the AME. Ensuring that the Installer will only patching DSM 7.0.X and 7.1.X legit. (Deprecated migrated to SCPT_1.17)
-# SCPT_1.17: Added Multi-Language Support.
+# SCPT_1.17: Added Multi-Language Support. Aesthetic improvements in the logging of the Wrappers.
 
 ##############################################################
 
@@ -554,7 +554,9 @@ text_start_3=("Install the Simplest Wrapper for VideoStation and DLNA MediaServe
 text_start_4=("Uninstall the Simplest or the Advanced Wrappers for VideoStation and DLNA MediaServer." "Desinstalar el Wrapper más simple o el Advanced de Video Station y del DLNA MediaServer." "Desinstale o Simpler ou Advanced Wrapper do VideoStation e do DLNA MediaServer." "Désinstallez Simpler ou Advanced Wrapper de VideoStation et DLNA MediaServer." "Deinstallieren Sie Simpler oder Advanced Wrapper von VideoStation und DLNA MediaServer." "Disinstallare Simpler o Advanced Wrapper da VideoStation e DLNA MediaServer.")
 text_start_5=("Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA." "Cambia la configuración del Advanced Wrapper para cambiar los codecs de audio en VIDEO-STATION y DLNA." "Altere as configurações do Advanced Wrapper para alterar os codecs de áudio em VIDEO-STATION e DLNA." "Modifiez les paramètres Advanced Wrapper pour modifier les codecs audio dans VIDEO-STATION et DLNA." "Ändern Sie die erweiterten Wrapper-Einstellungen, um die Audio-Codecs in VIDEO-STATION und DLNA zu ändern." "Modificare le impostazioni di Advanced Wrapper per modificare i codec audio in VIDEO-STATION e DLNA.")
 text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en este Instalador." "Altere o IDIOMA neste Instalador." "Modifiez la LANGUE dans ce programme d'installation." "Ändern Sie die SPRACHE in diesem Installationsprogramm." "Cambia la LINGUA in questo programma di installazione.")
-
+text_start_7=("EXIT from this Installer." "SALIR de este Instalador." "SAIR deste instalador." "QUITTER ce programme d'installation." "BEENDEN Sie dieses Installationsprogramm." "ESCI da questo programma di installazione.")
+text_start_8=("Please, What option wish to use?" "Por favor, ¿Qué opción desea utilizar?" "Por favor, qual opção você quer usar?" "S'il vous plaît, quelle option voulez-vous utiliser ?" "Bitte, welche Option möchten Sie verwenden?" "Per favore, quale opzione vuoi usare?")
+text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | Z for Exit." "Por favor responda I o Instalar | S o Simple | U o Uninstall | C o Configuración | L o Lengua | Z para Salir." "Por favor, responda I ou Instalar | S ou Simples | U ou Uninstall | C ou Configuração | L ou Língua | Z para Sair." "Veuillez répondre I ou Installer | S ou Simple | U ou Uninstall | C ou Configuration | L ou Langue | Z pour quitter." "Bitte antworten Sie I oder Installieren Sie | S oder Simple | U oder Uninstall | C oder Config | L oder Language | Z zum Beenden." "Per favore rispondi I o Installa | S o Semplice | U o Uninstall | C o Configurazione | L o Lingua | Z per uscire.")
 
    echo ""   
    echo -e "${YELLOW}${text_start_1[$LANG]}"
@@ -565,10 +567,10 @@ text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en est
    echo -e "${BLUE} ( C ) ${text_start_5[$LANG]}"
    echo -e "${BLUE} ( L ) ${text_start_6[$LANG]}"
    echo ""
-   echo -e "${PURPLE} ( Z ) EXIT from this Installer."
+   echo -e "${PURPLE} ( Z ) ${text_start_7[$LANG]}"
         while true; do
 	echo -e "${GREEN}"
-        read -p "Please, What option wish to use? " isuclz
+        read -p "${text_start_8[$LANG]}" isuclz
         case $isuclz in
         [Ii]* ) install;;
         [Ss]* ) install_simple;;
@@ -576,21 +578,24 @@ text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en est
 	[Cc]* ) configurator;;
 	[Ll]* ) language;;
       	[Zz]* ) exit;;
-        * ) echo -e "${YELLOW}Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | Z for Exit.";;
+        * ) echo -e "${YELLOW}${text_start_9[$LANG]}";;
         esac
         done
 }
 
 function titulo() {
    clear
-echo -e "${BLUE}====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.===================="
-echo -e "${BLUE}====================This Wrapper Installer is only avalaible for DSM 7.0 and above only===================="
+text_titulo_1=("====================FFMPEG WRAPPER INSTALLER FOR DSM 7.0 and above by Dark Nebular.====================" "====================INSTALADOR DE WRAPPER FFMPEG PARA DSM 7.0 y superior de Dark Nebular.====================" "==================== INSTALADOR DO FFMPEG WRAPPER PARA DSM 7.0 e superior de Dark Nebular.======================" "==================== FFMPEG WRAPPER INSTALLER POUR DSM 7.0 et supérieur de Dark Nebular.====================" "==================== FFMPEG WRAPPER INSTALLER FÜR DSM 7.0 und höher von Dark Nebular.=====================" "==================== INSTALLER FFMPEG WRAPPER PER DSM 7.0 e versioni successive da Dark Nebular.=======================")
+text_titulo_2=("====================This Wrapper Installer is only avalaible for DSM 7.0 and above only====================" "====================Este Instalador de Wrapper sólo está disponible para DSM 7.0 y superiores====================" "====================Este Instalador do Wrapper está disponível apenas para DSM 7.0 e superior======================" "====================Ce Wrapper Installer est uniquement disponible pour DSM 7.0 et supérieur=====================" "====================Dieser Wrapper-Installer ist nur für DSM 7.0 und höher verfügbar=====================" "=====================Questo programma di installazione wrapper è disponibile solo per DSM 7.0 e versioni successive=====================")
+
+echo -e "${BLUE}${text_titulo_1[$LANG]}"
+echo -e "${BLUE}${text_titulo_2[$LANG]}"
 echo ""
 echo ""
 }
 
 function check_root() {
-# NO SE PUEDE TRADUCIR
+# NO SE TRADUCE
    if [[ $EUID -ne 0 ]]; then
   error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write ("${PURPLE}" sudo -i "${RED}") and try again with the Installer."
   exit 1
@@ -598,7 +603,7 @@ fi
 }
 
 function check_licence_AME() {
-# NO SE PUEDE TRADUCIR
+# NO SE TRADUCE
 if [[ ! -f /usr/syno/etc/codec/activation.conf ]]; then
 error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer."
 error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer." >> $logfile
@@ -607,7 +612,7 @@ fi
 }
 
 function check_versions() {
-# NO SE PUEDE TRADUCIR
+# NO SE TRADUCE
 
 if [[ "$dsm_version" == 7.0* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/bin
@@ -648,6 +653,11 @@ function language() {
  text_language_2=("RETURN to MAIN menu." "VOLVER al MENU Principal." "VOLTAR ao MENU Principal." "RETOUR au MENU Principal." "ZURÜCK zum Hauptmenü." "INDIETRO al menù principale.")
  text_language_3=("Do you wish to change the language in this Installer?" "¿Deseas cambiar el idioma en este Instalador?" "Deseja alterar o idioma deste Instalador?" "Voulez-vous changer la langue de ce programme d'installation ?" "Möchten Sie die Sprache in diesem Installationsprogramm ändern?" "Vuoi cambiare la lingua in questo programma di installazione?")
  text_language_4=("Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: A o B o C o D o E o F. Escribe Z (para volver al menú PRINCIPAL)." "Por favor responda com a opção correta escrevendo: A ou B ou C ou D ou E ou F. Escreva Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en écrivant : A ou B ou C ou D ou E ou F. Écrivez Z (pour retourner au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Schreibweise: A oder B oder C oder D oder E oder F. Schreiben Sie Z (für die Rückkehr zum HAUPTMENÜ)." "Rispondi con l'opzione corretta scrivendo: A o B o C o D o E o F. Scrivi Z (per tornare al menu PRINCIPALE).")
+ text_language_5=("==================== Configuration of the Language in this Installer ====================" "==================== Configuración del idioma en este instalador ====================" "==================== Configurando o idioma neste instalador =====================" "==================== Réglage de la langue dans ce programme d'installation ====================" "==================== Einstellen der Sprache in diesem Installationsprogramm ====================" "===================== Impostazione della lingua in questo programma di installazione ====================")	
+	echo ""
+        info "${BLUE}${text_language_5[$LANG]}"
+	info "${BLUE}==================== Configuration of the Language in this Installer ====================" >> $logfile
+	echo ""
 	echo ""
         echo -e "${BLUE} ( A ) English."
         echo -e "${BLUE} ( B ) Castellano." 
