@@ -268,12 +268,12 @@ fi
 }
 
 function config_C() {
-text_configC_1=("Changing the 5.1 audio codec from AAC to AC3 regardless of the order of its audio streams in VIDEO-STATION." "Cambiando el codec de audio 5.1 de AAC a AC3 independientemente del orden de sus flujos de audio en VIDEO-STATION." "Alterando o codec de áudio 5.1 de AAC para AC3, independentemente da ordem de seus fluxos de áudio em VIDEO-STATION." "Changement du codec audio 5.1 de AAC à AC3 quel que soit l'ordre de ses flux audio dans VIDEO-STATION." "Ändern des 5.1-Audiocodecs von AAC auf AC3, unabhängig von der Reihenfolge seiner Audiostreams in VIDEO-STATION." "Modifica del codec audio 5.1 da AAC ad AC3 indipendentemente dall'ordine dei suoi flussi audio in VIDEO-STATION.")
+text_configC_1=("Changing the 5.1 audio codec from AAC 512kbps to AC3 640kbps regardless of the order of its audio streams in VIDEO-STATION." "Cambiando el codec de audio 5.1 de AAC 512kbps a AC3 640kbps independientemente del orden de sus flujos de audio en VIDEO-STATION." "Alterando o codec de áudio 5.1 de AAC 512kbps para AC3 640kbps, independentemente da ordem de seus fluxos de áudio em VIDEO-STATION." "Changement du codec audio 5.1 de AAC 512kbps à AC3 640kbps quel que soit l'ordre de ses flux audio dans VIDEO-STATION." "Ändern des 5.1-Audiocodecs von AAC 512kbps auf AC3 640kbps, unabhängig von der Reihenfolge seiner Audiostreams in VIDEO-STATION." "Modifica del codec audio 5.1 da AAC 512kbps ad AC3 640kbps indipendentemente dall'ordine dei suoi flussi audio in VIDEO-STATION.")
 text_configC_2=("Sucesfully changed the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION." "Cambiado correctamente el codec de audio 5.1 de AAC 512kbps a AC3 640kbps en VIDEO-STATION." "Mudou com sucesso o codec de áudio 5.1 de AAC 512kbps para AC3 640kbps no VIDEO-STATION." "Changement réussi du codec audio 5.1 de AAC 512kbps à AC3 640kbps sur VIDEO-STATION." "Der 5.1-Audio-Codec wurde erfolgreich von AAC 512 kbps auf AC3 640 kbps auf VIDEO-STATION geändert." "Modificato con successo il codec audio 5.1 da AAC 512kbps a AC3 640kbps su VIDEO-STATION.")
 text_configC_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
 text_configC_4=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
-text_configC_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's strMP3 2.0 256kbpseams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
-text_configC_6=("Changing the 5.1 audio codec from AAC to AC3 regardless of the order of its audio streams in VIDEO-STATION and DLNA MediaServer." "Cambiando el codec de audio 5.1 de AAC a AC3 independientemente del orden de sus flujos de audio en VIDEO-STATION y en DLNA MediaServer." "Alterando o codec de áudio 5.1 de AAC para AC3, independentemente da ordem de seus fluxos de áudio no VIDEO-STATION e no DLNA MediaServer." "Changer le codec audio 5.1 de AAC à AC3 quel que soit l'ordre de leurs flux audio sur la VIDEO-STATION et sur le DLNA MediaServer." "Ändern des 5.1-Audiocodecs von AAC auf AC3, unabhängig von der Reihenfolge ihrer Audiostreams auf der VIDEO-STATION und auf dem DLNA-MediaServer." "Modifica del codec audio 5.1 da AAC ad AC3 indipendentemente dall'ordine dei flussi audio sulla VIDEO-STATION e sul DLNA MediaServer.")
+text_configC_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+text_configC_6=("Changing the 5.1 audio codec from AAC 512kbps to AC3 640kbps regardless of the order of its audio streams in VIDEO-STATION and DLNA MediaServer." "Cambiando el codec de audio 5.1 de AAC 512kbps a AC3 640kbps independientemente del orden de sus flujos de audio en VIDEO-STATION y en DLNA MediaServer." "Alterando o codec de áudio 5.1 de AAC 512kbps para AC3 640kbps, independentemente da ordem de seus fluxos de áudio no VIDEO-STATION e no DLNA MediaServer." "Changer le codec audio 5.1 de AAC 512kbps à AC3 640kbps quel que soit l'ordre de leurs flux audio sur la VIDEO-STATION et sur le DLNA MediaServer." "Ändern des 5.1-Audiocodecs von AAC 512kbps auf AC3 640kbps, unabhängig von der Reihenfolge ihrer Audiostreams auf der VIDEO-STATION und auf dem DLNA-MediaServer." "Modifica del codec audio 5.1 da AAC 512kbps ad AC3 640kbps indipendentemente dall'ordine dei flussi audio sulla VIDEO-STATION e sul DLNA MediaServer.")
 text_configC_7=("Sucesfully changed the 5.1 audio's codec from AAC 512kbps to AC3 640kbps in VIDEO-STATION and DLNA MediaServer." "Cambiado correctamente el codec de audio 5.1 de AAC 512kbps a AC3 640kbps en VIDEO-STATION y en DLNA MediaServer." "Alterou com sucesso o codec de áudio 5.1 de AAC 512kbps para AC3 640kbps em VIDEO-STATION e DLNA MediaServer." "Changement réussi du codec audio 5.1 de AAC 512kbps à AC3 640kbps sur VIDEO-STATION et DLNA MediaServer." "Der 5.1-Audio-Codec wurde erfolgreich von AAC 512 kbps auf AC3 640 kbps auf VIDEO-STATION und DLNA MediaServer geändert." "Modificato con successo il codec audio 5.1 da AAC 512kbps a AC3 640kbps su VIDEO-STATION e DLNA MediaServer.")    
 
 if [[ "$check_amrif" == "$firma2" ]]; then 
@@ -402,38 +402,53 @@ fi
 }
 
 function config_F() {
+text_configF_1=("Changing the 5.1 audio codec from AC3 640kbps to AAC 512kbps regardless of the order of its audio streams in VIDEO-STATION." "Cambiando el codec de audio 5.1 de AC3 640kbps a AAC 512kbps independientemente del orden de sus flujos de audio en VIDEO-STATION." "Alterando o codec de áudio 5.1 de AC3 640kbps para AAC 512kbps, independentemente da ordem de seus fluxos de áudio em VIDEO-STATION." "Changement du codec audio 5.1 de AC3 640kbps à AAC 512kbps quel que soit l'ordre de ses flux audio dans VIDEO-STATION." "Ändern des 5.1-Audiocodecs von AC3 640kbps auf AAC 512kbps, unabhängig von der Reihenfolge seiner Audiostreams in VIDEO-STATION." "Modifica del codec audio 5.1 da AC3 640kbps ad AAC 512kbps indipendentemente dall'ordine dei suoi flussi audio in VIDEO-STATION.")
+text_configF_2=("Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION." "Cambiado correctamente el codec de audio 5.1 de AC3 640kbps a AAC 512kbps en VIDEO-STATION." "Mudou com sucesso o codec de áudio 5.1 de AC3 640kbps para AAC 512kbps no VIDEO-STATION." "Changement réussi du codec audio 5.1 de AC3 640kbps à AAC 512kbps sur VIDEO-STATION." "Der 5.1-Audio-Codec wurde erfolgreich von AC3 640 kbps auf AAC 512 kbps auf VIDEO-STATION geändert." "Modificato con successo il codec audio 5.1 da AC3 640kbps a AAC 512kbps su VIDEO-STATION.")
+text_configF_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
+text_configF_4=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configF_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+text_configF_6=("Changing the 5.1 audio codec from AC3 640kbps to AAC 512kbps regardless of the order of its audio streams in VIDEO-STATION and DLNA MediaServer." "Cambiando el codec de audio 5.1 de AC3 640kbps a AAC 512kbps independientemente del orden de sus flujos de audio en VIDEO-STATION y en DLNA MediaServer." "Alterando o codec de áudio 5.1 de AC3 640kbps para AAC 512kbps, independentemente da ordem de seus fluxos de áudio no VIDEO-STATION e no DLNA MediaServer." "Changer le codec audio 5.1 de AC3 640kbps à AAC 512kbps quel que soit l'ordre de leurs flux audio sur la VIDEO-STATION et sur le DLNA MediaServer." "Ändern des 5.1-Audiocodecs von AC3 640kbps auf AAC 512kbps, unabhängig von der Reihenfolge ihrer Audiostreams auf der VIDEO-STATION und auf dem DLNA-MediaServer." "Modifica del codec audio 5.1 da AC3 640kbps ad AAC 512kbps indipendentemente dall'ordine dei flussi audio sulla VIDEO-STATION e sul DLNA MediaServer.")
+text_configF_7=("Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer." "Cambiado correctamente el codec de audio 5.1 de AC3 640kbps a AAC 512kbps en VIDEO-STATION y en DLNA MediaServer." "Alterou com sucesso o codec de áudio 5.1 de AC3 640kbps para AAC 512kbps em VIDEO-STATION e DLNA MediaServer." "Changement réussi du codec audio 5.1 de AC3 640kbps à AAC 512kbps sur VIDEO-STATION et DLNA MediaServer." "Der 5.1-Audio-Codec wurde erfolgreich von AC3 640 kbps auf AAC 512 kbps auf VIDEO-STATION und DLNA MediaServer geändert." "Modificato con successo il codec audio 5.1 da AC3 640kbps a AAC 512kbps su VIDEO-STATION e DLNA MediaServer.")    
+
+
 if [[ "$check_amrif" == "$firma2" ]]; then 
-info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION."
+info "${YELLOW}${text_configF_1[$LANG]}"
 info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION." >> $logfile
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION."
+    info "${GREEN}${text_configF_2[$LANG]}"
     echo ""
-    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+    info "${BLUE}${text_configF_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
     exit 1  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-    info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer."
+    info "${YELLOW}${text_configF_6[$LANG]}"
     info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in VIDEO-STATION and DLNA MediaServer." >> $logfile
     sed -i 's/"ac3"/"libfdk_aac"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/"640k"/"512k"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in VIDEO-STATION and DLNA MediaServer."
+    info "${GREEN}${text_configF_7[$LANG]}"
     echo ""
  else
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configF_4[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   info "${BLUE}${text_configF_5[$LANG]}"
    start
 fi  
 }
 
 function config_G() {
+text_configG_1=("Changing to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." "Cambiando para usar un único flujo de audio en VIDEO-STATION (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." "Mudar para usar um único fluxo de áudio em VIDEO-STATION (o primeiro fluxo selecionado antes) para economizar recursos do sistema em dispositivos menos potentes." "Commutation pour utiliser un seul flux audio dans VIDEO-STATION (le premier flux sélectionné auparavant) pour économiser les ressources système sur les appareils moins puissants." "Umschalten auf die Verwendung eines einzelnen Audiostreams in VIDEO-STATION (der erste Stream, der zuvor ausgewählt wurde), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." "Passaggio all'utilizzo di un unico flusso audio in VIDEO-STATION (il primo flusso selezionato in precedenza) per risparmiare risorse di sistema su dispositivi meno potenti.")
+text_configG_2=("Sucesfully changed to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." "Cambiado correctamente para usar un único flujo de audio en VIDEO-STATION (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." "Corretamente alterado para usar um único fluxo de áudio no VIDEO-STATION (o primeiro fluxo selecionado antes) para economizar recursos do sistema em dispositivos menos potentes." "Correctement changé pour utiliser un seul flux audio sur VIDEO-STATION (le premier flux sélectionné auparavant) pour économiser les ressources système sur les appareils moins puissants." "Korrekterweise geändert, um einen einzelnen Audiostream auf VIDEO-STATION (der erste zuvor ausgewählte Stream) zu verwenden, um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." "Modificato correttamente per utilizzare un unico flusso audio su VIDEO-STATION (il primo flusso selezionato prima) per risparmiare risorse di sistema su dispositivi meno potenti.")
+text_configG_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
+text_configG_4=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configG_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+
 if [[ "$check_amrif" == "$firma2" ]]; then 
-info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}${text_configG_1[$LANG]}"
 info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
     sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     
@@ -451,15 +466,15 @@ info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (t
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+    info "${GREEN}${text_configG_2[$LANG]}"
     echo ""
-    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+    info "${BLUE}${text_configG_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
     exit 1  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
-info "${YELLOW}Changing to use only an unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+info "${YELLOW}${text_configG_1[$LANG]}"
 info "${YELLOW}Changing to use only an unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." >> $logfile
     sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     
@@ -477,19 +492,19 @@ info "${YELLOW}Changing to use only an unique Audio's Stream in VIDEO-STATION (t
     sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}Sucesfully changed to use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+    info "${GREEN}${text_configG_2[$LANG]}"
     echo ""
  else
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configG_4[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
+   info "${BLUE}${text_configG_5[$LANG]}"
    start
 fi  
 }
 
 function config_H() {
 if [[ "$check_amrif" == "$firma2" ]]; then 
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configG_4[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." >> $logfile
    info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams."
    start
