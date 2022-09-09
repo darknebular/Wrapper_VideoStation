@@ -154,7 +154,7 @@ function config_A() {
     sed -i 's/args2vs+=("-b:a" "256k")/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}${text_configA_2[$LANG]}"
     echo ""
-     info "${BLUE}${text_configA_3[$LANG]}"
+     echo -e "${BLUE}${text_configA_3[$LANG]}"
      info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
      exit 1   
     fi
@@ -228,7 +228,7 @@ info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps
     sed -i 's/args2vs+=("-b:a" "256k")/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}${text_configB_2[$LANG]}"
     echo ""
-    info "${BLUE}${text_configB_3[$LANG]}"
+    echo -e "${BLUE}${text_configB_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
     exit 1   
 fi
@@ -284,7 +284,7 @@ info "${YELLOW}Changing the 5.1 audio codec from AAC to AC3 regardless of the or
     sed -i 's/"6"/""/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}${text_configC_2[$LANG]}"
     echo ""
-    info "${BLUE}${text_configC_3[$LANG]}"
+    echo -e "${BLUE}${text_configC_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
     exit 1  
 fi
@@ -419,7 +419,7 @@ info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in
     sed -i 's/""/"6"/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}${text_configF_2[$LANG]}"
     echo ""
-    info "${BLUE}${text_configF_3[$LANG]}"
+    echo -e "${BLUE}${text_configF_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
     exit 1  
 fi
@@ -468,7 +468,7 @@ info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (t
     sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     info "${GREEN}${text_configG_2[$LANG]}"
     echo ""
-    info "${BLUE}${text_configG_3[$LANG]}"
+    echo -e "${BLUE}${text_configG_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
     exit 1  
 fi
@@ -505,16 +505,15 @@ fi
 function config_H() {
 text_configH_1=("Changing to use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." "Cambiando para usar un único flujo de audio en DLNA MediaServer (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." "Mudar para usar um único fluxo de áudio em DLNA MediaServer (o primeiro fluxo selecionado antes) para economizar recursos do sistema em dispositivos menos potentes." "Commutation pour utiliser un seul flux audio dans DLNA MediaServer (le premier flux sélectionné auparavant) pour économiser les ressources système sur les appareils moins puissants." "Umschalten auf die Verwendung eines einzelnen Audiostreams in DLNA MediaServer (der erste Stream, der zuvor ausgewählt wurde), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." "Passaggio all'utilizzo di un unico flusso audio in DLNA MediaServer (il primo flusso selezionato in precedenza) per risparmiare risorse di sistema su dispositivi meno potenti.")
 text_configH_2=("Sucesfully changed to use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." "Cambiado correctamente para usar un único flujo de audio en DLNA MediaServer (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." "Corretamente alterado para usar um único fluxo de áudio no DLNA MediaServer (o primeiro fluxo selecionado antes) para economizar recursos do sistema em dispositivos menos potentes." "Correctement changé pour utiliser un seul flux audio sur DLNA MediaServer (le premier flux sélectionné auparavant) pour économiser les ressources système sur les appareils moins puissants." "Korrekterweise geändert, um einen einzelnen Audiostream auf DLNA MediaServer (der erste zuvor ausgewählte Stream) zu verwenden, um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." "Modificato correttamente per utilizzare un unico flusso audio su DLNA MediaServer (il primo flusso selezionato prima) per risparmiare risorse di sistema su dispositivi meno potenti.")
-text_configH_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
-text_configH_4=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
-text_configH_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
-text_configH_6=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO en DLNA MediaServer y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O ADVANCED WRAPPER INSTALADO no DLNA MediaServer e este Codec Configurator NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS ADVANCED WRAPPER INSTALLÉ sur DLNA MediaServer et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit KEINEN ADVANCED WRAPPER auf dem DLNA MediaServer INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI WRAPPER AVANZATO INSTALLATO su DLNA MediaServer e questo configuratore di codec NON PUÒ modificare nulla.")    
+text_configH_3=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configH_4=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+text_configH_5=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO en DLNA MediaServer y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O ADVANCED WRAPPER INSTALADO no DLNA MediaServer e este Codec Configurator NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS ADVANCED WRAPPER INSTALLÉ sur DLNA MediaServer et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit KEINEN ADVANCED WRAPPER auf dem DLNA MediaServer INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI WRAPPER AVANZATO INSTALLATO su DLNA MediaServer e questo configuratore di codec NON PUÒ modificare nulla.")    
 
 
 if [[ "$check_amrif" == "$firma2" ]]; then 
-   info "${RED}${text_configH_6[$LANG]}"
+   info "${RED}${text_configH_5[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}${text_configH_5[$LANG]}"
+   info "${BLUE}${text_configH_4[$LANG]}"
    start
 fi
 
@@ -540,9 +539,9 @@ info "${YELLOW}Changing to use only an Unique Audio's Stream in DLNA MediaServer
     info "${GREEN}${text_configH_6[$LANG]}"
     echo ""
  else
-   info "${RED}${text_configH_4[$LANG]}"
+   info "${RED}${text_configH_3[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}${text_configH_5[$LANG]}"
+   info "${BLUE}${text_configH_4[$LANG]}"
    start
 fi  
 }
@@ -551,7 +550,7 @@ function start() {
 text_start_1=("THIS IS THE MAIN MENU, PLEASE CHOOSE YOUR SELECTION:" "ESTE ES EL MENÚ PRINCIPAL, POR FAVOR ESCOGE TU SELECCIÓN:" "ESTE É O MENU PRINCIPAL, POR FAVOR, ESCOLHA SUA SELEÇÃO:" "CECI EST LE MENU PRINCIPAL, VEUILLEZ CHOISIR VOTRE SÉLECTION:" "DAS IST DAS HAUPTMENÜ, BITTE WÄHLEN SIE IHRE AUSWAHL:" "QUESTO È IL MENU PRINCIPALE, SCEGLI LA TUA SELEZIONE:")
 text_start_2=("Install the Advanced Wrapper for VideoStation and DLNA MediaServer (If exist). (With 5.1 and 2.0 support, configurable)" "Instalar el Advanced Wrapper para VideoStation y DLNA MediaServer (si existe). (Con soporte 5.1 y 2.0, configurable)" "Instale o Advanced Wrapper for VideoStation e DLNA MediaServer (se houver). (Com suporte 5.1 e 2.0, configurável)" "Installez le Advanced Wrapper pour VideoStation et DLNA MediaServer (le cas échéant). (Avec prise en charge 5.1 et 2.0, configurable)" "Installieren Sie den Advanced Wrapper for VideoStation und DLNA MediaServer (falls vorhanden). (Mit 5.1 und 2.0 Unterstützung, konfigurierbar)" "Installare il Advanced Wrapper per VideoStation e DLNA MediaServer (se presente). (Con supporto 5.1 e 2.0, configurabile)")
 text_start_3=("Install the Simplest Wrapper for VideoStation and DLNA MediaServer (If exist). (Only 2.0 support, NOT configurable)" "Instalar el Wrapper más simple para VideoStation y DLNA MediaServer (si existe). (Con soporte 2.0 solamente, NO configurable)" "Instale o Wrapper mais simples para VideoStation e DLNA MediaServer (se houver). (Somente com suporte 2.0, NÃO configurável)" "Installez le wrapper le plus simple pour VideoStation et DLNA MediaServer (le cas échéant). (Avec prise en charge 2.0 uniquement, NON configurable)" "Installieren Sie den einfachsten Wrapper für VideoStation und DLNA MediaServer (falls vorhanden). (Nur mit 2.0-Unterstützung, NICHT konfigurierbar)" "Installare il wrapper più semplice per VideoStation e DLNA MediaServer (se presente). (Solo con supporto 2.0, NON configurabile)")
-text_start_4=("Uninstall the Simplest or the Advanced Wrappers for VideoStation and DLNA MediaServer." "Desinstalar el Wrapper más simple o el Advanced de Video Station y del DLNA MediaServer." "Desinstale o Simpler ou Advanced Wrapper do VideoStation e do DLNA MediaServer." "Désinstallez Simpler ou Advanced Wrapper de VideoStation et DLNA MediaServer." "Deinstallieren Sie Simpler oder Advanced Wrapper von VideoStation und DLNA MediaServer." "Disinstallare Simpler o Advanced Wrapper da VideoStation e DLNA MediaServer.")
+text_start_4=("Uninstall the Simplest or the Advanced Wrappers for VideoStation and DLNA MediaServer." "Desinstalar el Wrapper más simple o el Advanced de VideoStation y del DLNA MediaServer." "Desinstale o Simpler ou Advanced Wrapper do VideoStation e do DLNA MediaServer." "Désinstallez Simpler ou Advanced Wrapper de VideoStation et DLNA MediaServer." "Deinstallieren Sie Simpler oder Advanced Wrapper von VideoStation und DLNA MediaServer." "Disinstallare Simpler o Advanced Wrapper da VideoStation e DLNA MediaServer.")
 text_start_5=("Change the config of the Advanced Wrapper for change the audio's codecs in VIDEO-STATION and DLNA." "Cambia la configuración del Advanced Wrapper para cambiar los codecs de audio en VIDEO-STATION y DLNA." "Altere as configurações do Advanced Wrapper para alterar os codecs de áudio em VIDEO-STATION e DLNA." "Modifiez les paramètres Advanced Wrapper pour modifier les codecs audio dans VIDEO-STATION et DLNA." "Ändern Sie die erweiterten Wrapper-Einstellungen, um die Audio-Codecs in VIDEO-STATION und DLNA zu ändern." "Modificare le impostazioni di Advanced Wrapper per modificare i codec audio in VIDEO-STATION e DLNA.")
 text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en este Instalador." "Altere o IDIOMA neste Instalador." "Modifiez la LANGUE dans ce programme d'installation." "Ändern Sie die SPRACHE in diesem Installationsprogramm." "Cambia la LINGUA in questo programma di installazione.")
 text_start_7=("EXIT from this Installer." "SALIR de este Instalador." "SAIR deste instalador." "QUITTER ce programme d'installation." "BEENDEN Sie dieses Installationsprogramm." "ESCI da questo programma di installazione.")
@@ -655,7 +654,7 @@ function language() {
  text_language_4=("Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: A o B o C o D o E o F. Escribe Z (para volver al menú PRINCIPAL)." "Por favor responda com a opção correta escrevendo: A ou B ou C ou D ou E ou F. Escreva Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en écrivant : A ou B ou C ou D ou E ou F. Écrivez Z (pour retourner au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Schreibweise: A oder B oder C oder D oder E oder F. Schreiben Sie Z (für die Rückkehr zum HAUPTMENÜ)." "Rispondi con l'opzione corretta scrivendo: A o B o C o D o E o F. Scrivi Z (per tornare al menu PRINCIPALE).")
  text_language_5=("==================== Configuration of the Language in this Installer ====================" "==================== Configuración del idioma en este instalador ====================" "==================== Configurando o idioma neste instalador =====================" "==================== Réglage de la langue dans ce programme d'installation ====================" "==================== Einstellen der Sprache in diesem Installationsprogramm ====================" "===================== Impostazione della lingua in questo programma di installazione ====================")	
 	echo ""
-        info "${BLUE}${text_language_5[$LANG]}"
+        echo -e "${BLUE}${text_language_5[$LANG]}"
 	info "${BLUE}==================== Configuration of the Language in this Installer ====================" >> $logfile
 	echo ""
 	echo ""
@@ -756,14 +755,19 @@ start
 ################################
 
 function install() {
+  text_install_1=("==================== Installation of the Advanced Wrapper: START ====================" "==================== Instalación del Advanced Wrapper: INICIO ====================" "==================== Instalando o Wrapper Avançado: START =====================" "==================== Installation de l'encapsuleur avancé : DÉMARRER ====================" "==================== Installation des Advanced Wrappers: START ====================" "===================== Installazione del wrapper avanzato: START ====================")
+  text_install_2=("You are running DSM $dsm_version" "Estás ejecutando DSM $dsm_version" "Você está executando o DSM $dsm_version" "Vous utilisez DSM $dsm_version" "Sie führen DSM $dsm_version aus" "Stai eseguendo DSM $dsm_version")
+  text_install_3=("DSM $dsm_version is supported for this installer and the installer will tuned for your DSM" "DSM $dsm_version es compatible con este instalador y el instalador se ajustará a su DSM" "O DSM $dsm_version é compatível com este instalador e o instalador corresponderá ao seu DSM" "DSM $dsm_version est compatible avec ce programme d'installation et le programme d'installation correspondra à votre DSM" "DSM $dsm_version ist mit diesem Installationsprogramm kompatibel und das Installationsprogramm passt zu Ihrem DSM" "DSM $dsm_version è compatibile con questo programma di installazione e il programma di installazione corrisponderà al tuo DSM")
+  text_install_4=("DSM $dsm_version is using this path: $cp_bin_path" "DSM $dsm_version está utilizando esta ruta: $cp_bin_path" "O DSM $dsm_version está usando este caminho: $cp_bin_path" "DSM $dsm_version utilise ce chemin : $cp_bin_path" "DSM $dsm_version verwendet diesen Pfad: $cp_bin_path" "DSM $dsm_version utilizza questo percorso: $cp_bin_path")
+  text_install_5=("DSM $dsm_version is using this injector: $injector" "DSM $dsm_version está utilizando este inyector: $injector" "O DSM $dsm_version está usando este injetor: $injector" "DSM $dsm_version utilise cet injecteur : $injector" "DSM $dsm_version verwendet diesen Injektor: $injector" "DSM $dsm_version utilizza questo iniettore: $injector")
   
-  info "${BLUE}==================== Installation of the Advanced Wrapper: START ===================="
+  info "${BLUE}${text_install_1[$LANG]}"
   info "${BLUE}==================== Installation of the Advanced Wrapper: START ====================" >> $logfile
   echo ""
-   info "${BLUE}You are running DSM $dsm_version"
-   info "${BLUE}DSM $dsm_version is supported for this installer and the installer will tuned for your DSM"
-   info "${BLUE}DSM $dsm_version is using this path: $cp_bin_path"
-   info "${BLUE}DSM $dsm_version is using this injector: $injector"
+   info "${BLUE}${text_install_2[$LANG]}"
+   info "${BLUE}${text_install_3[$LANG]}"
+   info "${BLUE}${text_install_4[$LANG]}"
+   info "${BLUE}${text_install_5[$LANG]}"
 
 for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
@@ -1042,7 +1046,7 @@ clear
 if [[ "$check_amrif" == "$firma2" ]]; then 
 
         echo ""
-        info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
+        echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
 	echo ""
         echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
         echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
@@ -1079,7 +1083,7 @@ if [[ "$check_amrif" == "$firma2" ]]; then
         esac
         done
    
-   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+   echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
    exit 1
 fi
@@ -1139,14 +1143,20 @@ fi
 }
 
 function install_simple() {
+  text_installsim_1=("==================== Installation of the Simplest Wrapper: START ====================" "==================== Instalación del Wrapper más Simple: INICIO ====================" "==================== Instalando o wrapper mais simples: HOME =====================" "==================== Installation de l'encapsuleur le plus simple : ACCUEIL ====================" "==================== Installation des einfachsten Wrappers: HOME ====================" "===================== Installazione del wrapper più semplice: HOME ====================")
+  text_installsim_2=("You are running DSM $dsm_version" "Estás ejecutando DSM $dsm_version" "Você está executando o DSM $dsm_version" "Vous utilisez DSM $dsm_version" "Sie führen DSM $dsm_version aus" "Stai eseguendo DSM $dsm_version")
+  text_installsim_3=("DSM $dsm_version is supported for this installer and the installer will tuned for your DSM" "DSM $dsm_version es compatible con este instalador y el instalador se ajustará a su DSM" "O DSM $dsm_version é compatível com este instalador e o instalador corresponderá ao seu DSM" "DSM $dsm_version est compatible avec ce programme d'installation et le programme d'installation correspondra à votre DSM" "DSM $dsm_version ist mit diesem Installationsprogramm kompatibel und das Installationsprogramm passt zu Ihrem DSM" "DSM $dsm_version è compatibile con questo programma di installazione e il programma di installazione corrisponderà al tuo DSM")
+  text_installsim_4=("DSM $dsm_version is using this path: $cp_bin_path" "DSM $dsm_version está utilizando esta ruta: $cp_bin_path" "O DSM $dsm_version está usando este caminho: $cp_bin_path" "DSM $dsm_version utilise ce chemin : $cp_bin_path" "DSM $dsm_version verwendet diesen Pfad: $cp_bin_path" "DSM $dsm_version utilizza questo percorso: $cp_bin_path")
+  text_installsim_5=("DSM $dsm_version is using this injector: Simple" "DSM $dsm_version está utilizando este inyector: Simple" "O DSM $dsm_version está usando este injetor: Simple" "DSM $dsm_version utilise cet injecteur : Simple" "DSM $dsm_version verwendet diesen Injektor: Simple" "DSM $dsm_version utilizza questo iniettore: Simple")
   
-  info "${BLUE}==================== Installation of the Simplest Wrapper: START ===================="
+  
+  info "${BLUE}${text_installsim_1[$LANG]}"
   info "${BLUE}==================== Installation of the Simplest Wrapper: START ====================" >> $logfile
   echo ""
-   info "${BLUE}You are running DSM $dsm_version"
-   info "${BLUE}DSM $dsm_version is supported for this installer and the installer will tuned for your DSM"
-   info "${BLUE}DSM $dsm_version is using this path: $cp_bin_path"
-   info "${BLUE}DSM $dsm_version is using this injector: Simple"
+   info "${BLUE}${text_installsim_2[$LANG]}"
+   info "${BLUE}${text_installsim_3[$LANG]}"
+   info "${BLUE}${text_installsim_4[$LANG]}"
+   info "${BLUE}${text_installsim_5[$LANG]}"
    
 for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
