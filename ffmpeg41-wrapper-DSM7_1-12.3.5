@@ -16,9 +16,10 @@ rev="AME_12.3.5"
 # AME_12.3.4: Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.3.5)
 # AME_12.3.5: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station.
 
+WHITE="\u001B[37m"
 
 _log(){
-        echo "$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/wrapper_ffmpeg.log
+        echo -e "${WHITE}$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} - $1" >> /tmp/wrapper_ffmpeg.log
 }
 
 _log_para(){
