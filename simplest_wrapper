@@ -11,7 +11,7 @@ rev="AME_S_1.0"
 ##################################################
 # VARIABLES
 
-
+WHITE="\u001B[37m"
 pid=$$
 stderrfile="/tmp/ffmpeg-$pid.stderr"
 logfile="/tmp/wrapper_ffmpeg.log"
@@ -20,7 +20,7 @@ logfile="/tmp/wrapper_ffmpeg.log"
 # FUNCIONES
 
 function log() {
-  echo "[$(date '+%Y-%m-%d %H:%M:%S')] [$1] $2" >> $logfile
+  echo -e "${WHITE}[$(date '+%Y-%m-%d %H:%M:%S')] [$1] $2" >> $logfile
 }
 function newline() {
   echo "" >> $logfile
