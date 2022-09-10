@@ -766,12 +766,12 @@ function install_advanced() {
 ################################
 
 function install() {
-if [[ "$mode" == Simplest ]]
+if [[ "$mode" == Simplest ]]; then
 text_install_1=("==================== Installation of the Simplest Wrapper: START ====================" "==================== Instalación del Wrapper más Simple: INICIO ====================" "==================== Instalando o wrapper mais simples: START =====================" "==================== Installation de l'encapsuleur le plus simple : DÉMARRER ====================" "==================== Installation des einfachsten Wrappers: START ====================" "===================== Installazione del wrapper più semplice: START ====================")
 info "${BLUE}==================== Installation of the Simplest Wrapper: START ====================" >> $logfile
 fi
 
-if [[ "$mode" == "Advanced" ]]
+if [[ "$mode" == "Advanced" ]]; then
 text_install_1=("==================== Installation of the Advanced Wrapper: START ====================" "==================== Instalación del Advanced Wrapper: INICIO ====================" "==================== Instalando o Wrapper Avançado: START =====================" "==================== Installation de l'encapsuleur avancé : DÉMARRER ====================" "==================== Installation des Advanced Wrappers: START ====================" "===================== Installazione del wrapper avanzato: START ====================")
 info "${BLUE}==================== Installation of the Advanced Wrapper: START ====================" >> $logfile
 fi
@@ -838,10 +838,10 @@ else
 	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
 	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
 	
-	if [[ "$mode" == "Simplest" ]]
+	if [[ "$mode" == "Simplest" ]]; then
 	info "${GREEN}Installed correctly the Simplest Wrapper in Video Station."
 	fi
-	if [[ "$mode" == "Advanced" ]]
+	if [[ "$mode" == "Advanced" ]]; then
 	info "${GREEN}Installed correctly the Advanced Wrapper in VideoStation."
 	fi
 	
@@ -870,10 +870,10 @@ if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
 		info "${GREEN}Modified correctly the file $ms_libsynovte_file"
 		
-		if [[ "$mode" == "Simplest" ]]
+		if [[ "$mode" == "Simplest" ]]; then
 		info "${GREEN}Installed correctly the Simplest Wrapper in Media Server."
 		fi
-		if [[ "$mode" == "Advanced" ]]
+		if [[ "$mode" == "Advanced" ]]; then
 		info "${GREEN}Installed correctly the Advanced Wrapper in Media Server."
 		fi
 		
@@ -883,13 +883,13 @@ fi
 	
 restart_packages
 
-if [[ "$mode" == "Simplest" ]]
+if [[ "$mode" == "Simplest" ]]; then
 info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ===================="
 info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ====================" >> $logfile
 echo ""
 fi
 
-if [[ "$mode" == "Advanced" ]]
+if [[ "$mode" == "Advanced" ]]; then
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ===================="
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ====================" >> $logfile
 echo ""   
@@ -957,13 +957,13 @@ function uninstall_old() {
   echo ""
   echo ""
   
-if [[ "$mode" == "Simplest" ]]
+if [[ "$mode" == "Simplest" ]]; then
   info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...===================="
   info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...====================" >> $logfile
   echo ""
 fi
 
-if [[ "$mode" == "Advanced" ]]
+if [[ "$mode" == "Advanced" ]]; then
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...===================="
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...====================" >> $logfile
   echo "" 
