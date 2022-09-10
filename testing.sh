@@ -942,6 +942,9 @@ function uninstall_old() {
   text_uninstallold_6=("Restoring MediaServer's $filename" "Restaurando el $filename de MediaServer" "Restaurando o MediaServer $filename" "Restauration de la MediaServer $filename" "Wiederherstellen der MediaServer $filename" "Ripristino di MediaServer $filename")
   text_uninstallold_7=("Restoring VideoStation's $filename" "Restaurando el $filename de VideoStation" "Restaurando o VideoStation $filename" "Restauration de la VideoStation $filename" "Wiederherstellen der VideoStation $filename" "Ripristino di VideoStation $filename")
   text_uninstallold_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
+  text_uninstallold_9=("Delete old log file ffmpeg." "Borrado del viejo archivo de logs llamado ffmpeg." "Exclua o arquivo de log antigo chamado ffmpeg." "Supprimez l'ancien fichier journal appelé ffmpeg." "Löschen Sie die alte Protokolldatei namens ffmpeg." "Elimina il vecchio file di registro chiamato ffmpeg.")
+  text_uninstallold_10=("Uninstalled correctly the old Wrapper." "Desinstalado correctamente el viejo Wrapper." "Desinstalado com sucesso o Wrapper antigo." "Désinstallation réussie de l'ancien Wrapper." "Den alten Wrapper erfolgreich deinstalliert." "Disinstallato con successo il vecchio Wrapper.")
+  text_uninstallold_11=("==================== Uninstallation of OLD wrappers in the system: COMPLETE ====================" "==================== Desinstalación de VIEJOS wrappers en el sistema: COMPLETADO ====================" "==================== Desinstalando OLD wrappers no sistema: COMPLETO ======================" "==================== Désinstallation des anciens wrappers sur le système : COMPLET =====================" "==================== ALTE Wrapper auf dem System deinstallieren: VOLLSTÄNDIG =====================" "===================== Disinstallazione dei VECCHI wrapper sul sistema: COMPLETO =====================")
   
   
   info "${BLUE}${text_uninstallold_1[$LANG]}"
@@ -988,27 +991,29 @@ function uninstall_old() {
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
 
-   info "${YELLOW}Delete old log file ffmpeg."
+   info "${YELLOW}${text_uninstallold_9[$LANG]}"
    info "${YELLOW}Delete old log file ffmpeg." >> $logfile
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
      
-  info "${GREEN}Uninstalled correctly the old Wrapper"
+  info "${GREEN}${text_uninstallold_10[$LANG]}"
   echo ""
-  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
+  info "${BLUE}${text_uninstallold_11[$LANG]}"
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ====================" >> $logfile
   echo ""
   echo ""
   
 if [[ "$mode" == "Simplest" ]]; then
-  info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...===================="
+text_uninstallold_12=("====================CONTINUING With installation of the Simplest Wrapper...====================" "====================CONTINUANDO con la Instalación del Wrapper más simple...====================" "====================CONTINUAÇÃO com a instalação mais simples do wrapper...=====================" "====================SUITE avec l'installation de wrapper la plus simple...====================" "====================FORTSETZUNG mit der einfachsten Wrapper-Installation...====================" "=====================CONTINUA con l'installazione del wrapper più semplice...=====================")
+  info "${PURPLE}${text_uninstallold_12[$LANG]}"
   info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...====================" >> $logfile
   echo ""
 fi
 
 if [[ "$mode" == "Advanced" ]]; then
-  info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...===================="
+text_uninstallold_12=("====================CONTINUING With installation of the Advanced Wrapper...====================" "====================CONTINUANDO con la Instalación del Wrapper Avanzado...====================" "====================CONTINUANDO com a Instalação Avançada do Wrapper...=====================" "====================CONTINUANT ​​avec l'installation avancée de l'encapsuleur...====================" "====================FORTSETZUNG mit der Advanced Wrapper Installation...====================" "=====================CONTINUA con l'installazione avanzata del wrapper...====================")
+  info "${PURPLE}${text_uninstallold_12[$LANG]}"
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...====================" >> $logfile
   echo "" 
 fi
@@ -1020,32 +1025,41 @@ fi
 
 
 function uninstall() {
+text_uninstall_1=("==================== Uninstallation the Simplest or the Advanced Wrapper: START ====================" "==================== Desinstalación del Wrapper más simple o del avanzado: INICIO ====================" "==================== Desinstalando o Wrapper Simples ou Avançado: HOME =====================" "==================== Désinstallation de l'encapsuleur simple ou avancé : ACCUEIL ====================" "==================== Deinstallieren des Simpler oder Advanced Wrappers: HOME ====================" "===================== Disinstallazione del wrapper più semplice o avanzato: HOME ====================")
+text_uninstall_2=("Restoring VideoStation's libsynovte.so" "Restaurando el libsynovte.so de VideoStation" "Restaurando o VideoStation libsynovte.so" "Restauration de la VideoStation libsynovte.so" "Wiederherstellen der VideoStation libsynovte.so" "Ripristino di VideoStation libsynovte.so")
+text_uninstall_3=("Restoring MediaServer's libsynovte.so" "Restaurando el libsynovte.so de MediaServer" "Restaurando o MediaServer libsynovte.so" "Restauration de la MediaServer libsynovte.so" "Wiederherstellen der MediaServer libsynovte.so" "Ripristino di MediaServer libsynovte.so")
+text_uninstall_4=("Remove of the KEY of this Wrapper in DLNA MediaServer." "Eliminar la CLAVE de este Wrapper en DLNA MediaServer." "Exclua a KEY deste Wrapper no DLNA MediaServer." "Supprimez la clé de ce wrapper dans DLNA MediaServer." "Löschen Sie den SCHLÜSSEL dieses Wrappers im DLNA MediaServer." "Eliminare la CHIAVE di questo wrapper in DLNA MediaServer.")
+text_uninstall_5=("Restoring MediaServer's $filename" "Restaurando el $filename de MediaServer" "Restaurando o MediaServer $filename" "Restauration de la MediaServer $filename" "Wiederherstellen der MediaServer $filename" "Ripristino di MediaServer $filename")
+text_uninstall_6=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
+text_uninstall_7=("Delete new log file wrapper_ffmpeg." "Borrado del nuevo fichero de logs llamado wrapper_ffmpeg." "Exclua o novo arquivo de log chamado wrapper_ffmpeg." "Supprimez le nouveau fichier journal appelé wrapper_ffmpeg." "Löschen Sie die neue Protokolldatei namens wrapper_ffmpeg." "Elimina il nuovo file di registro chiamato wrapper_ffmpeg.")
+
+
   for losorig in "${all_files[@]}"; do
   if [[ -f "$losorig" ]]; then
-  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: START ===================="
+  info "${BLUE}${text_uninstall_1[$LANG]}"
   
-  info "${YELLOW}Restoring VideoStation's libsynovte.so"
+  info "${YELLOW}${text_uninstall_2[$LANG]}"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
   if [[ -d "$ms_path" ]]; then
-  info "${YELLOW}Restoring MediaServer's libsynovte.so"
+  info "${YELLOW}${text_uninstall_3[$LANG]}"
   mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
-  info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+  info "${YELLOW}${text_uninstall_4[$LANG]}"
     info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
     rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
     
        find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-       info "${YELLOW}Restoring MediaServer's $filename"
+       info "${YELLOW}${text_uninstall_5[$LANG]}"
        mv -T -f "$filename" "${filename::-5}"
        done
   fi
 
       find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "Restoring CodecPack's $filename"
+      info "${YELLOW}${text_uninstall_6[$LANG]}"
       mv -T -f "$filename" "${filename::-5}"
       done
-  info "${YELLOW}Delete new log file wrapper_ffmpeg."
+  info "${YELLOW}${text_uninstall_7[$LANG]}"
 	touch "$logfile"
 	rm "$logfile"
 
