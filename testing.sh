@@ -766,10 +766,11 @@ function install_advanced() {
 ################################
 
 function install() {
-if [[ "$mode" == "Simplest" ]]
+if [[ "$mode" == Simplest ]]
 text_install_1=("==================== Installation of the Simplest Wrapper: START ====================" "==================== Instalación del Wrapper más Simple: INICIO ====================" "==================== Instalando o wrapper mais simples: START =====================" "==================== Installation de l'encapsuleur le plus simple : DÉMARRER ====================" "==================== Installation des einfachsten Wrappers: START ====================" "===================== Installazione del wrapper più semplice: START ====================")
 info "${BLUE}==================== Installation of the Simplest Wrapper: START ====================" >> $logfile
 fi
+
 if [[ "$mode" == "Advanced" ]]
 text_install_1=("==================== Installation of the Advanced Wrapper: START ====================" "==================== Instalación del Advanced Wrapper: INICIO ====================" "==================== Instalando o Wrapper Avançado: START =====================" "==================== Installation de l'encapsuleur avancé : DÉMARRER ====================" "==================== Installation des Advanced Wrappers: START ====================" "===================== Installazione del wrapper avanzato: START ====================")
 info "${BLUE}==================== Installation of the Advanced Wrapper: START ====================" >> $logfile
