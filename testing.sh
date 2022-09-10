@@ -20,7 +20,7 @@ version="SCPT_1.17_ALPHA"
 # SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices. (Deprecated migrated to SCPT_1.15)
 # SCPT_1.15: Added the new wrapper's version in the installer. (Deprecated migrated to SCPT_1.16)
 # SCPT_1.16: Improvement in the Licence checker of the AME. Ensuring that the Installer will only patching DSM 7.0.X and 7.1.X legit. (Deprecated migrated to SCPT_1.17)
-# SCPT_1.17: Added Multi-Language Support. Aesthetic improvements in the logging of the Wrappers.
+# SCPT_1.17: Added Multi-Language Support. Aesthetic improvements in the logging of the Wrappers. Clean the code.
 
 ##############################################################
 
@@ -47,6 +47,7 @@ cp_bin_path=/var/packages/CodecPack/target/bin
 all_files=("$ms_libsynovte_file.orig" "vs_libsynovte_file.orig" "/var/packages/CodecPack/target/bin/ffmpeg41.orig" "/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig" "$ms_path/bin/ffmpeg.orig" "$vs_path/etc/TransProfile.orig" "$vs_path/bin/ffmpeg.orig")
 firma="DkNbulDkNbul"
 firma2="DkNbular"
+firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
@@ -1043,52 +1044,62 @@ function uninstall() {
 function configurator() {
 clear
 
-if [[ "$check_amrif" == "$firma2" ]]; then 
-
-        echo ""
-        echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
-	echo ""
-        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
-        echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
-	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
-	echo -e "${GREEN}Changing the audio stream's order automatically will put again 2 audio Streams."
-	echo ""
-        echo ""
-        echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
-        echo ""
-        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-        echo -e "${YELLOW} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
-        echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-        echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
-        echo -e "${YELLOW} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
-	echo -e "${BLUE} ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-	echo -e "${RED} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
-        echo ""
-        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
-   	while true; do
-	echo -e "${GREEN}"
-        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefghz
-        case $abcdefghz in
-        [Aa] ) config_A; break;;
-        [Bb] ) config_B; break;;
-	[Cc] ) config_C; break;;
-	[Dd] ) config_D; break;;
-	[Ee] ) config_E; break;;
-	[Ff] ) config_F; break;;
-	[Gg] ) config_G; break;;
-	[Hh] ) config_H; break;;
-	[Zz] ) start; break;;
-        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu).";;
-        esac
-        done
-   
-   echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
-   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-   exit 1
+if [[ "$check_amrif" == "$firma2" ]]; then
+YELLOW_BLUEMS="\u001b[33m"
+RED_BLUEMS="\u001b[31m"
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then
+YELLOW_BLUEMS="\u001b[36m"
+RED_BLUEMS="\u001b[36m"
+fi
+
+#if [[ "$check_amrif" == "$firma2" ]]; then 
+
+#        echo ""
+#        echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
+#	echo ""
+#        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
+#        echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
+#	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
+#	echo -e "${GREEN}Changing the audio stream's order automatically will put again 2 audio Streams."
+#	echo ""
+#        echo ""
+#        echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
+#        echo ""
+#        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
+#        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
+#        echo -e "${YELLOW} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
+#        echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+#        echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
+#        echo -e "${YELLOW} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
+#	echo -e "${BLUE} ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
+#	echo -e "${RED} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+#        echo ""
+#        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
+#   	while true; do
+#	echo -e "${GREEN}"
+#        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefghz
+#        case $abcdefghz in
+#        [Aa] ) config_A; break;;
+#        [Bb] ) config_B; break;;
+#	[Cc] ) config_C; break;;
+#	[Dd] ) config_D; break;;
+#	[Ee] ) config_E; break;;
+#	[Ff] ) config_F; break;;
+#	[Gg] ) config_G; break;;
+#	[Hh] ) config_H; break;;
+#	[Zz] ) start; break;;
+#        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu).";;
+#        esac
+#        done
+   
+#   echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+#   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+#   exit 1
+#fi
+
+if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 
         echo ""
         info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
@@ -1103,12 +1114,12 @@ if [[ "$check_amrif" == "$firma" ]]; then
         echo ""
         echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
         echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-        echo -e "${BLUE} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
-        echo -e "${BLUE} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-        echo -e "${BLUE} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
-        echo -e "${BLUE} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
+        echo -e "${YELLOW_BLUEMS} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
+        echo -e "${RED_BLUEMS} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
+        echo -e "${RED_BLUEMS} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
+        echo -e "${YELLOW_BLUEMS} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
 	echo -e "${BLUE} ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-	echo -e "${BLUE} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+	echo -e "${RED_BLUEMS} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
