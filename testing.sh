@@ -649,41 +649,42 @@ check_amrif="$check_amrif_1$check_amrif_2"
 function language() {
  clear
  text_language_1=("PLEASE, CHOOSE YOUR LANGUAGE:" "POR FAVOR, ELIGE TU IDIOMA:" "ESCOLHA O SEU IDIOMA:" "S'IL VOUS PLAÎT CHOISISSEZ VOTRE LANGUE:" "BITTE WÄHLEN SIE IHRE SPRACHE:" "SCEGLI LA TUA LINGUA:")
- echo -e "${YELLOW}${text_language_1[$LANG]}"
  text_language_2=("RETURN to MAIN menu." "VOLVER al MENU Principal." "VOLTAR ao MENU Principal." "RETOUR au MENU Principal." "ZURÜCK zum Hauptmenü." "INDIETRO al menù principale.")
  text_language_3=("Do you wish to change the language in this Installer?" "¿Deseas cambiar el idioma en este Instalador?" "Deseja alterar o idioma deste Instalador?" "Voulez-vous changer la langue de ce programme d'installation ?" "Möchten Sie die Sprache in diesem Installationsprogramm ändern?" "Vuoi cambiare la lingua in questo programma di installazione?")
- text_language_4=("Please answer with the correct option writing: A or B or C or D or E or F. Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: A o B o C o D o E o F. Escribe Z (para volver al menú PRINCIPAL)." "Por favor responda com a opção correta escrevendo: A ou B ou C ou D ou E ou F. Escreva Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en écrivant : A ou B ou C ou D ou E ou F. Écrivez Z (pour retourner au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Schreibweise: A oder B oder C oder D oder E oder F. Schreiben Sie Z (für die Rückkehr zum HAUPTMENÜ)." "Rispondi con l'opzione corretta scrivendo: A o B o C o D o E o F. Scrivi Z (per tornare al menu PRINCIPALE).")
+ text_language_4=("Please answer with the correct option writing: E or C or P or F or D or I. Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: E o C o P o F o D o I. Escribe Z (para volver al menú PRINCIPAL)." "Por favor responda com a opção correta escrevendo: E ou C ou P ou F ou D ou I. Escreva Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en écrivant : E ou C ou P ou F ou D ou I. Écrivez Z (pour retourner au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Schreibweise: E oder C oder P oder F oder D oder I. Schreiben Sie Z (für die Rückkehr zum HAUPTMENÜ)." "Rispondi con l'opzione corretta scrivendo: E o C o P o F o D o I. Scrivi Z (per tornare al menu PRINCIPALE).")
  text_language_5=("==================== Configuration of the Language in this Installer ====================" "==================== Configuración del idioma en este instalador ====================" "==================== Configurando o idioma neste instalador =====================" "==================== Réglage de la langue dans ce programme d'installation ====================" "==================== Einstellen der Sprache in diesem Installationsprogramm ====================" "===================== Impostazione della lingua in questo programma di installazione ====================")	
+	
+	echo -e "${YELLOW}${text_language_1[$LANG]}"
 	echo ""
         echo -e "${BLUE}${text_language_5[$LANG]}"
 	info "${BLUE}==================== Configuration of the Language in this Installer ====================" >> $logfile
 	echo ""
 	echo ""
-        echo -e "${BLUE} ( A ) English."
-        echo -e "${BLUE} ( B ) Castellano." 
-        echo -e "${BLUE} ( C ) Português."
-        echo -e "${BLUE} ( D ) Français."
-        echo -e "${BLUE} ( E ) Deutsch."
-        echo -e "${BLUE} ( F ) Italiano."
+        echo -e "${BLUE} ( E ) English."
+        echo -e "${BLUE} ( C ) Castellano." 
+        echo -e "${BLUE} ( P ) Português."
+        echo -e "${BLUE} ( F ) Français."
+        echo -e "${BLUE} ( D ) Deutsch."
+        echo -e "${BLUE} ( I ) Italiano."
 	echo -e ""
         echo -e "${PURPLE} ( Z ) ${text_language_2[$LANG]}"
    	while true; do
 	echo -e "${GREEN}"
-        read -p "${text_language_3[$LANG]}" abcdefz
-        case $abcdefz in
-        [Aa] ) language_A; break;;
-        [Bb] ) language_B; break;;
-	[Cc] ) language_C; break;;
-	[Dd] ) language_D; break;;
-	[Ee] ) language_E; break;;
-	[Ff] ) language_F; break;;
-	[Zz] ) start; break;;
+        read -p "${text_language_3[$LANG]}" ecpfdiz
+        case $ecpfdiz in
+        [Ee]* ) language_E; break;;
+        [Cc]* ) language_C; break;;
+	[Pp]* ) language_P; break;;
+	[Ff]* ) language_F; break;;
+	[Dd]* ) language_D; break;;
+	[Ii]* ) language_I; break;;
+	[Zz]* ) start; break;;
         * ) echo -e "${YELLOW}${text_language_4[$LANG]}";;  
         esac
 	done
 }
 
-function language_A() {
+function language_E() {
 LANG="0"
 clear
 titulo
@@ -695,7 +696,7 @@ check_firmas
 start
 }
 
-function language_B() {
+function language_C() {
 LANG="1"
 clear
 titulo
@@ -706,7 +707,7 @@ check_versions
 check_firmas
 start
 }
-function language_C() {
+function language_P() {
 LANG="2"
 clear
 titulo
@@ -717,7 +718,7 @@ check_versions
 check_firmas
 start
 }
-function language_D() {
+function language_F() {
 LANG="3"
 clear
 titulo
@@ -728,7 +729,7 @@ check_versions
 check_firmas
 start
 }
-function language_E() {
+function language_D() {
 LANG="4"
 clear
 titulo
@@ -739,7 +740,7 @@ check_versions
 check_firmas
 start
 }
-function language_F() {
+function language_I() {
 LANG="5"
 clear
 titulo
@@ -814,8 +815,8 @@ if [[ -f "$losorig" ]]; then
         echo -e "${PURPLE}${text_install_8[$LANG]}"
         while true; do
 	echo -e "${GREEN}"
-        read -p "${text_install_9[$LANG]}" yn
-        case $yn in
+        read -p "${text_install_9[$LANG]}" ysojn
+        case $ysojn in
         [Yy]* ) uninstall_old; break;;
 	[Ss]* ) uninstall_old; break;;
 	[Oo]* ) uninstall_old; break;;
@@ -914,13 +915,15 @@ fi
 restart_packages
 
 if [[ "$mode" == "Simplest" ]]; then
-info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ===================="
+text_install_30=("==================== Installation of the Simplest Wrapper: COMPLETE ====================" "==================== Instalación del Wrapper más simple: COMPLETADO ====================" "==================== Instalando o Wrapper Mais Simples: COMPLETO =====================" "==================== Installation de l'encapsuleur le plus simple : COMPLET ====================" "==================== Installation des einfachsten Wrappers: VOLLSTÄNDIG ====================" "===================== Installazione del wrapper più semplice: COMPLETO ====================")
+info "${BLUE}${GREEN}${text_install_30[$LANG]}"
 info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ====================" >> $logfile
 echo ""
 fi
 
 if [[ "$mode" == "Advanced" ]]; then
-info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ===================="
+text_install_30=("==================== Installation of the Advanced Wrapper: COMPLETE ====================" "==================== Instalación del Wrapper Avanzado: COMPLETADO ====================" "==================== Instalação Avançada do Wrapper: COMPLETA =====================" "==================== Installation de l'encapsuleur avancé : COMPLET ====================" "==================== Installation des Advanced Wrappers: VOLLSTÄNDIG ====================" "===================== Installazione del wrapper avanzato: COMPLETO ====================")
+info "${BLUE}${GREEN}${text_install_30[$LANG]}"
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ====================" >> $logfile
 echo ""   
 fi
@@ -930,47 +933,58 @@ exit 1
 
 function uninstall_old() {
   clear
-  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ===================="
+  
+  text_uninstallold_1=("==================== Uninstallation of OLD wrappers in the system: START ====================" "==================== Desinstalación de VIEJOS wrappers en el sistema: INICIO ====================" "==================== Desinstalando OLD wrappers no sistema: HOME ======================" "==================== Désinstallation des anciens wrappers sur le système : HOME =====================" "==================== ALTE Wrapper auf dem System deinstallieren: HOME =====================" "===================== Disinstallazione dei VECCHI wrapper sul sistema: HOME =====================")
+  text_uninstallold_2=("Restoring VideoStation's libsynovte.so" "Restaurando el libsynovte.so de VideoStation" "Restaurando o VideoStation libsynovte.so" "Restauration de la VideoStation libsynovte.so" "Wiederherstellen der VideoStation libsynovte.so" "Ripristino di VideoStation libsynovte.so")
+  text_uninstallold_3=("Restoring VideoStation's TransProfile if It has been modified in the past." "Restaurando el TransProfile de VideoStation si este ha sido modificado en el pasado." "Restaurar o TransProfile do VideoStation se tiver sido modificado no passado." "Restauration du TransProfile de VideoStation s'il a été modifié dans le passé." "Wiederherstellen des TransProfile der VideoStation, wenn es in der Vergangenheit geändert wurde." "Ripristino del TransProfile di VideoStation se è stato modificato in passato.")
+  text_uninstallold_4=("Restoring MediaServer's libsynovte.so" "Restaurando el libsynovte.so de MediaServer" "Restaurando o MediaServer libsynovte.so" "Restauration de la MediaServer libsynovte.so" "Wiederherstellen der MediaServer libsynovte.so" "Ripristino di MediaServer libsynovte.so")
+  text_uninstallold_5=("Remove of the KEY of this Wrapper in DLNA MediaServer." "Eliminar la CLAVE de este Wrapper en DLNA MediaServer." "Exclua a KEY deste Wrapper no DLNA MediaServer." "Supprimez la clé de ce wrapper dans DLNA MediaServer." "Löschen Sie den SCHLÜSSEL dieses Wrappers im DLNA MediaServer." "Eliminare la CHIAVE di questo wrapper in DLNA MediaServer.")
+  text_uninstallold_6=("Restoring MediaServer's $filename" "Restaurando el $filename de MediaServer" "Restaurando o MediaServer $filename" "Restauration de la MediaServer $filename" "Wiederherstellen der MediaServer $filename" "Ripristino di MediaServer $filename")
+  text_uninstallold_7=("Restoring VideoStation's $filename" "Restaurando el $filename de VideoStation" "Restaurando o VideoStation $filename" "Restauration de la VideoStation $filename" "Wiederherstellen der VideoStation $filename" "Ripristino di VideoStation $filename")
+  text_uninstallold_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
+  
+  
+  info "${BLUE}${text_uninstallold_1[$LANG]}"
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ====================" >> $logfile
 
-  info "${YELLOW}Restoring VideoStation's libsynovte.so"
+  info "${YELLOW}${text_uninstallold_2[$LANG]}"
   info "${YELLOW}Restoring VideoStation's libsynovte.so" >> $logfile
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file" 2>> $logfile
   
   
   if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
-  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
+  info "${YELLOW}${text_uninstallold_3[$LANG]}"
   info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past." >> $logfile
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile" 2>> $logfile
   fi
   
   
   if [[ -d "$ms_path" ]]; then
-    info "${YELLOW}Restoring MediaServer's libsynovte.so"
+    info "${YELLOW}${text_uninstallold_4[$LANG]}"
     info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
     mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
     
-    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
+    info "${YELLOW}${text_uninstallold_5[$LANG]}"
     info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
     rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
   
     find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring MediaServer's $filename"
+    info "${YELLOW}${text_uninstallold_6[$LANG]}"
     info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
     done
   fi
   
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring VideoStation's $filename"
+    info "${YELLOW}${text_uninstallold_7[$LANG]}"
     info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "Restoring CodecPack's $filename"
-      info "Restoring CodecPack's $filename" >> $logfile
+      info "${YELLOW}${text_uninstallold_8[$LANG]}"
+      info "${YELLOW}Restoring CodecPack's $filename" >> $logfile
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
 
