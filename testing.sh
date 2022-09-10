@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.17_ALPHA"
+version="SCPT_1.17_BETA"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -572,7 +572,7 @@ text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or 
 	echo -e "${GREEN}"
         read -p "${text_start_8[$LANG]}" isuclz
         case $isuclz in
-        [Ii]* ) install;;
+        [Ii]* ) install_advanced;;
         [Ss]* ) install_simple;;
         [Uu]* ) uninstall;;
 	[Cc]* ) configurator;;
@@ -751,20 +751,38 @@ check_firmas
 start
 }
 
+function install_simple() {
+  mode="Simplest"
+  injector="simplest"
+  install
+}
+function install_advanced() {
+  mode="Advanced"
+  install
+}
+
 ################################
 # PROCEDIMIENTOS DEL PATCH
 ################################
 
 function install() {
-  text_install_1=("==================== Installation of the Advanced Wrapper: START ====================" "==================== Instalación del Advanced Wrapper: INICIO ====================" "==================== Instalando o Wrapper Avançado: START =====================" "==================== Installation de l'encapsuleur avancé : DÉMARRER ====================" "==================== Installation des Advanced Wrappers: START ====================" "===================== Installazione del wrapper avanzato: START ====================")
+if [[ "$mode" == "Simplest" ]]
+text_install_1=("==================== Installation of the Simplest Wrapper: START ====================" "==================== Instalación del Wrapper más Simple: INICIO ====================" "==================== Instalando o wrapper mais simples: START =====================" "==================== Installation de l'encapsuleur le plus simple : DÉMARRER ====================" "==================== Installation des einfachsten Wrappers: START ====================" "===================== Installazione del wrapper più semplice: START ====================")
+info "${BLUE}==================== Installation of the Simplest Wrapper: START ====================" >> $logfile
+fi
+if [[ "$mode" == "Advanced" ]]
+text_install_1=("==================== Installation of the Advanced Wrapper: START ====================" "==================== Instalación del Advanced Wrapper: INICIO ====================" "==================== Instalando o Wrapper Avançado: START =====================" "==================== Installation de l'encapsuleur avancé : DÉMARRER ====================" "==================== Installation des Advanced Wrappers: START ====================" "===================== Installazione del wrapper avanzato: START ====================")
+info "${BLUE}==================== Installation of the Advanced Wrapper: START ====================" >> $logfile
+fi
+
+  
   text_install_2=("You are running DSM $dsm_version" "Estás ejecutando DSM $dsm_version" "Você está executando o DSM $dsm_version" "Vous utilisez DSM $dsm_version" "Sie führen DSM $dsm_version aus" "Stai eseguendo DSM $dsm_version")
   text_install_3=("DSM $dsm_version is supported for this installer and the installer will tuned for your DSM" "DSM $dsm_version es compatible con este instalador y el instalador se ajustará a su DSM" "O DSM $dsm_version é compatível com este instalador e o instalador corresponderá ao seu DSM" "DSM $dsm_version est compatible avec ce programme d'installation et le programme d'installation correspondra à votre DSM" "DSM $dsm_version ist mit diesem Installationsprogramm kompatibel und das Installationsprogramm passt zu Ihrem DSM" "DSM $dsm_version è compatibile con questo programma di installazione e il programma di installazione corrisponderà al tuo DSM")
   text_install_4=("DSM $dsm_version is using this path: $cp_bin_path" "DSM $dsm_version está utilizando esta ruta: $cp_bin_path" "O DSM $dsm_version está usando este caminho: $cp_bin_path" "DSM $dsm_version utilise ce chemin : $cp_bin_path" "DSM $dsm_version verwendet diesen Pfad: $cp_bin_path" "DSM $dsm_version utilizza questo percorso: $cp_bin_path")
   text_install_5=("DSM $dsm_version is using this injector: $injector" "DSM $dsm_version está utilizando este inyector: $injector" "O DSM $dsm_version está usando este injetor: $injector" "DSM $dsm_version utilise cet injecteur : $injector" "DSM $dsm_version verwendet diesen Injektor: $injector" "DSM $dsm_version utilizza questo iniettore: $injector")
   
   info "${BLUE}${text_install_1[$LANG]}"
-  info "${BLUE}==================== Installation of the Advanced Wrapper: START ====================" >> $logfile
-  echo ""
+   echo ""
    info "${BLUE}${text_install_2[$LANG]}"
    info "${BLUE}${text_install_3[$LANG]}"
    info "${BLUE}${text_install_4[$LANG]}"
@@ -819,7 +837,12 @@ else
 	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
 	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
 	
+	if [[ "$mode" == "Simplest" ]]
+	info "${GREEN}Installed correctly the Simplest Wrapper in Video Station."
+	fi
+	if [[ "$mode" == "Advanced" ]]
 	info "${GREEN}Installed correctly the Advanced Wrapper in VideoStation."
+	fi
 	
 	break
 		
@@ -831,7 +854,7 @@ if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
 		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
 		touch $ms_path/bin/ffmpeg.KEY
-		echo -e "# DarkNebular´s Advanced Wrapper" >> $ms_path/bin/ffmpeg.KEY
+		echo -e "# DarkNebular´s $mode Wrapper" >> $ms_path/bin/ffmpeg.KEY
 		info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
 		
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
@@ -846,16 +869,30 @@ if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
 		info "${GREEN}Modified correctly the file $ms_libsynovte_file"
 		
+		if [[ "$mode" == "Simplest" ]]
+		info "${GREEN}Installed correctly the Simplest Wrapper in Media Server."
+		fi
+		if [[ "$mode" == "Advanced" ]]
 		info "${GREEN}Installed correctly the Advanced Wrapper in Media Server."
+		fi
+		
 		   
 fi
 
 	
 restart_packages
 
+if [[ "$mode" == "Simplest" ]]
+info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ===================="
+info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ====================" >> $logfile
+echo ""
+fi
+
+if [[ "$mode" == "Advanced" ]]
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ===================="
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ====================" >> $logfile
 echo ""   
+fi
 
 exit 1
 }
@@ -918,81 +955,24 @@ function uninstall_old() {
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ====================" >> $logfile
   echo ""
   echo ""
+  
+if [[ "$mode" == "Simplest" ]]
+  info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...===================="
+  info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...====================" >> $logfile
+  echo ""
+fi
+
+if [[ "$mode" == "Advanced" ]]
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...===================="
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...====================" >> $logfile
-  echo ""
+  echo "" 
+fi
+
   
   install
   
 }
 
-function uninstall_old_simple() {
-  clear
-  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ===================="
-  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ====================" >> $logfile
-
-  info "${YELLOW}Restoring VideoStation's libsynovte.so"
-  info "${YELLOW}Restoring VideoStation's libsynovte.so" >> $logfile
-  mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file" 2>> $logfile
-  
-  if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
-  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past."
-  info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past." >> $logfile
-  mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile" 2>> $logfile
-  fi
-  
-  if [[ -d "$ms_path" ]]; then
-  info "${YELLOW}Restoring MediaServer's libsynovte.so"
-  info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
-  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
-  
-  info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer."
-    info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
-    rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
-  
-  find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring MediaServer's $filename"
-    info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
-    mv -T -f "$filename" "${filename::-5}" 2>> $logfile
-  done
-  fi
-
-
-  find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}Restoring VideoStation's $filename"
-    info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
-    mv -T -f "$filename" "${filename::-5}" 2>> $logfile
-  done
-  
-  
-
-  find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "Restoring CodecPack's $filename"
-      info "Restoring CodecPack's $filename" >> $logfile
-      mv -T -f "$filename" "${filename::-5}" 2>> $logfile
-  done
-  
- 
-   info "${YELLOW}Delete old log file ffmpeg."
-   info "${YELLOW}Delete old log file ffmpeg." >> $logfile
-   touch /tmp/ffmpeg.log
-   rm /tmp/ffmpeg.log
-  
-    
-
-  info "${GREEN}Uninstalled correctly the old Wrapper"
-  echo ""
-  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ===================="
-  info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ====================" >> $logfile
-  echo ""
-  echo ""
-  info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...===================="
-  info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...====================" >> $logfile
-  echo ""
-  
-  install_simple
-  
-}
 
 function uninstall() {
   for losorig in "${all_files[@]}"; do
@@ -1054,51 +1034,6 @@ YELLOW_BLUEMS="\u001b[36m"
 RED_BLUEMS="\u001b[36m"
 fi
 
-#if [[ "$check_amrif" == "$firma2" ]]; then 
-
-#        echo ""
-#        echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
-#	echo ""
-#        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
-#        echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
-#	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
-#	echo -e "${GREEN}Changing the audio stream's order automatically will put again 2 audio Streams."
-#	echo ""
-#        echo ""
-#        echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
-#        echo ""
-#        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-#        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-#        echo -e "${YELLOW} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
-#        echo -e "${RED} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-#        echo -e "${RED} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
-#        echo -e "${YELLOW} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
-#	echo -e "${BLUE} ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-#	echo -e "${RED} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
-#        echo ""
-#        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
-#   	while true; do
-#	echo -e "${GREEN}"
-#        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefghz
-#        case $abcdefghz in
-#        [Aa] ) config_A; break;;
-#        [Bb] ) config_B; break;;
-#	[Cc] ) config_C; break;;
-#	[Dd] ) config_D; break;;
-#	[Ee] ) config_E; break;;
-#	[Ff] ) config_F; break;;
-#	[Gg] ) config_G; break;;
-#	[Hh] ) config_H; break;;
-#	[Zz] ) start; break;;
-#        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu).";;
-#        esac
-#        done
-   
-#   echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
-#   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-#   exit 1
-#fi
-
 if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 
         echo ""
@@ -1153,107 +1088,6 @@ fi
 
 }
 
-function install_simple() {
-  text_installsim_1=("==================== Installation of the Simplest Wrapper: START ====================" "==================== Instalación del Wrapper más Simple: INICIO ====================" "==================== Instalando o wrapper mais simples: HOME =====================" "==================== Installation de l'encapsuleur le plus simple : ACCUEIL ====================" "==================== Installation des einfachsten Wrappers: HOME ====================" "===================== Installazione del wrapper più semplice: HOME ====================")
-  text_installsim_2=("You are running DSM $dsm_version" "Estás ejecutando DSM $dsm_version" "Você está executando o DSM $dsm_version" "Vous utilisez DSM $dsm_version" "Sie führen DSM $dsm_version aus" "Stai eseguendo DSM $dsm_version")
-  text_installsim_3=("DSM $dsm_version is supported for this installer and the installer will tuned for your DSM" "DSM $dsm_version es compatible con este instalador y el instalador se ajustará a su DSM" "O DSM $dsm_version é compatível com este instalador e o instalador corresponderá ao seu DSM" "DSM $dsm_version est compatible avec ce programme d'installation et le programme d'installation correspondra à votre DSM" "DSM $dsm_version ist mit diesem Installationsprogramm kompatibel und das Installationsprogramm passt zu Ihrem DSM" "DSM $dsm_version è compatibile con questo programma di installazione e il programma di installazione corrisponderà al tuo DSM")
-  text_installsim_4=("DSM $dsm_version is using this path: $cp_bin_path" "DSM $dsm_version está utilizando esta ruta: $cp_bin_path" "O DSM $dsm_version está usando este caminho: $cp_bin_path" "DSM $dsm_version utilise ce chemin : $cp_bin_path" "DSM $dsm_version verwendet diesen Pfad: $cp_bin_path" "DSM $dsm_version utilizza questo percorso: $cp_bin_path")
-  text_installsim_5=("DSM $dsm_version is using this injector: Simple" "DSM $dsm_version está utilizando este inyector: Simple" "O DSM $dsm_version está usando este injetor: Simple" "DSM $dsm_version utilise cet injecteur : Simple" "DSM $dsm_version verwendet diesen Injektor: Simple" "DSM $dsm_version utilizza questo iniettore: Simple")
-  
-  
-  info "${BLUE}${text_installsim_1[$LANG]}"
-  info "${BLUE}==================== Installation of the Simplest Wrapper: START ====================" >> $logfile
-  echo ""
-   info "${BLUE}${text_installsim_2[$LANG]}"
-   info "${BLUE}${text_installsim_3[$LANG]}"
-   info "${BLUE}${text_installsim_4[$LANG]}"
-   info "${BLUE}${text_installsim_5[$LANG]}"
-   
-for losorig in "${all_files[@]}"; do
-if [[ -f "$losorig" ]]; then
-        info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
-        info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." >> $logfile
-	echo ""
-	echo -e "${BLUE} ( YES ) = The Installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE} ( NO ) = EXIT from the Installer menu and return to MAIN MENU."
-        while true; do
-	echo -e "${GREEN}"
-        read -p "Do you wish to Uninstall this OLD wrapper? " yn
-        case $yn in
-        [Yy]* ) uninstall_old_simple; break;;
-        [Nn]* ) start;;
-        * ) echo -e "${YELLOW}Please answer YES = (Uninstall the OLD wrapper) or NO = (Return to MAIN Menu).";;
-        esac
-        done
-else
-  
-	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
-	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig." >> $logfile
-    	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig 2>> $logfile
-	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
-	touch ${cp_bin_path}/ffmpeg41 
-	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: Simplest."
-	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: Simplest." >> $logfile
-	wget -q $repo_url/main/simplest_wrapper -O ${cp_bin_path}/ffmpeg41 2>> $logfile
-	  info "${GREEN}Waiting for consolidate the download of the wrapper."
-        sleep 3
-	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
-	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
-	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
-	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg and its access."
-	touch "$logfile"
-	chmod 755 "$logfile"
-	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
-		
-	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
-	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig." >> $logfile
-	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig"
-	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig" >> $logfile
-	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
-	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
-	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
-	
-	info "${GREEN}Installed correctly the Simplest Wrapper in Video Station."
-	
-	break
-fi
-done
-
-if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
-
-	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
-	info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
-	touch $ms_path/bin/ffmpeg.KEY
-	echo -e "# DarkNebular´s Simplest Wrapper" >> $ms_path/bin/ffmpeg.KEY
-	info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
-		
-	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
-	info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." >> $logfile
-	cp -n $ms_libsynovte_file $ms_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig"
-	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig" >> $logfile
-	chown MediaServer:MediaServer $ms_libsynovte_file.orig 2>> $logfile
-	chmod 644 $ms_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
-	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
-	info "${GREEN}Modified correctly the file $ms_libsynovte_file"
-	
-	info "${GREEN}Installed correctly the Simplest Wrapper in Media Server."
-   
-fi
-
-restart_packages
-
-echo ""
-info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ===================="
-info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ====================" >> $logfile
-exit 1
-
-}
 
 ################################
 # EJECUCIÓN
