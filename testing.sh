@@ -781,7 +781,23 @@ fi
   text_install_3=("DSM $dsm_version is supported for this installer and the installer will tuned for your DSM" "DSM $dsm_version es compatible con este instalador y el instalador se ajustará a su DSM" "O DSM $dsm_version é compatível com este instalador e o instalador corresponderá ao seu DSM" "DSM $dsm_version est compatible avec ce programme d'installation et le programme d'installation correspondra à votre DSM" "DSM $dsm_version ist mit diesem Installationsprogramm kompatibel und das Installationsprogramm passt zu Ihrem DSM" "DSM $dsm_version è compatibile con questo programma di installazione e il programma di installazione corrisponderà al tuo DSM")
   text_install_4=("DSM $dsm_version is using this path: $cp_bin_path" "DSM $dsm_version está utilizando esta ruta: $cp_bin_path" "O DSM $dsm_version está usando este caminho: $cp_bin_path" "DSM $dsm_version utilise ce chemin : $cp_bin_path" "DSM $dsm_version verwendet diesen Pfad: $cp_bin_path" "DSM $dsm_version utilizza questo percorso: $cp_bin_path")
   text_install_5=("DSM $dsm_version is using this injector: $injector" "DSM $dsm_version está utilizando este inyector: $injector" "O DSM $dsm_version está usando este injetor: $injector" "DSM $dsm_version utilise cet injecteur : $injector" "DSM $dsm_version verwendet diesen Injektor: $injector" "DSM $dsm_version utilizza questo iniettore: $injector")
-  
+  text_install_6=("Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." "Actualmente tienes un parche VIEJO u OTRO parche aplicado en tu sistema, por favor, DESINSTALA primero el Wrapper MÁS VIEJO." "Você atualmente tem um patch ANTIGO ou OUTRO aplicado ao seu sistema, por favor, DESINSTALE o Wrapper ANTIGO primeiro." "Vous avez actuellement un ANCIEN ou UN AUTRE correctif appliqué à votre système, veuillez d'abord DÉSINSTALLER l'ANCIEN Wrapper." "Sie haben derzeit einen ALTEN oder ANDEREN Patch auf Ihr System angewendet, bitte DEINSTALLIEREN Sie zuerst den ÄLTEREN Wrapper." "Attualmente hai una patch VECCHIA o UN'ALTRA applicata al tuo sistema, per favore DISINSTALLA prima il wrapper VECCHIO.")
+  text_install_7=(" ( YES ) = The Installer will Uninstall the OLD patch or Wrapper." " ( SÍ ) = El Instalador desinstalará el wrapper o el parche VIEJO." " ( YES ) = O Instalador irá desinstalar o wrapper ou patch ANTIGO." " ( OUI ) = Le programme d'installation désinstallera l'ANCIEN wrapper ou correctif." " ( JA ) = Der Installer wird den ALTEN Wrapper oder Patch deinstallieren." " ( SÌ ) = Il programma di installazione disinstallerà il VECCHIO wrapper o patch.")
+  text_install_8=(" ( NO ) = EXIT from the Installer menu and return to MAIN MENU." " ( NO ) = SALIR del menú de Instalación y volver al MENÚ PRINCIPAL." " ( NÃO ) = SAIR do menu Instalação e retornar ao MENU PRINCIPAL." " ( NON ) = QUITTER le menu Installation et revenir au MENU PRINCIPAL." " ( NEIN ) = VERLASSEN Sie das Installationsmenü und kehren Sie zum HAUPTMENÜ zurück." " ( NO ) = USCIRE dal menu Installazione e tornare al MENU PRINCIPALE.")
+  text_install_9=("Do you wish to Uninstall this OLD wrapper?" "¿Deseas Desinstalar este Wrapper VIEJO?" "Deseja desinstalar este OLD Wrapper?" "Voulez-vous désinstaller cet ancien wrapper ?" "Möchten Sie diesen ALTEN Wrapper deinstallieren?" "Vuoi disinstallare questo VECCHIO Wrapper?")
+  text_install_10=("Please answer YES = (Uninstall the OLD wrapper) or NO = (Return to MAIN Menu)." "Por favor, responda SÍ = (Desinstala el Wrapper VIEJO) o NO = (Vuelve al menú PRINCIPAL)." "Por favor, responda SIM = (Desinstale o OLD Wrapper) ou NÃO = (Volte ao menu PRINCIPAL)." "Veuillez répondre OUI = (Désinstaller l'ANCIEN Wrapper) ou NON = (Revenir au menu PRINCIPAL)." "Bitte antworten Sie mit JA = (Deinstallieren Sie den ALTEN Wrapper) oder NEIN = (Gehen Sie zurück zum HAUPTMENÜ)." "Rispondi SÌ = (Disinstalla il VECCHIO Wrapper) o NO = (Torna al menu PRINCIPALE).")
+  text_install_11=("Backup the original ffmpeg41 as ffmpeg41.orig." "Copia de seguridad del fichero original ffmpeg41 como ffmpeg41.orig." "Backup do arquivo ffmpeg41 original como ffmpeg41.orig." "Sauvegarde du fichier ffmpeg41 d'origine en tant que ffmpeg41.orig." "Sicherung der ursprünglichen ffmpeg41-Datei als ffmpeg41.orig." "Backup del file ffmpeg41 originale come ffmpeg41.orig.")
+  text_install_12=("Creating the esqueleton of the ffmpeg41" "Creando el esqueleto del fichero ffmpeg41" "Criando o esqueleto do arquivo ffmpeg41" "Création du squelette du fichier ffmpeg41" "Erstellen des Skeletts der ffmpeg41-Datei" "Creazione dello scheletro del file ffmpeg41")
+  text_install_13=("Injection of the ffmpeg41 wrapper using this injector: $injector." "Inyección del Wrapper ffmpeg41 usando este inyector: $injector." "Injetando o Wrapper ffmpeg41 usando este injetor: $injector." "Injecter le wrapper ffmpeg41 à l'aide de cet injecteur : $injector." "Injizieren des ffmpeg41-Wrappers mit diesem Injektor: $injector." "Iniezione del wrapper ffmpeg41 utilizzando questo iniettore: $injector.")
+  text_install_14=("Waiting for consolidate the download of the wrapper." "Esperando para consolidar la descarga del Wrapper." "Aguardando para consolidar o download do Wrapper." "En attente de consolidation du téléchargement de Wrapper." "Warten auf die Konsolidierung des Wrapper-Downloads." "In attesa di consolidare il download del Wrapper.")
+  text_install_15=("Fixing permissions of the ffmpeg41 wrapper." "Arreglando permisos del wrapper ffmpeg41." "Corrigindo as permissões do wrapper ffmpeg41." "Correction des autorisations du wrapper ffmpeg41." "Behebung der ffmpeg41-Wrapper-Berechtigungen." "Correzione dei permessi del wrapper ffmpeg41.")
+  text_install_16=("Ensuring the existence of the new log file wrapper_ffmpeg and its access." "Asegurar la existencia y sus accesos al nuevo fichero de logs llamado wrapper_ffmpeg." "Assegure a existência e seu acesso ao novo arquivo de log chamado wrapper_ffmpeg." "Assurez-vous de l'existence et de votre accès au nouveau fichier journal appelé wrapper_ffmpeg." "Stellen Sie die Existenz und Ihren Zugriff auf die neue Protokolldatei namens wrapper_ffmpeg sicher." "Assicurati l'esistenza e il tuo accesso al nuovo file di registro chiamato wrapper_ffmpeg.")
+  text_install_17=("Installed correctly the wrapper41 in $cp_bin_path" "Instalado correctamente el wrapper41 en $cp_bin_path" "Wrapper41 instalado com sucesso em $cp_bin_path" "Wrapper41 installé avec succès dans $cp_bin_path" "Wrapper41 erfolgreich in $cp_bin_path installiert" "Wrapper41 installato correttamente in $cp_bin_path")
+  text_install_18=("Backup the original libsynovte.so in VideoStation as libsynovte.so.orig." "Copia de seguridad del fichero libsynovte.so como libsynovte.so.orig en VideoStation." "Faça backup do arquivo libsynovte.so como libsynovte.so.orig no VideoStation." "Sauvegardez le fichier libsynovte.so sous libsynovte.so.orig sur VideoStation." "Sichern Sie die Datei libsynovte.so als libsynovte.so.orig auf VideoStation." "Eseguire il backup del file libsynovte.so come libsynovte.so.orig su VideoStation.")
+  text_install_19=("Fixing permissions of $vs_libsynovte_file.orig" "Arreglando los permisos de $vs_libsynovte_file.orig" "Corrigindo as permissões de $vs_libsynovte_file.orig" "Correction des autorisations de $vs_libsynovte_file.orig" "Korrigieren der Berechtigungen von $vs_libsynovte_file.orig" "Correzione dei permessi di $vs_libsynovte_file.orig")
+  text_install_20=("Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $vs_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $vs_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $vs_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $vs_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $vs_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
+  text_install_21=("Modified correctly the file $vs_libsynovte_file" "Modificado correctamente el fichero $vs_libsynovte_file" "Modificou corretamente o arquivo $vs_libsynovte_file" "Correctement modifié le fichier $vs_libsynovte_file" "Die Datei $vs_libsynovte_file wurde korrekt geändert" "Modificato correttamente il file $vs_libsynovte_file")
+    
   info "${BLUE}${text_install_1[$LANG]}"
    echo ""
    info "${BLUE}${text_install_2[$LANG]}"
@@ -791,58 +807,63 @@ fi
 
 for losorig in "${all_files[@]}"; do
 if [[ -f "$losorig" ]]; then
-        info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first."
+        info "${RED}${text_install_6[$LANG]}"
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." >> $logfile
 	echo ""
-	echo -e "${BLUE} ( YES ) = The Installer will Uninstall the OLD patch or Wrapper."
-        echo -e "${PURPLE} ( NO ) = EXIT from the Installer menu and return to MAIN MENU."
+	echo -e "${BLUE}${text_install_7[$LANG]}"
+        echo -e "${PURPLE}${text_install_8[$LANG]}"
         while true; do
 	echo -e "${GREEN}"
-        read -p "Do you wish to Uninstall this OLD wrapper? " yn
+        read -p "${text_install_9[$LANG]}" yn
         case $yn in
         [Yy]* ) uninstall_old; break;;
+	[Ss]* ) uninstall_old; break;;
+	[Oo]* ) uninstall_old; break;;
+	[Jj]* ) uninstall_old; break;;
         [Nn]* ) start;;
-        * ) echo -e "${YELLOW}Please answer YES = (Uninstall the OLD wrapper) or NO = (Return to MAIN Menu).";;
+        * ) echo -e "${YELLOW}${text_install_10[$LANG]}";;
         esac
         done
 else
   
-	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig."
+	  info "${YELLOW}${text_install_11[$LANG]}"
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig." >> $logfile
 	mv -n ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg41.orig 2>> $logfile
-	  info "${YELLOW}Creating the esqueleton of the ffmpeg41"
+	  info "${YELLOW}${text_install_12[$LANG]}"
 	touch ${cp_bin_path}/ffmpeg41
-	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: $injector."
+	  info "${YELLOW}${text_install_13[$LANG]}"
 	  info "${YELLOW}Injection of the ffmpeg41 wrapper using this injector: $injector." >> $logfile
 	wget -q $repo_url/main/ffmpeg41-wrapper-DSM7_$injector -O ${cp_bin_path}/ffmpeg41 2>> $logfile
-	 info "${GREEN}Waiting for consolidate the download of the wrapper."
+	 info "${GREEN}${text_install_14[$LANG]}"
         sleep 3
-	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper."
+	  info "${YELLOW}${text_install_15[$LANG]}"
 	  info "${YELLOW}Fixing permissions of the ffmpeg41 wrapper." >> $logfile
 	chmod 755 ${cp_bin_path}/ffmpeg41 2>> $logfile
-	info "${GREEN}Ensuring the existence of the new log file wrapper_ffmpeg and its access."
+	info "${GREEN}${text_install_16[$LANG]}"
 	touch "$logfile"
 	chmod 755 "$logfile"
-	info "${GREEN}Installed correctly the wrapper41 in $cp_bin_path"
+	info "${GREEN}${text_install_17[$LANG]}"
 	
 	
 	
-	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig."
+	info "${YELLOW}${text_install_18[$LANG]}"
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig." >> $logfile
 	cp -n $vs_libsynovte_file $vs_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig"
+	  info "${YELLOW}${text_install_19[$LANG]}"
 	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig" >> $logfile
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
+	  info "${YELLOW}${text_install_20[$LANG]}"
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
-	info "${GREEN}Modified correctly the file $vs_libsynovte_file"
+	info "${GREEN}${text_install_21[$LANG]}"
 	
 	if [[ "$mode" == "Simplest" ]]; then
-	info "${GREEN}Installed correctly the Simplest Wrapper in Video Station."
+	text_install_22=("Installed correctly the Simplest Wrapper in Video Station." "Instalado correctamente el Wrapper más simple en Video Station." "Instalou com sucesso o Wrapper mais simples do Video Station." "Installation réussie du Wrapper le plus simple dans Video Station." "Der einfachste Wrapper wurde erfolgreich in Video Station installiert." "Installato con successo il wrapper più semplice in Video Station.")
+	info "${GREEN}${text_install_22[$LANG]}"
 	fi
 	if [[ "$mode" == "Advanced" ]]; then
-	info "${GREEN}Installed correctly the Advanced Wrapper in VideoStation."
+	text_install_22=("Installed correctly the Advanced Wrapper in VideoStation." "Instalado correctamente el Wrapper avanzado en Video Station." "Instalou com sucesso o Advanced Wrapper no Video Station." "L'encapsuleur avancé dans Video Station a été installé avec succès." "Der Advanced Wrapper wurde erfolgreich in Video Station installiert." "Installazione riuscita del wrapper avanzato in Video Station.")
+	info "${GREEN}${text_install_22[$LANG]}"
 	fi
 	
 	break
@@ -851,30 +872,39 @@ fi
 done
 
 if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
+text_install_23=("Adding of the KEY of this Wrapper in DLNA MediaServer." "Añadiendo la CLAVE de este Wrapper en DLNA MediaServer." "Adicionando a KEY deste Wrapper no DLNA MediaServer." "Ajout de la clé de ce wrapper dans DLNA MediaServer." "Hinzufügen des SCHLÜSSELS dieses Wrappers in DLNA MediaServer." "Aggiunta della chiave di questo wrapper in DLNA MediaServer.")
+text_install_24=("Installed correctly the wrapper41 in $ms_path/bin" "Instalado correctamente el wrapper41 en $ms_path/bin" "Wrapper41 instalado com sucesso em $ms_path/bin" "Wrapper41 installé avec succès dans $ms_path/bin" "Wrapper41 erfolgreich in $ms_path/bin installiert" "Wrapper41 installato correttamente in $ms_path/bin")
+text_install_25=("Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." "Copia de seguridad del fichero libsynovte.so como libsynovte.so.orig en MediaServer." "Faça backup do arquivo libsynovte.so como libsynovte.so.orig no MediaServer." "Sauvegardez le fichier libsynovte.so sous libsynovte.so.orig sur MediaServer." "Sichern Sie die Datei libsynovte.so als libsynovte.so.orig auf MediaServer." "Eseguire il backup del file libsynovte.so come libsynovte.so.orig su MediaServer.")
+text_install_26=("Fixing permissions of $ms_libsynovte_file.orig" "Arreglando los permisos de $ms_libsynovte_file.orig" "Corrigindo as permissões de $ms_libsynovte_file.orig" "Correction des autorisations de $ms_libsynovte_file.orig" "Korrigieren der Berechtigungen von $ms_libsynovte_file.orig" "Correzione dei permessi di $ms_libsynovte_file.orig")
+text_install_27=("Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $ms_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $ms_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $ms_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $ms_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $ms_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
+text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado correctamente el fichero $ms_libsynovte_file" "Modificou corretamente o arquivo $ms_libsynovte_file" "Correctement modifié le fichier $ms_libsynovte_file" "Die Datei $ms_libsynovte_file wurde korrekt geändert" "Modificato correttamente il file $ms_libsynovte_file")
+    
 
-		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer."
+		info "${YELLOW}${text_install_23[$LANG]}"
 		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
 		touch $ms_path/bin/ffmpeg.KEY
 		echo -e "# DarkNebular´s $mode Wrapper" >> $ms_path/bin/ffmpeg.KEY
-		info "${GREEN}Installed correctly the Wrapper in $ms_path/bin"
+		info "${GREEN}${text_install_24[$LANG]}"
 		
-		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig."
+		info "${YELLOW}${text_install_25[$LANG]}"
 		info "${YELLOW}Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." >> $logfile
 		cp -n $ms_libsynovte_file $ms_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig"
+	  info "${YELLOW}${text_install_26[$LANG]}"
 	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig" >> $logfile
 		chown MediaServer:MediaServer $ms_libsynovte_file.orig 2>> $logfile
 		chmod 644 $ms_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD"
+	  info "${YELLOW}${text_install_27[$LANG]}"
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
-		info "${GREEN}Modified correctly the file $ms_libsynovte_file"
+		info "${GREEN}${text_install_28[$LANG]}"
 		
 		if [[ "$mode" == "Simplest" ]]; then
-		info "${GREEN}Installed correctly the Simplest Wrapper in Media Server."
+		text_install_29=("Installed correctly the Simplest Wrapper in Media Server." "Instalado correctamente el Wrapper más simple en Media Server." "Instalou com sucesso o Wrapper mais simples no Media Server." "Installation réussie du Wrapper le plus simple sur Media Server." "Der einfachste Wrapper wurde erfolgreich auf dem Medienserver installiert." "Installato con successo il wrapper più semplice su Media Server.")
+		info "${GREEN}${text_install_29[$LANG]}"
 		fi
 		if [[ "$mode" == "Advanced" ]]; then
-		info "${GREEN}Installed correctly the Advanced Wrapper in Media Server."
+		text_install_29=("Installed correctly the Advanced Wrapper in Media Server." "Instalado correctamente el Wrapper avanzado en Media Server." "Instalou com sucesso o Advanced Wrapper no Media Server." "L'encapsuleur avancé dans Media Server a été installé avec succès." "Der Advanced Wrapper wurde erfolgreich in Media Server installiert." "Installazione riuscita del wrapper avanzato in Media Server.")
+		info "${GREEN}${text_install_29[$LANG]}"
 		fi
 		
 		   
