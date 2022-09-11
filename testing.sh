@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.17"
+version="SCPT_1.17_BETA2"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -111,15 +111,15 @@ exit 1
 fi
 
 }
-function intro() {
-  intro=$(curl -s -L "$repo_url/main/intro.txt")
-  if [ "${#intro}" -ge 1 ]; then
-    echo ""
-    echo -e "${PURPLE}	$intro"
-    echo ""
-    sleep 3
-  fi
-}
+#function intro() {
+#  intro=$(curl -s -L "$repo_url/main/intro.txt")
+#  if [ "${#intro}" -ge 1 ]; then
+#    echo ""
+#    echo -e "${PURPLE}	$intro"
+#    echo ""
+#    sleep 3
+#  fi
+#}
 function welcome() {
   text_welcome_1=("FFMPEG WRAPPER INSTALLER version: $version" "INSTALADOR DEL FFMPEG WRAPPER version: $version" "FFMPEG WRAPPER INSTALLER versão: $version" "Version de l'INSTALLATEUR D'EMBALLAGE FFMPEG : $version" "FFMPEG WRAPPER INSTALLER-Version: $version" "FFMPEG WRAPPER INSTALLER versione: $version")
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
