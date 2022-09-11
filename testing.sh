@@ -111,15 +111,16 @@ exit 1
 fi
 
 }
-#function intro() {
-#  intro=$(curl -s -L "$repo_url/main/intro.txt")
-#  if [ "${#intro}" -ge 1 ]; then
-#    echo ""
-#    echo -e "${PURPLE}	$intro"
-#    echo ""
-#    sleep 3
-#  fi
-#}
+function intro() {
+  clear
+  intro=$(curl -s -L "$repo_url/main/intro.txt")
+  if [ "${#intro}" -ge 1 ]; then
+    echo ""
+    echo -e "${PURPLE}	$intro"
+    echo ""
+    sleep 3
+  fi
+}
 function welcome() {
   text_welcome_1=("FFMPEG WRAPPER INSTALLER version: $version" "INSTALADOR DEL FFMPEG WRAPPER version: $version" "FFMPEG WRAPPER INSTALLER versão: $version" "Version de l'INSTALLATEUR D'EMBALLAGE FFMPEG : $version" "FFMPEG WRAPPER INSTALLER-Version: $version" "FFMPEG WRAPPER INSTALLER versione: $version")
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -1090,7 +1091,7 @@ function configurator() {
 clear
 
 text_configura_1=("==================== Configuration of the Advanced Wrapper: START ====================" "==================== Configuración para el Wrapper Avanzado: INICIO ====================" "==================== Configurações para o Wrapper Avançado: HOME =====================" "==================== Paramètres de l'encapsuleur avancé : ACCUEIL ====================" "==================== Einstellungen für den Advanced Wrapper: HOME ====================" "===================== Impostazioni per il wrapper avanzato: HOME ====================")
-# text_configura_2=("REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work" "RECUERDA: Si cambias el orden en VIDEO-STATION tendrás SIEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) en la primera transmisión de audio y algunos dispositivos no compatibles con 5.1 ni transmisiones múltiples de audio como Chromecast no funcionarán" "LEMBRE-SE: Se você alterar a ordem em VIDEO-STATION, SEMPRE terá AAC 5.1 512kbps (ou AC3 5.1 640kbps) no primeiro fluxo de áudio e alguns dispositivos não compatíveis com 5.1 ou vários fluxos de áudio como o Chromecast não funcionarão" "N'OUBLIEZ PAS : Si vous modifiez l'ordre dans VIDEO-STATION, vous aurez TOUJOURS AAC 5.1 512kbps (ou AC3 5.1 640kbps) sur le premier flux audio et certains appareils non compatibles avec 5.1 ou plusieurs flux audio comme Chromecast ne fonctionneront pas" "BEACHTEN SIE: Wenn Sie die Reihenfolge in VIDEO-STATION ändern, haben Sie IMMER AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) im ersten Audiostream und einige Geräte, die nicht mit 5.1 kompatibel sind, oder mehrere Audiostreams wie Chromecast funktionieren nicht" "RICORDA: Se modifichi l'ordine in VIDEO-STATION avrai SEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) sul primo flusso audio e alcuni dispositivi non compatibili con 5.1 o più flussi audio come Chromecast non funzioneranno")
+text_configura_2=("REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work" "RECUERDA: Si cambias el orden en VIDEO-STATION tendrás SIEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) en la primera transmisión de audio y algunos dispositivos no compatibles con 5.1 ni transmisiones múltiples de audio como Chromecast no funcionarán" "LEMBRE-SE: Se você alterar a ordem em VIDEO-STATION, SEMPRE terá AAC 5.1 512kbps (ou AC3 5.1 640kbps) no primeiro fluxo de áudio e alguns dispositivos não compatíveis com 5.1 ou vários fluxos de áudio como o Chromecast não funcionarão" "N'OUBLIEZ PAS : Si vous modifiez l'ordre dans VIDEO-STATION, vous aurez TOUJOURS AAC 5.1 512kbps (ou AC3 5.1 640kbps) sur le premier flux audio et certains appareils non compatibles avec 5.1 ou plusieurs flux audio comme Chromecast ne fonctionneront pas" "BEACHTEN SIE: Wenn Sie die Reihenfolge in VIDEO-STATION ändern, haben Sie IMMER AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) im ersten Audiostream und einige Geräte, die nicht mit 5.1 kompatibel sind, oder mehrere Audiostreams wie Chromecast funktionieren nicht" "RICORDA: Se modifichi l'ordine in VIDEO-STATION avrai SEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) sul primo flusso audio e alcuni dispositivi non compatibili con 5.1 o più flussi audio come Chromecast non funzioneranno")
 text_configura_3=("Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams order." "Ahora puede cambiar el códec de audio de AAC 512 kbps a AC3 640 kbps independientemente del orden de las transmisiones de audio." "Agora você pode alterar o codec de áudio de AAC 512 kbps para AC3 640 kbps, independentemente da ordem dos fluxos de áudio." "Vous pouvez maintenant changer le codec audio de AAC 512 kbps à AC3 640 kbps quel que soit l'ordre des flux audio." "Sie können jetzt den Audiocodec unabhängig von der Reihenfolge der Audiostreams von AAC 512 kbps auf AC3 640 kbps ändern." "È ora possibile modificare il codec audio da AAC 512 kbps a AC3 640 kbps indipendentemente dall'ordine dei flussi audio.")
 text_configura_4=("AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices." "AC3 640kbps tiene un poco menos de calidad y peor rendimiento que AAC pero es más compatible con dispositivos LEGACY." "AC3 640kbps tem qualidade ligeiramente inferior e desempenho inferior ao AAC, mas é mais compatível com dispositivos LEGACY." "AC3 640kbps a une qualité légèrement inférieure et des performances inférieures à AAC mais est plus compatible avec les appareils LEGACY." "AC3 640kbps hat eine etwas geringere Qualität und schlechtere Leistung als AAC, ist aber besser mit LEGACY-Geräten kompatibel." "AC3 640kbps ha una qualità leggermente inferiore e prestazioni inferiori rispetto a AAC ma è più compatibile con i dispositivi LEGACY.")
 text_configura_5=("Changing the audio stream's order automatically will put again 2 audio Streams." "Cambiando el orden de los flujos de audio hará que vuelvan a ponerse otra vez 2 flujos de audio automáticamente." "Alterar a ordem dos fluxos de áudio retornará automaticamente para 2 fluxos de áudio." "Changer l'ordre des flux audio reviendra automatiquement à 2 flux audio." "Wenn Sie die Reihenfolge der Audiostreams ändern, wird automatisch wieder auf 2 Audiostreams umgeschaltet." "La modifica dell'ordine dei flussi audio tornerà automaticamente a 2 flussi audio.")
@@ -1125,7 +1126,7 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
         echo ""
         echo -e "${BLUE}${text_configura_1[$LANG]}"
 	echo ""
-#        echo -e "${YELLOW}${text_configura_2[$LANG]}"
+        echo -e "${YELLOW}${text_configura_2[$LANG]}"
         echo -e "${GREEN}${text_configura_3[$LANG]}"
 	echo -e "${GREEN}${text_configura_4[$LANG]}"
 	echo -e "${GREEN}${text_configura_5[$LANG]}"
@@ -1160,8 +1161,8 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
         esac
         done
    
-   info "${BLUE}${text_configura_18[$LANG]}"
-   echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+   echo -e "${BLUE}${text_configura_18[$LANG]}"
+   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
    exit 1
 
 else
@@ -1185,7 +1186,7 @@ while getopts s: flag; do
   esac
 done
 
-#intro
+intro
 
 titulo
 
