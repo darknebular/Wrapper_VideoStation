@@ -1190,8 +1190,8 @@ check_firmas
 
 case "$setup" in
   start) start;;
-  install) install;;
-  uninstall) uninstall;;
+  install) install_advanced;;
+  uninstall) uninstall_new;;
   config) configurator;;
   info) exit 1;;
 esac
