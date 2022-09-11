@@ -1123,7 +1123,7 @@ fi
 if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 
         echo ""
-        info "${BLUE}${text_configura_1[$LANG]}"
+        echo -e "${BLUE}${text_configura_1[$LANG]}"
 	echo ""
 #        echo -e "${YELLOW}${text_configura_2[$LANG]}"
         echo -e "${GREEN}${text_configura_3[$LANG]}"
@@ -1161,7 +1161,7 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
         done
    
    info "${BLUE}${text_configura_18[$LANG]}"
-   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+   echo -e "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
    exit 1
 
 else
