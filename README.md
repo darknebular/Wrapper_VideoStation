@@ -1,4 +1,7 @@
 <p align="center">
+  <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/images/logointro.png?raw=true" height=200px alt="intro">
+</p>
+<p align="center">
   <img src="https://github.com/darknebular/Wrapper_VideoStation/blob/main/images/logo.png?raw=true" height=200px alt="logo">
 </p>
 
