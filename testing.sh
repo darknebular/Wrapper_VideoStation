@@ -1094,7 +1094,12 @@ text_configura_11=(" ( E ) FIRST STREAM= MP3 2.0 256kbps, SECOND STREAM= AAC 5.1
 text_configura_12=(" ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both." " ( F ) Cambiar el codec de audio 5.1 de AC3 640kbps a AAC 512 kbps independientemente del orden de los flujos de audio en ambos." " ( F ) Altere o codec de áudio 5.1 de AC3 640kbps para AAC 512kbps, independentemente da ordem dos fluxos de áudio em ambos." " ( F ) Modifiez le codec audio 5.1 de AC3 640kbps à AAC 512kbps quel que soit l'ordre des flux audio dans les deux." " ( F ) Ändern Sie den 5.1-Audiocodec von AC3 640 kbps auf AAC 512 kbps, unabhängig von der Reihenfolge der Audiostreams in beiden." " ( F ) Modificare il codec audio 5.1 da AC3 640 kbps a AAC 512 kbps indipendentemente dall'ordine dei flussi audio in entrambi.")
 text_configura_13=(" ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." " ( G ) Usar un único flujo de audio en VIDEO-STATION (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." " ( G ) Use um único fluxo de áudio no VIDEO-STATION (o primeiro fluxo selecionado acima) para economizar recursos do sistema em dispositivos menos potentes." " ( G ) Utilisez un seul flux audio sur VIDEO-STATION (le premier flux sélectionné ci-dessus) pour économiser les ressources système sur les appareils moins puissants." " ( G ) Verwenden Sie einen einzelnen Audiostream auf VIDEO-STATION (den ersten oben ausgewählten Stream), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." " ( G ) Utilizzare un unico flusso audio su VIDEO-STATION (il primo flusso selezionato sopra) per risparmiare risorse di sistema su dispositivi meno potenti.")
 text_configura_14=(" ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." " ( H ) Usar un único flujo de audio en DLNA MediaServer (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." " ( H ) Use um único fluxo de áudio no DLNA MediaServer (o primeiro fluxo selecionado acima) para economizar recursos do sistema em dispositivos menos potentes." " ( H ) Utilisez un seul flux audio sur DLNA MediaServer (le premier flux sélectionné ci-dessus) pour économiser les ressources système sur les appareils moins puissants." " ( H ) Verwenden Sie einen einzelnen Audiostream auf DLNA MediaServer (den ersten oben ausgewählten Stream), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." " ( H ) Utilizzare un unico flusso audio su DLNA MediaServer (il primo flusso selezionato sopra) per risparmiare risorse di sistema su dispositivi meno potenti.")
-
+text_configura_15=(" ( Z ) RETURN to MAIN menu." " ( Z ) VOLVER al menú PRINCIPAL." " ( Z ) VOLTAR ao menu PRINCIPAL." " ( Z ) RETOUR au menu PRINCIPAL." " ( Z ) ZURÜCK zum HAUPTMENÜ." " ( Z ) TORNA al menu PRINCIPALE.")
+text_configura_16=("Do you wish to change the order of these audio stream in the Advanced wrapper?" "¿Deseas cambiar el orden de estos flujos de audio en el Wrapper Avanzado?" "Deseja alterar a ordem desses fluxos de áudio no Advanced Wrapper?" "Voulez-vous modifier l'ordre de ces flux audio dans Advanced Wrapper?" "Möchten Sie die Reihenfolge dieser Audiostreams im Advanced Wrapper ändern?" "Vuoi cambiare l'ordine di questi flussi audio nel Wrapper avanzato?")
+text_configura_17=("Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu)." "Responda con la opción correcta escribiendo: A o B o C o D o E o F o G o H. Escriba Z (para volver al menú PRINCIPAL)." "Responda com a opção correta digitando: A ou B ou C ou D ou E ou F ou G ou H. Digite Z (para retornar ao menu PRINCIPAL)." "Répondez par l'option correcte en tapant : A ou B ou C ou D ou E ou F ou G ou H. Tapez Z (pour revenir au menu PRINCIPAL)." "Antworten Sie mit der richtigen Option, indem Sie Folgendes eingeben: A oder B oder C oder D oder E oder F oder G oder H. Geben Sie Z ein (um zum HAUPTMENÜ zurückzukehren)." "Rispondi con l'opzione corretta digitando: A o B o C o D o E o F o G o H. Digita Z (per tornare al menu PRINCIPALE).")
+text_configura_18=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
+text_configura_19=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configura_20=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
 
 if [[ "$check_amrif" == "$firma2" ]]; then
 YELLOW_BLUEMS="\u001b[33m"
@@ -1128,10 +1133,10 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 	echo -e "${BLUE}${text_configura_13[$LANG]}"
 	echo -e "${RED_BLUEMS}${text_configura_14[$LANG]}"
         echo ""
-        echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
+        echo -e "${PURPLE}${text_configura_15[$LANG]}"
    	while true; do
 	echo -e "${GREEN}"
-        read -p "Do you wish to change the order of these audio stream in the Advanced wrapper? " abcdefghz
+        read -p "${text_configura_16[$LANG]}" abcdefghz
         case $abcdefghz in
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
@@ -1142,18 +1147,18 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 	[Gg] ) config_G; break;;
 	[Hh] ) config_H; break;;
 	[Zz] ) start; break;;
-        * ) echo -e "${YELLOW}Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu).";;
+        * ) echo -e "${YELLOW}${text_configura_17[$LANG]}";;
         esac
         done
    
-   info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ===================="
+   info "${BLUE}${text_configura_18[$LANG]}"
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
    exit 1
 
 else
-   info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything."
+   info "${RED}${text_configura_19[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED and this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}Please, Install the Advanced Wrapper first and then you will can change the audio's streams order."
+   info "${BLUE}${text_configura_20[$LANG]}"
    start
 fi
 
