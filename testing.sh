@@ -956,71 +956,71 @@ function uninstall() {
   text_uninstall_17=("Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything." "Actualmente NO TIENES NINGÚN Wrapper Instalado. El Desinstalador NO PUEDE hacer nada." "Atualmente você NÃO TEM NENHUM Wrapper instalado. O Desinstalador NÃO PODE fazer nada." "Vous N'AVEZ actuellement AUCUN wrapper installé. Le programme de désinstallation ne peut rien faire." "Sie haben derzeit KEINEN Wrapper installiert. Das Deinstallationsprogramm kann NICHTS tun." "Attualmente NON HAI ALCUN Wrapper installato. Il programma di disinstallazione NON PUÒ fare nulla.")
   
 if [[ "$unmode" == "Old" ]]; then  
-  info "${BLUE}${text_uninstallold_1[$LANG]}"
+  info "${BLUE}${text_uninstall_1[$LANG]}"
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ====================" >> $logfile
 
-  info "${YELLOW}${text_uninstallold_2[$LANG]}"
+  info "${YELLOW}${text_uninstall_2[$LANG]}"
   info "${YELLOW}Restoring VideoStation's libsynovte.so" >> $logfile
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file" 2>> $logfile
     
   if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
-  info "${YELLOW}${text_uninstallold_3[$LANG]}"
+  info "${YELLOW}${text_uninstall_3[$LANG]}"
   info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past." >> $logfile
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile" 2>> $logfile
   fi
     
   if [[ -d "$ms_path" ]]; then
-    info "${YELLOW}${text_uninstallold_4[$LANG]}"
+    info "${YELLOW}${text_uninstall_4[$LANG]}"
     info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
     mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file" 2>> $logfile
     
-    info "${YELLOW}${text_uninstallold_5[$LANG]}"
+    info "${YELLOW}${text_uninstall_5[$LANG]}"
     info "${YELLOW}Remove of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
     rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
   
     find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}${text_uninstallold_6[$LANG]}"
+    info "${YELLOW}${text_uninstall_6[$LANG]}"
     info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
     done
   fi
 	
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
-    info "${YELLOW}${text_uninstallold_7[$LANG]}"
+    info "${YELLOW}${text_uninstall_7[$LANG]}"
     info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-      info "${YELLOW}${text_uninstallold_8[$LANG]}"
+      info "${YELLOW}${text_uninstall_8[$LANG]}"
       info "${YELLOW}Restoring CodecPack's $filename" >> $logfile
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
 
-   info "${YELLOW}${text_uninstallold_9[$LANG]}"
+   info "${YELLOW}${text_uninstall_9[$LANG]}"
    info "${YELLOW}Delete old log file ffmpeg." >> $logfile
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
      
-  info "${GREEN}${text_uninstallold_10[$LANG]}"
+  info "${GREEN}${text_uninstall_10[$LANG]}"
   echo ""
-  info "${BLUE}${text_uninstallold_11[$LANG]}"
+  info "${BLUE}${text_uninstall_11[$LANG]}"
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: COMPLETE ====================" >> $logfile
   echo ""
   echo ""
   
 if [[ "$mode" == "Simplest" ]]; then
-text_uninstallold_12=("====================CONTINUING With installation of the Simplest Wrapper...====================" "====================CONTINUANDO con la Instalación del Wrapper más simple...====================" "====================CONTINUAÇÃO com a instalação mais simples do wrapper...=====================" "====================SUITE avec l'installation de wrapper la plus simple...====================" "====================FORTSETZUNG mit der einfachsten Wrapper-Installation...====================" "=====================CONTINUA con l'installazione del wrapper più semplice...=====================")
-  info "${PURPLE}${text_uninstallold_12[$LANG]}"
+text_uninstall_12=("====================CONTINUING With installation of the Simplest Wrapper...====================" "====================CONTINUANDO con la Instalación del Wrapper más simple...====================" "====================CONTINUAÇÃO com a instalação mais simples do wrapper...=====================" "====================SUITE avec l'installation de wrapper la plus simple...====================" "====================FORTSETZUNG mit der einfachsten Wrapper-Installation...====================" "=====================CONTINUA con l'installazione del wrapper più semplice...=====================")
+  info "${PURPLE}${text_uninstall_12[$LANG]}"
   info "${PURPLE}====================CONTINUING With installation of the Simplest Wrapper...====================" >> $logfile
   echo ""
 fi
 
 if [[ "$mode" == "Advanced" ]]; then
-text_uninstallold_12=("====================CONTINUING With installation of the Advanced Wrapper...====================" "====================CONTINUANDO con la Instalación del Wrapper Avanzado...====================" "====================CONTINUANDO com a Instalação Avançada do Wrapper...=====================" "====================CONTINUANT ​​avec l'installation avancée de l'encapsuleur...====================" "====================FORTSETZUNG mit der Advanced Wrapper Installation...====================" "=====================CONTINUA con l'installazione avanzata del wrapper...====================")
-  info "${PURPLE}${text_uninstallold_12[$LANG]}"
+text_uninstall_12=("====================CONTINUING With installation of the Advanced Wrapper...====================" "====================CONTINUANDO con la Instalación del Wrapper Avanzado...====================" "====================CONTINUANDO com a Instalação Avançada do Wrapper...=====================" "====================CONTINUANT ​​avec l'installation avancée de l'encapsuleur...====================" "====================FORTSETZUNG mit der Advanced Wrapper Installation...====================" "=====================CONTINUA con l'installazione avanzata del wrapper...====================")
+  info "${PURPLE}${text_uninstall_12[$LANG]}"
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...====================" >> $logfile
   echo "" 
 fi
