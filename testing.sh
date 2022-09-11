@@ -1185,7 +1185,7 @@ while getopts s: flag; do
   esac
 done
 
-intro
+#intro
 
 titulo
 
