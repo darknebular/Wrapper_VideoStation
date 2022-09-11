@@ -20,7 +20,7 @@ version="SCPT_1.17_BETA"
 # SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices. (Deprecated migrated to SCPT_1.15)
 # SCPT_1.15: Added the new wrapper's version in the installer. (Deprecated migrated to SCPT_1.16)
 # SCPT_1.16: Improvement in the Licence checker of the AME. Ensuring that the Installer will only patching DSM 7.0.X and 7.1.X legit. (Deprecated migrated to SCPT_1.17)
-# SCPT_1.17: Added Multi-Language Support. Aesthetic improvements in the logging of the Wrappers. Clean the code.
+# SCPT_1.17: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Clean the code.
 
 ##############################################################
 
@@ -654,13 +654,14 @@ function language() {
  text_language_4=("Please answer with the correct option writing: E or C or P or F or D or I. Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: E o C o P o F o D o I. Escribe Z (para volver al menú PRINCIPAL)." "Por favor responda com a opção correta escrevendo: E ou C ou P ou F ou D ou I. Escreva Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en écrivant : E ou C ou P ou F ou D ou I. Écrivez Z (pour retourner au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Schreibweise: E oder C oder P oder F oder D oder I. Schreiben Sie Z (für die Rückkehr zum HAUPTMENÜ)." "Rispondi con l'opzione corretta scrivendo: E o C o P o F o D o I. Scrivi Z (per tornare al menu PRINCIPALE).")
  text_language_5=("==================== Configuration of the Language in this Installer ====================" "==================== Configuración del idioma en este instalador ====================" "==================== Configurando o idioma neste instalador =====================" "==================== Réglage de la langue dans ce programme d'installation ====================" "==================== Einstellen der Sprache in diesem Installationsprogramm ====================" "===================== Impostazione della lingua in questo programma di installazione ====================")	
 	
-	echo -e "${YELLOW}${text_language_1[$LANG]}"
 	echo ""
         echo -e "${BLUE}${text_language_5[$LANG]}"
 	info "${BLUE}==================== Configuration of the Language in this Installer ====================" >> $logfile
 	echo ""
 	echo ""
-        echo -e "${BLUE} ( E ) English."
+        echo -e "${YELLOW}${text_language_1[$LANG]}"
+	echo ""
+	echo -e "${BLUE} ( E ) English."
         echo -e "${BLUE} ( C ) Castellano." 
         echo -e "${BLUE} ( P ) Português."
         echo -e "${BLUE} ( F ) Français."
@@ -945,23 +946,20 @@ function uninstall_old() {
   text_uninstallold_9=("Delete old log file ffmpeg." "Borrado del viejo archivo de logs llamado ffmpeg." "Exclua o arquivo de log antigo chamado ffmpeg." "Supprimez l'ancien fichier journal appelé ffmpeg." "Löschen Sie die alte Protokolldatei namens ffmpeg." "Elimina il vecchio file di registro chiamato ffmpeg.")
   text_uninstallold_10=("Uninstalled correctly the old Wrapper." "Desinstalado correctamente el viejo Wrapper." "Desinstalado com sucesso o Wrapper antigo." "Désinstallation réussie de l'ancien Wrapper." "Den alten Wrapper erfolgreich deinstalliert." "Disinstallato con successo il vecchio Wrapper.")
   text_uninstallold_11=("==================== Uninstallation of OLD wrappers in the system: COMPLETE ====================" "==================== Desinstalación de VIEJOS wrappers en el sistema: COMPLETADO ====================" "==================== Desinstalando OLD wrappers no sistema: COMPLETO ======================" "==================== Désinstallation des anciens wrappers sur le système : COMPLET =====================" "==================== ALTE Wrapper auf dem System deinstallieren: VOLLSTÄNDIG =====================" "===================== Disinstallazione dei VECCHI wrapper sul sistema: COMPLETO =====================")
-  
-  
+    
   info "${BLUE}${text_uninstallold_1[$LANG]}"
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ====================" >> $logfile
 
   info "${YELLOW}${text_uninstallold_2[$LANG]}"
   info "${YELLOW}Restoring VideoStation's libsynovte.so" >> $logfile
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file" 2>> $logfile
-  
-  
+    
   if [[ -f "$vs_path/etc/TransProfile.orig" ]]; then
   info "${YELLOW}${text_uninstallold_3[$LANG]}"
   info "${YELLOW}Restoring VideoStation's TransProfile if It has been modified in the past." >> $logfile
   mv -T -f "$vs_path/etc/TransProfile.orig" "$vs_path/etc/TransProfile" 2>> $logfile
   fi
-  
-  
+    
   if [[ -d "$ms_path" ]]; then
     info "${YELLOW}${text_uninstallold_4[$LANG]}"
     info "${YELLOW}Restoring MediaServer's libsynovte.so" >> $logfile
@@ -1017,12 +1015,10 @@ text_uninstallold_12=("====================CONTINUING With installation of the A
   info "${PURPLE}====================CONTINUING With installation of the Advanced Wrapper...====================" >> $logfile
   echo "" 
 fi
-
   
   install
   
 }
-
 
 function uninstall() {
 text_uninstall_1=("==================== Uninstallation the Simplest or the Advanced Wrapper: START ====================" "==================== Desinstalación del Wrapper más simple o del avanzado: INICIO ====================" "==================== Desinstalando o Wrapper Simples ou Avançado: HOME =====================" "==================== Désinstallation de l'encapsuleur simple ou avancé : ACCUEIL ====================" "==================== Deinstallieren des Simpler oder Advanced Wrappers: HOME ====================" "===================== Disinstallazione del wrapper più semplice o avanzato: HOME ====================")
@@ -1032,7 +1028,9 @@ text_uninstall_4=("Remove of the KEY of this Wrapper in DLNA MediaServer." "Elim
 text_uninstall_5=("Restoring MediaServer's $filename" "Restaurando el $filename de MediaServer" "Restaurando o MediaServer $filename" "Restauration de la MediaServer $filename" "Wiederherstellen der MediaServer $filename" "Ripristino di MediaServer $filename")
 text_uninstall_6=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
 text_uninstall_7=("Delete new log file wrapper_ffmpeg." "Borrado del nuevo fichero de logs llamado wrapper_ffmpeg." "Exclua o novo arquivo de log chamado wrapper_ffmpeg." "Supprimez le nouveau fichier journal appelé wrapper_ffmpeg." "Löschen Sie die neue Protokolldatei namens wrapper_ffmpeg." "Elimina il nuovo file di registro chiamato wrapper_ffmpeg.")
-
+text_uninstall_8=("Uninstalled correctly the Simplest or the Advanced Wrapper in DLNA MediaServer (If exist) and VideoStation." "Desinstalado correctamente el Wrapper más simple o el Avanzado en DLNA MediaServer (si existiese) y VideoStation." "Desinstalou com êxito o Simpler ou Advanced Wrapper no DLNA MediaServer (se houver) e no VideoStation." "Désinstallation réussie de Simpler ou Advanced Wrapper sur DLNA MediaServer (le cas échéant) et VideoStation." "Der Simpler oder Advanced Wrapper wurde erfolgreich auf DLNA MediaServer (falls vorhanden) und VideoStation deinstalliert." "Disinstallazione riuscita di Simpler o Advanced Wrapper su DLNA MediaServer (se presente) e VideoStation.")
+text_uninstall_9=("==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ====================" "==================== Desinstalación del Wrapper más simple o del avanzado: COMPLETADO ====================" "==================== Desinstalando o Wrapper mais simples ou avançado: COMPLETED =====================" "==================== Désinstallation du Wrapper plus simple ou avancé : TERMINÉ ====================" "==================== Deinstallation des einfacheren oder erweiterten Wrappers: ABGESCHLOSSEN ====================" "===================== Disinstallazione del wrapper più semplice o avanzato: COMPLETATO ====================")
+text_uninstall_10=("Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything." "Actualmente NO TIENES NINGÚN Wrapper Instalado. El Desinstalador NO PUEDE hacer nada." "Atualmente você NÃO TEM NENHUM Wrapper instalado. O Desinstalador NÃO PODE fazer nada." "Vous N'AVEZ actuellement AUCUN wrapper installé. Le programme de désinstallation ne peut rien faire." "Sie haben derzeit KEINEN Wrapper installiert. Das Deinstallationsprogramm kann NICHTS tun." "Attualmente NON HAI ALCUN Wrapper installato. Il programma di disinstallazione NON PUÒ fare nulla.")
 
   for losorig in "${all_files[@]}"; do
   if [[ -f "$losorig" ]]; then
@@ -1054,7 +1052,6 @@ text_uninstall_7=("Delete new log file wrapper_ffmpeg." "Borrado del nuevo fiche
        mv -T -f "$filename" "${filename::-5}"
        done
   fi
-
       find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
       info "${YELLOW}${text_uninstall_6[$LANG]}"
       mv -T -f "$filename" "${filename::-5}"
@@ -1065,15 +1062,15 @@ text_uninstall_7=("Delete new log file wrapper_ffmpeg." "Borrado del nuevo fiche
 
   restart_packages
   
-  info "${GREEN}Uninstalled correctly the Simplest or the Advanced Wrapper in DLNA MediaServer (If exist) and VideoStation."
+  info "${GREEN}${text_uninstall_8[$LANG]}"
 
   echo ""
-  info "${BLUE}==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ===================="
+  info "${BLUE}${text_uninstall_9[$LANG]}"
   exit 1
   
   else
   
-  info "${RED}Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything."
+  info "${RED}${text_uninstall_10[$LANG]}"
   exit 1
   
   fi
@@ -1082,6 +1079,22 @@ text_uninstall_7=("Delete new log file wrapper_ffmpeg." "Borrado del nuevo fiche
 
 function configurator() {
 clear
+
+text_configura_1=("==================== Configuration of the Advanced Wrapper: START ====================" "==================== Configuración para el Wrapper Avanzado: INICIO ====================" "==================== Configurações para o Wrapper Avançado: HOME =====================" "==================== Paramètres de l'encapsuleur avancé : ACCUEIL ====================" "==================== Einstellungen für den Advanced Wrapper: HOME ====================" "===================== Impostazioni per il wrapper avanzato: HOME ====================")
+text_configura_2=("REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work" "RECUERDA: Si cambias el orden en VIDEO-STATION tendrás SIEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) en la primera transmisión de audio y algunos dispositivos no compatibles con 5.1 ni transmisiones múltiples de audio como Chromecast no funcionarán" "LEMBRE-SE: Se você alterar a ordem em VIDEO-STATION, SEMPRE terá AAC 5.1 512kbps (ou AC3 5.1 640kbps) no primeiro fluxo de áudio e alguns dispositivos não compatíveis com 5.1 ou vários fluxos de áudio como o Chromecast não funcionarão" "N'OUBLIEZ PAS : Si vous modifiez l'ordre dans VIDEO-STATION, vous aurez TOUJOURS AAC 5.1 512kbps (ou AC3 5.1 640kbps) sur le premier flux audio et certains appareils non compatibles avec 5.1 ou plusieurs flux audio comme Chromecast ne fonctionneront pas" "BEACHTEN SIE: Wenn Sie die Reihenfolge in VIDEO-STATION ändern, haben Sie IMMER AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) im ersten Audiostream und einige Geräte, die nicht mit 5.1 kompatibel sind, oder mehrere Audiostreams wie Chromecast funktionieren nicht" "RICORDA: Se modifichi l'ordine in VIDEO-STATION avrai SEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) sul primo flusso audio e alcuni dispositivi non compatibili con 5.1 o più flussi audio come Chromecast non funzioneranno")
+text_configura_3=("Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams order." "Ahora puede cambiar el códec de audio de AAC 512 kbps a AC3 640 kbps independientemente del orden de las transmisiones de audio." "Agora você pode alterar o codec de áudio de AAC 512 kbps para AC3 640 kbps, independentemente da ordem dos fluxos de áudio." "Vous pouvez maintenant changer le codec audio de AAC 512 kbps à AC3 640 kbps quel que soit l'ordre des flux audio." "Sie können jetzt den Audiocodec unabhängig von der Reihenfolge der Audiostreams von AAC 512 kbps auf AC3 640 kbps ändern." "È ora possibile modificare il codec audio da AAC 512 kbps a AC3 640 kbps indipendentemente dall'ordine dei flussi audio.")
+text_configura_4=("AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices." "AC3 640kbps tiene un poco menos de calidad y peor rendimiento que AAC pero es más compatible con dispositivos LEGACY." "AC3 640kbps tem qualidade ligeiramente inferior e desempenho inferior ao AAC, mas é mais compatível com dispositivos LEGACY." "AC3 640kbps a une qualité légèrement inférieure et des performances inférieures à AAC mais est plus compatible avec les appareils LEGACY." "AC3 640kbps hat eine etwas geringere Qualität und schlechtere Leistung als AAC, ist aber besser mit LEGACY-Geräten kompatibel." "AC3 640kbps ha una qualità leggermente inferiore e prestazioni inferiori rispetto a AAC ma è più compatibile con i dispositivi LEGACY.")
+text_configura_5=("Changing the audio stream's order automatically will put again 2 audio Streams." "Cambiando el orden de los flujos de audio hará que vuelvan a ponerse otra vez 2 flujos de audio automáticamente." "Alterar a ordem dos fluxos de áudio retornará automaticamente para 2 fluxos de áudio." "Changer l'ordre des flux audio reviendra automatiquement à 2 flux audio." "Wenn Sie die Reihenfolge der Audiostreams ändern, wird automatisch wieder auf 2 Audiostreams umgeschaltet." "La modifica dell'ordine dei flussi audio tornerà automaticamente a 2 flussi audio.")
+text_configura_6=("THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:" "ESTE ES EL MENÚ DE LA HERRAMIENTA DEL CONFIGURADOR, POR FAVOR ELIJA SU SELECCIÓN:" "ESTE É O MENU DA FERRAMENTA DO CONFIGURADOR, FAÇA SUA SELEÇÃO:" "VOICI LE MENU DE L'OUTIL CONFIGURATEUR, VEUILLEZ FAIRE VOTRE SÉLECTION :" "DAS IST DAS MENÜ DES KONFIGURATOR-TOOLS, BITTE TREFFEN SIE IHRE AUSWAHL:" "QUESTO È IL MENU DELLO STRUMENTO DI CONFIGURAZIONE, SI PREGA DI SELEZIONARE:")
+text_configura_7=(" ( A ) FIRST STREAM= MP3 2.0 256kbps, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)" " ( A ) PRIMER FLUJO= MP3 2.0 256kbps, SEGUNDO FLUJO= AAC 5.1 512kbps (or AC3 5.1 640kbps) cuando se necesite transcodificar en VIDEO-STATION. (ORDEN POR DEFECTO en VIDEO-STATION)" " ( A ) PRIMEIRO STREAM= MP3 2.0 256kbps, SEGUNDO STREAM= AAC 5.1 512kbps (ou AC3 5.1 640kbps) quando a transcodificação é necessária em VIDEO-STATION. (PEDIDO PADRÃO na ESTAÇÃO DE VÍDEO)" " ( A ) PREMIER FLUX = MP3 2.0 256kbps, DEUXIÈME FLUX = AAC 5.1 512kbps (ou AC3 5.1 640kbps) lorsque le transcodage est nécessaire sur VIDEO-STATION. (ORDRE PAR DEFAUT dans VIDEO-STATION)" " ( A ) ERSTER STREAM = MP3 2.0 256 kbps, ZWEITER STREAM = AAC 5.1 512 kbps (oder AC3 5.1 640 kbps), wenn eine Transcodierung auf VIDEO-STATION erforderlich ist. (STANDARDREIHENFOLGE in VIDEO-STATION)" " ( A ) PRIMO STREAM= MP3 2.0 256 kbps, SECONDO STREAM= AAC 5.1 512 kbps (o AC3 5.1 640 kbps) quando è necessaria la transcodifica su VIDEO-STATION. (ORDINE PREDEFINITO in VIDEO-STATION)")
+text_configura_8=(" ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." " ( B ) PRIMER FLUJO= AAC 5.1 512kbps (or AC3 5.1 640kbps), SEGUNDO FLUJO= MP3 2.0 256kbps cuando se necesite transcodificar en VIDEO-STATION." " ( B ) PRIMEIRO STREAM= AAC 5.1 512kbps (ou AC3 5.1 640kbps), SEGUNDO STREAM= MP3 2.0 256kbps quando a transcodificação é necessária em VIDEO-STATION." " ( B ) PREMIER FLUX = AAC 5.1 512kbps (ou AC3 5.1 640kbps), DEUXIÈME FLUX = MP3 2.0 256kbps lorsque le transcodage est nécessaire sur VIDEO-STATION." " ( B ) ERSTER STREAM = AAC 5.1 512 kbps (oder AC3 5.1 640 kbps), ZWEITER STREAM = MP3 2.0 256 kbps, wenn eine Transcodierung auf VIDEO-STATION erforderlich ist." " ( B ) PRIMO STREAM= AAC 5.1 512 kbps (o AC3 5.1 640 kbps), SECONDO STREAM= MP3 2.0 256 kbps quando è necessaria la transcodifica su VIDEO-STATION.")
+text_configura_9=(" ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both." " ( C ) Cambiar el codec de audio 5.1 de AAC 512 kbps a AC3 640kbps independientemente del orden de los flujos de audio en ambos." " ( C ) Altere o codec de áudio 5.1 de AAC 512kbps para AC3 640kbps, independentemente da ordem dos fluxos de áudio em ambos." " ( C ) Modifiez le codec audio 5.1 de AAC 512kbps à AC3 640kbps quel que soit l'ordre des flux audio dans les deux." " ( C ) Ändern Sie den 5.1-Audiocodec von AAC 512 kbps auf AC3 640 kbps, unabhängig von der Reihenfolge der Audiostreams in beiden." " ( C ) Modificare il codec audio 5.1 da AAC 512 kbps a AC3 640 kbps indipendentemente dall'ordine dei flussi audio in entrambi.")
+text_configura_10=(" ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER in DLNA)" " ( D ) PRIMER FLUJO= AAC 5.1 512kbps (or AC3 5.1 640kbps), SEGUNDO FLUJO= MP3 2.0 256kbps cuando se necesite transcodificar en DLNA MediaServer. (ORDEN POR DEFECTO en DLNA)" " ( D ) PRIMEIRO STREAM= AAC 5.1 512kbps (ou AC3 5.1 640kbps), SEGUNDO STREAM= MP3 2.0 256kbps quando a transcodificação é necessária em DLNA MediaServer. (PEDIDO PADRÃO na DLNA)" " ( D ) PREMIER FLUX = AAC 5.1 512kbps (ou AC3 5.1 640kbps), DEUXIÈME FLUX = MP3 2.0 256kbps lorsque le transcodage est nécessaire sur DLNA MediaServer. (ORDRE PAR DEFAUT dans DLNA)" " ( D ) ERSTER STREAM = AAC 5.1 512 kbps (oder AC3 5.1 640 kbps), ZWEITER STREAM = MP3 2.0 256 kbps, wenn eine Transcodierung auf DLNA MediaServer erforderlich ist. (STANDARDREIHENFOLGE in DLNA)" " ( D ) PRIMO STREAM= AAC 5.1 512 kbps (o AC3 5.1 640 kbps), SECONDO STREAM= MP3 2.0 256 kbps quando è necessaria la transcodifica su DLNA MediaServer. (ORDINE PREDEFINITO in DLNA)")
+text_configura_11=(" ( E ) FIRST STREAM= MP3 2.0 256kbps, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer." " ( E ) PRIMER FLUJO= MP3 2.0 256kbps, SEGUNDO FLUJO= AAC 5.1 512kbps (or AC3 5.1 640kbps) cuando se necesite transcodificar en DLNA MediaServer." " ( E ) PRIMEIRO STREAM= MP3 2.0 256kbps, SEGUNDO STREAM= AAC 5.1 512kbps (ou AC3 5.1 640kbps) quando a transcodificação é necessária em DLNA MediaServer." " ( E ) PREMIER FLUX = MP3 2.0 256kbps, DEUXIÈME FLUX = AAC 5.1 512kbps (ou AC3 5.1 640kbps) lorsque le transcodage est nécessaire sur DLNA MediaServer." " ( E ) ERSTER STREAM = MP3 2.0 256 kbps, ZWEITER STREAM = AAC 5.1 512 kbps (oder AC3 5.1 640 kbps), wenn eine Transcodierung auf DLNA MediaServer erforderlich ist." " ( E ) PRIMO STREAM= MP3 2.0 256 kbps, SECONDO STREAM= AAC 5.1 512 kbps (o AC3 5.1 640 kbps) quando è necessaria la transcodifica su DLNA MediaServer.")
+text_configura_12=(" ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both." " ( F ) Cambiar el codec de audio 5.1 de AC3 640kbps a AAC 512 kbps independientemente del orden de los flujos de audio en ambos." " ( F ) Altere o codec de áudio 5.1 de AC3 640kbps para AAC 512kbps, independentemente da ordem dos fluxos de áudio em ambos." " ( F ) Modifiez le codec audio 5.1 de AC3 640kbps à AAC 512kbps quel que soit l'ordre des flux audio dans les deux." " ( F ) Ändern Sie den 5.1-Audiocodec von AC3 640 kbps auf AAC 512 kbps, unabhängig von der Reihenfolge der Audiostreams in beiden." " ( F ) Modificare il codec audio 5.1 da AC3 640 kbps a AAC 512 kbps indipendentemente dall'ordine dei flussi audio in entrambi.")
+text_configura_13=(" ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." " ( G ) Usar un único flujo de audio en VIDEO-STATION (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." " ( G ) Use um único fluxo de áudio no VIDEO-STATION (o primeiro fluxo selecionado acima) para economizar recursos do sistema em dispositivos menos potentes." " ( G ) Utilisez un seul flux audio sur VIDEO-STATION (le premier flux sélectionné ci-dessus) pour économiser les ressources système sur les appareils moins puissants." " ( G ) Verwenden Sie einen einzelnen Audiostream auf VIDEO-STATION (den ersten oben ausgewählten Stream), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." " ( G ) Utilizzare un unico flusso audio su VIDEO-STATION (il primo flusso selezionato sopra) per risparmiare risorse di sistema su dispositivi meno potenti.")
+text_configura_14=(" ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." " ( H ) Usar un único flujo de audio en DLNA MediaServer (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." " ( H ) Use um único fluxo de áudio no DLNA MediaServer (o primeiro fluxo selecionado acima) para economizar recursos do sistema em dispositivos menos potentes." " ( H ) Utilisez un seul flux audio sur DLNA MediaServer (le premier flux sélectionné ci-dessus) pour économiser les ressources système sur les appareils moins puissants." " ( H ) Verwenden Sie einen einzelnen Audiostream auf DLNA MediaServer (den ersten oben ausgewählten Stream), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." " ( H ) Utilizzare un unico flusso audio su DLNA MediaServer (il primo flusso selezionato sopra) per risparmiare risorse di sistema su dispositivi meno potenti.")
+
 
 if [[ "$check_amrif" == "$firma2" ]]; then
 YELLOW_BLUEMS="\u001b[33m"
@@ -1096,24 +1109,24 @@ fi
 if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 
         echo ""
-        info "${BLUE}==================== Configuration of the Advanced Wrapper: START ===================="
+        info "${BLUE}${text_configura_1[$LANG]}"
 	echo ""
-        echo -e "${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work"
-        echo -e "${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams."
-	echo -e "${GREEN}AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices."
-	echo -e "${GREEN}Changing the audio stream's order automatically will put again 2 audio Streams."
+        echo -e "${YELLOW}${text_configura_2[$LANG]}"
+        echo -e "${GREEN}${text_configura_3[$LANG]}"
+	echo -e "${GREEN}${text_configura_4[$LANG]}"
+	echo -e "${GREEN}${text_configura_5[$LANG]}"
 	echo ""
         echo ""
-        echo -e "${YELLOW}THIS IS THE CONFIGURATOR TOOL MENU, PLEASE CHOOSE YOUR SELECTION:"
+        echo -e "${YELLOW}${text_configura_6[$LANG]}"
         echo ""
-        echo -e "${BLUE} ( A ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in VIDEO-STATION. (DEFAULT ORDER VIDEO-STATION)"
-        echo -e "${BLUE} ( B ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in VIDEO-STATION." 
-        echo -e "${YELLOW_BLUEMS} ( C ) Change the 5.1 audio's codec from AAC 512kbps to AC3 640kbps independently of its audio's streams order in both."
-        echo -e "${RED_BLUEMS} ( D ) FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps), SECOND STREAM= MP3 2.0 256kbps when It needs to do transcoding in DLNA MediaServer. (DEFAULT ORDER DLNA)"
-        echo -e "${RED_BLUEMS} ( E ) FIRST STREAM= MP3 2.0 256kbpss, SECOND STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps) when It needs to do transcoding in DLNA MediaServer."
-        echo -e "${YELLOW_BLUEMS} ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both."
-	echo -e "${BLUE} ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices."
-	echo -e "${RED_BLUEMS} ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices."
+        echo -e "${BLUE}${text_configura_7[$LANG]}"
+        echo -e "${BLUE}${text_configura_8[$LANG]}" 
+        echo -e "${YELLOW_BLUEMS}${text_configura_9[$LANG]}"
+        echo -e "${RED_BLUEMS}${text_configura_10[$LANG]}"
+        echo -e "${RED_BLUEMS}${text_configura_11[$LANG]}"
+        echo -e "${YELLOW_BLUEMS}${text_configura_12[$LANG]}"
+	echo -e "${BLUE}${text_configura_13[$LANG]}"
+	echo -e "${RED_BLUEMS}${text_configura_14[$LANG]}"
         echo ""
         echo -e "${PURPLE} ( Z ) RETURN to MAIN menu."
    	while true; do
