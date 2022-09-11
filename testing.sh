@@ -943,9 +943,6 @@ function uninstall() {
   text_uninstall_3=("Restoring VideoStation's TransProfile if It has been modified in the past." "Restaurando el TransProfile de VideoStation si este ha sido modificado en el pasado." "Restaurar o TransProfile do VideoStation se tiver sido modificado no passado." "Restauration du TransProfile de VideoStation s'il a été modifié dans le passé." "Wiederherstellen des TransProfile der VideoStation, wenn es in der Vergangenheit geändert wurde." "Ripristino del TransProfile di VideoStation se è stato modificato in passato.")
   text_uninstall_4=("Restoring MediaServer's libsynovte.so" "Restaurando el libsynovte.so de MediaServer" "Restaurando o MediaServer libsynovte.so" "Restauration de la MediaServer libsynovte.so" "Wiederherstellen der MediaServer libsynovte.so" "Ripristino di MediaServer libsynovte.so")
   text_uninstall_5=("Remove of the KEY of this Wrapper in DLNA MediaServer." "Eliminar la CLAVE de este Wrapper en DLNA MediaServer." "Exclua a KEY deste Wrapper no DLNA MediaServer." "Supprimez la clé de ce wrapper dans DLNA MediaServer." "Löschen Sie den SCHLÜSSEL dieses Wrappers im DLNA MediaServer." "Eliminare la CHIAVE di questo wrapper in DLNA MediaServer.")
-  text_uninstall_6=("Restoring MediaServer's $filename" "Restaurando el $filename de MediaServer" "Restaurando o MediaServer $filename" "Restauration de la MediaServer $filename" "Wiederherstellen der MediaServer $filename" "Ripristino di MediaServer $filename")
-  text_uninstall_7=("Restoring VideoStation's $filename" "Restaurando el $filename de VideoStation" "Restaurando o VideoStation $filename" "Restauration de la VideoStation $filename" "Wiederherstellen der VideoStation $filename" "Ripristino di VideoStation $filename")
-  text_uninstall_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
   text_uninstall_9=("Delete old log file ffmpeg." "Borrado del viejo archivo de logs llamado ffmpeg." "Exclua o arquivo de log antigo chamado ffmpeg." "Supprimez l'ancien fichier journal appelé ffmpeg." "Löschen Sie die alte Protokolldatei namens ffmpeg." "Elimina il vecchio file di registro chiamato ffmpeg.")
   text_uninstall_10=("Uninstalled correctly the old Wrapper." "Desinstalado correctamente el viejo Wrapper." "Desinstalado com sucesso o Wrapper antigo." "Désinstallation réussie de l'ancien Wrapper." "Den alten Wrapper erfolgreich deinstalliert." "Disinstallato con successo il vecchio Wrapper.")
   text_uninstall_11=("==================== Uninstallation of OLD wrappers in the system: COMPLETE ====================" "==================== Desinstalación de VIEJOS wrappers en el sistema: COMPLETADO ====================" "==================== Desinstalando OLD wrappers no sistema: COMPLETO ======================" "==================== Désinstallation des anciens wrappers sur le système : COMPLET =====================" "==================== ALTE Wrapper auf dem System deinstallieren: VOLLSTÄNDIG =====================" "===================== Disinstallazione dei VECCHI wrapper sul sistema: COMPLETO =====================")
@@ -979,6 +976,7 @@ if [[ "$unmode" == "Old" ]]; then
     rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
   
     find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
+    text_uninstall_6=("Restoring MediaServer's $filename" "Restaurando el $filename de MediaServer" "Restaurando o MediaServer $filename" "Restauration de la MediaServer $filename" "Wiederherstellen der MediaServer $filename" "Ripristino di MediaServer $filename")
     info "${YELLOW}${text_uninstall_6[$LANG]}"
     info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
@@ -986,6 +984,7 @@ if [[ "$unmode" == "Old" ]]; then
   fi
 	
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
+  text_uninstall_7=("Restoring VideoStation's $filename" "Restaurando el $filename de VideoStation" "Restaurando o VideoStation $filename" "Restauration de la VideoStation $filename" "Wiederherstellen der VideoStation $filename" "Ripristino di VideoStation $filename")
     info "${YELLOW}${text_uninstall_7[$LANG]}"
     info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
@@ -993,6 +992,7 @@ if [[ "$unmode" == "Old" ]]; then
   
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
+  text_uninstall_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
       info "${YELLOW}${text_uninstall_8[$LANG]}"
       info "${YELLOW}Restoring CodecPack's $filename" >> $logfile
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
@@ -1047,6 +1047,7 @@ for losorig in "${all_files[@]}"; do
   fi
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
+  text_uninstall_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
   info "${YELLOW}${text_uninstall_8[$LANG]}"
   mv -T -f "$filename" "${filename::-5}"
   done
