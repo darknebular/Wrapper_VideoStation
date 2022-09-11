@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_1.17_BETA"
+version="SCPT_1.17"
 # Changes:
 # SCPT_1.0: Initial release of the automatic installer script for DMS 7.X. (Deprecated migrated to SCPT_1.1)
 # SCPT_1.1: To avoid discrepancies and possible deletion of original binaries when there is a previously installed wrapper, an analyzer of other installations has been added. (Deprecated migrated to SCPT_1.2)
@@ -20,7 +20,7 @@ version="SCPT_1.17_BETA"
 # SCPT_1.14: Added two new options in Configurator Tool, now you can change to use an unique audio's stream for low powered devices. (Deprecated migrated to SCPT_1.15)
 # SCPT_1.15: Added the new wrapper's version in the installer. (Deprecated migrated to SCPT_1.16)
 # SCPT_1.16: Improvement in the Licence checker of the AME. Ensuring that the Installer will only patching DSM 7.0.X and 7.1.X legit. (Deprecated migrated to SCPT_1.17)
-# SCPT_1.17: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Clean the code.
+# SCPT_1.17: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Clean the code. Adding a ASCII Intro.
 
 ##############################################################
 
@@ -110,6 +110,14 @@ echo -e  "${RED}${text_ckck_depen3[$LANG]}"
 exit 1
 fi
 
+}
+function intro() {
+  intro=$(curl -s -L "$repo_url/main/intro.txt")
+  if [ "${#intro}" -ge 1 ]; then
+    echo ""
+    echo -e "${PURPLE}	$intro"
+    echo ""
+  fi
 }
 function welcome() {
   text_welcome_1=("FFMPEG WRAPPER INSTALLER version: $version" "INSTALADOR DEL FFMPEG WRAPPER version: $version" "FFMPEG WRAPPER INSTALLER versão: $version" "Version de l'INSTALLATEUR D'EMBALLAGE FFMPEG : $version" "FFMPEG WRAPPER INSTALLER-Version: $version" "FFMPEG WRAPPER INSTALLER versione: $version")
@@ -1175,6 +1183,8 @@ while getopts s: flag; do
     *) echo "usage: $0 [-s install|uninstall|config|info]" >&2; exit 1;;
   esac
 done
+
+intro
 
 titulo
 
