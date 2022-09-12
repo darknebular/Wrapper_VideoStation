@@ -945,14 +945,14 @@ restart_packages
 
 if [[ "$mode" == "Simplest" ]]; then
 text_install_30=("==================== Installation of the Simplest Wrapper: COMPLETE ====================" "==================== Instalación del Wrapper más simple: COMPLETADO ====================" "==================== Instalando o Wrapper Mais Simples: COMPLETO =====================" "==================== Installation de l'encapsuleur le plus simple : COMPLET ====================" "==================== Installation des einfachsten Wrappers: VOLLSTÄNDIG ====================" "===================== Installazione del wrapper più semplice: COMPLETO ====================")
-info "${BLUE}${GREEN}${text_install_30[$LANG]}"
+info "${BLUE}${text_install_30[$LANG]}"
 info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ====================" >> $logfile
 echo ""
 fi
 
 if [[ "$mode" == "Advanced" ]]; then
 text_install_30=("==================== Installation of the Advanced Wrapper: COMPLETE ====================" "==================== Instalación del Wrapper Avanzado: COMPLETADO ====================" "==================== Instalação Avançada do Wrapper: COMPLETA =====================" "==================== Installation de l'encapsuleur avancé : COMPLET ====================" "==================== Installation des Advanced Wrappers: VOLLSTÄNDIG ====================" "===================== Installazione del wrapper avanzato: COMPLETO ====================")
-info "${BLUE}${GREEN}${text_install_30[$LANG]}"
+info "${BLUE}${text_install_30[$LANG]}"
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ====================" >> $logfile
 echo ""   
 fi
