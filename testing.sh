@@ -1077,12 +1077,12 @@ for losorig in "${all_files[@]}"; do
   mv -T -f "$filename" "${filename::-5}"
   done
   
+  restart_packages
+  
   info "${YELLOW}${text_uninstall_14[$LANG]}"
 	touch "$logfile"
 	rm "$logfile"
-
-  restart_packages
-  
+    
   info "${GREEN}${text_uninstall_15[$LANG]}"
 
   echo ""
