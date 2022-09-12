@@ -1,11 +1,12 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.1"
+version="SCPT_2.2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
 # SCPT_2.1: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Adding a ASCII Intro.
+# SCPT_2.2: Added new info texts. 
 
 ##############################################################
 
@@ -682,6 +683,10 @@ function language() {
 
 function language_E() {
 LANG="0"
+echo ""
+info "${GREEN}Changed correctly the Language in this Installer to: ENGLISH"
+info "${BLUE}==================== Changed the Language in this Installer to: ENGLISH ====================" >> $logfile
+sleep 2
 clear
 titulo
 welcome
@@ -694,6 +699,10 @@ start
 
 function language_C() {
 LANG="1"
+echo ""
+info "${GREEN}Cambió correctamente el idioma en este instalador a: CASTELLANO"
+info "${BLUE}==================== Changed the Language in this Installer to: SPANISH ====================" >> $logfile
+sleep 2
 clear
 titulo
 welcome
@@ -705,6 +714,10 @@ start
 }
 function language_P() {
 LANG="2"
+echo ""
+info "${GREEN}Alterado corretamente o Idioma neste Instalador para: PORTUGUÊS"
+info "${BLUE}==================== Changed the Language in this Installer to: PORTUGUESE ====================" >> $logfile
+sleep 2
 clear
 titulo
 welcome
@@ -716,6 +729,10 @@ start
 }
 function language_F() {
 LANG="3"
+echo ""
+info "${GREEN}Changé correctement la langue dans ce programme d'installation en : FRANÇAIS"
+info "${BLUE}==================== Changed the Language in this Installer to: FRENCH ====================" >> $logfile
+sleep 2
 clear
 titulo
 welcome
@@ -727,6 +744,10 @@ start
 }
 function language_D() {
 LANG="4"
+echo ""
+info "${GREEN}Die Sprache in diesem Installer korrekt geändert auf: GERMAN"
+info "${BLUE}==================== Changed the Language in this Installer to: GERMAN ====================" >> $logfile
+sleep 2
 clear
 titulo
 welcome
@@ -738,6 +759,10 @@ start
 }
 function language_I() {
 LANG="5"
+echo ""
+info "${GREEN}Modificata correttamente la Lingua in questo Installer in: ITALIANO"
+info "${BLUE}==================== Changed the Language in this Installer to: ITALIAN ====================" >> $logfile
+sleep 2
 clear
 titulo
 welcome
@@ -877,8 +902,8 @@ fi
 done
 
 if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
-text_install_23=("Adding of the KEY of this Wrapper in DLNA MediaServer." "Añadiendo la CLAVE de este Wrapper en DLNA MediaServer." "Adicionando a KEY deste Wrapper no DLNA MediaServer." "Ajout de la clé de ce wrapper dans DLNA MediaServer." "Hinzufügen des SCHLÜSSELS dieses Wrappers in DLNA MediaServer." "Aggiunta della chiave di questo wrapper in DLNA MediaServer.")
-text_install_24=("Installed correctly the wrapper41 in $ms_path/bin" "Instalado correctamente el wrapper41 en $ms_path/bin" "Wrapper41 instalado com sucesso em $ms_path/bin" "Wrapper41 installé avec succès dans $ms_path/bin" "Wrapper41 erfolgreich in $ms_path/bin installiert" "Wrapper41 installato correttamente in $ms_path/bin")
+text_install_23=("Adding of the KEY of this Wrapper in DLNA MediaServer." "Añadiendo la CLAVE de este Wrapper en DLNA MediaServer." "Adicionando a KEY deste Wrapper no DLNA MediaServer." "Ajout de la CLÉ de ce wrapper dans DLNA MediaServer." "Hinzufügen des SCHLÜSSEL dieses Wrappers in DLNA MediaServer." "Aggiunta della CHIAVE di questo wrapper in DLNA MediaServer.")
+text_install_24=("Installed correctly the KEY in $ms_path/bin" "Instalado correctamente la CLAVE en $ms_path/bin" "KEY instalado com sucesso em $ms_path/bin" "CLÉ installé avec succès dans $ms_path/bin" "SCHLÜSSEL erfolgreich in $ms_path/bin installiert" "CHIAVE installata correttamente in $ms_path/bin")
 text_install_25=("Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." "Copia de seguridad del fichero libsynovte.so como libsynovte.so.orig en MediaServer." "Faça backup do arquivo libsynovte.so como libsynovte.so.orig no MediaServer." "Sauvegardez le fichier libsynovte.so sous libsynovte.so.orig sur MediaServer." "Sichern Sie die Datei libsynovte.so als libsynovte.so.orig auf MediaServer." "Eseguire il backup del file libsynovte.so come libsynovte.so.orig su MediaServer.")
 text_install_26=("Fixing permissions of $ms_libsynovte_file.orig" "Arreglando los permisos de $ms_libsynovte_file.orig" "Corrigindo as permissões de $ms_libsynovte_file.orig" "Correction des autorisations de $ms_libsynovte_file.orig" "Korrigieren der Berechtigungen von $ms_libsynovte_file.orig" "Correzione dei permessi di $ms_libsynovte_file.orig")
 text_install_27=("Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $ms_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $ms_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $ms_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $ms_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $ms_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
@@ -920,14 +945,14 @@ restart_packages
 
 if [[ "$mode" == "Simplest" ]]; then
 text_install_30=("==================== Installation of the Simplest Wrapper: COMPLETE ====================" "==================== Instalación del Wrapper más simple: COMPLETADO ====================" "==================== Instalando o Wrapper Mais Simples: COMPLETO =====================" "==================== Installation de l'encapsuleur le plus simple : COMPLET ====================" "==================== Installation des einfachsten Wrappers: VOLLSTÄNDIG ====================" "===================== Installazione del wrapper più semplice: COMPLETO ====================")
-info "${BLUE}${GREEN}${text_install_30[$LANG]}"
+info "${BLUE}${text_install_30[$LANG]}"
 info "${BLUE}==================== Installation of the Simplest Wrapper: COMPLETE ====================" >> $logfile
 echo ""
 fi
 
 if [[ "$mode" == "Advanced" ]]; then
 text_install_30=("==================== Installation of the Advanced Wrapper: COMPLETE ====================" "==================== Instalación del Wrapper Avanzado: COMPLETADO ====================" "==================== Instalação Avançada do Wrapper: COMPLETA =====================" "==================== Installation de l'encapsuleur avancé : COMPLET ====================" "==================== Installation des Advanced Wrappers: VOLLSTÄNDIG ====================" "===================== Installazione del wrapper avanzato: COMPLETO ====================")
-info "${BLUE}${GREEN}${text_install_30[$LANG]}"
+info "${BLUE}${text_install_30[$LANG]}"
 info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE ====================" >> $logfile
 echo ""   
 fi
@@ -1052,12 +1077,12 @@ for losorig in "${all_files[@]}"; do
   mv -T -f "$filename" "${filename::-5}"
   done
   
+  restart_packages
+  
   info "${YELLOW}${text_uninstall_14[$LANG]}"
 	touch "$logfile"
 	rm "$logfile"
-
-  restart_packages
-  
+    
   info "${GREEN}${text_uninstall_15[$LANG]}"
 
   echo ""
