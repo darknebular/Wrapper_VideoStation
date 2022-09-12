@@ -19,6 +19,7 @@ This wrapper is a fork of BenjaminPoncet rev.12 with a few changes, fixes and so
 
 This installer is designed to simplify the installation steps and enable **DTS**, **EAC3** and **TrueHD** support to Synology VideoStation by replacing the ffmpeg binary files by a wrapper using SynoCommunity ffmpeg, (only when It´s necessary).
 You will can change the order of the audio codecs in the wrapper, install the most advanced wrapper with 5.1 or the simplest one, patch DLNA MediaServer and VideoStation, all in the SAME Installer.
+
 The Installer has Multi Language support (English, Spanish, Portuguese, French, German, Italian).
 
 
