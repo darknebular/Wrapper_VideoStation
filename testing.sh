@@ -7,7 +7,7 @@ version="SCPT_2.3"
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
 # SCPT_2.1: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Adding a ASCII Intro.
 # SCPT_2.2: Added new info texts. (Deprecated migrated to SCPT_2.3)
-# SCPT_2.3: Improvements in the License's checker. 
+# SCPT_2.3: Improvements in the AME'S License checker. 
 
 ##############################################################
 
