@@ -1,5 +1,5 @@
  
-${YELLOW}REMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and 
+\u001b[33mREMEMBER: If you change the order in VIDEO-STATION you will have ALWAYS AAC 5.1 512kbps (or AC3 5.1 640kbps) in first audio stream and 
 some devices not compatibles with 5.1 neigther multi audio streams like Chromecast will not work.
 ${GREEN}Now you can change the audio's codec from from AAC 512kbps to AC3 640kbps independently of its audio's streams order.
 AC3 640kbps has a little bit less quality and worse performance than AAC but is more compatible with LEGACY devices.
