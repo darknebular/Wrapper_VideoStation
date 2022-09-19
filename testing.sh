@@ -564,7 +564,8 @@ text_start_7=("EXIT from this Installer." "SALIR de este Instalador." "SAIR dest
 text_start_8=("Please, What option wish to use?" "Por favor, ¿Qué opción desea utilizar?" "Por favor, qual opção você quer usar?" "S'il vous plaît, quelle option voulez-vous utiliser ?" "Bitte, welche Option möchten Sie verwenden?" "Per favore, quale opzione vuoi usare?")
 text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | Z for Exit." "Por favor responda I o Instalar | S o Simple | U o Uninstall | C o Configuración | L o Lengua | Z para Salir." "Por favor, responda I ou Instalar | S ou Simples | U ou Uninstall | C ou Configuração | L ou Língua | Z para Sair." "Veuillez répondre I ou Installer | S ou Simple | U ou Uninstall | C ou Configuration | L ou Langue | Z pour quitter." "Bitte antworten Sie I oder Installieren Sie | S oder Simple | U oder Uninstall | C oder Config | L oder Language | Z zum Beenden." "Per favore rispondi I o Installa | S o Semplice | U o Uninstall | C o Configurazione | L o Lingua | Z per uscire.")
 
-   echo ""   
+   echo ""
+   echo ""
    echo -e "${YELLOW}${text_start_1[$LANG]}"
    echo ""
    echo -e "${BLUE} ( I ) ${text_start_2[$LANG]}"
