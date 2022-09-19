@@ -8,7 +8,7 @@ version="SCPT_2.4_BETA"
 # SCPT_2.1: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Adding a ASCII Intro.
 # SCPT_2.2: Added new info texts. (Deprecated migrated to SCPT_2.3)
 # SCPT_2.3: Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
-# SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller.
+# SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old.
 
 ##############################################################
 
@@ -1158,7 +1158,6 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 
         echo ""
         echo -e "${BLUE}${text_configura_1[$LANG]}"
-	echo ""
 	welcome_config
 	echo ""
         echo ""
