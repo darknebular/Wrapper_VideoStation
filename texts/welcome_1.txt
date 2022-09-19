@@ -8,7 +8,8 @@ Cuando el Wrapper necesite transcodificar, tendrá 2 audio streams de la MISMA p
 - En VIDEO-STATION = [1) MP3 2.0 256kbp Y 2) AAC 5.1 512kbps.] (por defecto)*
 *(Para Chromecast o Google TV u otros clientes que no acepten 5.1 AAC ni soporte multi audio stream).
 
-Ahora, puedes cambiar el códec de audio 5.1 de AAC 512 kbps a AC3 640 kbps independientemente del orden de las transmisiones de audio en VIDEO-STATION y DLNA MediaServer utilizando la HERRAMIENTA de configuración integrada en el instalador.
+Ahora, puedes cambiar el códec de audio 5.1 de AAC 512 kbps a AC3 640 kbps independientemente del orden de las transmisiones de audio en VIDEO-STATION y DLNA MediaServer 
+utilizando la HERRAMIENTA de configuración integrada en el instalador.
 (AC3 es más compatible con dispositivos antiguos de 5.1).
 
 Funciona bien la transcodificación OffLine y el streaming de extensiones típicas como: MKV, MP4, AVI... Funciona bien las miniaturas en VideoStation.
