@@ -1,4 +1,6 @@
-RICORDA: Se modifichi l'ordine in VIDEO-STATION avrai SEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) sul primo flusso audio e alcuni dispositivi non compatibili con 5.1 o più flussi audio come Chromecast non funzioneranno.
-È ora possibile modificare il codec audio da AAC 512 kbps a AC3 640 kbps indipendentemente dall'ordine dei flussi audio.
+ 
+\u001b[33mRICORDA: Se modifichi l'ordine in VIDEO-STATION avrai SEMPRE AAC 5.1 512kbps (o AC3 5.1 640kbps) sul primo flusso audio e 
+alcuni dispositivi non compatibili con 5.1 o più flussi audio come Chromecast non funzioneranno.
+\u001b[32mÈ ora possibile modificare il codec audio da AAC 512 kbps a AC3 640 kbps indipendentemente dall'ordine dei flussi audio.
 AC3 640kbps ha una qualità leggermente inferiore e prestazioni inferiori rispetto a AAC ma è più compatibile con i dispositivi LEGACY.
 La modifica dell'ordine dei flussi audio tornerà automaticamente a 2 flussi audio.
