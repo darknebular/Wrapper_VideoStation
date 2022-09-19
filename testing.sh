@@ -124,7 +124,6 @@ function welcome_config() {
  
   welcome_config=$(curl -s -L "$repo_url/main/texts/welcome_config_$LANG")
   if [ "${#welcome_config}" -ge 1 ]; then
-    echo ""
     echo -e "${GREEN}	$welcome_config"
     echo ""
   fi
