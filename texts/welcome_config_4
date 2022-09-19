@@ -1,4 +1,6 @@
-BEACHTEN SIE: Wenn Sie die Reihenfolge in VIDEO-STATION ändern, haben Sie IMMER AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) im ersten Audiostream und einige Geräte, die nicht mit 5.1 kompatibel sind, oder mehrere Audiostreams wie Chromecast funktionieren nicht.
-Sie können jetzt den Audiocodec unabhängig von der Reihenfolge der Audiostreams von AAC 512 kbps auf AC3 640 kbps ändern.
+ 
+\u001b[33mBEACHTEN SIE: Wenn Sie die Reihenfolge in VIDEO-STATION ändern, haben Sie IMMER AAC 5.1 512 kbps (oder AC3 5.1 640 kbps) im ersten Audiostream und 
+einige Geräte, die nicht mit 5.1 kompatibel sind, oder mehrere Audiostreams wie Chromecast funktionieren nicht.
+\u001b[32mSie können jetzt den Audiocodec unabhängig von der Reihenfolge der Audiostreams von AAC 512 kbps auf AC3 640 kbps ändern.
 AC3 640kbps hat eine etwas geringere Qualität und schlechtere Leistung als AAC, ist aber besser mit LEGACY-Geräten kompatibel.
 Wenn Sie die Reihenfolge der Audiostreams ändern, wird automatisch wieder auf 2 Audiostreams umgeschaltet.
