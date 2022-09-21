@@ -340,13 +340,12 @@ childpid=$!
 _log "CHILDPID = $childpid"
 wait $childpid
 
-if [ "$pipe" = "pipe_6" ]; then
+if grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && [ "$pipe" = "pipe_6" ]; then
 
     _log "*** CHILD END ***"
     startexectime=`date +%s`
     _log "STDOUT   ="
     _log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
-    # _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
     _log "MODE     = PIPE V_WRAP-A_WRAP-MS"
     _log "FFMPEG1  = $bin2"
     _log "FFMPEG2  = $bin2"
