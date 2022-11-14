@@ -1087,13 +1087,13 @@ for losorig in "${all_files[@]}"; do
   info "${YELLOW}${text_uninstall_2[$LANG]}"
   mv -T -f "$vs_libsynovte_file.orig" "$vs_libsynovte_file"
   
-  if [[ -d "$ms_path" ]]; then
-  info "${YELLOW}${text_uninstall_4[$LANG]}"
-  mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
+  	if [[ -d "$ms_path" ]]; then
+  	info "${YELLOW}${text_uninstall_4[$LANG]}"
+  	mv -T -f "$ms_libsynovte_file.orig" "$ms_libsynovte_file"
   
-  info "${YELLOW}${text_uninstall_5[$LANG]}"
-  rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
-  fi
+  	info "${YELLOW}${text_uninstall_5[$LANG]}"
+  	rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
+  	fi
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
@@ -1119,7 +1119,7 @@ for losorig in "${all_files[@]}"; do
   exit 1
   
   fi
-  done
+done
 fi
 
 }
