@@ -1,14 +1,15 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.4"
+version="SCPT_2.5"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
 # SCPT_2.1: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Adding a ASCII Intro.
 # SCPT_2.2: Added new info texts. (Deprecated migrated to SCPT_2.3)
 # SCPT_2.3: Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
-# SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old.
+# SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
+# SCPT_2.5: Fix a bug in the Uninstallation process.
 
 ##############################################################
 
@@ -1080,8 +1081,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-for losorig in "${all_files[@]}"; do
-  if [[ -f "$losorig" ]]; then
+  if [[ -f "$vs_libsynovte_file.orig" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
@@ -1119,7 +1119,7 @@ for losorig in "${all_files[@]}"; do
   exit 1
   
   fi
-done
+
 fi
 
 }
