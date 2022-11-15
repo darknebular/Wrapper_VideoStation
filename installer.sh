@@ -870,7 +870,9 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] || [[ -f "$vs_libsynovte_file.orig" ]] 
         * ) echo -e "${YELLOW}${text_install_10[$LANG]}";;
         esac
         done
-else
+fi
+if [[ ! -f "$cp_bin_path/ffmpeg41.orig" ]] || [[ ! -f "$vs_libsynovte_file.orig" ]] || [[ ! -f "$vs_path/bin/ffmpeg.orig" ]] || [[ ! -f "$vs_path/etc/TransProfile.orig" ]] || [[ ! -f "$ms_path/bin/ffmpeg.orig" ]] || [[ ! -f "$ms_libsynovte_file.orig" ]] || [[ ! -f "$logfile" ]]; then
+
   
 	  info "${YELLOW}${text_install_11[$LANG]}"
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig." >> $logfile
