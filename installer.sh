@@ -911,8 +911,6 @@ else
 	text_install_22=("Installed correctly the Advanced Wrapper in VideoStation." "Instalado correctamente el Wrapper avanzado en Video Station." "Instalou com sucesso o Advanced Wrapper no Video Station." "L'encapsuleur avancé dans Video Station a été installé avec succès." "Der Advanced Wrapper wurde erfolgreich in Video Station installiert." "Installazione riuscita del wrapper avanzato in Video Station.")
 	info "${GREEN}${text_install_22[$LANG]}"
 	fi
-	
-	break
 		
 fi
 
