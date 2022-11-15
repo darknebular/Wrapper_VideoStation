@@ -851,7 +851,7 @@ fi
    info "${BLUE}${text_install_4[$LANG]}"
    info "${BLUE}${text_install_5[$LANG]}"
 
-if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] || [[ -f "$vs_libsynovte_file.orig" ]] || [[ -f "$vs_path/bin/ffmpeg.orig" ]] || [[ -f "$vs_path/etc/TransProfile.orig" ]] || [[ -f "$ms_path/bin/ffmpeg.orig" ]] || [[ -f "$ms_libsynovte_file.orig" ]] || [[ -f "$logfile" ]]; then
+if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 
         info "${RED}${text_install_6[$LANG]}"
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." >> $logfile
@@ -870,9 +870,7 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] || [[ -f "$vs_libsynovte_file.orig" ]] 
         * ) echo -e "${YELLOW}${text_install_10[$LANG]}";;
         esac
         done
-fi
-if [[ ! -f "$cp_bin_path/ffmpeg41.orig" ]] || [[ ! -f "$vs_libsynovte_file.orig" ]] || [[ ! -f "$vs_path/bin/ffmpeg.orig" ]] || [[ ! -f "$vs_path/etc/TransProfile.orig" ]] || [[ ! -f "$ms_path/bin/ffmpeg.orig" ]] || [[ ! -f "$ms_libsynovte_file.orig" ]] || [[ ! -f "$logfile" ]]; then
-
+else
   
 	  info "${YELLOW}${text_install_11[$LANG]}"
 	  info "${YELLOW}Backup the original ffmpeg41 as ffmpeg41.orig." >> $logfile
