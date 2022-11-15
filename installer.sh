@@ -9,7 +9,7 @@ version="SCPT_2.5"
 # SCPT_2.2: Added new info texts. (Deprecated migrated to SCPT_2.3)
 # SCPT_2.3: Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
 # SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
-# SCPT_2.5: Fix a bug in the Uninstallation process.
+# SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers.
 
 ##############################################################
 
