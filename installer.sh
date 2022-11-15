@@ -33,7 +33,6 @@ ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
 cp_bin_path=/var/packages/CodecPack/target/bin
-all_files=("$vs_libsynovte_file.orig" "/var/packages/CodecPack/target/bin/ffmpeg41.orig" "/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig" "$vs_path/etc/TransProfile.orig" "$vs_path/bin/ffmpeg.orig" "$ms_path/bin/ffmpeg.orig" "$ms_libsynovte_file.orig")
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
@@ -852,8 +851,8 @@ fi
    info "${BLUE}${text_install_4[$LANG]}"
    info "${BLUE}${text_install_5[$LANG]}"
 
-for losorig in "${all_files[@]}"; do
-if [[ -f "$losorig" ]]; then
+if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] || [[ -f "$vs_libsynovte_file.orig" ]] || [[ -f "$vs_path/bin/ffmpeg.orig" ]] || [[ -f "$vs_path/etc/TransProfile.orig" ]] || [[ -f "$ms_path/bin/ffmpeg.orig" ]] || [[ -f "$ms_libsynovte_file.orig" ]] || [[ -f "$logfile" ]]; then
+
         info "${RED}${text_install_6[$LANG]}"
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." >> $logfile
 	echo ""
@@ -916,7 +915,6 @@ else
 	break
 		
 fi
-done
 
 if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 text_install_23=("Adding of the KEY of this Wrapper in DLNA MediaServer." "Añadiendo la CLAVE de este Wrapper en DLNA MediaServer." "Adicionando a KEY deste Wrapper no DLNA MediaServer." "Ajout de la CLÉ de ce wrapper dans DLNA MediaServer." "Hinzufügen des SCHLÜSSEL dieses Wrappers in DLNA MediaServer." "Aggiunta della CHIAVE di questo wrapper in DLNA MediaServer.")
@@ -1081,7 +1079,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
+  if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] || [[ -f "$logfile" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
