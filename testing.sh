@@ -39,6 +39,7 @@ firma2="DkNbular"
 firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
+temp_path=/tmp
 LANG="0"
 
 ###############################
@@ -1089,7 +1090,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -c "/tmp/wrapper_ffmpeg.log" ]]; then
+  if [[ -c "$temp_path/wrapper_ffmpeg.log" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
