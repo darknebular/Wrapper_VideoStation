@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6-beta-6"
+version="SCPT_2.6-beta-6."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -1116,7 +1116,7 @@ if [[ "$unmode" == "New" ]]; then
   
   info "${YELLOW}${text_uninstall_14[$LANG]}"
 	touch "$logfile"
-	rm "$logfile"
+#	rm "$logfile"
     
   info "${GREEN}${text_uninstall_15[$LANG]}"
 
