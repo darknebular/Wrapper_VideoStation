@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6-beta_6."
+version="SCPT_2.6-beta_6"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -39,7 +39,6 @@ firma2="DkNbular"
 firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
-temp_path=/tmp
 LANG="0"
 
 ###############################
@@ -1092,7 +1091,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -c "$temp_path/wrapper_ffmpeg.log" ]]; then
+  if [ -c /tmp/wrapper_ffmpeg.log ]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
@@ -1116,7 +1115,7 @@ if [[ "$unmode" == "New" ]]; then
   
   info "${YELLOW}${text_uninstall_14[$LANG]}"
 	touch "$logfile"
-#	rm "$logfile"
+	rm "$logfile"
     
   info "${GREEN}${text_uninstall_15[$LANG]}"
 
