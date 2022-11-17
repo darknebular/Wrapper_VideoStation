@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6"
+version="SCPT_2.6a"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -798,7 +798,8 @@ function install_simple() {
 function install_advanced() {
   mode="Advanced"
   if [[ "$setup" == "autoinstall" ]]; then
-  ysojn=A
+  echo "Installation in automatic mode"
+  ysojn="auto"
   fi
   install
 }
@@ -866,7 +867,7 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 	echo -e "${GREEN}"
         read -p "${text_install_9[$LANG]}" ysojn
         case $ysojn in
-        [Aa]* ) uninstall_old; break;;
+        auto) uninstall_old; break;;
 	[Yy]* ) uninstall_old; break;;
 	[Ss]* ) uninstall_old; break;;
 	[Oo]* ) uninstall_old; break;;
