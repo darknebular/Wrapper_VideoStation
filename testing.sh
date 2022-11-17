@@ -866,6 +866,10 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
         while true; do
 	echo -e "${GREEN}"
         read -p "${text_install_9[$LANG]}" ysojn
+	if [[ $setup == autoinstall ]]; then
+  	echo "Installer is running in Automatic Mode."
+  	ysojn="auto"
+  	fi
         case $ysojn in
         auto) uninstall_old; break;;
 	[Yy]* ) uninstall_old; break;;
