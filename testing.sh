@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.5a2"
+version="SCPT_2.6"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -9,7 +9,8 @@ version="SCPT_2.5a2"
 # SCPT_2.2: Added new info texts. (Deprecated migrated to SCPT_2.3)
 # SCPT_2.3: Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
 # SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
-# SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers.
+# SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
+# SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. 
 
 ##############################################################
 
@@ -796,6 +797,9 @@ function install_simple() {
 }
 function install_advanced() {
   mode="Advanced"
+  if [[ "$setup" == "autoinstall" ]]; then
+  ysojn="A"
+  fi
   install
 }
 function uninstall_new() {
@@ -862,7 +866,8 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 	echo -e "${GREEN}"
         read -p "${text_install_9[$LANG]}" ysojn
         case $ysojn in
-        [Yy]* ) uninstall_old; break;;
+        [Aa]* ) uninstall_old; break;;
+	[Yy]* ) uninstall_old; break;;
 	[Ss]* ) uninstall_old; break;;
 	[Oo]* ) uninstall_old; break;;
 	[Jj]* ) uninstall_old; break;;
@@ -1077,7 +1082,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -f '/tmp/wrapper_ffmpeg.log' ]]; then
+  if [[ -c "$logfile" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
@@ -1204,7 +1209,7 @@ fi
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|uninstall|config|info]" >&2; exit 1;;
+    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; exit 1;;
   esac
 done
 
@@ -1228,6 +1233,7 @@ check_firmas
 case "$setup" in
   start) start;;
   install) install_advanced;;
+  autoinstall) install_advanced;;
   uninstall) uninstall_new;;
   config) configurator;;
   info) exit 1;;
