@@ -1111,7 +1111,7 @@ if [[ "$unmode" == "New" ]]; then
   mv -T -f "$filename" "${filename::-5}"
   done
   
-  restart_packages
+  # restart_packages
   
   info "${YELLOW}${text_uninstall_14[$LANG]}"
 	touch "$logfile"
