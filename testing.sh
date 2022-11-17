@@ -800,7 +800,8 @@ function install_advanced() {
   mode="Advanced"
   if [[ $setup == autoinstall ]]; then
   # NO SE TRADUCE
-  echo "${YELLOW}Installer is running in Automatic Mode."
+  echo -e "${YELLOW}Installer is running in Automatic Mode."
+  echo ""
   fi
   install
 }
