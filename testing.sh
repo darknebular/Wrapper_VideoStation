@@ -1089,7 +1089,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -c "$logfile" ]]; then
+  if [[ -c "/tmp/wrapper_ffmpeg.log" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
