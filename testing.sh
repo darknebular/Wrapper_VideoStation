@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6-beta-6."
+version="SCPT_2.6-beta_6."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -1092,7 +1092,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -f "$temp_path/wrapper*.log" ]]; then
+  if [[ -c "$temp_path/wrapper_ffmpeg.log" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
