@@ -799,7 +799,8 @@ function install_simple() {
 function install_advanced() {
   mode="Advanced"
   if [[ $setup == autoinstall ]]; then
-  echo "Installer is running in Automatic Mode."
+  # NO SE TRADUCE
+  echo "${YELLOW}Installer is running in Automatic Mode."
   fi
   install
 }
