@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6-alpha3"
+version="SCPT_2.6-alpha4"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -799,7 +799,6 @@ function install_advanced() {
   mode="Advanced"
   if [[ $setup == autoinstall ]]; then
   echo "Installer is running in Automatic Mode."
-  ysojn="auto"
   fi
   install
 }
@@ -856,6 +855,11 @@ fi
    info "${BLUE}${text_install_4[$LANG]}"
    info "${BLUE}${text_install_5[$LANG]}"
 
+if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] && [[ $setup == autoinstall ]]; then
+  	uninstall_old
+	break
+fi
+
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 
         info "${RED}${text_install_6[$LANG]}"
@@ -866,12 +870,7 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
         while true; do
 	echo -e "${GREEN}"
         read -p "${text_install_9[$LANG]}" ysojn
-	if [[ $setup == autoinstall ]]; then
-  	echo "Installer is running in Automatic Mode."
-  	ysojn="auto"
-  	fi
-        case $ysojn in
-        auto) uninstall_old;;
+	case $ysojn in
 	[Yy]* ) uninstall_old; break;;
 	[Ss]* ) uninstall_old; break;;
 	[Oo]* ) uninstall_old; break;;
