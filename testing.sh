@@ -1091,7 +1091,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -c /tmp/wrapper* ]]; then
+  if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
@@ -1111,7 +1111,7 @@ if [[ "$unmode" == "New" ]]; then
   mv -T -f "$filename" "${filename::-5}"
   done
   
-  # restart_packages
+  restart_packages
   
   info "${YELLOW}${text_uninstall_14[$LANG]}"
 	touch "$logfile"
