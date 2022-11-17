@@ -798,7 +798,7 @@ function install_simple() {
 function install_advanced() {
   mode="Advanced"
   if [[ "$setup" == "autoinstall" ]]; then
-  ysojn="A"
+  ysojn=A
   fi
   install
 }
