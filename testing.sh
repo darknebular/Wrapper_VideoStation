@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6a"
+version="SCPT_2.6alpha"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -797,7 +797,7 @@ function install_simple() {
 }
 function install_advanced() {
   mode="Advanced"
-  if [[ "$setup" == "autoinstall" ]]; then
+  if [[ $setup == autoinstall ]]; then
   echo "Installation in automatic mode"
   ysojn="auto"
   fi
