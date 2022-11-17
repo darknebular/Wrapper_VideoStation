@@ -871,7 +871,7 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
   	ysojn="auto"
   	fi
         case $ysojn in
-        auto) uninstall_old; break;;
+        auto) uninstall_old;;
 	[Yy]* ) uninstall_old; break;;
 	[Ss]* ) uninstall_old; break;;
 	[Oo]* ) uninstall_old; break;;
