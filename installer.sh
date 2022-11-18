@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.5"
+version="SCPT_2.6"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -9,7 +9,8 @@ version="SCPT_2.5"
 # SCPT_2.2: Added new info texts. (Deprecated migrated to SCPT_2.3)
 # SCPT_2.3: Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
 # SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
-# SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers.
+# SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
+# SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. 
 
 ##############################################################
 
@@ -796,6 +797,11 @@ function install_simple() {
 }
 function install_advanced() {
   mode="Advanced"
+  if [[ $setup == autoinstall ]]; then
+  # NO SE TRADUCE
+  echo -e "${YELLOW}Installer is running in Automatic Mode."
+  echo ""
+  fi
   install
 }
 function uninstall_new() {
@@ -843,6 +849,8 @@ fi
   text_install_19=("Fixing permissions of $vs_libsynovte_file.orig" "Arreglando los permisos de $vs_libsynovte_file.orig" "Corrigindo as permissões de $vs_libsynovte_file.orig" "Correction des autorisations de $vs_libsynovte_file.orig" "Korrigieren der Berechtigungen von $vs_libsynovte_file.orig" "Correzione dei permessi di $vs_libsynovte_file.orig")
   text_install_20=("Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $vs_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $vs_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $vs_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $vs_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $vs_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
   text_install_21=("Modified correctly the file $vs_libsynovte_file" "Modificado correctamente el fichero $vs_libsynovte_file" "Modificou corretamente o arquivo $vs_libsynovte_file" "Correctement modifié le fichier $vs_libsynovte_file" "Die Datei $vs_libsynovte_file wurde korrekt geändert" "Modificato correttamente il file $vs_libsynovte_file")
+  text_install_23=("Adding of the KEY of this Wrapper in /tmp." "Añadiendo la CLAVE de este Wrapper en /tmp." "Adicionando a KEY deste Wrapper no /tmp." "Ajout de la CLÉ de ce wrapper dans /tmp." "Hinzufügen des SCHLÜSSEL dieses Wrappers in /tmp." "Aggiunta della CHIAVE di questo wrapper in /tmp.")
+  text_install_24=("Installed correctly the KEY in /tmp" "Instalada correctamente la CLAVE en /tmp" "KEY instalado com sucesso em /tmp" "CLÉ installé avec succès dans /tmp" "SCHLÜSSEL erfolgreich in /tmp installiert" "CHIAVE installata correttamente in /tmp")
     
   info "${BLUE}${text_install_1[$LANG]}"
    echo ""
@@ -851,7 +859,12 @@ fi
    info "${BLUE}${text_install_4[$LANG]}"
    info "${BLUE}${text_install_5[$LANG]}"
 
-if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
+if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] && [[ $setup == autoinstall ]]; then
+  	uninstall_old
+	break
+fi
+
+if [[ -f "/tmp/wrapper.KEY" ]]; then
 
         info "${RED}${text_install_6[$LANG]}"
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." >> $logfile
@@ -861,8 +874,8 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
         while true; do
 	echo -e "${GREEN}"
         read -p "${text_install_9[$LANG]}" ysojn
-        case $ysojn in
-        [Yy]* ) uninstall_old; break;;
+	case $ysojn in
+	[Yy]* ) uninstall_old; break;;
 	[Ss]* ) uninstall_old; break;;
 	[Oo]* ) uninstall_old; break;;
 	[Jj]* ) uninstall_old; break;;
@@ -889,7 +902,11 @@ else
 	touch "$logfile"
 	chmod 755 "$logfile"
 	info "${GREEN}${text_install_17[$LANG]}"
-	
+	info "${YELLOW}${text_install_23[$LANG]}"
+	info "${YELLOW}Adding of the KEY of this Wrapper in /tmp." >> $logfile
+	touch /tmp/wrapper.KEY
+	echo -e "# DarkNebular´s $mode Wrapper" >> /tmp/wrapper.KEY
+	info "${GREEN}${text_install_24[$LANG]}"
 	
 	
 	info "${YELLOW}${text_install_18[$LANG]}"
@@ -925,8 +942,8 @@ text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado c
 
 		info "${YELLOW}${text_install_23[$LANG]}"
 		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
-		touch $ms_path/bin/ffmpeg.KEY
-		echo -e "# DarkNebular´s $mode Wrapper" >> $ms_path/bin/ffmpeg.KEY
+		cp /tmp/wrapper.KEY $ms_path/bin/
+		mv $ms_path/bin/wrapper.KEY $ms_path/bin/ffmpeg.KEY
 		info "${GREEN}${text_install_24[$LANG]}"
 		
 		info "${YELLOW}${text_install_25[$LANG]}"
@@ -974,7 +991,12 @@ exit 1
 }
 
 function uninstall() {
+  if [[ $setup != autoinstall ]]; then
   clear
+  fi
+  if [ ! -f "/tmp/wrapper.KEY" ] && [ -f "$cp_bin_path/ffmpeg41.orig" ]; then
+  touch /tmp/wrapper.KEY
+  fi
   
   text_uninstall_1=("==================== Uninstallation of OLD wrappers in the system: START ====================" "==================== Desinstalación de VIEJOS wrappers en el sistema: INICIO ====================" "==================== Desinstalando OLD wrappers no sistema: HOME ======================" "==================== Désinstallation des anciens wrappers sur le système : HOME =====================" "==================== ALTE Wrapper auf dem System deinstallieren: HOME =====================" "===================== Disinstallazione dei VECCHI wrapper sul sistema: HOME =====================")
   text_uninstall_2=("Restoring VideoStation's libsynovte.so" "Restaurando el libsynovte.so de VideoStation" "Restaurando o VideoStation libsynovte.so" "Restauration de la VideoStation libsynovte.so" "Wiederherstellen der VideoStation libsynovte.so" "Ripristino di VideoStation libsynovte.so")
@@ -989,6 +1011,7 @@ function uninstall() {
   text_uninstall_15=("Uninstalled correctly the Simplest or the Advanced Wrapper in DLNA MediaServer (If exist) and VideoStation." "Desinstalado correctamente el Wrapper más simple o el Avanzado en DLNA MediaServer (si existiese) y VideoStation." "Desinstalou com êxito o Simpler ou Advanced Wrapper no DLNA MediaServer (se houver) e no VideoStation." "Désinstallation réussie de Simpler ou Advanced Wrapper sur DLNA MediaServer (le cas échéant) et VideoStation." "Der Simpler oder Advanced Wrapper wurde erfolgreich auf DLNA MediaServer (falls vorhanden) und VideoStation deinstalliert." "Disinstallazione riuscita di Simpler o Advanced Wrapper su DLNA MediaServer (se presente) e VideoStation.")
   text_uninstall_16=("==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ====================" "==================== Desinstalación del Wrapper más simple o del avanzado: COMPLETADO ====================" "==================== Desinstalando o Wrapper mais simples ou avançado: COMPLETED =====================" "==================== Désinstallation du Wrapper plus simple ou avancé : TERMINÉ ====================" "==================== Deinstallation des einfacheren oder erweiterten Wrappers: ABGESCHLOSSEN ====================" "===================== Disinstallazione del wrapper più semplice o avanzato: COMPLETATO ====================")
   text_uninstall_17=("Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything." "Actualmente NO TIENES NINGÚN Wrapper Instalado. El Desinstalador NO PUEDE hacer nada." "Atualmente você NÃO TEM NENHUM Wrapper instalado. O Desinstalador NÃO PODE fazer nada." "Vous N'AVEZ actuellement AUCUN wrapper installé. Le programme de désinstallation ne peut rien faire." "Sie haben derzeit KEINEN Wrapper installiert. Das Deinstallationsprogramm kann NICHTS tun." "Attualmente NON HAI ALCUN Wrapper installato. Il programma di disinstallazione NON PUÒ fare nulla.")
+  text_uninstall_18=("Remove of the KEY of this Wrapper in /tmp." "Eliminar la CLAVE de este Wrapper en /tmp." "Exclua a KEY deste Wrapper no /tmp." "Supprimez la clé de ce wrapper dans /tmp." "Löschen Sie den SCHLÜSSEL dieses Wrappers im /tmp." "Eliminare la CHIAVE di questo wrapper in /tmp.")
   
 if [[ "$unmode" == "Old" ]]; then  
   info "${BLUE}${text_uninstall_1[$LANG]}"
@@ -1049,6 +1072,9 @@ if [[ "$unmode" == "Old" ]]; then
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
+   info "${YELLOW}${text_uninstall_18[$LANG]}"
+   info "${YELLOW}Remove of the KEY of this Wrapper in /tmp." >> $logfile
+   rm /tmp/wrapper.KEY 2>> $logfile
      
   info "${GREEN}${text_uninstall_10[$LANG]}"
   echo ""
@@ -1077,7 +1103,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
+  if [[ -f "/tmp/wrapper.KEY" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
@@ -1097,11 +1123,14 @@ if [[ "$unmode" == "New" ]]; then
   mv -T -f "$filename" "${filename::-5}"
   done
   
+  info "${YELLOW}${text_uninstall_18[$LANG]}"
+  rm /tmp/wrapper.KEY 2>> $logfile
+  
   restart_packages
   
   info "${YELLOW}${text_uninstall_14[$LANG]}"
-	touch "$logfile"
-	rm "$logfile"
+  touch "$logfile"
+  rm "$logfile"
     
   info "${GREEN}${text_uninstall_15[$LANG]}"
 
@@ -1204,7 +1233,7 @@ fi
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|uninstall|config|info]" >&2; exit 1;;
+    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; exit 1;;
   esac
 done
 
@@ -1228,6 +1257,7 @@ check_firmas
 case "$setup" in
   start) start;;
   install) install_advanced;;
+  autoinstall) install_advanced;;
   uninstall) uninstall_new;;
   config) configurator;;
   info) exit 1;;
