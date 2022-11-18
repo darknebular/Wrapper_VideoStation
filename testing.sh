@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6-RC-1"
+version="SCPT_2.6-RC-2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -864,7 +864,7 @@ if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] && [[ $setup == autoinstall ]]; then
 	break
 fi
 
-if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
+if [[ -f "/tmp/wrapper.KEY" ]]; then
 
         info "${RED}${text_install_6[$LANG]}"
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." >> $logfile
