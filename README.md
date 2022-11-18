@@ -60,9 +60,9 @@ With options:
 |--------------|----------|---------------------------------------------------------------------------------|
 | install      | No       | The default flag, this install the Advanced Wrapper.                            |    
 | autoinstall  | No       | This install the Advanced Wrapper without prompts (Automatic Mode)              |  
-| uninstall    | No       | This flag uninstall the patch.                                                  |
-| config       | No       | Change the behaviour of the audio codecs                                        |
-| info         | No       | Show the general info of the installer                                          |
+| uninstall    | No       | This flag uninstall the patch. (Simplest or the Advanced one).                  |
+| config       | No       | Change the behaviour of the audio codecs for the Advanced Wrapper               |
+| info         | No       | Show the general info of the Installer                                          |
 
 
 
