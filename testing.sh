@@ -1091,7 +1091,7 @@ fi
 
 
 if [[ "$unmode" == "New" ]]; then
-  if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
+  if [[ -f "/tmp/wrapper.KEY" ]]; then
   info "${BLUE}${text_uninstall_13[$LANG]}"
   
   info "${YELLOW}${text_uninstall_2[$LANG]}"
