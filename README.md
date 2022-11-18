@@ -58,7 +58,7 @@ With options:
 
 | Flags        | Required | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
-| start        | No       | The default flag.                                                               |   
+| start        | No       | The default flag going to the MAIN Menu.                                        |   
 | install      | No       | This install the Advanced Wrapper.                                              |  
 | autoinstall  | No       | This install the Advanced Wrapper without prompts (Automatic Mode)              |  
 | uninstall    | No       | This flag uninstall the patch. (Simplest or the Advanced one).                  |
