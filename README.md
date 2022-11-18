@@ -58,7 +58,8 @@ With options:
 
 | Flags       | Required  | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
-| install      | No       | The default flag, this install the patch.                                       |                            
+| install      | No       | The default flag, this install the Advanced Wrapper.                            |    
+| autoinstall  | No       | This install the Advanced Wrapper without prompts (Automatic Mode)              |  
 | uninstall    | No       | This flag uninstall the patch.                                                  |
 | config       | No       | Change the behaviour of the audio codecs                                        |
 | info         | No       | Show the general info of the installer                                          |
