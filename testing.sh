@@ -1122,7 +1122,6 @@ if [[ "$unmode" == "New" ]]; then
   done
   
   info "${YELLOW}${text_uninstall_18[$LANG]}"
-  info "${YELLOW}Remove of the KEY of this Wrapper in /tmp." >> $logfile
   rm /tmp/wrapper.KEY 2>> $logfile
   
   restart_packages
