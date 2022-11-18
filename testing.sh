@@ -849,6 +849,8 @@ fi
   text_install_19=("Fixing permissions of $vs_libsynovte_file.orig" "Arreglando los permisos de $vs_libsynovte_file.orig" "Corrigindo as permissões de $vs_libsynovte_file.orig" "Correction des autorisations de $vs_libsynovte_file.orig" "Korrigieren der Berechtigungen von $vs_libsynovte_file.orig" "Correzione dei permessi di $vs_libsynovte_file.orig")
   text_install_20=("Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $vs_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $vs_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $vs_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $vs_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $vs_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
   text_install_21=("Modified correctly the file $vs_libsynovte_file" "Modificado correctamente el fichero $vs_libsynovte_file" "Modificou corretamente o arquivo $vs_libsynovte_file" "Correctement modifié le fichier $vs_libsynovte_file" "Die Datei $vs_libsynovte_file wurde korrekt geändert" "Modificato correttamente il file $vs_libsynovte_file")
+  text_install_23=("Adding of the KEY of this Wrapper in /tmp." "Añadiendo la CLAVE de este Wrapper en /tmp." "Adicionando a KEY deste Wrapper no /tmp." "Ajout de la CLÉ de ce wrapper dans /tmp." "Hinzufügen des SCHLÜSSEL dieses Wrappers in /tmp." "Aggiunta della CHIAVE di questo wrapper in /tmp.")
+  text_install_24=("Installed correctly the KEY in /tmp" "Instalada correctamente la CLAVE en /tmp" "KEY instalado com sucesso em /tmp" "CLÉ installé avec succès dans /tmp" "SCHLÜSSEL erfolgreich in /tmp installiert" "CHIAVE installata correttamente in /tmp")
     
   info "${BLUE}${text_install_1[$LANG]}"
    echo ""
@@ -900,7 +902,11 @@ else
 	touch "$logfile"
 	chmod 755 "$logfile"
 	info "${GREEN}${text_install_17[$LANG]}"
-	
+	info "${YELLOW}${text_install_23[$LANG]}"
+	info "${YELLOW}Adding of the KEY of this Wrapper in /tmp." >> $logfile
+	touch /tmp/wrapper.KEY
+	echo -e "# DarkNebular´s $mode Wrapper" >> /tmp/wrapper.KEY
+	info "${GREEN}${text_install_24[$LANG]}"
 	
 	
 	info "${YELLOW}${text_install_18[$LANG]}"
@@ -936,8 +942,8 @@ text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado c
 
 		info "${YELLOW}${text_install_23[$LANG]}"
 		info "${YELLOW}Adding of the KEY of this Wrapper in DLNA MediaServer." >> $logfile
-		touch $ms_path/bin/ffmpeg.KEY
-		echo -e "# DarkNebular´s $mode Wrapper" >> $ms_path/bin/ffmpeg.KEY
+		cp /tmp/wrapper.KEY $ms_path/bin/
+		mv $ms_path/bin/wrapper.KEY $ms_path/bin/ffmpeg.KEY
 		info "${GREEN}${text_install_24[$LANG]}"
 		
 		info "${YELLOW}${text_install_25[$LANG]}"
@@ -1003,6 +1009,7 @@ function uninstall() {
   text_uninstall_15=("Uninstalled correctly the Simplest or the Advanced Wrapper in DLNA MediaServer (If exist) and VideoStation." "Desinstalado correctamente el Wrapper más simple o el Avanzado en DLNA MediaServer (si existiese) y VideoStation." "Desinstalou com êxito o Simpler ou Advanced Wrapper no DLNA MediaServer (se houver) e no VideoStation." "Désinstallation réussie de Simpler ou Advanced Wrapper sur DLNA MediaServer (le cas échéant) et VideoStation." "Der Simpler oder Advanced Wrapper wurde erfolgreich auf DLNA MediaServer (falls vorhanden) und VideoStation deinstalliert." "Disinstallazione riuscita di Simpler o Advanced Wrapper su DLNA MediaServer (se presente) e VideoStation.")
   text_uninstall_16=("==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ====================" "==================== Desinstalación del Wrapper más simple o del avanzado: COMPLETADO ====================" "==================== Desinstalando o Wrapper mais simples ou avançado: COMPLETED =====================" "==================== Désinstallation du Wrapper plus simple ou avancé : TERMINÉ ====================" "==================== Deinstallation des einfacheren oder erweiterten Wrappers: ABGESCHLOSSEN ====================" "===================== Disinstallazione del wrapper più semplice o avanzato: COMPLETATO ====================")
   text_uninstall_17=("Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything." "Actualmente NO TIENES NINGÚN Wrapper Instalado. El Desinstalador NO PUEDE hacer nada." "Atualmente você NÃO TEM NENHUM Wrapper instalado. O Desinstalador NÃO PODE fazer nada." "Vous N'AVEZ actuellement AUCUN wrapper installé. Le programme de désinstallation ne peut rien faire." "Sie haben derzeit KEINEN Wrapper installiert. Das Deinstallationsprogramm kann NICHTS tun." "Attualmente NON HAI ALCUN Wrapper installato. Il programma di disinstallazione NON PUÒ fare nulla.")
+  text_uninstall_18=("Remove of the KEY of this Wrapper in /tmp." "Eliminar la CLAVE de este Wrapper en /tmp." "Exclua a KEY deste Wrapper no /tmp." "Supprimez la clé de ce wrapper dans /tmp." "Löschen Sie den SCHLÜSSEL dieses Wrappers im /tmp." "Eliminare la CHIAVE di questo wrapper in /tmp.")
   
 if [[ "$unmode" == "Old" ]]; then  
   info "${BLUE}${text_uninstall_1[$LANG]}"
@@ -1063,6 +1070,9 @@ if [[ "$unmode" == "Old" ]]; then
    touch /tmp/ffmpeg.log
    rm /tmp/ffmpeg.log
   
+   info "${YELLOW}${text_uninstall_18[$LANG]}"
+   info "${YELLOW}Remove of the KEY of this Wrapper in /tmp." >> $logfile
+   rm /tmp/wrapper.KEY 2>> $logfile
      
   info "${GREEN}${text_uninstall_10[$LANG]}"
   echo ""
@@ -1111,11 +1121,15 @@ if [[ "$unmode" == "New" ]]; then
   mv -T -f "$filename" "${filename::-5}"
   done
   
+  info "${YELLOW}${text_uninstall_18[$LANG]}"
+  info "${YELLOW}Remove of the KEY of this Wrapper in /tmp." >> $logfile
+  rm /tmp/wrapper.KEY 2>> $logfile
+  
   restart_packages
   
   info "${YELLOW}${text_uninstall_14[$LANG]}"
-	touch "$logfile"
-	rm "$logfile"
+  touch "$logfile"
+  rm "$logfile"
     
   info "${GREEN}${text_uninstall_15[$LANG]}"
 
