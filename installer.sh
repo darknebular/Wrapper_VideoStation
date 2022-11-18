@@ -859,7 +859,7 @@ fi
    info "${BLUE}${text_install_4[$LANG]}"
    info "${BLUE}${text_install_5[$LANG]}"
 
-if [[ -f "$cp_bin_path/ffmpeg41.orig" ]] && [[ $setup == autoinstall ]]; then
+if [[ -f "/tmp/wrapper.KEY" ]] && [[ $setup == autoinstall ]]; then
   	uninstall_old
 	break
 fi
@@ -1141,6 +1141,7 @@ if [[ "$unmode" == "New" ]]; then
   else
   
   info "${RED}${text_uninstall_17[$LANG]}"
+  rm "$logfile"
   exit 1
   
   fi
