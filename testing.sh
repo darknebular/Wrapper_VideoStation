@@ -11,7 +11,7 @@ version="SCPT_2.7"
 # SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
 # SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
 # SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. (Deprecated migrated to SCPT_2.6)
-# SCPT_2.6: Save space in the Installer script in some function that can't be translated.
+# SCPT_2.7: Save space in the Installer script in some function that mustn't be translated.
 
 ##############################################################
 
