@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.6"
+version="SCPT_2.7"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -10,7 +10,8 @@ version="SCPT_2.6"
 # SCPT_2.3: Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
 # SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
 # SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
-# SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. 
+# SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. (Deprecated migrated to SCPT_2.6)
+# SCPT_2.7: Save space in the Installer script in some function that mustn't be translated.
 
 ##############################################################
 
@@ -78,12 +79,11 @@ function restart_packages() {
 }
 
 function check_dependencias() {
- text_ckck_depen1=("MISSING $dependencia Package." "FALTA el paquete $dependencia" "pacote $dependencia está FALTANDO" "le paquet $dependencia est MANQUANT" "Paket $dependencia fehlt" "il pacchetto $dependencia è MANCANTE")
- text_ckck_depen2=("You have ALL necessary packages Installed, GOOD." "Tienes TODOS los paquetes necesarios ya instalados, BIEN." "Você tem TODOS os pacotes necessários já instalados, BOM." "Vous avez TOUS les packages nécessaires déjà installés, BON." "Sie haben ALLE notwendigen Pakete bereits installiert, GUT." "Hai già installato TUTTI i pacchetti necessari, BUONO.")
-text_ckck_depen3=("At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again." "Al menos necesitas $npacks paquete/s por instalar, por favor, Instala las dependencias y EJECUTA el Instalador otra vez." "Você precisa de pelo menos $npacks pacote(s) para instalar, por favor, instale as dependências e execute o instalador novamente." "Vous avez besoin d'au moins $npacks package(s) pour l'installation, veuillez installer les dépendances et exécuter à nouveau le programme d'installation." "Sie benötigen mindestens $npacks-Pakete zur Installation, bitte installieren Sie die Abhängigkeiten und führen Sie das Installationsprogramm erneut aus." "Sono necessari almeno $npacks pacchetti per l'installazione, installare le dipendenze ed eseguire nuovamente il programma di installazione.")
+text_ckck_depen1=("You have ALL necessary packages Installed, GOOD." "Tienes TODOS los paquetes necesarios ya instalados, BIEN." "Você tem TODOS os pacotes necessários já instalados, BOM." "Vous avez TOUS les packages nécessaires déjà installés, BON." "Sie haben ALLE notwendigen Pakete bereits installiert, GUT." "Hai già installato TUTTI i pacchetti necessari, BUONO.")
+
 for dependencia in "${dependencias[@]}"; do
     if [[ ! -d "/var/packages/${dependencia[@]}" ]]; then
-      error "${text_ckck_depen1[$LANG]}" 
+      error "MISSING $dependencia Package." 
       error "MISSING $dependencia Package." >> $logfile
     let "npacks=npacks+1"
 
@@ -91,11 +91,11 @@ for dependencia in "${dependencias[@]}"; do
 done
 
 if [[ npacks -eq control ]]; then
-echo -e  "${GREEN}${text_ckck_depen2[$LANG]}"
+echo -e  "${GREEN}${text_ckck_depen1[$LANG]}"
 fi
-#else
+
 if [[ npacks -ne control ]]; then
-echo -e  "${RED}${text_ckck_depen3[$LANG]}"
+echo -e  "At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again."
 exit 1
 fi
 
