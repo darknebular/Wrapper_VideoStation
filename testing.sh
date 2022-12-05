@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.7"
+version="SCPT_2.8"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -11,7 +11,8 @@ version="SCPT_2.7"
 # SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
 # SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
 # SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. (Deprecated migrated to SCPT_2.6)
-# SCPT_2.7: Save space in the Installer script in some function that mustn't be translated.
+# SCPT_2.7: Save space in the Installer script in some function that mustn't be translated. (Deprecated migrated to SCPT_2.8)
+# SCPT_2.8: Fixed a bug when you are in 7.0.X the scripts doesn't take the conditional correctly in check-versions fuction.
 
 ##############################################################
 
@@ -824,6 +825,7 @@ fi
 if [[ "$mode" == "Advanced" ]]; then
 text_install_1=("==================== Installation of the Advanced Wrapper: START ====================" "==================== Instalación del Advanced Wrapper: INICIO ====================" "==================== Instalando o Wrapper Avançado: START =====================" "==================== Installation de l'encapsuleur avancé : DÉMARRER ====================" "==================== Installation des Advanced Wrappers: START ====================" "===================== Installazione del wrapper avanzato: START ====================")
 info "${BLUE}==================== Installation of the Advanced Wrapper: START ====================" >> $logfile
+check_versions
 fi
 
   
