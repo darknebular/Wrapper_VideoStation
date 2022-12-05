@@ -12,7 +12,7 @@ version="SCPT_2.8"
 # SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
 # SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. (Deprecated migrated to SCPT_2.6)
 # SCPT_2.7: Save space in the Installer script in some function that mustn't be translated. (Deprecated migrated to SCPT_2.8)
-# SCPT_2.8: Fixed a bug when you are in 7.0.X the scripts doesn't take the conditional correctly in check-versions fuction.
+# SCPT_2.8: Fixed a bug when you are in 7.0.X the scripts doesn't take the conditional correctly in check_versions fuction.
 
 ##############################################################
 
