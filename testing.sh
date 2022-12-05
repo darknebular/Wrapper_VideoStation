@@ -630,13 +630,7 @@ function check_versions() {
 if [[ "$dsm_version" == 7.0* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/bin
   injector="0-12.2.4"
-fi
-if [[ "$dsm_version" == 7.0.* ]]; then
-cp_bin_path=/var/packages/CodecPack/target/bin
-  injector="0-12.2.4"
-fi
-
-if [[ "$dsm_version" == 7.1* ]]; then
+elif [[ "$dsm_version" == 7.1* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="1-12.3.5"
 else
