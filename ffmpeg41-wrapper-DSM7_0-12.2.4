@@ -2,14 +2,15 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.2.4"
+rev="AME_12.2.5"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
 # AME_12.2.1: Initial release for DSM 7.0. Compatible with the new paths of this DSM. Fix the order and the use of the binaries. Added some missing variables in the wrapper and improvements. (Deprecated, migrate to 12.2.2)
 # AME_12.2.2: Now with 2 audio streamS for DSM 7.0 (One in MP3 Stereo and other with 5.1 AAC). Chromecast Supported. (Deprecated, migrate to 12.2.3)
 # AME_12.2.3: Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.2.4)
-# AME_12.2.4: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station.
+# AME_12.2.4: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station. (Deprecated, migrate to 12.2.5)
+# AME_12.2.5: Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server.
 
 WHITE="\u001B[37m"
 
@@ -69,9 +70,14 @@ case "$1" in
                 y="OffEnable"
                 args+=("-y" "$1")
         ;;
+        pipe:4)
+        shift
+        pipe="pipe_MS"
+        args+=("pipe:4")
+        ;;
         pipe:6)
         shift
-        pipe="pipe_6"
+        pipe="pipe_MS"
         args+=("pipe:6")
         ;;
         -map)
@@ -340,7 +346,7 @@ childpid=$!
 _log "CHILDPID = $childpid"
 wait $childpid
 
-if grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && [ "$pipe" = "pipe_6" ]; then
+if grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && [ "$pipe" = "pipe_MS" ]; then
 
     _log "*** CHILD END ***"
     startexectime=`date +%s`
@@ -364,7 +370,7 @@ if grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Err
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:6: Broken pipe" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:" /tmp/ffmpeg-${streamid}.stderr; then
 
         _log "*** CHILD END ***"
         startexectime=`date +%s`
@@ -389,7 +395,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:6: Broken pipe" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:" /tmp/ffmpeg-${streamid}.stderr; then
 
         _log "*** CHILD END ***"
         startexectime=`date +%s`
