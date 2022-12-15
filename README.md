@@ -38,6 +38,7 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 - DTS or EAC3 or TrueHD + HEVC: ✅
 - DSM 7.X: ✅
 - DSM 6.2: ⚠️ The installer doesn´t support this version, you will need do a Manual procedure. 
+- DTS HD-MA: ⚠️ The Wrapper could play it, but there will not be transcoding of this audio codec. 
 
 (In low powered devices you only will have remux of the audio.)
 
