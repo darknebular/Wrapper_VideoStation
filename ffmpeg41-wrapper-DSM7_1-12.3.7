@@ -226,9 +226,9 @@ case "$1" in
         ;;
         -hls_seek_time)
                 shift
-                argsnew+=("-hls_seek_time" "$1")
-                args2vs+=("-hls_seek_time" "$1")
-                args2vsms+=("-hls_seek_time" "$1")
+                argsnew+=("-ss" "$1""ms")
+                args2vs+=("-ss" "$1""ms")
+                args2vsms+=("-ss" "$1""ms")
         ;;
         -segment_time)
                 shift
