@@ -14,7 +14,7 @@ usando a FERRAMENTA de configuração incorporada ao instalador.
 
 A transcodificação offline funciona bem e o streaming de extensões típicas como: MKV, MP4, AVI... Miniaturas funcionam bem no VideoStation.
 
-A versão mais recente é 12.2.5 para DSM 7.0 e 12.3.6 para DSM 7.1 e superior.
+A versão mais recente é 12.2.6 para DSM 7.0 e 12.3.7 para DSM 7.1 e superior.
 Você terá controle total de todos os parâmetros dos codecs de áudio usando a FERRAMENTA de configuração do Advanced Wrapper. O único Internet Wrapper com suporte 5.1 AAC e FERRAMENTA de configuração integrada.
 
 ============================================================== APROVEITE!!!!! ==============================================================
