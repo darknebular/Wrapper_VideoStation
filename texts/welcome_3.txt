@@ -14,7 +14,7 @@ Désormais, vous pouvez changer le codec audio 5.1 de AAC 512kbps à AC3 640kbps
 
 Le transcodage hors ligne fonctionne bien et le streaming d'extensions typiques telles que : MKV, MP4, AVI... Les miniatures fonctionnent bien dans VideoStation.
 
-La dernière version est 12.2.5 pour DSM 7.0 et 12.3.6 pour DSM 7.1 et supérieur.
+La dernière version est 12.2.6 pour DSM 7.0 et 12.3.7 pour DSM 7.1 et supérieur.
 Vous aurez le contrôle total de chaque paramètre des codecs audio en utilisant l'OUTIL de configuration pour Advanced Wrapper. Le seul wrapper Internet avec prise en charge 5.1 AAC et outil de configuration intégré.
 
 ============================================================= PROFITEZ !!!!! =============================================================
