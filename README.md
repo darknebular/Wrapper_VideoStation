@@ -23,16 +23,16 @@ You will can change the order of the audio codecs in the wrapper, install the mo
 The Installer has Multi Language support (English, Spanish, Portuguese, French, German, Italian).
 
 
-## Dependencies
+## Dependencies:
 - DSM 7.0-41890 (and above)
 - Video Station 2.4.6-1594 (and above)
 - SynoCommunity ffmpeg 4.X.X (For the moment VideoStation It's not compatible with 5.X and 6.X) ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 1.0.0-50001 (and above). (The licence in AME must be LOADED.)
 
-## Optional Packages
+## Optional Packages:
 - MediaServer 1.1.0-0201 (and above) (OPTIONAL)
 
-## Supported / Unsupported scenarios
+## Supported / Unsupported scenarios:
 - DTS or EAC3 or TrueHD + Any non standard video format: ✅
 - no DTS, no EAC3, no TrueHD + HEVC: ✅
 - DTS or EAC3 or TrueHD + HEVC: ✅
@@ -42,7 +42,7 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 
 (In low powered devices you only will have remux of the audio.)
 
-## Instructions
+## Instructions:
 - Check that you meet the required dependencies
 - Install SynoCommunity ffmpeg ([help](https://synocommunity.com/#easy-install))
 - Connect to your NAS using SSH (admin user required) ([help](https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General_Setup/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet))
@@ -50,7 +50,7 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 - Use the following command (Basic command) to execute the patch
 - You'll have to re-run the patcher everytime you update VideoStation, Advanced Media Extensions and DSM
 
-## Usage
+# USAGE:
 Basic command:  
 `bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")"`
 
