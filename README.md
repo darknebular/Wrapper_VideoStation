@@ -51,8 +51,10 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 - You'll have to re-run the patcher everytime you update VideoStation, Advanced Media Extensions and DSM
 
 # USAGE:
-Basic command:  
+Basic Installation command:  
 `bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")"`
+
+.
 
 With options:  
 `bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s <Flags>`
