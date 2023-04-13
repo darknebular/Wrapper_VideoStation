@@ -89,7 +89,7 @@ case "$1" in
                         vcodec=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                         vcodecprofile=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=profile -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 else
-                        acodec=`/var/packages/ffmpeg/target6/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        acodec=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 fi
         ;;
         *)
@@ -221,9 +221,9 @@ case "$1" in
         ;;
         -hls_seek_time)
                 shift
-                argsnew+=("-hls_seek_time" "$1")
-                args2vs+=("-hls_seek_time" "$1")
-                args2vsms+=("-hls_seek_time" "$1")
+                argsnew+=("-ss" "$1""ms")
+                args2vs+=("-ss" "$1""ms")
+                args2vsms+=("-ss" "$1""ms")
         ;;
         -segment_time)
                 shift
