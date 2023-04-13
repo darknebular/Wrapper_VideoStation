@@ -2,7 +2,7 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.2.5"
+rev="AME_12.2.6"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
@@ -11,6 +11,7 @@ rev="AME_12.2.5"
 # AME_12.2.3: Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.2.4)
 # AME_12.2.4: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station. (Deprecated, migrate to 12.2.5)
 # AME_12.2.5: Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server.
+# AME_12.2.6: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
 
 WHITE="\u001B[37m"
 
@@ -37,7 +38,7 @@ paramvs=$@
 stream="${@: -1}"
 streamid="FFM$pid"
 bin1=/var/packages/CodecPack/target/bin/ffmpeg41.orig
-bin2=/var/packages/ffmpeg/target/bin/ffmpeg
+bin2=/var/packages/ffmpeg6/target/bin/ffmpeg
 args=()
 
 vcodec="KO"
@@ -85,10 +86,10 @@ case "$1" in
                 args+=("-map" "$1")
                 idmap=`echo $1 | cut -d : -f 2`
                 if [ "$vcodec" = "KO" ]; then
-                        vcodec=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
-                        vcodecprofile=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=profile -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        vcodec=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        vcodecprofile=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=profile -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 else
-                        acodec=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        acodec=`/var/packages/ffmpeg/target6/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 fi
         ;;
         *)
