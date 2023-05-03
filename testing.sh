@@ -628,6 +628,10 @@ cp_bin_path=/var/packages/CodecPack/target/bin
 elif [[ "$dsm_version" == 7.1* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="1-12.3.7"
+elif [[ "$dsm_version" == 7.2* ]]; then
+cp_bin_path=/var/packages/CodecPack/target/pack/bin
+  injector="1-12.3.7"
+  
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
