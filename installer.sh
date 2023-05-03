@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.9"
+version="SCPT_2.9.1"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
@@ -13,7 +13,9 @@ version="SCPT_2.9"
 # SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. (Deprecated migrated to SCPT_2.6)
 # SCPT_2.7: Save space in the Installer script in some function that mustn't be translated. (Deprecated migrated to SCPT_2.8)
 # SCPT_2.8: Fixed a bug when you are in 7.0.X the scripts doesn't take the conditional correctly in check_versions fuction. (Deprecated migrated to SCPT_2.9)
-# SCPT_2.9: Change the injectors for the new Wrapper's version.
+# SCPT_2.9: Change the injectors for the new Wrapper's version. (Deprecated migrated to SCPT_2.9.1)
+# SCPT_2.9.1: Make the installation script compatible with the new version of DSM 7.2. Thanks to sunnyxiong2020.
+
 
 ##############################################################
 
@@ -635,6 +637,10 @@ cp_bin_path=/var/packages/CodecPack/target/bin
 elif [[ "$dsm_version" == 7.1* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="1-12.3.6"
+elif [[ "$dsm_version" == 7.2* ]]; then
+cp_bin_path=/var/packages/CodecPack/target/pack/bin
+injector="1-12.3.6"
+
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
