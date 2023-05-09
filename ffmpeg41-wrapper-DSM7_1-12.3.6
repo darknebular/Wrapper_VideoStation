@@ -134,9 +134,9 @@ case "$1" in
                 shift
                 argsnew+=("-i" "$1")
                 args1vs+=("-i" "$1")
-                args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args1vsms+=("-i" "$1")
-                args2vsms+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2vsms+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
         ;;
         -vf)
                 shift
