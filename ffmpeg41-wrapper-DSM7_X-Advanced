@@ -16,7 +16,7 @@ rev="AME_12.3.7"
 # AME_12.3.4: Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.3.5)
 # AME_12.3.5: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station. (Deprecated, migrate to 12.3.6)
 # AME_12.3.6: Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server. (Deprecated, migrate to 12.3.7)
-# AME_12.3.7: Fixing a bug with the new ffmpeg versions using pipe:0 in "-i" argument.
+# AME_12.3.7: Fixing a bug with the new ffmpeg versions using pipe:0 in "-i" argument. Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
 
 
 WHITE="\u001B[37m"
@@ -44,7 +44,7 @@ paramvs=$@
 stream="${@: -1}"
 streamid="FFM$pid"
 bin1=/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig
-bin2=/var/packages/ffmpeg/target/bin/ffmpeg
+bin2=/var/packages/ffmpeg6/target/bin/ffmpeg
 args=()
 
 vcodec="KO"
@@ -92,10 +92,10 @@ case "$1" in
                 args+=("-map" "$1")
                 idmap=`echo $1 | cut -d : -f 2`
                 if [ "$vcodec" = "KO" ]; then
-                        vcodec=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
-                        vcodecprofile=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=profile -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        vcodec=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        vcodecprofile=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=profile -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 else
-                        acodec=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        acodec=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 fi
         ;;
         *)
