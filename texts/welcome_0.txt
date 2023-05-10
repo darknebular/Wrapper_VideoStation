@@ -14,7 +14,7 @@ using the Configurator TOOL embedded into the Installer.
 
 Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI... Works fine the thumbnails in VideoStation.
 
-With DS-XXX PLAY Appliances or Low powered devices: ⚠️ I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for ffmpeg binary.
+With DS-XXX PLAY Appliances or Low powered devices: ⚠️  I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for ffmpeg binary.
 You will have full control of each Audio's codecs parameter using the Configuration TOOL for the Advanced Wrapper Mode. The only Wrapper of Internet with 5.1 AAC support and with a Configurator TOOL.
 
 ============================================================      ¡¡¡¡¡ENJOY!!!!!     ============================================================
