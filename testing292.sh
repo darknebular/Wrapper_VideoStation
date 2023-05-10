@@ -789,7 +789,7 @@ start
 
 function install_simple() {
   mode="Simplest"
-  injector="simplest"
+  injector="X-Simplest"
   install
 }
 function install_advanced() {
