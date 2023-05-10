@@ -4,11 +4,11 @@
 # Simplest wrapper. This wrapper works with the Video Station´s Transcoding Profiles and always will be using MP3 2.0 96kbps or 128kbps when transcoding.
 # It derives all parameters to the SynoCommunity´s ffmpeg.
 
-rev="AME_S_1.2"
+rev="AME_S_1.1"
 # Changes:
 # AME_S_1.0: Initial release of the simplest wrapper. Fork from AlexPresso. (Deprecated, migrate to AME_S_1.1)
-# AME_S_1.1: Correcting the log file. (Deprecated, migrate to AME_S_1.2)
-# AME_S_1.2: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
+# AME_S_1.1: Correcting the log file.
+# Next Release: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
 
 ##################################################
 # VARIABLES
@@ -52,6 +52,6 @@ newline
 info "========================================[start ffmpeg $pid]"
 info "DEFAULT_ARGS: $*"
 
-/var/packages/ffmpeg6/target/bin/ffmpeg "$@" 2> $stderrfile
+/var/packages/ffmpeg/target/bin/ffmpeg "$@" 2> $stderrfile
 
 endprocess
