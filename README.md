@@ -37,7 +37,7 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 - no DTS, no EAC3, no TrueHD + HEVC: ✅
 - DTS or EAC3 or TrueHD + HEVC: ✅
 - DSM 7.X: ✅
-- With DS-XXX PLAY Appliances or Low Powered Devices: ⚠️ I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for ffmpeg binary.
+- With DS-XXX PLAY Appliances or Low Powered Devices: ✅ (I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for ffmpeg binary.)
 - DSM 6.2: ⚠️ The installer doesn´t support this version.
 - DTS HD-MA: ⚠️ The Wrapper could play it, but there will not be transcoding of this audio codec. 
 
