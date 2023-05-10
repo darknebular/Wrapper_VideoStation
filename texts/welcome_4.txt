@@ -14,7 +14,7 @@ indem Sie das im Installationsprogramm integrierte Setup-TOOL verwenden.
 
 Die Offline-Transcodierung funktioniert gut und das Streamen typischer Erweiterungen wie: MKV, MP4, AVI ... Miniaturansichten funktionieren gut in VideoStation.
 
-Die neueste Version ist 12.2.5 für DSM 7.0 und 12.3.6 für DSM 7.1 und höher.
+Mit DS-XXX PLAY oder Low-Power-Geräten: ⚠️  Ich empfehle die Installation des Simplest Wrappers. Der Advanced benötigt eine bessere CPU oder eine verfügbare GPU für die ffmpeg-Binärdatei.
 Mit dem Konfigurations-TOOL für den Advanced Wrapper haben Sie die volle Kontrolle über jeden Parameter der Audio-Codecs. Der einzige Internet Wrapper mit 5.1 AAC-Unterstützung und integriertem Konfigurationstool.
 
 =========================================================== GENIESSEN!!!!! ===========================================================
