@@ -1,21 +1,13 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_2.9.1"
+version="SCPT_3.1"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
-# SCPT_2.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
-# SCPT_2.1: Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Adding a ASCII Intro.
-# SCPT_2.2: Added new info texts. (Deprecated migrated to SCPT_2.3)
-# SCPT_2.3: Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
-# SCPT_2.4: Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
-# SCPT_2.5: Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
-# SCPT_2.6: Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. (Deprecated migrated to SCPT_2.6)
-# SCPT_2.7: Save space in the Installer script in some function that mustn't be translated. (Deprecated migrated to SCPT_2.8)
-# SCPT_2.8: Fixed a bug when you are in 7.0.X the scripts doesn't take the conditional correctly in check_versions fuction. (Deprecated migrated to SCPT_2.9)
-# SCPT_2.9: Change the injectors for the new Wrapper's version. (Deprecated migrated to SCPT_2.9.1)
-# SCPT_2.9.1: Make the installation script compatible with the new version of DSM 7.2. Thanks to sunnyxiong2020.
-
+# SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
+# SCPT_3.0: Initial new major Release. Clean the code from last versions. 
+# SCPT_3.1: Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors.
+# Next release: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X.
 
 ##############################################################
 
@@ -33,7 +25,7 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-injector="0-12.2.5"
+injector="0-Advanced"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
@@ -633,13 +625,13 @@ function check_versions() {
 
 if [[ "$dsm_version" == 7.0* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/bin
-  injector="0-12.2.5"
+  injector="0-Advanced"
 elif [[ "$dsm_version" == 7.1* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
-  injector="1-12.3.6"
+  injector="X-Advanced"
 elif [[ "$dsm_version" == 7.2* ]]; then
 cp_bin_path=/var/packages/CodecPack/target/pack/bin
-injector="1-12.3.6"
+injector="X-Advanced"
 
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
@@ -798,7 +790,7 @@ start
 
 function install_simple() {
   mode="Simplest"
-  injector="simplest"
+  injector="X-Simplest"
   install
 }
 function install_advanced() {
@@ -915,6 +907,10 @@ else
 	echo -e "# DarkNebular´s $mode Wrapper" >> /tmp/wrapper.KEY
 	info "${GREEN}${text_install_24[$LANG]}"
 	
+  if [[ -f "${cp_bin_path}/ffmpeg27" ]]; then
+  	mv -n ${cp_bin_path}/ffmpeg27 ${cp_bin_path}/ffmpeg27.orig 2>> $logfile
+  	ln -s -f ${cp_bin_path}/ffmpeg41 ${cp_bin_path}/ffmpeg27 2>> $logfile
+  fi
 	
 	info "${YELLOW}${text_install_18[$LANG]}"
 	info "${YELLOW}Backup the original libsynovte.so in VideoStation as libsynovte.so.orig." >> $logfile
@@ -1059,6 +1055,16 @@ if [[ "$unmode" == "Old" ]]; then
   done
   
   if [[ "$dsm_version" == 7.1* ]]; then
+  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.1
+  find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
+  text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
+      info "${YELLOW}${text_uninstall_8b[$LANG]}"
+      info "${YELLOW}Restoring CodecPack's link" >> $logfile
+      mv -T -f "$filename" "${filename::-5}" 2>> $logfile
+  done
+  fi
+  if [[ "$dsm_version" == 7.2* ]]; then
+  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.2
   find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
       info "${YELLOW}${text_uninstall_8b[$LANG]}"
