@@ -14,7 +14,7 @@ usando a FERRAMENTA de configuração incorporada ao instalador.
 
 A transcodificação offline funciona bem e o streaming de extensões típicas como: MKV, MP4, AVI... Miniaturas funcionam bem no VideoStation.
 
-Com DS-XXX PLAY ou Dispositivos de Baixo Consumo: ⚠️ Recomendo instalar o Simplest Wrapper. O Advanced precisa de uma CPU melhor ou de ter uma GPU disponível para o binário ffmpeg.
+Com DS-XXX PLAY ou Dispositivos de Baixo Consumo: ⚠️  Recomendo instalar o Simplest Wrapper. O Advanced precisa de uma CPU melhor ou de ter uma GPU disponível para o binário ffmpeg.
 Você terá controle total de todos os parâmetros dos codecs de áudio usando a FERRAMENTA de configuração do Advanced Wrapper. O único Internet Wrapper com suporte 5.1 AAC e FERRAMENTA de configuração integrada.
 
 ============================================================== APROVEITE!!!!! ==============================================================
