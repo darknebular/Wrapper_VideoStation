@@ -18,6 +18,7 @@ pid=$$
 stderrfile="/tmp/ffmpeg-$pid.stderr"
 logfile="/tmp/wrapper_ffmpeg.log"
 errcode=0
+bin1=/var/packages/ffmpeg/target/bin/ffmpeg
 
 ##################################################
 # FUNCIONES
@@ -57,6 +58,6 @@ newline
 info "========================================[start ffmpeg $pid]"
 info "DEFAULT_ARGS: $*"
 
-/var/packages/ffmpeg/target/bin/ffmpeg "$@" 2> $stderrfile
+$bin1 "$@" 2> $stderrfile
 
 endprocess
