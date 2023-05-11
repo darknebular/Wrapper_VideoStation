@@ -313,6 +313,7 @@ _log "VCODEC   = $vcodec ($vcodecprofile)"
         _log_para "$param1"
 
         $bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+        
 childpid=$!
 _log "CHILDPID = $childpid"
 wait $childpid
