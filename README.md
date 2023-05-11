@@ -26,7 +26,7 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 ## Dependencies:
 - DSM 7.0-41890 (and above)
 - Video Station 2.4.6-1594 (and above)
-- SynoCommunity ffmpeg 4.4.3-48 (For the moment VideoStation It's not compatible with 5.X and 6.X) ([help](https://synocommunity.com/#easy-install))
+- SynoCommunity ffmpeg 4.X.X (For the moment VideoStation It's not compatible with 5.X and 6.X) ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 1.0.0-50001 (and above). (The licence in AME must be LOADED.)
 
 ## Optional Packages:
