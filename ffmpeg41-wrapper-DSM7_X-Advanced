@@ -16,7 +16,7 @@ rev="AME_12.3.7"
 # AME_12.3.4: Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.3.5)
 # AME_12.3.5: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station. (Deprecated, migrate to 12.3.6)
 # AME_12.3.6: Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server. (Deprecated, migrate to 12.3.7)
-# AME_12.3.7: Fixed a bug in Offline Transcoding. Fixed the -i pipe argument to the correct syntax.
+# AME_12.3.7: Fixed a bug in Offline Transcoding.
 # Next Release: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
 
 
@@ -136,9 +136,9 @@ case "$1" in
                 shift
                 argsnew+=("-i" "$1")
                 args1vs+=("-i" "$1")
-                args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args1vsms+=("-i" "$1")
-                args2vsms+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2vsms+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
         ;;
         -vf)
                 shift
