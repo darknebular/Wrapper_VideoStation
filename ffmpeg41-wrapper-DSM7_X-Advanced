@@ -304,7 +304,7 @@ startexectime=`date +%s`
 if [ "$y" = "OffEnable" ]; then
 _log "VCODEC   = $vcodec ($vcodecprofile)"
         _log "${BLUE}ACODEC   = $acodec"
-        _log "${BLUE}PARAM_ORIG  ="
+        _log "${BLUE}PARAM_ORIG  =${WHITE}"
         _log_para "$paramvs"
         _log "${YELLOW}MODE     = MP4_TRANSCO-VS"
         _log "${BLUE}FFMPEG   = $bin2"
