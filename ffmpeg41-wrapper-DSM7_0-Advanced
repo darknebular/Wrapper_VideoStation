@@ -311,7 +311,7 @@ _log "VCODEC   = $vcodec ($vcodecprofile)"
 childpid=$!
 _log "${BLUE}CHILDPID = $childpid"
 wait $childpid
-_log "${BLUE}*** CHILD END ***"
+_log "${PURPLE}*** CHILD END ***"
 _log "${PURPLE}*** PROCESS END ***"
 rm /tmp/ffmpeg-*.stderr
 
@@ -432,7 +432,7 @@ if test $((stopexectime-startexectime)) -lt 10; then
         # _log_para "`cat /tmp/ffmpeg-${streamid}.stderr`"
 fi
 
-_log "${BLUE}*** CHILD END ***"
+_log "${PURPLE}*** CHILD END ***"
 _log "${PURPLE}*** PROCESS END ***"
 newline
 newline
