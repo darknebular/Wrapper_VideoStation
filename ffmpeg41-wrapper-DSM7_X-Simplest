@@ -4,16 +4,21 @@
 # Simplest wrapper. This wrapper works with the Video Station´s Transcoding Profiles and always will be using MP3 2.0 96kbps or 128kbps when transcoding.
 # It derives all parameters to the SynoCommunity´s ffmpeg.
 
-rev="AME_S_1.1"
+rev="AME_S_1.2"
 # Changes:
 # AME_S_1.0: Initial release of the simplest wrapper. Fork from AlexPresso. (Deprecated, migrate to AME_S_1.1)
-# AME_S_1.1: Correcting the log file.
+# AME_S_1.1: Correcting the log file. (Deprecated, migrate to AME_S_1.2)
+# AME_S_1.2: Improved the viewing of logs.
 # Next Release: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
 
 ##################################################
 # VARIABLES
-
 WHITE="\u001B[37m"
+RED="\u001b[31m"
+BLUE="\u001b[36m"
+PURPLE="\u001B[35m"
+GREEN="\u001b[32m"
+YELLOW="\u001b[33m"
 pid=$$
 stderrfile="/tmp/ffmpeg-$pid.stderr"
 logfile="/tmp/wrapper_ffmpeg.log"
@@ -30,11 +35,11 @@ function newline() {
   echo "" >> $logfile
 }
 function info() {
-  log "INFO" "$1"
+  log "${BLUE}INFO" "${WHITE}$1"
 }
 
 function handle_error() {
-  log "ERROR" "An error occurred, here is the $stderrfile content: "
+  log "${RED}ERROR" "${RED}An error occurred, here is the $stderrfile content: "
   newline
   cat "$stderrfile" >> $logfile
   newline
@@ -43,7 +48,7 @@ function handle_error() {
 }
 
 function endprocess() {
-  info "========================================[end ffmpeg $pid]"
+  info "${PURPLE}========================================[end ffmpeg $pid]${WHITE}"
   newline
   rm -f "$stderrfile"
   exit $errcode
@@ -55,8 +60,8 @@ trap endprocess SIGTERM
 trap handle_error ERR
 
 newline
-info "========================================[start ffmpeg $pid]"
-info "DEFAULT_ARGS: $*"
+info "${PURPLE}========================================[start ffmpeg $pid]${WHITE}"
+info "${BLUE}DEFAULT_ARGS: $*${WHITE}"
 
 $bin1 "$@" 2> $stderrfile
 
