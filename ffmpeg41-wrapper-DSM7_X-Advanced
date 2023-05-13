@@ -416,7 +416,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
         startexectime=`date +%s`
         _log "${BLUE}STDOUT   =${WHITE}"
         _log_para "`tail -n 18 /tmp/ffmpeg-${streamid}.stderr`"
-        _log "${YELLOW}MODE     = WRAPPER_SINGLE-VSMS"
+        _log "${YELLOW}MODE     = WRAPPER_SINGLE-VS"
         _log "${BLUE}FFMPEG   = $bin2"
 		_log "${GREEN}PARAM_WRAP   =${WHITE}"
         paramwps=${argsnew[@]}
