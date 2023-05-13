@@ -302,7 +302,7 @@ sed -i -e "s/{\"PID\":${pid},\"hardware_transcode\":true,/{\"PID\":${pid},\"hard
 startexectime=`date +%s`
 
 if [ "$y" = "OffEnable" ]; then
-_log "VCODEC   = $vcodec ($vcodecprofile)"
+	_log "${BLUE}VCODEC   = $vcodec ($vcodecprofile)"
         _log "${BLUE}ACODEC   = $acodec"
         _log "${BLUE}PARAM_ORIG  =${WHITE}"
         _log_para "$paramvs"
