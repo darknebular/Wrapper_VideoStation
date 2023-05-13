@@ -35,7 +35,9 @@ _log(){
 _log_para(){
         echo -e "${WHITE}$1" | fold -w 120 | sed "s/^.*$/$(date '+%Y-%m-%d %H:%M:%S') - ${streamid} -          = &/" >> /tmp/wrapper_ffmpeg.log
 }
-
+function newline() {
+  echo "" >> /tmp/wrapper_ffmpeg.log
+}
 _term(){
         rm /tmp/ffmpeg-${streamid}.stderr
         _log "${PURPLE}*** KILLCHILD ***"
@@ -438,5 +440,7 @@ fi
 
 _log "${BLUE}*** CHILD END ***"
 _log "${PURPLE}*** PROCESS END ***"
+newline
+newline
 
 rm /tmp/ffmpeg-*.stderr
