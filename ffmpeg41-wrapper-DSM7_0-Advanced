@@ -12,7 +12,7 @@ rev="AME_12.2.7"
 # AME_12.2.4: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station. (Deprecated, migrate to 12.2.5)
 # AME_12.2.5: Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server. (Deprecated, migrate to 12.2.6)
 # AME_12.2.6: Fixed a bug in Offline Transcoding. (Deprecated, migrate to 12.2.7)
-# AME_12.2.7: Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process.
+# AME_12.2.7: Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process. Fixed a piping problem with the new versions of FFMPEG.
 # Next Release: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
 
 WHITE="\u001B[37m"
@@ -135,7 +135,7 @@ case "$1" in
                 shift
                 argsnew+=("-i" "$1")
                 args1vs+=("-i" "$1")
-                args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args2vsms+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
         ;;
         -vf)
@@ -277,7 +277,7 @@ case "$1" in
         *)
                 argsnew+=("$1")
                 if [ "$stream" = "$1" ]; then
-                        args1vs+=("-bufsize" "8192k" "pipe:1")
+                        args1vs+=("-bufsize" "8192k" "pipe:")
                         args2vs+=("$1")
                         args2vsms+=("-bufsize" "8192k" "$1")
 						
