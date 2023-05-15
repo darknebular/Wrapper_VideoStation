@@ -319,6 +319,8 @@ _log "${BLUE}CHILDPID = $childpid"
 wait $childpid
 _log "${PURPLE}*** CHILD END ***"
 _log "${PURPLE}*** PROCESS END ***"
+newline
+newline
 rm -f /tmp/ffmpeg-${streamid}.stderr
 exit 0
 
