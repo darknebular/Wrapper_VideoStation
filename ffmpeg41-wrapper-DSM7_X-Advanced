@@ -2,7 +2,7 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.3.8"
+rev="AME_12.3.9"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
@@ -17,7 +17,8 @@ rev="AME_12.3.8"
 # AME_12.3.5: Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station. (Deprecated, migrate to 12.3.6)
 # AME_12.3.6: Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server. (Deprecated, migrate to 12.3.7)
 # AME_12.3.7: Fixed a bug in Offline Transcoding. (Deprecated, migrate to 12.3.8)
-# AME_12.3.8: Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process. Fixed a piping problem with the new versions of FFMPEG.
+# AME_12.3.8: Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process. Fixed a piping problem with the new versions of FFMPEG. (Deprecated, migrate to 12.3.9)
+# AME_12.3.9: Improved the removing of the stderr's temps to specific PID.
 # Next Release: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
 
 
@@ -319,7 +320,7 @@ _log "${BLUE}CHILDPID = $childpid"
 wait $childpid
 _log "${PURPLE}*** CHILD END ***"
 _log "${PURPLE}*** PROCESS END ***"
-rm -f /tmp/ffmpeg-*.stderr
+rm -f /tmp/ffmpeg-$pid.stderr
 exit 0
 
 fi
@@ -441,5 +442,5 @@ _log "${PURPLE}*** PROCESS END ***"
 newline
 newline
 
-rm -f /tmp/ffmpeg-*.stderr
+rm -f /tmp/ffmpeg-$pid.stderr
 exit 0
