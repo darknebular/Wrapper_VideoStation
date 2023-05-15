@@ -441,5 +441,5 @@ _log "${PURPLE}*** PROCESS END ***"
 newline
 newline
 
-rm -f /tmp/ffmpeg-$pid.stderr
+rm -f /tmp/ffmpeg-${streamid}.stderr
 exit 0
