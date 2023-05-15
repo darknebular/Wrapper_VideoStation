@@ -41,7 +41,7 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 - DSM 6.2: ⚠️ The installer doesn´t support this version.
 - DTS HD-MA: ⚠️ The Wrapper could play it, but there will not be transcoding of this audio codec. 
 
-*(In low powered devices you only will have remux of the audio.)*
+*(In low powered devices you only will have remux of the audio or only be able to play it without transcoding.)*
 
 ## Instructions:
 - Check that you meet the required dependencies
