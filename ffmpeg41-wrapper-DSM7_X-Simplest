@@ -41,7 +41,7 @@ function info() {
 }
 
 function handle_error() {
-  log "${RED}ERROR" "${RED}An error occurred, here is the $stderrfile content: "
+  log "${RED}ERROR" "${RED}An error occurred, here is the $stderrfile content:${WHITE}"
   newline
   cat "$stderrfile" >> $logfile
   newline
@@ -50,7 +50,7 @@ function handle_error() {
 }
 
 function endprocess() {
-  info "${PURPLE}========================================[end ffmpeg $pid]${WHITE}"
+  info "${PURPLE}========================================[END ffmpeg $pid]${WHITE}"
   newline
   rm -f "$stderrfile"
   exit $errcode
@@ -62,7 +62,7 @@ trap endprocess SIGTERM
 trap handle_error ERR
 
 newline
-info "${PURPLE}========================================[start ffmpeg $pid]${WHITE}"
+info "${PURPLE}========================================[START ffmpeg $pid]${WHITE}"
 info "${BLUE}DEFAULT_ARGS: $*${WHITE}"
 
 $bin1 "$@" 2> $stderrfile
