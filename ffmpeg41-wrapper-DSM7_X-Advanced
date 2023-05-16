@@ -2,7 +2,7 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.3.9"
+rev="AME_12.4.1"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
@@ -18,8 +18,8 @@ rev="AME_12.3.9"
 # AME_12.3.6: Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server. (Deprecated, migrate to 12.3.7)
 # AME_12.3.7: Fixed a bug in Offline Transcoding. (Deprecated, migrate to 12.3.8)
 # AME_12.3.8: Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process. Fixed a piping problem with the new versions of FFMPEG. (Deprecated, migrate to 12.3.9)
-# AME_12.3.9: Improved the removing of the stderr's temporals to specific PID. Fixed a bug with AVBR movies using DLNA transcoding. I remove the buffer 8M for DLNA. It must be only for ChromeCast or Browsers.
-# Next Release: Adding support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X.
+# AME_12.3.9: Improved the removing of the stderr's temporals to specific PID. Fixed a bug with AVBR movies using DLNA transcoding. I remove the buffer 8M for DLNA. It must be only for ChromeCast or Browsers. (Deprecated, migrate to 12.4.1)
+# AME_12.4.1: Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X.
 
 
 WHITE="\u001B[37m"
@@ -54,7 +54,7 @@ paramvs=$@
 stream="${@: -1}"
 streamid="FFM$pid"
 bin1=/var/packages/CodecPack/target/pack/bin/ffmpeg41.orig
-bin2=/var/packages/ffmpeg/target/bin/ffmpeg
+bin2=/var/packages/ffmpeg6/target/bin/ffmpeg
 args=()
 
 vcodec="KO"
@@ -102,10 +102,10 @@ case "$1" in
                 args+=("-map" "$1")
                 idmap=`echo $1 | cut -d : -f 2`
                 if [ "$vcodec" = "KO" ]; then
-                        vcodec=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
-                        vcodecprofile=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=profile -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        vcodec=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        vcodecprofile=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=profile -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 else
-                        acodec=`/var/packages/ffmpeg/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
+                        acodec=`/var/packages/ffmpeg6/target/bin/ffprobe -v error -select_streams $idmap -show_entries stream=codec_name -of default=noprint_wrappers=1:nokey=1 "$movie" | head -n 1`
                 fi
         ;;
         *)
