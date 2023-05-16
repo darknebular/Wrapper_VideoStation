@@ -1,14 +1,14 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.2"
+version="SCPT_3.3"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_3.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_3.1)
 # SCPT_3.1: Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors. (Deprecated migrated to SCPT_3.2)
-# SCPT_3.2: Reflect the new Wrapper change in the installation script.
-# Next release: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X.
+# SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
+# SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X.
 
 ##############################################################
 
@@ -20,7 +20,7 @@ version="SCPT_3.2"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
-dependencias=("VideoStation" "ffmpeg" "CodecPack")
+dependencias=("VideoStation" "ffmpeg6" "CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
