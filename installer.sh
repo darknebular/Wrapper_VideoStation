@@ -161,7 +161,7 @@ function config_A() {
     echo ""
      echo -e "${BLUE}${text_configA_3[$LANG]}"
      info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-     exit 1   
+     exit 0   
     fi
 	
 	if [[ "$check_amrif" == "$firma" ]]; then  
@@ -235,7 +235,7 @@ info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps
     echo ""
     echo -e "${BLUE}${text_configB_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    exit 1   
+    exit 0   
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
@@ -291,7 +291,7 @@ info "${YELLOW}Changing the 5.1 audio codec from AAC to AC3 regardless of the or
     echo ""
     echo -e "${BLUE}${text_configC_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    exit 1  
+    exit 0  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
@@ -426,7 +426,7 @@ info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in
     echo ""
     echo -e "${BLUE}${text_configF_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    exit 1  
+    exit 0  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
@@ -475,7 +475,7 @@ info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (t
     echo ""
     echo -e "${BLUE}${text_configG_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    exit 1  
+    exit 0  
 fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
@@ -514,7 +514,6 @@ text_configH_3=("Actually you HAVEN'T INSTALLED THE ADVANCED WRAPPER so this cod
 text_configH_4=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
 text_configH_5=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED in DLNA MediaServer and this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO en DLNA MediaServer y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O ADVANCED WRAPPER INSTALADO no DLNA MediaServer e este Codec Configurator NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS ADVANCED WRAPPER INSTALLÉ sur DLNA MediaServer et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit KEINEN ADVANCED WRAPPER auf dem DLNA MediaServer INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI WRAPPER AVANZATO INSTALLATO su DLNA MediaServer e questo configuratore di codec NON PUÒ modificare nulla.")    
 
-
 if [[ "$check_amrif" == "$firma2" ]]; then 
    info "${RED}${text_configH_5[$LANG]}"
    info "${RED}Actually you HAVEN'T INSTALLED THE ADVANCED WRAPPER so this codec configurator CAN'T change anything." >> $logfile
@@ -541,7 +540,7 @@ info "${YELLOW}Changing to use only an Unique Audio's Stream in DLNA MediaServer
     sed -i 's/args2vsms+=("-ac:1" "$1" "-ac:2" "")/args2vsms+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "6" "-ac:2" "$1")/args2vsms+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     sed -i 's/args2vsms+=("-ac:1" "" "-ac:2" "$1")/args2vsms+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
-    info "${GREEN}${text_configH_6[$LANG]}"
+    info "${GREEN}${text_configH_2[$LANG]}"
     echo ""
  else
    info "${RED}${text_configH_3[$LANG]}"
@@ -991,7 +990,7 @@ info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE
 echo ""   
 fi
 
-exit 1
+exit 0
 }
 
 function uninstall() {
@@ -1150,7 +1149,7 @@ if [[ "$unmode" == "New" ]]; then
 
   echo ""
   info "${BLUE}${text_uninstall_16[$LANG]}"
-  exit 1
+  exit 0
   
   else
   
@@ -1232,7 +1231,7 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
    
    echo -e "${BLUE}${text_configura_14[$LANG]}"
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-   exit 1
+   exit 0
 
 else
    info "${RED}${text_configura_15[$LANG]}"
@@ -1248,7 +1247,7 @@ fi
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; exit 1;;
+    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; exit 0;;
   esac
 done
 
