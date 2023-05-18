@@ -1274,5 +1274,5 @@ case "$setup" in
   autoinstall) install_advanced;;
   uninstall) uninstall_new;;
   config) configurator;;
-  info) exit 1;;
+  info) exit 0;;
 esac
