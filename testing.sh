@@ -15,7 +15,7 @@ version="SCPT_3.4.1"
 
 sleep 2
 touch /tmp/SCPT_Language
-curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o /tmp/SCPT_Languages
+curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o /tmp/
 
 ###############################
 # VARIABLES GLOBALES
