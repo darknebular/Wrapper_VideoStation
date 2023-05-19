@@ -14,9 +14,16 @@ version="SCPT_3.4.RC4"
 ##############################################################
 
 ###############################
+# FICHERO AUXILIAR PARA IDIOMAS
+###############################
+touch /tmp/SCPT_Languages
+curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
+
+###############################
 # VARIABLES GLOBALES
 ###############################
 
+source "/tmp/SCPT_Languages"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
@@ -102,11 +109,6 @@ function intro() {
     echo -e "${PURPLE}	$intro"
     echo ""
   fi
-  
-# Bajar todos los textos en todos los idiomas y aprovechar los 3 segundos de la función intro para que se carguen bien.
-touch /tmp/SCPT_Languages
-curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
-
 sleep 3
 }
 function welcome() {
@@ -1155,9 +1157,3 @@ case "$setup" in
   config) configurator;;
   info) rm -f /tmp/SCPT_Languages; exit 0;;
 esac
-
-###############################
-# FICHERO AUXILIAR PARA IDIOMAS
-###############################
-
-source "/tmp/SCPT_Languages"
