@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC1.5."
+version="SCPT_3.4.RC2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -37,8 +37,8 @@ firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
 declare -i control=0
-mayorver=$(expr "$majorversion" + 0)
-menorver=$(expr "$minorversion" + 0)
+declare -i mayorver=$((majorversion + 0))
+declare -i menorver=$((minorversion + 0))
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 
