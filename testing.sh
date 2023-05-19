@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4"
+version="SCPT_3.4.1"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -12,6 +12,11 @@ version="SCPT_3.4"
 # SCPT_3.4: Improvements in checking DSM's versions. Reduced the size of this script using a external file called SCPT_Languages.
 
 ##############################################################
+
+touch /tmp/SCPT_Languages
+#curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
+wget -q "$repo_url/main/SCPT_Languages" -O /tmp/SCPT_Languages 2>> "$logfile"
+sleep 1
 
 ###############################
 # VARIABLES GLOBALES
@@ -1117,9 +1122,6 @@ fi
 ################################
 # EJECUCIÓN
 ################################
-touch /tmp/SCPT_Languages
-#curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
-wget -q "$repo_url/main/SCPT_Languages" -O /tmp/SCPT_Languages 2>> "$logfile"
 
 while getopts s: flag; do
   case "${flag}" in
