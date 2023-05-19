@@ -21,8 +21,8 @@ sleep 1
 # VARIABLES GLOBALES
 ###############################
 
-source "/tmp/SCPT_Languages"
 source "/etc/VERSION"
+source "/tmp/SCPT_Languages"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
