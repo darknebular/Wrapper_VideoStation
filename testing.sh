@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC1.2"
+version="SCPT_3.4.RC1.2."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -42,8 +42,8 @@ LANG="0"
 ###############################
 # FICHERO AUXILIAR PARA IDIOMAS
 ###############################
-touch /tmp/SCPT_Languages
-curl -sSL "$repo_url/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
+touch /tmp/SCPT_VAR_Languages
+curl -sSL "$repo_url/main/SCPT_VAR_Languages" -o "/tmp/SCPT_VAR_Languages" 2>> $logfile
 # Se cargará en la función intro que tiene una espera de 3 segundos para asegurar su descarga.
 
 
@@ -97,7 +97,7 @@ fi
 
 if [[ npacks -ne control ]]; then
 echo -e  "At least you need $npacks package/s to Install, please Install the dependencies and RE-RUN the Installer again."
-rm -f /tmp/SCPT_Languages
+rm -f /tmp/SCPT_VAR_Languages
 exit 1
 fi
 
@@ -111,8 +111,10 @@ function intro() {
     echo ""
   fi
 sleep 3
-cat /etc/VERSION >> /tmp/SCPT_Languages
-source "/tmp/SCPT_Languages"
+cat /etc/VERSION >> /tmp/SCPT_VAR_Languages
+source "/tmp/SCPT_VAR_Languages"
+echo "$major"
+echo "$minor"
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -162,7 +164,7 @@ function config_A() {
     echo ""
      echo -e "${BLUE}${text_configA_3[$LANG]}"
      info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-     rm -f /tmp/SCPT_Languages
+     rm -f /tmp/SCPT_VAR_Languages
      exit 0   
     fi
 	
@@ -231,7 +233,7 @@ info "${YELLOW}Changing to use FIRST STREAM= AAC 5.1 512kbps (or AC3 5.1 640kbps
     echo ""
     echo -e "${BLUE}${text_configB_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    rm -f /tmp/SCPT_Languages
+    rm -f /tmp/SCPT_VAR_Languages
     exit 0   
 fi
 
@@ -281,7 +283,7 @@ info "${YELLOW}Changing the 5.1 audio codec from AAC to AC3 regardless of the or
     echo ""
     echo -e "${BLUE}${text_configC_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    rm -f /tmp/SCPT_Languages
+    rm -f /tmp/SCPT_VAR_Languages
     exit 0  
 fi
 
@@ -398,7 +400,7 @@ info "${YELLOW}Changing the 5.1 audio's codec from AC3 640kbps to AAC 512kbps in
     echo ""
     echo -e "${BLUE}${text_configF_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    rm -f /tmp/SCPT_Languages
+    rm -f /tmp/SCPT_VAR_Languages
     exit 0  
 fi
 
@@ -443,7 +445,7 @@ info "${YELLOW}Changing to use only an Unique Audio's Stream in VIDEO-STATION (t
     echo ""
     echo -e "${BLUE}${text_configG_3[$LANG]}"
     info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
-    rm -f /tmp/SCPT_Languages
+    rm -f /tmp/SCPT_VAR_Languages
     exit 0  
 fi
 
@@ -536,7 +538,7 @@ function start() {
         [Uu]* ) uninstall_new;;
 	[Cc]* ) configurator;;
 	[Ll]* ) language;;
-      	[Zz]* ) rm -f /tmp/SCPT_Languages; exit;;
+      	[Zz]* ) rm -f /tmp/SCPT_VAR_Languages; exit;;
         * ) echo -e "${YELLOW}${text_start_9[$LANG]}";;
         esac
         done
@@ -555,7 +557,7 @@ function check_root() {
 # NO SE TRADUCE
    if [[ $EUID -ne 0 ]]; then
   error "YOU MUST BE ROOT FOR EXECUTE THIS INSTALLER. Please write ("${PURPLE}" sudo -i "${RED}") and try again with the Installer."
-  rm -f /tmp/SCPT_Languages
+  rm -f /tmp/SCPT_VAR_Languages
   exit 1
 fi
 }
@@ -565,13 +567,13 @@ function check_licence_AME() {
 if [[ ! -f /usr/syno/etc/codec/activation.conf ]]; then
 error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer."
 error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer." >> $logfile
-rm -f /tmp/SCPT_Languages
+rm -f /tmp/SCPT_VAR_Languages
 exit 1
 fi
 if grep "false" /usr/syno/etc/codec/activation.conf >> $logfile; then
 error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer."
 error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer." >> $logfile
-rm -f /tmp/SCPT_Languages
+rm -f /tmp/SCPT_VAR_Languages
 exit 1
 fi
 }
@@ -583,7 +585,7 @@ function check_versions() {
 if [[ "$major" != 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
-  rm -f /tmp/SCPT_Languages
+  rm -f /tmp/SCPT_VAR_Languages
   exit 1
 else
 # Verificar el valor de minorversion
@@ -911,7 +913,7 @@ info "${BLUE}==================== Installation of the Advanced Wrapper: COMPLETE
 echo ""   
 fi
 
-rm -f /tmp/SCPT_Languages
+rm -f /tmp/SCPT_VAR_Languages
 exit 0
 }
 
@@ -1045,14 +1047,15 @@ if [[ "$unmode" == "New" ]]; then
 
   echo ""
   info "${BLUE}${text_uninstall_16[$LANG]}"
-  rm -f /tmp/SCPT_Languages
+  rm "$logfile"
+  rm -f /tmp/SCPT_VAR_Languages
   exit 0
   
   else
   
   info "${RED}${text_uninstall_17[$LANG]}"
   rm "$logfile"
-  rm -f /tmp/SCPT_Languages
+  rm -f /tmp/SCPT_VAR_Languages
   exit 1
   
   fi
@@ -1129,7 +1132,7 @@ fi
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; rm -f /tmp/SCPT_Languages; exit 0;;
+    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; rm -f /tmp/SCPT_VAR_Languages; exit 0;;
   esac
 done
 
@@ -1157,5 +1160,5 @@ case "$setup" in
   autoinstall) install_advanced;;
   uninstall) uninstall_new;;
   config) configurator;;
-  info) rm -f /tmp/SCPT_Languages; exit 0;;
+  info) rm -f /tmp/SCPT_VAR_Languages; exit 0;;
 esac
