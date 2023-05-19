@@ -17,7 +17,7 @@ version="SCPT_3.4.RC"
 # VARIABLES GLOBALES
 ###############################
 
-source "/etc/VERSION"
+source /etc.defaults/VERSION
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
@@ -45,8 +45,8 @@ LANG="0"
 ###############################
 touch /tmp/SCPT_Languages
 curl -sSL "$repo_url/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
-sleep 2
-source "/tmp/SCPT_Languages"
+# Se cargará en la función intro que tiene una espera de 3 segundos.
+# sleep 2
 
 
 ###############################
@@ -112,7 +112,8 @@ function intro() {
     echo -e "${PURPLE}	$intro"
     echo ""
   fi
-sleep 2
+sleep 3
+source "/tmp/SCPT_Languages"
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
