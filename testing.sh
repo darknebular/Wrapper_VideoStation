@@ -592,7 +592,7 @@ if [[ "$majorversion" -lt 7 ]]; then
 fi
 
 # Verificar el valor de minorversion si es igual o mayor a 1
-if [[ "$minorversion" -ge 1 ]]; then
+if [[ "$minorversion" > "0" ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="X-Advanced"
 fi
