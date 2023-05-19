@@ -9,7 +9,7 @@ version="SCPT_3.4.RC2"
 # SCPT_3.1: Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors. (Deprecated migrated to SCPT_3.2)
 # SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
 # SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
-# SCPT_3.4: Improvements in checking DSM's versions. Reduced the size of this script using a external file called SCPT_Languages.
+# SCPT_3.4: Improvements in checking DSM's versions. Reduced the size of this script using a external file called SCPT_VAR_Languages.
 
 ##############################################################
 
