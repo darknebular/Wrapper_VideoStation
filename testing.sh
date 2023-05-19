@@ -14,7 +14,8 @@ version="SCPT_3.4"
 ##############################################################
 
 touch /tmp/SCPT_Languages
-curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
+#curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
+wget -qO /tmp/SCPT_Languages "$repo_url/main/SCPT_Languages" 2>> "$logfile"
 
 ###############################
 # VARIABLES GLOBALES
