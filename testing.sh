@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC1.4"
+version="SCPT_3.4.RC1.4."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -27,12 +27,12 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-injector="0-Advanced"
+#injector="0-Advanced"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-cp_bin_path=/var/packages/CodecPack/target/bin
+#cp_bin_path=/var/packages/CodecPack/target/bin
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
@@ -583,7 +583,7 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
-# Verificar si la majorversion no es igual a 7
+# Verificar si la majorversion es menor a 7
 if [[ "$majorversion" -lt 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
@@ -591,11 +591,14 @@ if [[ "$majorversion" -lt 7 ]]; then
   exit 1
 fi
 
-# Verificar el valor de minorversion
-  if [[ "$minorversion" -ge 1 ]]; then
-    cp_bin_path=/var/packages/CodecPack/target/pack/bin
-    injector="X-Advanced"
-  fi
+# Verificar el valor de minorversion si es igual o mayor a 1
+if [[ "$minorversion" -ge 1 ]]; then
+  cp_bin_path=/var/packages/CodecPack/target/pack/bin
+  injector="X-Advanced"
+else
+  cp_bin_path=/var/packages/CodecPack/target/bin
+  injector="0-Advanced"
+fi
 }
 
 function check_firmas() {
