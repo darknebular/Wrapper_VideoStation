@@ -15,7 +15,7 @@ version="SCPT_3.4.1"
 
 touch /tmp/SCPT_Languages
 #curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
-wget -q "$repo_url/main/SCPT_Languages" -O /tmp/SCPT_Languages 2>> "$logfile"
+wget -q "https://github.com/darknebular/Wrapper_VideoStation/blob/main/SCPT_Languages" -O /tmp/SCPT_Languages 2>> "$logfile"
 sleep 1
 
 ###############################
