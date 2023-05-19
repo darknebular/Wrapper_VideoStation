@@ -1055,17 +1055,8 @@ if [[ "$unmode" == "Old" ]]; then
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
-  if [[ "$dsm_version" == 7.1* ]]; then
-  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.1
-  find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
-  text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
-      info "${YELLOW}${text_uninstall_8b[$LANG]}"
-      info "${YELLOW}Restoring CodecPack's link" >> $logfile
-      mv -T -f "$filename" "${filename::-5}" 2>> $logfile
-  done
-  fi
-  if [[ "$dsm_version" == 7.2* ]]; then
-  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.2
+  if [[ "$majorversion" == 7 && "$minorversion" -ge 1 ]]; then
+  # Limpiando la posibilidad de haber instalado otro Wrapper en el path incorrecto en 7.X
   find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
       info "${YELLOW}${text_uninstall_8b[$LANG]}"
