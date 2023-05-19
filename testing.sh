@@ -15,7 +15,7 @@ version="SCPT_3.4.1"
 
 touch /tmp/SCPT_Languages
 chmod 777 /tmp/SCPT_Languages
-wget -q "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -O "/tmp/SCPT_Languages" 2>> "$logfile"
+wget "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -O "/tmp/SCPT_Languages" 2>> "$logfile"
 sleep 1
 
 ###############################
