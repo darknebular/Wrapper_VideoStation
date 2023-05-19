@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC1.1"
+version="SCPT_3.4.RC1.2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -44,8 +44,7 @@ LANG="0"
 ###############################
 touch /tmp/SCPT_Languages
 curl -sSL "$repo_url/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
-# Se cargará en la función intro que tiene una espera de 3 segundos.
-# sleep 2
+# Se cargará en la función intro que tiene una espera de 3 segundos para asegurar su descarga.
 
 
 ###############################
@@ -112,6 +111,7 @@ function intro() {
     echo ""
   fi
 sleep 3
+cat /etc/VERSION >> /tmp/SCPT_Languages
 source "/tmp/SCPT_Languages"
 }
 function welcome() {
@@ -579,7 +579,6 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
-source "/etc.defaults/VERSION"
 # Verificar si la majorversion no es igual a 7
 if [[ "$major" != 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
