@@ -115,6 +115,7 @@ cat /etc/VERSION >> /tmp/SCPT_VAR_Languages
 source "/tmp/SCPT_VAR_Languages"
 echo "$major"
 echo "$minor"
+sleep 5
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
