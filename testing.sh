@@ -37,6 +37,8 @@ firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
 declare -i control=0
+declare -i mayorver=$(echo "$majorversion")
+declare -i menorver=$(echo "$minorversion")
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 
@@ -114,9 +116,6 @@ function intro() {
 sleep 3
 #cat /etc/VERSION >> /tmp/SCPT_VAR_Languages
 source "/tmp/SCPT_VAR_Languages"
-echo "$major"
-echo "$minor"
-sleep 5
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -584,7 +583,7 @@ function check_versions() {
 # NO SE TRADUCE
 
 # Verificar si la majorversion es menor a 7
-if [[ "$majorversion" -lt 7 ]]; then
+if [[ "$mayorver" -lt 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
   rm -f /tmp/SCPT_VAR_Languages
@@ -592,7 +591,7 @@ if [[ "$majorversion" -lt 7 ]]; then
 fi
 
 # Verificar el valor de minorversion si es igual o mayor a 1
-if [[ "$minorversion" > "0" ]]; then
+if [[ "$menorver" -ge 1 ]]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="X-Advanced"
 fi
