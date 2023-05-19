@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC5"
+version="SCPT_3.4.RC"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -12,14 +12,6 @@ version="SCPT_3.4.RC5"
 # SCPT_3.4: Improvements in checking DSM's versions. Reduced the size of this script using a external file called SCPT_Languages.
 
 ##############################################################
-
-###############################
-# FICHERO AUXILIAR PARA IDIOMAS
-###############################
-touch /tmp/SCPT_Languages
-curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> /tmp/wrapper_ffmpeg.log
-sleep 2
-source "/tmp/SCPT_Languages"
 
 ###############################
 # VARIABLES GLOBALES
@@ -47,6 +39,15 @@ firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
+
+###############################
+# FICHERO AUXILIAR PARA IDIOMAS
+###############################
+touch /tmp/SCPT_Languages
+curl -sSL "$repo_url/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
+sleep 2
+source "/tmp/SCPT_Languages"
+
 
 ###############################
 # FUNCIONES
