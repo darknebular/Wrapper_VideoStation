@@ -13,10 +13,6 @@ version="SCPT_3.4"
 
 ##############################################################
 
-touch /tmp/SCPT_Languages
-#curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
-wget -qO /tmp/SCPT_Languages "$repo_url/main/SCPT_Languages" 2>> "$logfile"
-
 ###############################
 # VARIABLES GLOBALES
 ###############################
@@ -103,6 +99,9 @@ fi
 function intro() {
   clear
   intro=$(curl -s -L "$repo_url/main/intro.txt")
+  touch /tmp/SCPT_Languages
+#curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
+wget -q "$repo_url/main/SCPT_Languages" -O /tmp/SCPT_Languages 2>> "$logfile"
   if [ "${#intro}" -ge 1 ]; then
     echo ""
     echo -e "${PURPLE}	$intro"
