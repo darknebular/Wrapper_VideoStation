@@ -584,21 +584,18 @@ function check_versions() {
 # NO SE TRADUCE
 
 # Verificar si la majorversion no es igual a 7
-if [[ "$major" != 7 ]]; then
+if [[ "$majorversion" != 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
   rm -f /tmp/SCPT_VAR_Languages
   exit 1
-else
+fi
+
 # Verificar el valor de minorversion
-  if [[ "$minor" == 0 ]]; then
-    cp_bin_path=/var/packages/CodecPack/target/bin
-    injector="0-Advanced"
-  else
+  if [[ "$minorversion" != 0 ]]; then
     cp_bin_path=/var/packages/CodecPack/target/pack/bin
     injector="X-Advanced"
   fi
-fi
 }
 
 function check_firmas() {
