@@ -18,7 +18,7 @@ version="SCPT_3.4"
 # VARIABLES GLOBALES
 ###############################
 
-source  <(curl -sSL $repo_url/main/SCPT_Languages 2>> "$logfile")
+source  <(curl -sSL $repo_url/main/SCPT_Languages")
 source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
