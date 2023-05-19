@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC1.3."
+version="SCPT_3.4.RC1.4"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -584,7 +584,7 @@ function check_versions() {
 # NO SE TRADUCE
 
 # Verificar si la majorversion no es igual a 7
-if [[ "$majorversion" != 7 ]]; then
+if [[ "$majorversion" -lt 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
   rm -f /tmp/SCPT_VAR_Languages
@@ -961,8 +961,8 @@ if [[ "$unmode" == "Old" ]]; then
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
-  if [[ "$majorversion" == 7 && "$minorversion" -ge 1 ]]; then
-  # Limpiando la posibilidad de haber instalado otro Wrapper en el path incorrecto en 7.X
+  if [[ "$majorversion" -ge 7 && "$minorversion" -ge 1 ]]; then
+  # Limpiando la posibilidad de haber instalado otro Wrapper en el path incorrecto en 7.X o futuras.
   find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
       info "${YELLOW}${text_uninstall_8b[$LANG]}"
