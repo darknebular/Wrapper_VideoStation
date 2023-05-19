@@ -50,7 +50,7 @@ function handle_error() {
 }
 
 function endprocess() {
-  info "${PURPLE}========================================[END ffmpeg $pid]${WHITE}"
+  info "${PURPLE}========================================[END FFmpeg $pid]${WHITE}"
   newline
   rm -f "$stderrfile"
   exit $errcode
@@ -62,7 +62,8 @@ trap endprocess SIGTERM
 trap handle_error ERR
 
 newline
-info "${PURPLE}========================================[START ffmpeg $pid]${WHITE}"
+info "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
+info "${BLUE}FFMPEG   = $bin1${WHITE}"
 info "${BLUE}DEFAULT_ARGS: $*${WHITE}"
 
 $bin1 "$@" 2> $stderrfile
