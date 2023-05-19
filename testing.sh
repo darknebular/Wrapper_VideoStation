@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC2"
+version="SCPT_3.4.RC3"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -13,16 +13,10 @@ version="SCPT_3.4.RC2"
 
 ##############################################################
 
-touch /tmp/SCPT_Languages
-curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages"
-sleep 1
-
 ###############################
 # VARIABLES GLOBALES
 ###############################
 
-source "/etc/VERSION"
-source "/tmp/SCPT_Languages"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
@@ -107,8 +101,8 @@ function intro() {
     echo ""
     echo -e "${PURPLE}	$intro"
     echo ""
-    sleep 3
   fi
+  sleep 3
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -1129,6 +1123,10 @@ while getopts s: flag; do
   esac
 done
 
+# Bajar todos los textos en todos los idiomas y aprovechar los 3 segundos de la función intro para que se carguen bien.
+touch /tmp/SCPT_Languages
+curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
+
 intro
 
 titulo
@@ -1154,3 +1152,10 @@ case "$setup" in
   config) configurator;;
   info) rm -f /tmp/SCPT_Languages; exit 0;;
 esac
+
+###############################
+# VARIABLES EXTERNAS
+###############################
+
+source "/etc/VERSION"
+source "/tmp/SCPT_Languages"
