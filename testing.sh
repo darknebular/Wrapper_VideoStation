@@ -13,13 +13,13 @@ version="SCPT_3.4"
 
 ##############################################################
 
+touch /tmp/SCPT_Languages
+curl -sSL "$repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
 
 ###############################
 # VARIABLES GLOBALES
 ###############################
 
-touch /tmp/SCPT_Languages
-curl -sSL $repo_url/main/SCPT_Languages" -o /tmp/SCPT_Languages 2>> "$logfile"
 source  "/tmp/SCPT_Languages"
 source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
