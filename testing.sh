@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC1"
+version="SCPT_3.4.RC1."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -17,7 +17,6 @@ version="SCPT_3.4.RC1"
 # VARIABLES GLOBALES
 ###############################
 
-source /etc.defaults/VERSION
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
@@ -580,6 +579,7 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
+source "/etc.defaults/VERSION"
 # Verificar si la majorversion no es igual a 7
 if [[ "$majorversion" != 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
