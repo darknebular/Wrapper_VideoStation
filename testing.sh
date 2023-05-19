@@ -13,11 +13,6 @@ version="SCPT_3.4.1"
 
 ##############################################################
 
-touch /tmp/SCPT_Languages
-chmod 777 /tmp/SCPT_Languages
-wget "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -O "/tmp/SCPT_Languages" 2>> "$logfile"
-sleep 1
-
 ###############################
 # VARIABLES GLOBALES
 ###############################
@@ -1129,6 +1124,11 @@ while getopts s: flag; do
     *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; rm -f /tmp/SCPT_Languages; exit 0;;
   esac
 done
+
+touch /tmp/SCPT_Languages
+chmod 777 /tmp/SCPT_Languages
+wget "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -O "/tmp/SCPT_Languages" 2>> "$logfile"
+sleep 1
 
 intro
 
