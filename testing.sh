@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC1"
+version="SCPT_3.4.RC2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -21,6 +21,8 @@ sleep 1
 # VARIABLES GLOBALES
 ###############################
 
+source "/tmp/SCPT_Languages"
+source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
@@ -42,8 +44,6 @@ firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
-source "/tmp/SCPT_Languages"
-source "/etc/VERSION"
 
 ###############################
 # FUNCIONES
