@@ -624,12 +624,14 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
+# Verificar si la majorversion no es igual a 7
 if [[ "$majorversion" != 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
   exit 1
 else
-  if [[ "$minorversion" -eq 0 ]]; then
+# Verificar el valor de minorversion
+  if [[ "$minorversion" == 0 ]]; then
     cp_bin_path=/var/packages/CodecPack/target/bin
     injector="0-Advanced"
   else
