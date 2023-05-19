@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC3"
+version="SCPT_3.4.RC4"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -102,7 +102,12 @@ function intro() {
     echo -e "${PURPLE}	$intro"
     echo ""
   fi
-  sleep 3
+  
+# Bajar todos los textos en todos los idiomas y aprovechar los 3 segundos de la función intro para que se carguen bien.
+touch /tmp/SCPT_Languages
+curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
+
+sleep 3
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -569,6 +574,7 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
+source "/etc/VERSION"
 # Verificar si la majorversion no es igual a 7
 if [[ "$majorversion" != 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
@@ -1123,9 +1129,6 @@ while getopts s: flag; do
   esac
 done
 
-# Bajar todos los textos en todos los idiomas y aprovechar los 3 segundos de la función intro para que se carguen bien.
-touch /tmp/SCPT_Languages
-curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
 
 intro
 
@@ -1154,8 +1157,7 @@ case "$setup" in
 esac
 
 ###############################
-# VARIABLES EXTERNAS
+# FICHERO AUXILIAR PARA IDIOMAS
 ###############################
 
-source "/etc/VERSION"
 source "/tmp/SCPT_Languages"
