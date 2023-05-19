@@ -15,6 +15,7 @@ version="SCPT_3.4.BETA2"
 
 touch /tmp/SCPT_Languages
 curl -sSL "$repo_url/main/SCPT_Languages" -o "/tmp/SCPT_Languages"
+sleep 2
 
 ###############################
 # VARIABLES GLOBALES
