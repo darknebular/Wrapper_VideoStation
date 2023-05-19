@@ -13,6 +13,8 @@ version="SCPT_3.4.1"
 
 ##############################################################
 
+curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o /tmp/SCPT_Languages
+
 ###############################
 # VARIABLES GLOBALES
 ###############################
