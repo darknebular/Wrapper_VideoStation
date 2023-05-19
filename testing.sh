@@ -17,7 +17,7 @@ version="SCPT_3.4.RC5"
 # FICHERO AUXILIAR PARA IDIOMAS
 ###############################
 touch /tmp/SCPT_Languages
-curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
+curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> /tmp/wrapper_ffmpeg.log
 sleep 2
 source "/tmp/SCPT_Languages"
 
