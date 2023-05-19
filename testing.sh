@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC4"
+version="SCPT_3.4.RC5"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -18,12 +18,14 @@ version="SCPT_3.4.RC4"
 ###############################
 touch /tmp/SCPT_Languages
 curl -sSL "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/SCPT_Languages" -o "/tmp/SCPT_Languages" 2>> $logfile
-# Se cargará en la función INTRO para aprovechar los 3 segundos y asegurar su descarga correcta.
+sleep 2
+source "/tmp/SCPT_Languages"
 
 ###############################
 # VARIABLES GLOBALES
 ###############################
 
+source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
@@ -109,8 +111,7 @@ function intro() {
     echo -e "${PURPLE}	$intro"
     echo ""
   fi
-sleep 3
-source "/tmp/SCPT_Languages"
+sleep 2
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -577,7 +578,6 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
-source "/etc/VERSION"
 # Verificar si la majorversion no es igual a 7
 if [[ "$majorversion" != 7 ]]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
