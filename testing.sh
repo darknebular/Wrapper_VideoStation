@@ -1125,7 +1125,7 @@ fi
 while getopts s: flag; do
   case "${flag}" in
     s) setup=${OPTARG};;
-    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; exit 0;;
+    *) echo "usage: $0 [-s install|autoinstall|uninstall|config|info]" >&2; rm -f /tmp/SCPT_Languages; exit 0;;
   esac
 done
 
