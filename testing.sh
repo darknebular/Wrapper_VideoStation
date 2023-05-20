@@ -610,25 +610,25 @@ fi
 if [[ "$menorver" -ge "1" ]]; then
   cp_bin_path=/var/packages/CodePack/target/pack/bin
   injector="X-Advanced"
-  echo "$menorver 1"
+  echo "$menorver $injector 1"
   sleep 5
 fi
 if [[ "$menorver" -ge 1 ]]; then
   cp_bin_path=/var/packages/CodePack/target/pack/bin
   injector="X-Advanced"
-  echo "$menorver 2"
+  echo "$menorver $injector 2"
   sleep 5
 fi
 if [[ $menorver -ge 1 ]]; then
   cp_bin_path=/var/packages/CodePack/target/pack/bin
   injector="X-Advanced"
-  echo "$menorver 3"
+  echo "$menorver $injector 3"
   sleep 5
 fi
-if [[ "$menorver" != "0" ]]; then
+if [[ "$menorver" != 0 ]]; then
   cp_bin_path=/var/packages/CodePack/target/pack/bin
   injector="X-Advanced"
-  echo "$menorver 4"
+  echo "$menorver $injector 4"
   sleep 5
 fi
 }
