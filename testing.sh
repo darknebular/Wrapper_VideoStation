@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC2"
+version="SCPT_3.4.RC2."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -585,7 +585,7 @@ function check_versions() {
 # NO SE TRADUCE
 
 # Verificar si la majorversion es menor a 7
-if [[ $mayorver -lt 7 ]]; then
+if [ "$mayorver" -lt "7" ]; then
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
   error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
   rm -f /tmp/SCPT_VAR_Languages
@@ -593,7 +593,7 @@ if [[ $mayorver -lt 7 ]]; then
 fi
 
 # Verificar el valor de minorversion si es igual o mayor a 1
-if [[ $menorver -ge 1 ]]; then
+if [ "$menorver" -ge "1" ]; then
   cp_bin_path=/var/packages/CodecPack/target/pack/bin
   injector="X-Advanced"
 fi
