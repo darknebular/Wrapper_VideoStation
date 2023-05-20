@@ -37,8 +37,10 @@ firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
 declare -i control=0
-declare -i mayorver=$((majorversion + 0))
-declare -i menorver=$((minorversion + 0))
+declare -i mayorver
+mayorver=$majorversion
+declare -i menorver
+menorver=$minorversion
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 
