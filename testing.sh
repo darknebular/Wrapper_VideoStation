@@ -20,6 +20,13 @@ version="SCPT_3.4.BETA.6"
 source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
+RED="\u001b[31m"
+BLUE="\u001b[36m"
+PURPLE="\u001B[35m"
+GREEN="\u001b[32m"
+YELLOW="\u001b[33m"
+logfile="/tmp/wrapper_ffmpeg.log"
+LANG="0"
 declare -i control=0
 declare -i mayorver
 mayorver=$majorversion
