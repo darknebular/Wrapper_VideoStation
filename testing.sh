@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA"
+version="SCPT_3.4.BETA."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -27,12 +27,12 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-injector="0-Advanced"
+#injector="0-Advanced"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-cp_bin_path=/var/packages/CodecPack/target/bin
+#cp_bin_path=/var/packages/CodecPack/target/bin
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
@@ -584,19 +584,32 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
-if [[ "$dsm_version" == 7.0* ]]; then
+#if [[ "$dsm_version" == 7.0* ]]; then
+#cp_bin_path=/var/packages/CodecPack/target/bin
+#  injector="0-Advanced"
+#elif [[ "$dsm_version" == 7.1* ]]; then
+#cp_bin_path=/var/packages/CodecPack/target/pack/bin
+#  injector="X-Advanced"
+#elif [[ "$dsm_version" == 7.2* ]]; then
+#cp_bin_path=/var/packages/CodecPack/target/pack/bin
+#injector="X-Advanced"
+
+#else
+#error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
+#error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
+# exit 1
+#fi
+if [[ "$mayorver" -ge 7 ]]; then
+  cp_bin_path=/var/packages/CodePack/target/pack/bin
+  injector="X-Advanced"
+elif [[ "$menorver" == 0 ]]; then
 cp_bin_path=/var/packages/CodecPack/target/bin
   injector="0-Advanced"
-elif [[ "$dsm_version" == 7.1* ]]; then
-cp_bin_path=/var/packages/CodecPack/target/pack/bin
-  injector="X-Advanced"
-elif [[ "$dsm_version" == 7.2* ]]; then
-cp_bin_path=/var/packages/CodecPack/target/pack/bin
-injector="X-Advanced"
 
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
+rm -f /tmp/SCPT_VAR_Languages
  exit 1
 fi
 
