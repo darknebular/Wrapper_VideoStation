@@ -24,7 +24,7 @@ declare -i mayorver
 mayorver=$majorversion
 declare -i menorver
 menorver=$minorversion
-LANG="0"
+setup="start"
 
 
 ###############################
