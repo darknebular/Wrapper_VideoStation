@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA.5"
+version="SCPT_3.4.BETA.6"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -19,30 +19,12 @@ version="SCPT_3.4.BETA.5"
 
 source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
-repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
-setup="start"
-dependencias=("VideoStation" "ffmpeg6" "CodecPack")
-RED="\u001b[31m"
-BLUE="\u001b[36m"
-PURPLE="\u001B[35m"
-GREEN="\u001b[32m"
-YELLOW="\u001b[33m"
-export injector="0-Advanced"
-vs_path=/var/packages/VideoStation/target
-ms_path=/var/packages/MediaServer/target
-vs_libsynovte_file="$vs_path/lib/libsynovte.so"
-ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-export cp_bin_path=/var/packages/CodecPack/target/bin
-firma="DkNbulDkNbul"
-firma2="DkNbular"
-firma_cp="DkNbul"
 declare -i control=0
 declare -i mayorver
 mayorver=$majorversion
 declare -i menorver
 menorver=$minorversion
-logfile="/tmp/wrapper_ffmpeg.log"
-LANG="0"
+
 
 ###############################
 # FICHERO AUXILIAR PARA IDIOMAS
@@ -602,13 +584,12 @@ rm -f /tmp/SCPT_VAR_Languages
 exit 1
 
 fi
-export cp_bin_path
-export injector
 }
 
 function check_firmas() {
 
 echo "$cp_bin_path"
+echo "$ms_path"
 sleep 5
 
 # CHEQUEOS DE FIRMAS
