@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA"
+version="SCPT_3.4.BETA1"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -583,10 +583,16 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
-if [[ "$mayorver" -ge 7 ]]; then
-  elif [[ "$menorver" != 0 ]]; then
-  global cp_bin_path=/var/packages/CodePack/target/pack/bin
-  global injector="X-Advanced"
+# Contemplando la posibilidad de que las sucesivas versiones 0 de DSM 8 y futuras sigan con las variables correctas.
+if [[ "$mayorver" -ge 8 ]]; then
+  cp_bin_path="/var/packages/CodePack/target/pack/bin"
+  injector="X-Advanced"
+elif [[ "$mayorver" -ge 7 && "$menorver" -ge 1 ]]; then
+  cp_bin_path="/var/packages/CodePack/target/pack/bin"
+  injector="X-Advanced"
+elif [[ "$mayorver" -ge 7 && "$menorver" -eq 0 ]]; then
+  cp_bin_path="/var/packages/CodecPack/target/bin"
+  injector="0-Advanced"
 
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
