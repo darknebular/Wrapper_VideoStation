@@ -1,9 +1,4 @@
 dependencias=("VideoStation" "ffmpeg6" "CodecPack")
-RED="\u001b[31m"
-BLUE="\u001b[36m"
-PURPLE="\u001B[35m"
-GREEN="\u001b[32m"
-YELLOW="\u001b[33m"
 injector="0-Advanced"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
@@ -13,8 +8,7 @@ cp_bin_path=/var/packages/CodecPack/target/bin
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
-logfile="/tmp/wrapper_ffmpeg.log"
-LANG="0"
+
 
 text_restart_1=("Restarting CodecPack..." "Reiniciando CodecPack..." "Reiniciando o CodecPack..." "Redémarrage de CodecPack..." "CodecPack wird neu gestartet..." "Riavvio CodecPack...")
 text_restart_2=("Restarting VideoStation..." "Reiniciando VideoStation..." "Reiniciando o VideoStation..." "Redémarrage de VideoStation..." "VideoStation wird neu gestartet..." "Riavvio VideoStation...")
