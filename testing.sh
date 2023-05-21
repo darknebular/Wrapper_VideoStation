@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA.4"
+version="SCPT_3.4.BETA.5"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -27,12 +27,12 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-injector="0-Advanced"
+export injector="0-Advanced"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-cp_bin_path=/var/packages/CodecPack/target/bin
+export cp_bin_path=/var/packages/CodecPack/target/bin
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
@@ -586,14 +586,14 @@ function check_versions() {
 
 # Contemplando la posibilidad de que las sucesivas versiones 0 de DSM 8 y futuras sigan con las variables correctas.
 if [[ "$mayorver" -ge 8 ]]; then
-  global cp_bin_path="/var/packages/CodePack/target/pack/bin"
-  global injector="X-Advanced"
+  cp_bin_path="/var/packages/CodePack/target/pack/bin"
+  injector="X-Advanced"
 elif [[ "$mayorver" -ge 7 && "$menorver" -ge 1 ]]; then
-  global cp_bin_path="/var/packages/CodePack/target/pack/bin"
-  global injector="X-Advanced"
+  cp_bin_path="/var/packages/CodePack/target/pack/bin"
+  injector="X-Advanced"
 elif [[ "$mayorver" -ge 7 && "$menorver" -eq 0 ]]; then
-  global cp_bin_path="/var/packages/CodecPack/target/bin"
-  global injector="0-Advanced"
+  cp_bin_path="/var/packages/CodecPack/target/bin"
+  injector="0-Advanced"
 
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
@@ -602,11 +602,12 @@ rm -f /tmp/SCPT_VAR_Languages
 exit 1
 
 fi
+export cp_bin_path
+export injector
 }
 
 function check_firmas() {
 
-global cp_bin_path
 echo "$cp_bin_path"
 sleep 5
 
