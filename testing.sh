@@ -39,10 +39,8 @@ firma_cp="DkNbul"
 declare -i control=0
 declare -i mayorver
 mayorver=$majorversion
-#mayorver=7
 declare -i menorver
 menorver=$minorversion
-#menorver=1
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 
@@ -586,17 +584,16 @@ function check_versions() {
 # NO SE TRADUCE
 
 if [[ "$mayorver" -ge 7 ]]; then
+  elif [[ "$menorver" != 0 ]]; then
   global cp_bin_path=/var/packages/CodePack/target/pack/bin
   global injector="X-Advanced"
-elif [[ "$menorver" == 0 ]]; then
-  global cp_bin_path=/var/packages/CodecPack/target/bin
-  global injector="0-Advanced"
 
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
 rm -f /tmp/SCPT_VAR_Languages
 exit 1
+
 fi
 }
 
@@ -963,7 +960,7 @@ if [[ "$unmode" == "Old" ]]; then
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
-  if [[ "$majorversion" -ge 7 && "$minorversion" -ge 1 ]]; then
+  if [[ "$mayorver" -ge 7 && "$menorver" -ge 1 ]]; then
   # Limpiando la posibilidad de haber instalado otro Wrapper en el path incorrecto en 7.X o futuras.
   find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
