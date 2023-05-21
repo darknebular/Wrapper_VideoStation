@@ -119,7 +119,7 @@ function intro() {
   fi
 sleep 3
 #cat /etc/VERSION >> /tmp/SCPT_VAR_Languages
-# source "/tmp/SCPT_VAR_Languages"
+source "/tmp/SCPT_VAR_Languages"
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
