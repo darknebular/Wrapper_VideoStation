@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA5"
+version="SCPT_3.4.BETA.5"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -613,17 +613,19 @@ sleep 5
 
 # CHEQUEOS DE FIRMAS
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
-export check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
+check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
 if [[ -f "$ms_path/bin/ffmpeg.KEY" ]]; then
-export check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
+check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
 else
-export check_amrif_2="ar"
+check_amrif_2="ar"
 fi
 
-export check_amrif="$check_amrif_1$check_amrif_2"
-
+check_amrif="$check_amrif_1$check_amrif_2"
+export check_amrif_1
+export check_amrif_2
+export check_amrif
 }
 
 function language() {
