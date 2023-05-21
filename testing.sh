@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.RC2"
+version="SCPT_3.4.BETA"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -583,54 +583,71 @@ fi
 
 function check_versions() {
 # NO SE TRADUCE
-echo "$mayorver"
-echo "$menorver"
-sleep 5
+
+if [[ "$dsm_version" == 7.0* ]]; then
+cp_bin_path=/var/packages/CodecPack/target/bin
+  injector="0-Advanced"
+elif [[ "$dsm_version" == 7.1* ]]; then
+cp_bin_path=/var/packages/CodecPack/target/pack/bin
+  injector="X-Advanced"
+elif [[ "$dsm_version" == 7.2* ]]; then
+cp_bin_path=/var/packages/CodecPack/target/pack/bin
+injector="X-Advanced"
+
+else
+error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
+error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
+ exit 1
+fi
+
+# echo "$mayorver"
+# echo "$menorver"
+# sleep 5
 # Verificar si la majorversion es menor a 7
-if [ "$mayorver" -lt "7" ]; then
-  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
-  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
-  rm -f /tmp/SCPT_VAR_Languages
-  exit 1
-fi
+# if [ "$mayorver" -lt "7" ]; then
+#  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
+#  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
+#  rm -f /tmp/SCPT_VAR_Languages
+#  exit 1
+#fi
 
 # Verificar el valor de minorversion si es igual o mayor a 1
-if [ "$menorver" -ge "1" ]; then
-  cp_bin_path=/var/packages/CodePack/target/pack/bin
-  injector="X-Advanced"
-fi
-if [[ "$mayorver" -lt "7" ]]; then
-  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
-  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
-  rm -f /tmp/SCPT_VAR_Languages
-  exit 1
-fi
+# if [ "$menorver" -ge "1" ]; then
+#  cp_bin_path=/var/packages/CodePack/target/pack/bin
+#  injector="X-Advanced"
+#fi
+# if [[ "$mayorver" -lt "7" ]]; then
+#  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer."
+#  error "Your DSM Version $majorversion-$minorversion is NOT SUPPORTED using this Installer." >> $logfile
+#  rm -f /tmp/SCPT_VAR_Languages
+#  exit 1
+#fi
 
 # Verificar el valor de minorversion si es igual o mayor a 1
-if [[ "$menorver" -ge "1" ]]; then
-  cp_bin_path=/var/packages/CodePack/target/pack/bin
-  injector="X-Advanced"
-  echo "$menorver $injector 1"
-  sleep 5
-fi
-if [[ "$menorver" -ge 1 ]]; then
-  cp_bin_path=/var/packages/CodePack/target/pack/bin
-  injector="X-Advanced"
-  echo "$menorver $injector 2"
-  sleep 5
-fi
-if [[ $menorver -ge 1 ]]; then
-  cp_bin_path=/var/packages/CodePack/target/pack/bin
-  injector="X-Advanced"
-  echo "$menorver $injector 3"
-  sleep 5
-fi
-if [[ "$menorver" != 0 ]]; then
-  cp_bin_path=/var/packages/CodePack/target/pack/bin
-  injector="X-Advanced"
-  echo "$menorver $injector 4"
-  sleep 5
-fi
+# if [[ "$menorver" -ge "1" ]]; then
+#  cp_bin_path=/var/packages/CodePack/target/pack/bin
+#  injector="X-Advanced"
+#  echo "$menorver $injector 1"
+#  sleep 5
+#fi
+# if [[ "$menorver" -ge 1 ]]; then
+#  cp_bin_path=/var/packages/CodePack/target/pack/bin
+#  injector="X-Advanced"
+#  echo "$menorver $injector 2"
+#  sleep 5
+#fi
+#if [[ $menorver -ge 1 ]]; then
+#  cp_bin_path=/var/packages/CodePack/target/pack/bin
+#  injector="X-Advanced"
+#  echo "$menorver $injector 3"
+#  sleep 5
+#fi
+#if [[ "$menorver" != 0 ]]; then
+#  cp_bin_path=/var/packages/CodePack/target/pack/bin
+#  injector="X-Advanced"
+#  echo "$menorver $injector 4"
+#  sleep 5
+#fi
 }
 
 function check_firmas() {
