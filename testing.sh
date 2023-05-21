@@ -600,7 +600,11 @@ export injector
 function check_firmas() {
 
 echo "$cp_bin_path"
+echo $cp_bin_path
 echo "$ms_path"
+echo $ms_path
+echo "$injector"
+echo $injector
 sleep 5
 
 # CHEQUEOS DE FIRMAS
