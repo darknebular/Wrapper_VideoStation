@@ -119,7 +119,7 @@ function intro() {
   fi
 sleep 3
 #cat /etc/VERSION >> /tmp/SCPT_VAR_Languages
-source "/tmp/SCPT_VAR_Languages"
+# source "/tmp/SCPT_VAR_Languages"
 }
 function welcome() {
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
@@ -853,6 +853,9 @@ fi
    info "${BLUE}${text_install_3[$LANG]}"
    info "${BLUE}${text_install_4[$LANG]}"
    info "${BLUE}${text_install_5[$LANG]}"
+echo "$injector"
+echo "$cp_bin_path"
+sleep5
 
 if [[ -f "/tmp/wrapper.KEY" ]] && [[ $setup == autoinstall ]]; then
   	uninstall_old
