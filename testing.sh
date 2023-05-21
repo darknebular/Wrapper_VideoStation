@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA.6"
+version="SCPT_3.4.BETA.6."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -593,6 +593,8 @@ rm -f /tmp/SCPT_VAR_Languages
 exit 1
 
 fi
+export cp_bin_path
+export injector
 }
 
 function check_firmas() {
