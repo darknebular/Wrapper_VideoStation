@@ -17,7 +17,7 @@ version="SCPT_3.4.BETA"
 # VARIABLES GLOBALES
 ###############################
 
-#source "/etc/VERSION"
+source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
@@ -27,22 +27,22 @@ BLUE="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
-#injector="0-Advanced"
+injector="0-Advanced"
 vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-#cp_bin_path=/var/packages/CodecPack/target/bin
+cp_bin_path=/var/packages/CodecPack/target/bin
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
 declare -i control=0
 declare -i mayorver
-#mayorver=$majorversion
-mayorver=7
+mayorver=$majorversion
+#mayorver=7
 declare -i menorver
-#menorver=$minorversion
-menorver=1
+menorver=$minorversion
+#menorver=1
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 
@@ -853,9 +853,6 @@ fi
    info "${BLUE}${text_install_3[$LANG]}"
    info "${BLUE}${text_install_4[$LANG]}"
    info "${BLUE}${text_install_5[$LANG]}"
-echo "$injector"
-echo "$cp_bin_path"
-sleep5
 
 if [[ -f "/tmp/wrapper.KEY" ]] && [[ $setup == autoinstall ]]; then
   	uninstall_old
