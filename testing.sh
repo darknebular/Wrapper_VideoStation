@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA3"
+version="SCPT_3.4.BETA3."
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -605,7 +605,10 @@ fi
 }
 
 function check_firmas() {
-  
+
+echo "$cp_bin_path"
+sleep 5
+
 # CHEQUEOS DE FIRMAS
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
 check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
