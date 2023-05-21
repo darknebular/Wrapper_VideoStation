@@ -1,4 +1,3 @@
-repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 dependencias=("VideoStation" "ffmpeg6" "CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
