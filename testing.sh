@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA1"
+version="SCPT_3.4.BETA2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -49,7 +49,8 @@ LANG="0"
 ###############################
 touch /tmp/SCPT_VAR_Languages
 curl -sSL "$repo_url/main/SCPT_VAR_Languages" -o "/tmp/SCPT_VAR_Languages" 2>> $logfile
-# Se cargará en la función intro que tiene una espera de 3 segundos para asegurar su descarga.
+# Se cargará en la función intro que tiene una espera de 3 segundos para asegurar su descarga 
+# y nuevamente después de cargar todas las funciones principales por si hubieran hecho algún cambio sobre alguna variable para reflejar los valores actuales.
 
 
 ###############################
@@ -1157,6 +1158,7 @@ check_versions
 
 check_firmas
 
+source "/tmp/SCPT_VAR_Languages"
 
 case "$setup" in
   start) start;;
