@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA2"
+version="SCPT_3.4.BETA3"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -51,7 +51,6 @@ touch /tmp/SCPT_VAR_Languages
 curl -sSL "$repo_url/main/SCPT_VAR_Languages" -o "/tmp/SCPT_VAR_Languages" 2>> $logfile
 # Se cargará inicialmente en la función intro que tiene una espera de 3 segundos para asegurar la descarga del fichero. 
 # y nuevamente después de cargar la función de check_versions por si hubieran hecho algún cambio sobre alguna variable utilizada en los textos traducidos para reflejar los valores actuales.
-# También se cargará en cada condicional o comando find que haga uso de filename para reflejar los cambios en los textos con el nombre de archivo correcto.
 
 
 ###############################
@@ -956,16 +955,14 @@ if [[ "$unmode" == "Old" ]]; then
     rm $ms_path/bin/ffmpeg.KEY 2>> $logfile
   
     find "$ms_path/bin" -type f -name "*.orig" | while read -r filename; do
-    source "/tmp/SCPT_VAR_Languages"
-    info "${YELLOW}${text_uninstall_6[$LANG]}"
+    info "${YELLOW}${text_uninstall_6[$LANG]//$filename/$filename}"
     info "${YELLOW}Restoring MediaServer's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
     done
   fi
 	
   find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
-    source "/tmp/SCPT_VAR_Languages"
-    info "${YELLOW}${text_uninstall_7[$LANG]}"
+    info "${YELLOW}${text_uninstall_7[$LANG]//$filename/$filename}"
     info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
@@ -981,8 +978,7 @@ if [[ "$unmode" == "Old" ]]; then
   fi
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-     source "/tmp/SCPT_VAR_Languages"
-     info "${YELLOW}${text_uninstall_8[$LANG]}"
+     info "${YELLOW}${text_uninstall_8[$LANG]//$filename/$filename}"
      info "${YELLOW}Restoring CodecPack's $filename" >> $logfile
      mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
@@ -1038,9 +1034,8 @@ if [[ "$unmode" == "New" ]]; then
   	fi
   
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
-  source "/tmp/SCPT_VAR_Languages"
   text_uninstall_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
-  info "${YELLOW}${text_uninstall_8[$LANG]}"
+  info "${YELLOW}${text_uninstall_8[$LANG]//$filename/$filename}"
   mv -T -f "$filename" "${filename::-5}"
   done
   
