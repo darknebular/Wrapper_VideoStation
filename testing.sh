@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA4"
+version="SCPT_3.4.BETA.4"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -606,6 +606,7 @@ fi
 
 function check_firmas() {
 
+global cp_bin_path
 echo "$cp_bin_path"
 sleep 5
 
