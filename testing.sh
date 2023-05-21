@@ -613,16 +613,16 @@ sleep 5
 
 # CHEQUEOS DE FIRMAS
 if [[ -f "$cp_bin_path/ffmpeg41.orig" ]]; then
-check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
+export check_amrif_1=$(sed -n '3p' < $cp_bin_path/ffmpeg41 | tr -d "# " | tr -d "\´sAdvancedWrapper")
 fi
 
 if [[ -f "$ms_path/bin/ffmpeg.KEY" ]]; then
-check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
+export check_amrif_2=$(sed -n '1p' < $ms_path/bin/ffmpeg.KEY | tr -d "# " | tr -d "\´sAdvancedWrapper")
 else
-check_amrif_2="ar"
+export check_amrif_2="ar"
 fi
 
-check_amrif="$check_amrif_1$check_amrif_2"
+export check_amrif="$check_amrif_1$check_amrif_2"
 
 }
 
