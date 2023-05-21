@@ -19,6 +19,7 @@ version="SCPT_3.4.BETA.6"
 
 source "/etc/VERSION"
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
+repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 declare -i control=0
 declare -i mayorver
 mayorver=$majorversion
