@@ -629,10 +629,10 @@ function check_versions() {
 
 # Contemplando la posibilidad de que las sucesivas versiones 0 de DSM 8 y futuras sigan con las variables correctas.
 if [[ "$majorversion" -ge "8" ]]; then
-  cp_bin_path="/var/packages/CodePack/target/pack/bin"
+  cp_bin_path="/var/packages/CodecPack/target/pack/bin"
   injector="X-Advanced"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
-  cp_bin_path="/var/packages/CodePack/target/pack/bin"
+  cp_bin_path="/var/packages/CodecPack/target/pack/bin"
   injector="X-Advanced"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "0" ]]; then
   cp_bin_path="/var/packages/CodecPack/target/bin"
