@@ -6,7 +6,7 @@ curl -L --max-filesize 512000 -o /tmp/installer_OffLine.sh "https://raw.githubus
 # Give execution permissions to the downloaded script
 chmod +x /tmp/installer_OffLine.sh
 
-# Run installer_OffLine.sh passing the supplied arguments to the installer.sh script
+# Run installer.sh passing the supplied arguments to the installer_OffLine.sh script
 /bin/bash /tmp/installer_OffLine.sh "$@"
 
 # Delete the downloaded script
