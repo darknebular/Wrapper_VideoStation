@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA"
+version="SCPT_3.4.BETA1"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -40,9 +40,9 @@ declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 majorversion=$(awk -F= '/majorversion/{print $2}' /etc/VERSION)
-majorversion=$(expr $majorversion)
+declare -i majorversion
 minorversion=$(awk -F= '/minorversion/{print $2}' /etc/VERSION)
-minorversion=$(expr $minorversion)
+declare -i minorversion
 
 ###############################
 # FUNCIONES
