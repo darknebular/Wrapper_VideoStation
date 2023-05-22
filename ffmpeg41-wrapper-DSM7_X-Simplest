@@ -25,6 +25,8 @@ streamid="FFM$pid"
 stderrfile="/tmp/ffmpeg-${streamid}.stderr"
 logfile="/tmp/wrapper_ffmpeg.log"
 errcode=0
+arch=`uname -a | sed 's/.*synology_//' | cut -d '_' -f 1`
+nas=`uname -a | sed 's/.*synology_//' | cut -d '_' -f 2`
 bin1=/var/packages/ffmpeg6/target/bin/ffmpeg
 
 ##################################################
@@ -62,6 +64,7 @@ trap endprocess SIGTERM
 trap handle_error ERR
 
 newline
+info "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
 info "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
 info "${BLUE}FFMPEG   = $bin1${WHITE}"
 info "${BLUE}DEFAULT_ARGS: $*${WHITE}"
