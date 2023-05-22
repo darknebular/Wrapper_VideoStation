@@ -1,14 +1,15 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.3"
+version="SCPT_3.4"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_3.0: Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_3.1)
 # SCPT_3.1: Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors. (Deprecated migrated to SCPT_3.2)
 # SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
-# SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X.
+# SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
+# SCPT_3.4: Improvements in checking for future releases of DSM's versions.
 
 ##############################################################
 
@@ -18,6 +19,8 @@ version="SCPT_3.3"
 ###############################
 
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
+majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
+minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
 dependencias=("VideoStation" "ffmpeg6" "CodecPack")
@@ -623,20 +626,21 @@ fi
 function check_versions() {
 # NO SE TRADUCE
 
-if [[ "$dsm_version" == 7.0* ]]; then
-cp_bin_path=/var/packages/CodecPack/target/bin
-  injector="0-Advanced"
-elif [[ "$dsm_version" == 7.1* ]]; then
-cp_bin_path=/var/packages/CodecPack/target/pack/bin
+# Contemplando la posibilidad de que las sucesivas versiones 0 de DSM 8 y futuras sigan con las variables correctas.
+if [[ "$majorversion" -ge "8" ]]; then
+  cp_bin_path="/var/packages/CodecPack/target/pack/bin"
   injector="X-Advanced"
-elif [[ "$dsm_version" == 7.2* ]]; then
-cp_bin_path=/var/packages/CodecPack/target/pack/bin
-injector="X-Advanced"
+elif [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
+  cp_bin_path="/var/packages/CodecPack/target/pack/bin"
+  injector="X-Advanced"
+elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "0" ]]; then
+  cp_bin_path="/var/packages/CodecPack/target/bin"
+  injector="0-Advanced"
 
 else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
- exit 1
+exit 1
 fi
 }
 
@@ -1054,8 +1058,8 @@ if [[ "$unmode" == "Old" ]]; then
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
-  if [[ "$dsm_version" == 7.1* ]]; then
-  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.1
+  if [[ "$majorversion" -ge "7" && "$minorversion" -ge "1" ]]; then
+  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.1 o superior
   find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
       info "${YELLOW}${text_uninstall_8b[$LANG]}"
@@ -1063,16 +1067,7 @@ if [[ "$unmode" == "Old" ]]; then
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   fi
-  if [[ "$dsm_version" == 7.2* ]]; then
-  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.2
-  find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
-  text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
-      info "${YELLOW}${text_uninstall_8b[$LANG]}"
-      info "${YELLOW}Restoring CodecPack's link" >> $logfile
-      mv -T -f "$filename" "${filename::-5}" 2>> $logfile
-  done
-  fi
-  
+    
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
       info "${YELLOW}${text_uninstall_8[$LANG]}"
