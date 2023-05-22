@@ -52,12 +52,12 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 
 # USAGE:
 Basic Installation command:  
-`bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")"`
+`bash -c "$(curl -L --max-filesize 512000 "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")"`
 
 .
 
 With options:  
-`bash -c "$(curl "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s <Flags>`
+`bash -c "$(curl -L --max-filesize 512000 "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/installer.sh")" -- -s <Flags>`
 
 | Flags        | Required | Description                                                                     |
 |--------------|----------|---------------------------------------------------------------------------------|
