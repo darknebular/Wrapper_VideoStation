@@ -6,6 +6,27 @@ patch_ame_license() {
 
     prefix="/var/packages/CodecPack/target/usr"
     so="$prefix/lib/libsynoame-license.so"
+    so_backup="$prefix/lib/libsynoame-license.so.orig"
+    lic="/usr/syno/etc/license/data/ame/offline_license.json"
+    lic_backup="/usr/syno/etc/license/data/ame/offline_license.json.orig"
+
+# Verificar si ya existen los archivos de respaldo
+
+if [ -f "$so_backup" ]; then
+  echo "El archivo de respaldo $so_backup ya existe. No se creará una nueva copia de seguridad."
+else
+  # Crear copia de seguridad de libsynoame-license.so
+  cp -p "$so" "$so_backup"
+  echo "Copia de seguridad de $so creada como $so_backup"
+fi
+
+if [ -f "$lic_backup" ]; then
+  echo "El archivo de respaldo $lic_backup ya existe. No se creará una nueva copia de seguridad."
+else
+  # Crear copia de seguridad de offline_license.json
+  cp -p "$lic" "$lic_backup"
+  echo "Copia de seguridad de $lic creada como $lic_backup"
+fi
 
     echo "Patching"
     if ! md5sum_result=$(md5sum "$so"); then
@@ -27,7 +48,6 @@ patch_ame_license() {
         echo -n "$hex_val" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>/dev/null
     done
 
-    lic="/usr/syno/etc/license/data/ame/offline_license.json"
     mkdir -p "$(dirname "$lic")"
 
     cat > "$lic" <<EOF
@@ -74,6 +94,21 @@ EOF
     else
         echo "Patch is unsuccessful"
     fi
+}
+unpatch_ame_license() {
+  if [ -f "$so_backup" ]; then
+    mv "$so_backup" "$so"
+    echo "Archivo $so restaurado desde $so_backup"
+  else
+    echo "El archivo de respaldo $so_backup no existe. No se realizará ninguna acción de restauración."
+  fi
+
+  if [ -f "$lic_backup" ]; then
+    mv "$lic_backup" "$lic"
+    echo "Archivo $lic restaurado desde $lic_backup"
+  else
+    echo "El archivo de respaldo $lic_backup no existe. No se realizará ninguna acción de restauración."
+  fi
 }
 
 patch_ame_license
