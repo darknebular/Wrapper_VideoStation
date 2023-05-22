@@ -19,8 +19,8 @@ version="SCPT_3.4.RC1"
 ###############################
 
 dsm_version=$(cat /etc.defaults/VERSION | grep productversion | sed 's/productversion=//' | tr -d '"')
-majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
-minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
+majorversion=$(cat /tmp/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
+minorversion=$(cat /tmp/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
 dependencias=("VideoStation" "ffmpeg6" "CodecPack")
