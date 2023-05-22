@@ -40,9 +40,8 @@ declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
-# declare -i majorversion
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
-# declare -i minorversion
+
 
 ###############################
 # FUNCIONES
@@ -643,7 +642,6 @@ else
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure."
 error "Your DSM Version $dsm_version is NOT SUPPORTED using this Installer. Please use the MANUAL Procedure." >> $logfile
 exit 1
-
 fi
 }
 
@@ -661,7 +659,12 @@ check_amrif_2="ar"
 fi
 
 check_amrif="$check_amrif_1$check_amrif_2"
-
+echo "$check_amrif"
+echo "$check_amrif_1"
+echo "$check_amrif_2"
+echo "$cp_bin_path"
+echo "$ms_path"
+sleep 7
 }
 
 function language() {
