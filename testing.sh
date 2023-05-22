@@ -1058,7 +1058,7 @@ if [[ "$unmode" == "Old" ]]; then
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
-  if [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
+  if [[ "$majorversion" -ge "7" && "$minorversion" -ge "1" ]]; then
   #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.1 o superior
   find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
