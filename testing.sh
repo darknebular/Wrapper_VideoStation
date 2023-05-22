@@ -40,9 +40,9 @@ declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 majorversion=$(awk -F= '/majorversion/{print $2}' /etc/VERSION)
-declare -i majorversion
+majorversion=$(expr $majorversion)
 minorversion=$(awk -F= '/minorversion/{print $2}' /etc/VERSION)
-declare -i minorversion
+minorversion=$(expr $minorversion)
 
 ###############################
 # FUNCIONES
