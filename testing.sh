@@ -659,12 +659,7 @@ check_amrif_2="ar"
 fi
 
 check_amrif="$check_amrif_1$check_amrif_2"
-echo "$check_amrif"
-echo "$check_amrif_1"
-echo "$check_amrif_2"
-echo "$cp_bin_path"
-echo "$ms_path"
-sleep 7
+
 }
 
 function language() {
@@ -1064,8 +1059,8 @@ if [[ "$unmode" == "Old" ]]; then
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   
-  if [[ "$dsm_version" == 7.1* ]]; then
-  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.1
+  if [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
+  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.1 o superior
   find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
       info "${YELLOW}${text_uninstall_8b[$LANG]}"
@@ -1073,16 +1068,7 @@ if [[ "$unmode" == "Old" ]]; then
       mv -T -f "$filename" "${filename::-5}" 2>> $logfile
   done
   fi
-  if [[ "$dsm_version" == 7.2* ]]; then
-  #Limpiando la posibilidad de haber instalado usando otro Wrapper el path incorrecto en 7.2
-  find /var/packages/CodecPack/target/bin -type f -name "*.orig" | while read -r filename; do
-  text_uninstall_8b=("Restoring CodecPack's link" "Restaurando el link de CodecPack" "Restaurando o CodecPack link" "Restauration de la CodecPack link" "Wiederherstellen der CodecPack link" "Ripristino di CodecPack link")
-      info "${YELLOW}${text_uninstall_8b[$LANG]}"
-      info "${YELLOW}Restoring CodecPack's link" >> $logfile
-      mv -T -f "$filename" "${filename::-5}" 2>> $logfile
-  done
-  fi
-  
+    
   find $cp_bin_path -type f -name "*.orig" | while read -r filename; do
   text_uninstall_8=("Restoring CodecPack's $filename" "Restaurando el $filename de CodecPack" "Restaurando o CodecPack $filename" "Restauration de la CodecPack $filename" "Wiederherstellen der CodecPack $filename" "Ripristino di CodecPack $filename")
       info "${YELLOW}${text_uninstall_8[$LANG]}"
@@ -1192,16 +1178,6 @@ text_configura_13=("Please answer with the correct option writing: A or B or C o
 text_configura_14=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
 text_configura_15=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED so this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
 text_configura_16=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
-
-echo "$check_amrif"
-echo "$check_amrif_1"
-echo "$check_amrif_2"
-echo "$cp_bin_path"
-echo "$ms_path"
-echo "$firma NO tienes MS"
-echo "$firma2 tienes MS"
-echo "$firma_cp tienes todo el pack se iguala a $check_amrif_1 quizás tenga que cambiarlo a $check_amrif"
-sleep 7
 
 if [[ "$check_amrif" == "$firma2" ]]; then
 YELLOW_BLUEMS="\u001b[33m"
