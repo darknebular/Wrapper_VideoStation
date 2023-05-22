@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA-1"
+version="SCPT_3.4.BETA-2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -9,7 +9,7 @@ version="SCPT_3.4.BETA-1"
 # SCPT_3.1: Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors. (Deprecated migrated to SCPT_3.2)
 # SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
 # SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
-# SCPT_3.4: Improvements in checking DSM's versions. 
+# SCPT_3.4: Improvements in checking for future releases of DSM's versions. 
 
 ##############################################################
 
@@ -39,9 +39,9 @@ firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
-majorversion=$(awk -F= '/majorversion/{print $2}' /etc/VERSION)
+majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
 declare -i majorversion
-minorversion=$(awk -F= '/minorversion/{print $2}' /etc/VERSION)
+minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 declare -i minorversion
 
 ###############################
