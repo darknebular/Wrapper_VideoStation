@@ -9,7 +9,7 @@ version="SCPT_3.4.RC2"
 # SCPT_3.1: Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors. (Deprecated migrated to SCPT_3.2)
 # SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
 # SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
-# SCPT_3.4: Improvements in checking for future releases of DSM's versions. Include support for the AAC codec for those models without AAC supported.
+# SCPT_3.4: Improvements in checking for future releases of DSM's versions.
 
 ##############################################################
 
@@ -924,7 +924,7 @@ else
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}${text_install_20[$LANG]}"
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $vs_libsynovte_file 2>> $logfile
+	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
 	info "${GREEN}${text_install_21[$LANG]}"
 	
 	if [[ "$mode" == "Simplest" ]]; then
@@ -962,7 +962,7 @@ text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado c
 		chmod 644 $ms_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}${text_install_27[$LANG]}"
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $ms_libsynovte_file 2>> $logfile
+		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
 		info "${GREEN}${text_install_28[$LANG]}"
 		
 		if [[ "$mode" == "Simplest" ]]; then
