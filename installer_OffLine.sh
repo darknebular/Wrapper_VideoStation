@@ -694,11 +694,10 @@ function language() {
 	[Ff]* ) language_F; break;;
 	[Dd]* ) language_D; break;;
 	[Ii]* ) language_I; break;;
-	[Zz]* ) start; break;;
+	[Zz]* ) clear; start; break;;
         * ) echo -e "${YELLOW}${text_language_4[$LANG]}";;  
         esac
 	done
-clear
 }
 
 function language_E() {
