@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4.BETA-2"
+version="SCPT_3.4.BETA.2"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -40,9 +40,9 @@ declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
 majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversion=//' | tr -d '"')
-declare -i majorversion
+# declare -i majorversion
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
-declare -i minorversion
+# declare -i minorversion
 
 ###############################
 # FUNCIONES
@@ -629,13 +629,13 @@ function check_versions() {
 # NO SE TRADUCE
 
 # Contemplando la posibilidad de que las sucesivas versiones 0 de DSM 8 y futuras sigan con las variables correctas.
-if [[ $majorversion -ge 8 ]]; then
+if [[ "$majorversion" -ge "8" ]]; then
   cp_bin_path="/var/packages/CodePack/target/pack/bin"
   injector="X-Advanced"
-elif [[ $majorversion -ge 7 && $minorversion -ge 1 ]]; then
+elif [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
   cp_bin_path="/var/packages/CodePack/target/pack/bin"
   injector="X-Advanced"
-elif [[ $majorversion -ge 7 && $minorversion -eq 0 ]]; then
+elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "0" ]]; then
   cp_bin_path="/var/packages/CodecPack/target/bin"
   injector="0-Advanced"
 
