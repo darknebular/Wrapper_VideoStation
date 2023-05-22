@@ -698,6 +698,7 @@ function language() {
         * ) echo -e "${YELLOW}${text_language_4[$LANG]}";;  
         esac
 	done
+clear
 }
 
 function language_E() {
