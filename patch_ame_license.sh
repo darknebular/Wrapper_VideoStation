@@ -9,6 +9,8 @@ patch_ame_license() {
     so_backup="$prefix/lib/libsynoame-license.so.orig"
     lic="/usr/syno/etc/license/data/ame/offline_license.json"
     lic_backup="/usr/syno/etc/license/data/ame/offline_license.json.orig"
+    licsig="/usr/syno/etc/license/data/ame/offline_license.sig"
+    licsig_backup="/usr/syno/etc/license/data/ame/offline_license.sig.orig"
 
 # Verificar si ya existen los archivos de respaldo
 
@@ -26,6 +28,14 @@ else
   # Crear copia de seguridad de offline_license.json
   cp -p "$lic" "$lic_backup"
   echo "Copia de seguridad de $lic creada como $lic_backup"
+fi
+
+if [ -f "$licsig_backup" ]; then
+  echo "El archivo de respaldo $licsig_backup ya existe. No se creará una nueva copia de seguridad."
+else
+  # Crear copia de seguridad de offline_license.sig
+  cp -p "$licsig" "$licsig_backup"
+  echo "Copia de seguridad de $lic creada como $licsig_backup"
 fi
 
     echo "Patching"
