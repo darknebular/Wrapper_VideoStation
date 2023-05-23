@@ -22,7 +22,7 @@ You will can change the order of the audio codecs in the Wrapper, install the mo
 
 The Installer has Multi Language support (English, Spanish, Portuguese, French, German, Italian).
 
-# Now the installer has a AME's License Crack: 
+# Now the Installer has a AME's License Crack: 
 This enables the AAC and HEVC codecs and its license in the AME package, until DSM 7.1.1.
 This patcher enables Advanced Media Extensions 3.0 for you, without having to login account.
 
