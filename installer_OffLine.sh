@@ -795,7 +795,7 @@ fi
 	if "$cp_usr_path/bin/synoame-bin-check-license"; then
 	info "${YELLOW}${text_patchame_9[$LANG]}"
   	info "${YELLOW}Successful, updating codecs..." >> $logfile
-        "$cp_usr_path/bin/synoame-bin-auto-install-needed-codec"
+        "$cp_usr_path/bin/synoame-bin-auto-install-needed-codec" 2>> "$logfile"
 	info "${GREEN}${text_patchame_10[$LANG]}"
         info "${GREEN}Crack installed correctly." >> $logfile
 		sleep 4
