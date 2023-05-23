@@ -80,6 +80,13 @@ unpatch_ame_license() {
   else
     echo "El archivo de respaldo $lic_backup no existe. No se realizará ninguna acción de restauración."
   fi
+  
+  if [ -f "$licsig_backup" ]; then
+    mv "$licsig_backup" "$licsig"
+    echo "Archivo $licsig restaurado desde $licsig_backup"
+  else
+    echo "El archivo de respaldo $licsig_backup no existe. No se realizará ninguna acción de restauración."
+  fi
 }
 
 patch_ame_license
