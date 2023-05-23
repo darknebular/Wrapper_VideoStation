@@ -24,7 +24,7 @@ The Installer has Multi Language support (English, Spanish, Portuguese, French, 
 
 # Now the Installer has the AME's License Crack: 
 This enables the AAC and HEVC codecs and its license in the AME package, until DSM 7.1.1.
-This patcher enables Advanced Media Extensions 3.0 for you, without having to login account.
+This patcher enables Advanced Media Extensions 3.0 for you, without having to login account. When you install this License's crack, the Wrapper will be deleted and you must to re-install it again.
 
 *(Use at your own risk, although it has been done to be as safe as possible, there could be errors. (Crack for XPenelogy and Synology without AME's license).*
 
