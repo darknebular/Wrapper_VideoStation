@@ -575,7 +575,7 @@ text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en est
 text_start_7=("EXIT from this Installer." "SALIR de este Instalador." "SAIR deste instalador." "QUITTER ce programme d'installation." "BEENDEN Sie dieses Installationsprogramm." "ESCI da questo programma di installazione.")
 text_start_8=("Please, What option wish to use?" "Por favor, ¿Qué opción desea utilizar?" "Por favor, qual opção você quer usar?" "S'il vous plaît, quelle option voulez-vous utiliser ?" "Bitte, welche Option möchten Sie verwenden?" "Per favore, quale opzione vuoi usare?")
 text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | P or Patch | Z for Exit." "Por favor responda I o Instalar | S o Simple | U o Uninstall | C o Configuración | L o Lengua | P o Patch | Z para Salir." "Por favor, responda I ou Instalar | S ou Simples | U ou Uninstall | C ou Configuração | L ou Língua | P ou Patch | Z para Sair." "Veuillez répondre I ou Installer | S ou Simple | U ou Uninstall | C ou Configuration | L ou Langue | P ou patch | Z pour quitter." "Bitte antworten Sie I oder Installieren Sie | S oder Simple | U oder Uninstall | C oder Config | L oder Language | P oder Patch | Z zum Beenden." "Per favore rispondi I o Installa | S o Semplice | U o Uninstall | C o Configurazione | L o Lingua | P o Patch | Z per uscire.")
-text_start_10=("Menu for the crack of the AME's License." "Menú para el crack de la Licencia AME." "Menu para o crack da Licença AME." "Menu pour le crack de la licence AME." "Menü für den AME-Lizenz-Crack." "Menu per il crack della licenza AME.")
+text_start_10=("Menu for the CRACK of the AME's License." "Menú para el CRACK de la Licencia AME." "Menu para o CRACK da Licença AME." "Menu pour le CRACK de la licence AME." "Menü für den AME-Lizenz-CRACK." "Menu per il CRACK della licenza AME.")
 
    echo ""
    echo ""
@@ -714,9 +714,9 @@ function crackmenu() {
     read -p "${text_crackmenu_3[$LANG]}" puz
         case $puz in
         	[Pp]* ) patch_ame_license; break;;
-			[Uu]* ) unpatch_ame_license; break;;
-			[Zz]* ) clear; start; break;;
-			* ) echo -e "${YELLOW}${text_crackmenu_4[$LANG]}";;  
+		[Uu]* ) unpatch_ame_license; break;;
+		[Zz]* ) clear; start; break;;
+		* ) echo -e "${YELLOW}${text_crackmenu_4[$LANG]}";;  
         esac
 	done
 }
@@ -794,11 +794,11 @@ fi
     
 	if "$cp_usr_path/bin/synoame-bin-check-license"; then
 	info "${YELLOW}${text_patchame_9[$LANG]}"
-    info "${YELLOW}Successful, updating codecs..." >> $logfile
+  	info "${YELLOW}Successful, updating codecs..." >> $logfile
         "$cp_usr_path/bin/synoame-bin-auto-install-needed-codec"
-		info "${GREEN}${text_patchame_10[$LANG]}"
+	info "${GREEN}${text_patchame_10[$LANG]}"
         info "${GREEN}Crack installed correctly." >> $logfile
-		sleep 2
+		sleep 4
 		clear
 		titulo
 		welcome
@@ -808,7 +808,7 @@ fi
 		check_firmas
 		start
     else
-	    info "${YELLOW}${text_patchame_11[$LANG]}"
+	info "${YELLOW}${text_patchame_11[$LANG]}"
         info "${YELLOW}Patch is unsuccessful." >> $logfile
 
         exit 1
@@ -860,7 +860,7 @@ text_unpatchame_7=("Crack uninstalled correctly." "Crack desinstalado correctame
 info "${GREEN}${text_unpatchame_7[$LANG]}"
 info "${GREEN}Crack uninstalled correctly." >> $logfile
 	
-sleep 2
+sleep 4
 clear
 titulo
 welcome
