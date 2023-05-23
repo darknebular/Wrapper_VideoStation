@@ -596,10 +596,10 @@ text_start_10=("Menu for the CRACK of the AME's License." "Menú para el CRACK d
         [Ii]* ) install_advanced;;
         [Ss]* ) install_simple;;
         [Uu]* ) uninstall_new;;
-	    [Cc]* ) configurator;;
-	    [Ll]* ) language;;
-		[Pp]* ) crackmenu;;
-      	[Zz]* ) exit;;
+	[Cc]* ) configurator;;
+	[Ll]* ) language;;
+	[Pp]* ) crackmenu;;
+      	[Zz]* ) exit 0;;
         * ) echo -e "${YELLOW}${text_start_9[$LANG]}";;
         esac
         done
@@ -715,7 +715,7 @@ function crackmenu() {
         case $puz in
         	[Pp]* ) patch_ame_license; break;;
 		[Uu]* ) unpatch_ame_license; break;;
-		[Zz]* ) clear; start; break;;
+		[Zz]* ) reloadstart; break;;
 		* ) echo -e "${YELLOW}${text_crackmenu_4[$LANG]}";;  
         esac
 	done
@@ -799,14 +799,7 @@ fi
 	info "${GREEN}${text_patchame_10[$LANG]}"
         info "${GREEN}Crack installed correctly." >> $logfile
 		sleep 4
-		clear
-		titulo
-		welcome
-		check_dependencias
-		check_licence_AME
-		check_versions
-		check_firmas
-		start
+		reloadstart
     else
 	info "${YELLOW}${text_patchame_11[$LANG]}"
         info "${YELLOW}Patch is unsuccessful." >> $logfile
@@ -861,6 +854,10 @@ info "${GREEN}${text_unpatchame_7[$LANG]}"
 info "${GREEN}Crack uninstalled correctly." >> $logfile
 	
 sleep 4
+reloadstart
+}
+
+function reloadstart() {
 clear
 titulo
 welcome
@@ -904,7 +901,7 @@ function language() {
 	[Ff]* ) language_F; break;;
 	[Dd]* ) language_D; break;;
 	[Ii]* ) language_I; break;;
-	[Zz]* ) clear; start; break;;
+	[Zz]* ) reloadstart; break;;
         * ) echo -e "${YELLOW}${text_language_4[$LANG]}";;  
         esac
 	done
@@ -916,14 +913,7 @@ echo ""
 info "${GREEN}Changed correctly the Language in this Installer to: ENGLISH"
 info "${BLUE}==================== Changed the Language in this Installer to: ENGLISH ====================" >> $logfile
 sleep 2
-clear
-titulo
-welcome
-check_dependencias
-check_licence_AME
-check_versions
-check_firmas
-start
+reloadstart
 }
 
 function language_C() {
@@ -932,14 +922,7 @@ echo ""
 info "${GREEN}Cambió correctamente el idioma en este instalador a: CASTELLANO"
 info "${BLUE}==================== Changed the Language in this Installer to: SPANISH ====================" >> $logfile
 sleep 2
-clear
-titulo
-welcome
-check_dependencias
-check_licence_AME
-check_versions
-check_firmas
-start
+reloadstart
 }
 function language_P() {
 LANG="2"
@@ -947,14 +930,7 @@ echo ""
 info "${GREEN}Alterado corretamente o Idioma neste Instalador para: PORTUGUÊS"
 info "${BLUE}==================== Changed the Language in this Installer to: PORTUGUESE ====================" >> $logfile
 sleep 2
-clear
-titulo
-welcome
-check_dependencias
-check_licence_AME
-check_versions
-check_firmas
-start
+reloadstart
 }
 function language_F() {
 LANG="3"
@@ -962,14 +938,7 @@ echo ""
 info "${GREEN}Changé correctement la langue dans ce programme d'installation en : FRANÇAIS"
 info "${BLUE}==================== Changed the Language in this Installer to: FRENCH ====================" >> $logfile
 sleep 2
-clear
-titulo
-welcome
-check_dependencias
-check_licence_AME
-check_versions
-check_firmas
-start
+reloadstart
 }
 function language_D() {
 LANG="4"
@@ -977,14 +946,7 @@ echo ""
 info "${GREEN}Die Sprache in diesem Installer korrekt geändert auf: GERMAN"
 info "${BLUE}==================== Changed the Language in this Installer to: GERMAN ====================" >> $logfile
 sleep 2
-clear
-titulo
-welcome
-check_dependencias
-check_licence_AME
-check_versions
-check_firmas
-start
+reloadstart
 }
 function language_I() {
 LANG="5"
@@ -992,14 +954,7 @@ echo ""
 info "${GREEN}Modificata correttamente la Lingua in questo Installer in: ITALIANO"
 info "${BLUE}==================== Changed the Language in this Installer to: ITALIAN ====================" >> $logfile
 sleep 2
-clear
-titulo
-welcome
-check_dependencias
-check_licence_AME
-check_versions
-check_firmas
-start
+reloadstart
 }
 
 function install_simple() {
@@ -1092,7 +1047,7 @@ if [[ -f "/tmp/wrapper.KEY" ]]; then
 	[Ss]* ) uninstall_old; break;;
 	[Oo]* ) uninstall_old; break;;
 	[Jj]* ) uninstall_old; break;;
-        [Nn]* ) start;;
+        [Nn]* ) reloadstart;;
         * ) echo -e "${YELLOW}${text_install_10[$LANG]}";;
         esac
         done
@@ -1429,7 +1384,7 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 	[Ff] ) config_F; break;;
 	[Gg] ) config_G; break;;
 	[Hh] ) config_H; break;;
-	[Zz] ) start; break;;
+	[Zz] ) reloadstart; break;;
         * ) echo -e "${YELLOW}${text_configura_13[$LANG]}";;
         esac
         done
