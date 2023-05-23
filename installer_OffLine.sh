@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.4"
+version="SCPT_3.5"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -9,7 +9,8 @@ version="SCPT_3.4"
 # SCPT_3.1: Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors. (Deprecated migrated to SCPT_3.2)
 # SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
 # SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
-# SCPT_3.4: Improvements in checking for future releases of DSM's versions. Creation of installer_OffLine to avoid the 128KB limit and to be able to create more logic in the script and new fuctions.
+# SCPT_3.4: Improvements in checking for future releases of DSM's versions. Creation of installer_OffLine to avoid the 128KB limit and to be able to create more logic in the script and new fuctions. (Deprecated migrated to SCPT_3.5)
+# SCPT_3.5: Added a Installer for the License's CRACK for the AME 3.0.
 
 ##############################################################
 
@@ -41,6 +42,17 @@ firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
+
+r=('669066909066906690' 'B801000000' '30')
+s=(('0x1F28' 0) ('0x48F5' 1) ('0x4921' 1) ('0x4953' 1) ('0x4975' 1) ('0x9AC8' 2))
+cp_usr_path='/var/packages/CodecPack/target/usr'
+so="$cp_usr_path/lib/libsynoame-license.so"
+so_backup="$cp_usr_path/lib/libsynoame-license.so.orig"
+lic="/usr/syno/etc/license/data/ame/offline_license.json"
+lic_backup="/usr/syno/etc/license/data/ame/offline_license.json.orig"
+licsig="/usr/syno/etc/license/data/ame/offline_license.sig"
+licsig_backup="/usr/syno/etc/license/data/ame/offline_license.sig.orig"
+
 
 ###############################
 # FUNCIONES
@@ -562,7 +574,8 @@ text_start_5=("Change the config of the Advanced Wrapper for change the audio's 
 text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en este Instalador." "Altere o IDIOMA neste Instalador." "Modifiez la LANGUE dans ce programme d'installation." "Ändern Sie die SPRACHE in diesem Installationsprogramm." "Cambia la LINGUA in questo programma di installazione.")
 text_start_7=("EXIT from this Installer." "SALIR de este Instalador." "SAIR deste instalador." "QUITTER ce programme d'installation." "BEENDEN Sie dieses Installationsprogramm." "ESCI da questo programma di installazione.")
 text_start_8=("Please, What option wish to use?" "Por favor, ¿Qué opción desea utilizar?" "Por favor, qual opção você quer usar?" "S'il vous plaît, quelle option voulez-vous utiliser ?" "Bitte, welche Option möchten Sie verwenden?" "Per favore, quale opzione vuoi usare?")
-text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | Z for Exit." "Por favor responda I o Instalar | S o Simple | U o Uninstall | C o Configuración | L o Lengua | Z para Salir." "Por favor, responda I ou Instalar | S ou Simples | U ou Uninstall | C ou Configuração | L ou Língua | Z para Sair." "Veuillez répondre I ou Installer | S ou Simple | U ou Uninstall | C ou Configuration | L ou Langue | Z pour quitter." "Bitte antworten Sie I oder Installieren Sie | S oder Simple | U oder Uninstall | C oder Config | L oder Language | Z zum Beenden." "Per favore rispondi I o Installa | S o Semplice | U o Uninstall | C o Configurazione | L o Lingua | Z per uscire.")
+text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | P or Patch | Z for Exit." "Por favor responda I o Instalar | S o Simple | U o Uninstall | C o Configuración | L o Lengua | P o Patch | Z para Salir." "Por favor, responda I ou Instalar | S ou Simples | U ou Uninstall | C ou Configuração | L ou Língua | P ou Patch | Z para Sair." "Veuillez répondre I ou Installer | S ou Simple | U ou Uninstall | C ou Configuration | L ou Langue | P ou patch | Z pour quitter." "Bitte antworten Sie I oder Installieren Sie | S oder Simple | U oder Uninstall | C oder Config | L oder Language | P oder Patch | Z zum Beenden." "Per favore rispondi I o Installa | S o Semplice | U o Uninstall | C o Configurazione | L o Lingua | P o Patch | Z per uscire.")
+text_start_10=("Menu for the crack of the AME's License." "Menú para el crack de la Licencia AME." "Menu para o crack da Licença AME." "Menu pour le crack de la licence AME." "Menü für den AME-Lizenz-Crack." "Menu per il crack della licenza AME.")
 
    echo ""
    echo ""
@@ -573,17 +586,19 @@ text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or 
    echo -e "${BLUE} ( U ) ${text_start_4[$LANG]}" 
    echo -e "${BLUE} ( C ) ${text_start_5[$LANG]}"
    echo -e "${BLUE} ( L ) ${text_start_6[$LANG]}"
+   echo -e "${BLUE} ( P ) ${text_start_10[$LANG]}"
    echo ""
    echo -e "${PURPLE} ( Z ) ${text_start_7[$LANG]}"
         while true; do
 	echo -e "${GREEN}"
-        read -p "${text_start_8[$LANG]}" isuclz
-        case $isuclz in
+        read -p "${text_start_8[$LANG]}" isuclpz
+        case $isuclpz in
         [Ii]* ) install_advanced;;
         [Ss]* ) install_simple;;
         [Uu]* ) uninstall_new;;
-	[Cc]* ) configurator;;
-	[Ll]* ) language;;
+	    [Cc]* ) configurator;;
+	    [Ll]* ) language;;
+		[Pp]* ) crackmenu;;
       	[Zz]* ) exit;;
         * ) echo -e "${YELLOW}${text_start_9[$LANG]}";;
         esac
@@ -659,6 +674,201 @@ fi
 
 check_amrif="$check_amrif_1$check_amrif_2"
 
+}
+
+function crackmenu() {
+ clear
+ text_crackmenu_1=("THIS IS THE LICENSE CRACK MENU, PLEASE CHOOSE YOUR SELECTION:" "ESTE ES EL MENU DEL CRACK DE LICENCIAS, POR FAVOR ELIJA SU SELECCIÓN:" "ESTE É O MENU DE CRACK DE LICENÇA, POR FAVOR, ESCOLHA SUA SELEÇÃO:" "VOICI LE MENU DE CRACK DE LICENCE, VEUILLEZ CHOISIR VOTRE SÉLECTION :" "DIES IST DAS LIZENZ-Crack-MENÜ, BITTE WÄHLEN SIE IHRE AUSWAHL:" "QUESTO È IL MENU CRACK DELLA LICENZA, PER FAVORE SCEGLI LA TUA SELEZIONE:")
+ text_crackmenu_2=("RETURN to MAIN menu." "VOLVER al MENU Principal." "VOLTAR ao MENU Principal." "RETOUR au MENU Principal." "ZURÜCK zum Hauptmenü." "INDIETRO al menù principale.")
+ text_crackmenu_3=("Do you want to install the crack for the AME license?" "¿Deseas instalar el crack para la licencia del AME?" "Deseja instalar o crack para a licença AME?" "Voulez-vous installer le crack pour la licence AME ?" "Möchten Sie den Crack für die AME-Lizenz installieren?" "Vuoi installare la crack per la licenza AME?")
+ text_crackmenu_4=("Please answer with the correct option writing: P (Patch the AME's license) or U (Unpatch the AME's license). Write Z (for return to MAIN menu)." "Por favor, responda con la opción correcta escribiendo: P (parchea la licencia de AME) o U (desparchea la licencia de AME). Escribe Z (para volver al menú PRINCIPAL)." "Por favor, responda com a opção correta digitando: P (patches de licença AME) ou U (unpatches de licença AME). Digite Z (para retornar ao menu PRINCIPAL)." "Veuillez répondre avec l'option correcte en tapant : P (corrige la licence AME) ou U (élimine la licence AME). Tapez Z (pour revenir au menu PRINCIPAL)." "Bitte antworten Sie mit der richtigen Option, indem Sie Folgendes eingeben: P (Patches der AME-Lizenz) oder U (Patches der AME-Lizenz aufheben). Geben Sie Z ein (um zum HAUPTMENÜ zurückzukehren)." "Si prega di rispondere con l'opzione corretta digitando: P (patch della licenza AME) o U (unpatch della licenza AME). Digitare Z (per tornare al menu PRINCIPALE).")
+ text_crackmenu_5=("==================== Installation of the AME's License Crack ====================" "==================== Instalación del Crack de Licencia de AME ====================" "==================== Instalando o crack da licença AME =====================" "==================== Installation du crack de licence AME ====================" "==================== Installieren des AME-Lizenz-Cracks ====================" "===================== Installazione della licenza AME Crack ====================")	
+ text_crackmenu_6=("INSTALL the AME's License Crack" "INSTALAR el crack de licencia de AME" "INSTALE o crack da licença AME" "INSTALLER le crack de la licence AME" "INSTALLIEREN Sie den AME-Lizenz-Crack" "INSTALLA il crack della licenza AME")
+ text_crackmenu_7=("UNINSTALL the AME's License Crack" "DESINSTALAR el crack de licencia de AME" "DESINSTALAR crack de licença AME" "DÉSINSTALLER le crack de la licence AME" "AME-Lizenz-Crack DEINSTALLIEREN" "DISINSTALLA il crack della licenza AME")	
+ text_crackmenu_8=("This patcher enables Advanced Media Extensions 3.0 for you, without having to login account." "Este parche habilita Advanced Media Extensions 3.0 para usted, sin tener que iniciar sesión en la cuenta." "Este patch habilita o Advanced Media Extensions 3.0 para você, sem ter que entrar em sua conta." "Ce correctif active Advanced Media Extensions 3.0 pour vous, sans avoir à vous connecter à votre compte." "Dieser Patch aktiviert Advanced Media Extensions 3.0 für Sie, ohne dass Sie sich bei Ihrem Konto anmelden müssen." "Questa patch abilita Advanced Media Extensions 3.0 per te, senza dover accedere al tuo account.")	
+ text_crackmenu_9=("This enables the AAC and HEVC codecs and its license in the AME package, until DSM 7.1.1." "Esto habilita los códecs AAC y HEVC y su licencia en el paquete AME, hasta DSM 7.1.1." "Isso habilita os codecs AAC e HEVC e suas licenças no pacote AME, até DSM 7.1.1." "Cela active les codecs AAC et HEVC et leur licence dans le package AME, jusqu'à DSM 7.1.1." "Dadurch werden die AAC- und HEVC-Codecs und deren Lizenz im AME-Paket bis DSM 7.1.1 aktiviert." "Ciò abilita i codec AAC e HEVC e la relativa licenza nel pacchetto AME, fino a DSM 7.1.1.")	
+ text_crackmenu_10=("Note that in order to use this, you will have to use a valid SN (but doesn't have to login synology account with that SN)." "Tenga en cuenta que para usar esto, deberá usar un SN válido (pero no tiene que iniciar sesión en una cuenta de Synology con ese SN)." "Observe que, para usá-lo, você precisará usar um SN válido (mas não precisa entrar em uma conta Synology com esse SN)." "Veuillez noter que pour l'utiliser, vous devrez utiliser un SN valide (mais vous n'avez pas besoin de vous connecter à un compte Synology avec ce SN)." "Bitte beachten Sie, dass Sie zur Nutzung eine gültige SN verwenden müssen (Sie müssen sich jedoch nicht mit dieser SN bei einem Synology-Konto anmelden)." "Si noti che per utilizzare questo, sarà necessario utilizzare un SN valido (ma non è necessario accedere a un account Synology con quel SN).")	
+ text_crackmenu_11=("DISCLAIMER:" "DESCARGO DE RESPONSABILIDAD:" "ISENÇÃO DE RESPONSABILIDADE:" "CLAUSE DE NON-RESPONSABILITÉ:" "HAFTUNGSAUSSCHLUSS:" "DISCLAIMER:")	
+ text_crackmenu_12=("Use at your own risk, although it has been done to be as safe as possible, there could be errors. (Crack for XPenelogy and Synology without AME's license)." "Úsalo bajo tu propia responsabilidad, aunque se ha hecho para ser lo más seguro posible, podría haber errores. (Crack para XPenology y Synology sin licencia de AME)." "Use-o por sua conta e risco, embora tenha sido feito para ser o mais seguro possível, pode haver erros. (Crack para XPenology e Synology sem licença AME)." "Utilisez-le à vos propres risques, bien qu'il ait été fait pour être aussi sûr que possible, il pourrait y avoir des erreurs. (Crack pour XPenology et Synology sans licence AME)." "Die Verwendung erfolgt auf eigene Gefahr. Obwohl dies so sicher wie möglich ist, kann es dennoch zu Fehlern kommen. (Crack für XPenology und Synology ohne AME-Lizenz)." "Usalo a tuo rischio e pericolo, anche se è stato fatto per essere il più sicuro possibile, potrebbero esserci degli errori. (Crack per XPenology e Synology senza licenza AME).")	
+	 
+	echo ""
+        echo -e "${BLUE}${text_crackmenu_5[$LANG]}"
+	info "${BLUE}==================== Installation of the AME's License Crack ====================" >> $logfile
+	echo ""
+	echo -e "${GREEN}${text_crackmenu_8[$LANG]}"
+	echo -e "${GREEN}${text_crackmenu_9[$LANG]}"
+	echo -e "${GREEN}${text_crackmenu_10[$LANG]}"
+	echo ""
+	echo ""
+	echo -e "${RED}${text_crackmenu_11[$LANG]} ${YELLOW}${text_crackmenu_12[$LANG]}"
+	echo ""
+        echo -e "${YELLOW}${text_crackmenu_1[$LANG]}"
+	echo ""
+		echo -e "${BLUE} ( P ) ${text_crackmenu_6[$LANG]}"
+        echo -e "${BLUE} ( U ) ${text_crackmenu_7[$LANG]}" 
+        
+	echo -e ""
+        echo -e "${PURPLE} ( Z ) ${text_crackmenu_2[$LANG]}"
+   	while true; do
+	echo -e "${GREEN}"
+    read -p "${text_crackmenu_3[$LANG]}" puz
+        case $puz in
+        	[Pp]* ) patch_ame_license; break;;
+			[Uu]* ) unpatch_ame_license; break;;
+			[Zz]* ) clear; start; break;;
+			* ) echo -e "${YELLOW}${text_crackmenu_4[$LANG]}";;  
+        esac
+	done
+}
+patch_ame_license() {
+
+touch "$logfile"
+    
+text_patchame_1=("The backup file $so_backup already exists. A new backup will not be created." "El archivo de respaldo $so_backup ya existe. No se creará una nueva copia de seguridad." "O arquivo de backup $so_backup já existe. Um novo backup não será criado." "Le fichier de sauvegarde $so_backup existe déjà. Une nouvelle sauvegarde ne sera pas créée." "Die Sicherungsdatei $so_backup existiert bereits. Es wird kein neues Backup erstellt." "Il file di backup $so_backup esiste già. Non verrà creato un nuovo backup.")
+text_patchame_2=("$so backup created as $so_backup." "Copia de seguridad de $so creada como $so_backup." "$so backup criado como $so_backup." "Sauvegarde $so créée en tant que $so_backup." "$so-Backup erstellt als $so_backup." "$so backup creato come $so_backup.")
+text_patchame_3=("The backup file $lic_backup already exists. A new backup will not be created." "El archivo de respaldo $lic_backup ya existe. No se creará una nueva copia de seguridad." "O arquivo de backup $lic_backup já existe. Um novo backup não será criado." "Le fichier de sauvegarde $lic_backup existe déjà. Une nouvelle sauvegarde ne sera pas créée." "Die Sicherungsdatei $lic_backup existiert bereits. Es wird kein neues Backup erstellt." "Il file di backup $lic_backup esiste già. Non verrà creato un nuovo backup.")
+text_patchame_4=("$lic backup created as $lic_backup." "Copia de seguridad de $lic creada como $lic_backup." "$lic backup criado como $lic_backup." "Sauvegarde $lic créée en tant que $lic_backup." "$lic-Backup erstellt als $lic_backup." "$lic backup creato come $lic_backup.")
+text_patchame_5=("The backup file $licsig_backup already exists. A new backup will not be created." "El archivo de respaldo $licsig_backup ya existe. No se creará una nueva copia de seguridad." "O arquivo de backup $licsig_backup já existe. Um novo backup não será criado." "Le fichier de sauvegarde $licsig_backup existe déjà. Une nouvelle sauvegarde ne sera pas créée." "Die Sicherungsdatei $licsig_backup existiert bereits. Es wird kein neues Backup erstellt." "Il file di backup $licsig_backup esiste già. Non verrà creato un nuovo backup.")
+text_patchame_6=("$licsig backup created as $licsig_backup." "Copia de seguridad de $licsig creada como $licsig_backup." "$licsig backup criado como $licsig_backup." "Sauvegarde $licsig créée en tant que $licsig_backup." "$licsig-Backup erstellt als $licsig_backup." "$licsig backup creato come $licsig_backup.")
+text_patchame_7=("Applying the patch." "Aplicando el patch." "Aplicando o remendo." "Application du patch." "Anbringen des Patches." "Applicazione del cerotto.")	
+text_patchame_8=("Checking whether patch is successful..." "Comprobando si el parche es exitoso..." "Verificando se o patch foi bem-sucedido..." "Vérification du succès du correctif..." "Überprüfen, ob der Patch erfolgreich ist..." "Verifica se la patch ha esito positivo...")	
+text_patchame_9=("Successful, updating codecs..." "Correcto, actualizando códecs..." "Certo, atualizando codecs..." "Bon, mise à jour des codecs..." "Richtig, Codecs aktualisieren ..." "Giusto, aggiornando i codec...")	
+text_patchame_10=("Crack installed correctly." "Crack instalado correctamente." "Crack instalado com sucesso." "Crack installé avec succès." "Crack erfolgreich installiert." "Crack installato con successo.")	
+text_patchame_11=("Patch is unsuccessful." "El parche no tiene éxito." "O patch não foi bem-sucedido." "Le patch échoue." "Der Patch ist nicht erfolgreich." "La patch non ha successo.")	
+
+# Verificar si ya existen los archivos de respaldo
+
+if [ -f "$so_backup" ]; then
+  info "${GREEN}${text_patchame_1[$LANG]}"
+  info "${GREEN}The backup file $so_backup already exists. A new backup will not be created." >> $logfile
+else
+  # Crear copia de seguridad de libsynoame-license.so
+  cp -p "$so" "$so_backup"
+  info "${GREEN}${text_patchame_2[$LANG]}"
+  info "${GREEN}$so backup created as $so_backup." >> $logfile
+fi
+
+if [ -f "$lic_backup" ]; then
+  info "${GREEN}${text_patchame_3[$LANG]}"
+  info "${GREEN}The backup file $lic_backup already exists. A new backup will not be created." >> $logfile
+else
+  # Crear copia de seguridad de offline_license.json
+  cp -p "$lic" "$lic_backup"
+  info "${GREEN}${text_patchame_4[$LANG]}"
+  info "${GREEN}$lic backup created as $lic_backup." >> $logfile
+fi
+
+if [ -f "$licsig_backup" ]; then
+  info "${GREEN}${text_patchame_5[$LANG]}"
+  info "${GREEN}The backup file $licsig_backup already exists. A new backup will not be created." >> $logfile
+else
+  # Crear copia de seguridad de offline_license.sig
+  cp -p "$licsig" "$licsig_backup"
+  info "${GREEN}${text_patchame_6[$LANG]}"
+  info "${GREEN}$licsig backup created as $licsig_backup." >> $logfile
+fi
+
+   info "${YELLOW}${text_patchame_7[$LANG]}"
+   info "${YELLOW}Applying the patch." >> $logfile
+
+
+expected_checksum='fcc1084f4eadcf5855e6e8494fb79e23'
+
+if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
+    echo "MD5 mismatch"
+    exit 1
+fi
+
+    for ((i = 0; i < ${#s[@]}; i++)); do
+        offset=$((s[i][0] + 0x8000))
+        value=${r[s[i][1]]}
+        printf '\x%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2> $logfile
+    done
+
+    lic='/usr/syno/etc/license/data/ame/offline_license.json'
+    mkdir -p "$(dirname "$lic")"
+    echo '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]' > "$lic"
+
+    info "${YELLOW}${text_patchame_8[$LANG]}"
+    info "${YELLOW}Checking whether patch is successful..." >> $logfile
+    
+	if "$cp_usr_path/bin/synoame-bin-check-license"; then
+	info "${YELLOW}${text_patchame_9[$LANG]}"
+    info "${YELLOW}Successful, updating codecs..." >> $logfile
+        "$cp_usr_path/bin/synoame-bin-auto-install-needed-codec"
+		info "${GREEN}${text_patchame_10[$LANG]}"
+        info "${GREEN}Crack installed correctly." >> $logfile
+		sleep 2
+		clear
+		titulo
+		welcome
+		check_dependencias
+		check_licence_AME
+		check_versions
+		check_firmas
+		start
+    else
+	    info "${YELLOW}${text_patchame_11[$LANG]}"
+        info "${YELLOW}Patch is unsuccessful." >> $logfile
+
+        exit 1
+    fi
+}
+unpatch_ame_license() {
+
+touch "$logfile"
+
+text_unpatchame_1=("$so file restored from $so_backup." "Archivo $so restaurado desde $so_backup." "$so arquivo restaurado de $so_backup." "Fichier $so restauré à partir de $so_backup." "$so-Datei aus $so_backup wiederhergestellt." "$so file ripristinato da $so_backup.")	
+text_unpatchame_2=("Backup file $so_backup does not exist. No restore action will be performed." "El archivo de respaldo $so_backup no existe. No se realizará ninguna acción de restauración." "O arquivo de backup $so_backup não existe. Nenhuma ação de restauração será executada." "Le fichier de sauvegarde $so_backup n'existe pas. Aucune action de restauration ne sera effectuée." "Die Sicherungsdatei $so_backup existiert nicht. Es wird keine Wiederherstellungsaktion durchgeführt." "Il file di backup $so_backup non esiste. Non verrà eseguita alcuna azione di ripristino.")	
+text_unpatchame_3=("$lic file restored from $lic_backup." "Archivo $lic restaurado desde $lic_backup." "$lic arquivo restaurado de $lic_backup." "Fichier $lic restauré à partir de $lic_backup." "$lic-Datei aus $lic_backup wiederhergestellt." "$lic file ripristinato da $lic_backup.")	
+text_unpatchame_4=("Backup file $lic_backup does not exist. No restore action will be performed." "El archivo de respaldo $lic_backup no existe. No se realizará ninguna acción de restauración." "O arquivo de backup $lic_backup não existe. Nenhuma ação de restauração será executada." "Le fichier de sauvegarde $lic_backup n'existe pas. Aucune action de restauration ne sera effectuée." "Die Sicherungsdatei $lic_backup existiert nicht. Es wird keine Wiederherstellungsaktion durchgeführt." "Il file di backup $lic_backup non esiste. Non verrà eseguita alcuna azione di ripristino.")	
+text_unpatchame_5=("$licsig file restored from $licsig_backup." "Archivo $licsig restaurado desde $licsig_backup." "$licsig arquivo restaurado de $licsig_backup." "Fichier $licsig restauré à partir de $licsig_backup." "$licsig-Datei aus $licsig_backup wiederhergestellt." "$licsig file ripristinato da $licsig_backup.")	
+text_unpatchame_6=("Backup file $licsig_backup does not exist. No restore action will be performed." "El archivo de respaldo $licsig_backup no existe. No se realizará ninguna acción de restauración." "O arquivo de backup $licsig_backup não existe. Nenhuma ação de restauração será executada." "Le fichier de sauvegarde $licsig_backup n'existe pas. Aucune action de restauration ne sera effectuée." "Die Sicherungsdatei $licsig_backup existiert nicht. Es wird keine Wiederherstellungsaktion durchgeführt." "Il file di backup $licsig_backup non esiste. Non verrà eseguita alcuna azione di ripristino.")	
+text_unpatchame_7=("Crack uninstalled correctly." "Crack desinstalado correctamente." "Crack desinstalado com sucesso." "Crack désinstallé avec succès." "Crack wurde erfolgreich deinstalliert." "Crack disinstallato con successo.")
+	
+  if [ -f "$so_backup" ]; then
+    mv "$so_backup" "$so"
+	info "${GREEN}${text_unpatchame_1[$LANG]}"
+    info "${GREEN}$so file restored from $so_backup." >> $logfile
+  else
+    info "${GREEN}${text_unpatchame_2[$LANG]}"
+    info "${GREEN}Backup file $so_backup does not exist. No restore action will be performed." >> $logfile
+
+  fi
+
+  if [ -f "$lic_backup" ]; then
+    mv "$lic_backup" "$lic"
+	info "${GREEN}${text_unpatchame_3[$LANG]}"
+    info "${GREEN}$lic file restored from $lic_backup." >> $logfile
+
+  else
+    info "${GREEN}${text_unpatchame_4[$LANG]}"
+    info "${GREEN}Backup file $lic_backup does not exist. No restore action will be performed." >> $logfile
+
+  fi
+  
+  if [ -f "$licsig_backup" ]; then
+    mv "$licsig_backup" "$licsig"
+	info "${GREEN}${text_unpatchame_5[$LANG]}"
+    info "${GREEN}$licsig file restored from $licsig_backup." >> $logfile
+
+  else
+    info "${GREEN}${text_unpatchame_6[$LANG]}"
+    info "${GREEN}Backup file $licsig_backup does not exist. No restore action will be performed." >> $logfile
+
+  fi
+info "${GREEN}${text_unpatchame_7[$LANG]}"
+info "${GREEN}Crack uninstalled correctly." >> $logfile
+	
+sleep 2
+clear
+titulo
+welcome
+check_dependencias
+check_licence_AME
+check_versions
+check_firmas
+start
 }
 
 function language() {
