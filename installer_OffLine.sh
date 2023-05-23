@@ -691,7 +691,7 @@ function crackmenu() {
  text_crackmenu_11=("Note that in order to use this, you will have to use a valid SN (but doesn't have to login synology account with that SN)." "Tenga en cuenta que para usar esto, deberá usar un SN válido (pero no tiene que iniciar sesión en una cuenta de Synology con ese SN)." "Observe que, para usá-lo, você precisará usar um SN válido (mas não precisa entrar em uma conta Synology com esse SN)." "Veuillez noter que pour l'utiliser, vous devrez utiliser un SN valide (mais vous n'avez pas besoin de vous connecter à un compte Synology avec ce SN)." "Bitte beachten Sie, dass Sie zur Nutzung eine gültige SN verwenden müssen (Sie müssen sich jedoch nicht mit dieser SN bei einem Synology-Konto anmelden)." "Si noti che per utilizzare questo, sarà necessario utilizzare un SN valido (ma non è necessario accedere a un account Synology con quel SN).")	
  text_crackmenu_12=("DISCLAIMER:" "DESCARGO DE RESPONSABILIDAD:" "ISENÇÃO DE RESPONSABILIDADE:" "CLAUSE DE NON-RESPONSABILITÉ:" "HAFTUNGSAUSSCHLUSS:" "DISCLAIMER:")	
  text_crackmenu_13=("Use at your own risk, although it has been done to be as safe as possible, there could be errors. (Crack for XPenelogy and Synology without AME's license)." "Úsalo bajo tu propia responsabilidad, aunque se ha hecho para ser lo más seguro posible, podría haber errores. (Crack para XPenology y Synology sin licencia de AME)." "Use-o por sua conta e risco, embora tenha sido feito para ser o mais seguro possível, pode haver erros. (Crack para XPenology e Synology sem licença AME)." "Utilisez-le à vos propres risques, bien qu'il ait été fait pour être aussi sûr que possible, il pourrait y avoir des erreurs. (Crack pour XPenology et Synology sans licence AME)." "Die Verwendung erfolgt auf eigene Gefahr. Obwohl dies so sicher wie möglich ist, kann es dennoch zu Fehlern kommen. (Crack für XPenology und Synology ohne AME-Lizenz)." "Usalo a tuo rischio e pericolo, anche se è stato fatto per essere il più sicuro possibile, potrebbero esserci degli errori. (Crack per XPenology e Synology senza licenza AME).")	
-	 
+  
 	echo ""
         echo -e "${BLUE}${text_crackmenu_5[$LANG]}"
 	info "${BLUE}==================== Installation of the AME's License Crack ====================" >> $logfile
@@ -725,7 +725,7 @@ function crackmenu() {
 patch_ame_license() {
 
 touch "$logfile"
-    
+
 text_patchame_1=("The backup file $so_backup already exists. A new backup will not be created." "El archivo de respaldo $so_backup ya existe. No se creará una nueva copia de seguridad." "O arquivo de backup $so_backup já existe. Um novo backup não será criado." "Le fichier de sauvegarde $so_backup existe déjà. Une nouvelle sauvegarde ne sera pas créée." "Die Sicherungsdatei $so_backup existiert bereits. Es wird kein neues Backup erstellt." "Il file di backup $so_backup esiste già. Non verrà creato un nuovo backup.")
 text_patchame_2=("$so backup created as $so_backup." "Copia de seguridad de $so creada como $so_backup." "$so backup criado como $so_backup." "Sauvegarde $so créée en tant que $so_backup." "$so-Backup erstellt als $so_backup." "$so backup creato come $so_backup.")
 text_patchame_3=("The backup file $lic_backup already exists. A new backup will not be created." "El archivo de respaldo $lic_backup ya existe. No se creará una nueva copia de seguridad." "O arquivo de backup $lic_backup já existe. Um novo backup não será criado." "Le fichier de sauvegarde $lic_backup existe déjà. Une nouvelle sauvegarde ne sera pas créée." "Die Sicherungsdatei $lic_backup existiert bereits. Es wird kein neues Backup erstellt." "Il file di backup $lic_backup esiste già. Non verrà creato un nuovo backup.")
@@ -737,6 +737,14 @@ text_patchame_8=("Checking whether patch is successful..." "Comprobando si el pa
 text_patchame_9=("Successful, updating codecs..." "Correcto, actualizando códecs..." "Certo, atualizando codecs..." "Bon, mise à jour des codecs..." "Richtig, Codecs aktualisieren ..." "Giusto, aggiornando i codec...")	
 text_patchame_10=("Crack installed correctly." "Crack instalado correctamente." "Crack instalado com sucesso." "Crack installé avec succès." "Crack erfolgreich installiert." "Crack installato con successo.")	
 text_patchame_11=("Patch is unsuccessful." "El parche no tiene éxito." "O patch não foi bem-sucedido." "Le patch échoue." "Der Patch ist nicht erfolgreich." "La patch non ha successo.")	
+text_patchame_12=("Please do an uninstallation of the Wrapper first." "Por favor, primero desinstale el Wrapper." "Faça uma desinstalação do Wrapper primeiro." "Veuillez d'abord désinstaller le Wrapper." "Bitte deinstallieren Sie zunächst den Wrapper." "Eseguire prima una disinstallazione del Wrapper.")	
+
+if [[ -f "/tmp/wrapper.KEY" ]]; then
+info "${RED}${text_patchame_12[$LANG]}"
+info "${RED}Please do an uninstallation of the Wrapper first." >> $logfile
+sleep 4
+reloadstart
+fi
 
 # Verificar si ya existen los archivos de respaldo
 
