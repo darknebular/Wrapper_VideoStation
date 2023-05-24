@@ -968,8 +968,18 @@ reloadstart
 }
 
 function install_auto() {
-  
-  install_advanced
+
+if [[ -f "/tmp/wrapper.KEY" ]]; then
+    if grep -q "Advanced" wrapper.KEY; then
+        install_advanced
+    fi
+    
+    if grep -q "Simplest" wrapper.KEY; then
+	install_simple
+    fi
+else
+    install_advanced
+fi
 }
 
 function install_simple() {
