@@ -968,6 +968,9 @@ reloadstart
 }
 
 function install_auto() {
+  # NO SE TRADUCE
+  echo -e "${YELLOW}Installer is running in Automatic Mode."
+  echo ""
 
 if [[ -f "/tmp/wrapper.KEY" ]]; then
     if grep -q "Advanced" /tmp/wrapper.KEY; then
@@ -986,20 +989,12 @@ install_advanced
 function install_simple() {
   mode="Simplest"
   injector="X-Simplest"
-  if [[ $setup == autoinstall ]]; then
-  # NO SE TRADUCE
-  echo -e "${YELLOW}Installer is running in Automatic Mode."
-  echo ""
-  fi
+  
   install
 }
 function install_advanced() {
   mode="Advanced"
-  if [[ $setup == autoinstall ]]; then
-  # NO SE TRADUCE
-  echo -e "${YELLOW}Installer is running in Automatic Mode."
-  echo ""
-  fi
+
   install
 }
 function uninstall_new() {
