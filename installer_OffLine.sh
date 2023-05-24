@@ -977,9 +977,10 @@ if [[ -f "/tmp/wrapper.KEY" ]]; then
     if grep -q "Simplest" /tmp/wrapper.KEY; then
 	install_simple
     fi
-else
-    install_advanced
 fi
+
+install_advanced
+
 }
 
 function install_simple() {
