@@ -970,11 +970,11 @@ reloadstart
 function install_auto() {
 
 if [[ -f "/tmp/wrapper.KEY" ]]; then
-    if grep -q "Advanced" wrapper.KEY; then
+    if grep -q "Advanced" /tmp/wrapper.KEY; then
         install_advanced
     fi
     
-    if grep -q "Simplest" wrapper.KEY; then
+    if grep -q "Simplest" /tmp/wrapper.KEY; then
 	install_simple
     fi
 else
