@@ -10,7 +10,7 @@ version="SCPT_3.5"
 # SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
 # SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
 # SCPT_3.4: Improvements in checking for future releases of DSM's versions. Creation of installer_OffLine to avoid the 128KB limit and to be able to create more logic in the script and new fuctions. (Deprecated migrated to SCPT_3.5)
-# SCPT_3.5: Added an Installer for the License's CRACK for the AME 3.0.
+# SCPT_3.5: Added an Installer for the License's CRACK for the AME 3.0. Improvements in autoinstall, now the autoinstall will installs the type of Wrapper that you had installed.
 
 ##############################################################
 
@@ -967,9 +967,19 @@ sleep 2
 reloadstart
 }
 
+function install_auto() {
+  
+  install_advanced
+}
+
 function install_simple() {
   mode="Simplest"
   injector="X-Simplest"
+  if [[ $setup == autoinstall ]]; then
+  # NO SE TRADUCE
+  echo -e "${YELLOW}Installer is running in Automatic Mode."
+  echo ""
+  fi
   install
 }
 function install_advanced() {
@@ -1441,7 +1451,7 @@ check_firmas
 case "$setup" in
   start) start;;
   install) install_advanced;;
-  autoinstall) install_advanced;;
+  autoinstall) install_auto;;
   uninstall) uninstall_new;;
   config) configurator;;
   info) exit 0;;
