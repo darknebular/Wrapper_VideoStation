@@ -68,7 +68,7 @@ With options:
 |--------------|----------|---------------------------------------------------------------------------------|
 | start        | No       | The default flag going to the MAIN Menu.                                        |   
 | install      | No       | This install the Advanced Wrapper.                                              |  
-| autoinstall  | No       | This install the Advanced Wrapper without prompts (Automatic Mode)              |  
+| autoinstall  | No       | This install the Advanced/Simplest Wrapper without prompts (Automatic Mode)     |  
 | uninstall    | No       | This flag uninstall the patch. (Simplest or the Advanced one).                  |
 | config       | No       | Change the behaviour of the audio codecs for the Advanced Wrapper               |
 | info         | No       | Show the general info of the Installer                                          |
