@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.5"
+version="SCPT_3.6"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -10,7 +10,8 @@ version="SCPT_3.5"
 # SCPT_3.2: Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
 # SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
 # SCPT_3.4: Improvements in checking for future releases of DSM's versions. Creation of installer_OffLine to avoid the 128KB limit and to be able to create more logic in the script and new fuctions. (Deprecated migrated to SCPT_3.5)
-# SCPT_3.5: Added an Installer for the License's CRACK for the AME 3.0. Improvements in autoinstall, now the autoinstall will installs the type of Wrapper that you had installed.
+# SCPT_3.5: Added an Installer for the License's CRACK for the AME 3.0. Improvements in autoinstall, now the autoinstall will installs the type of Wrapper that you had installed. (Deprecated migrated to SCPT_3.6)
+# SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper.
 
 ##############################################################
 
@@ -27,6 +28,7 @@ setup="start"
 dependencias=("VideoStation" "ffmpeg6" "CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
+BLUEGSLP="\u001b[36m"
 PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
@@ -35,13 +37,16 @@ vs_path=/var/packages/VideoStation/target
 ms_path=/var/packages/MediaServer/target
 vs_libsynovte_file="$vs_path/lib/libsynovte.so"
 ms_libsynovte_file="$ms_path/lib/libsynovte.so"
-cp_bin_path=/var/packages/CodecPack/target/bin
+cp_path=/var/packages/CodecPack/target
+cp_bin_path="$cp_path/bin"
 firma="DkNbulDkNbul"
 firma2="DkNbular"
 firma_cp="DkNbul"
 declare -i control=0
 logfile="/tmp/wrapper_ffmpeg.log"
 LANG="0"
+cpu_model=$(cat /proc/cpuinfo | grep "model name")
+GST_comp="NO"
 
 r=('669066909066906690' 'B801000000' '30')
 s=(('0x1F28' 0) ('0x48F5' 1) ('0x4921' 1) ('0x4953' 1) ('0x4975' 1) ('0x9AC8' 2))
@@ -581,7 +586,7 @@ text_start_10=("Menu for the CRACK of the AME's License." "Menú para el CRACK d
    echo ""
    echo -e "${YELLOW}${text_start_1[$LANG]}"
    echo ""
-   echo -e "${BLUE} ( I ) ${text_start_2[$LANG]}"
+   echo -e "${BLUEGSLP} ( I ) ${text_start_2[$LANG]}"
    echo -e "${BLUE} ( S ) ${text_start_3[$LANG]}"
    echo -e "${BLUE} ( U ) ${text_start_4[$LANG]}" 
    echo -e "${BLUE} ( C ) ${text_start_5[$LANG]}"
@@ -643,13 +648,16 @@ function check_versions() {
 
 # Contemplando la posibilidad de que las sucesivas versiones 0 de DSM 8 y futuras sigan con las variables correctas.
 if [[ "$majorversion" -ge "8" ]]; then
-  cp_bin_path="/var/packages/CodecPack/target/pack/bin"
+  cp_path="/var/packages/CodecPack/target/pack"
+  cp_bin_path="$cp_path/bin"
   injector="X-Advanced"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
-  cp_bin_path="/var/packages/CodecPack/target/pack/bin"
+  cp_path="/var/packages/CodecPack/target/pack"
+  cp_bin_path="$cp_path/bin"
   injector="X-Advanced"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "0" ]]; then
-  cp_bin_path="/var/packages/CodecPack/target/bin"
+  cp_path="/var/packages/CodecPack/target"
+  cp_bin_path="$cp_path/bin"
   injector="0-Advanced"
 
 else
@@ -867,6 +875,29 @@ sleep 4
 reloadstart
 }
 
+function other_checks() {
+#Para comprobar el rendimiento y recomendar un Wrapper u otro.
+text_otherchecks_1=("Your system has a low performance, I recommend to you install the Simplest Wrapper." "Tu sistema tiene un rendimiento bajo, te recomiendo instalar el Wrapper más simple." "Seu sistema está com baixo desempenho, eu recomendo que você instale o Wrapper mais simples." "Votre système a des performances faibles, je vous recommande d'installer le Wrapper le plus simple." "Ihr System hat eine geringe Leistung, ich empfehle Ihnen, den einfachsten Wrapper zu installieren." "Il tuo sistema ha una bassa performance, ti consiglio di installare il Wrapper più semplice.")
+text_otherchecks_2=("Your system is a 'Play' device, I recommend to you install the Simplest Wrapper." "Tu sistema es un dispositivo 'Play', te recomiendo que instales el Wrapper más simple." "Seu sistema é um dispositivo 'Play', eu recomendo que você instale o Wrapper mais simples." "Votre système est un appareil 'Play', je vous recommande d'installer le Wrapper le plus simple." "Ihr System ist ein 'Play'-Gerät, ich empfehle Ihnen, den einfachsten Wrapper zu installieren." "Il tuo sistema è un dispositivo 'Play', ti consiglio di installare il Wrapper più semplice.")
+cpu_model=$(cat /proc/cpuinfo | grep "model name")
+
+if ! cat /proc/cpuinfo | grep processor | grep -q "3"; then
+  echo -e "${YELLOW}${text_otherchecks_1[$LANG]}"
+  info "${YELLOW}Your system has a low performance, I recommend to you install the Simplest Wrapper." >> $logfile
+  BLUEGSLP="\u001b[33m"	
+fi
+
+if [[ $cpu_model == *"ARMv8"* ]]; then
+	echo -e "${YELLOW}${text_otherchecks_2[$LANG]}"
+	info "${YELLOW}Your system is a 'Play' device, I recommend to you install the Simplest Wrapper." >> $logfile
+    BLUEGSLP="\u001b[33m"
+	if [[ -f "$vs_path/bin/gst-launch-1.0" ]]; then
+	GST_comp="YES"
+	fi
+fi
+
+}
+
 function reloadstart() {
 clear
 titulo
@@ -875,6 +906,7 @@ check_dependencias
 check_licence_AME
 check_versions
 check_firmas
+other_checks
 start
 }
 
@@ -1006,6 +1038,68 @@ function uninstall_old() {
   uninstall
 }
 
+function install_gstreamer() {
+
+text_installgst_1=("Backup the originals GStreamer's binaries." "Haciendo una copia de seguridad de los binarios originales de GStreamer." "Fazer backup dos binários originais do GStreamer." "Sauvegarder les binaires originaux de GStreamer." "Sichern Sie die Original-GStreamer-Binärdateien." "Eseguire il backup dei binari originali di GStreamer.")
+text_installgst_2=("Download the additional libraries for GStreamer." "Descargar las bibliotecas adicionales para GStreamer." "Baixar as bibliotecas adicionais para GStreamer." "Télécharger les bibliothèques supplémentaires pour GStreamer." "Laden Sie die zusätzlichen Bibliotheken für GStreamer herunter." "Scarica le librerie aggiuntive per GStreamer.")
+text_installgst_3=("Patching GStreamer in VIDEOSTATION." "Parcheando GStreamer en VIDEOSTATION." "Aplicando patch no GStreamer no VIDEOSTATION." "Application du patch GStreamer dans VIDEOSTATION." "GStreamer in VIDEOSTATION patchen." "Applicazione del patch di GStreamer in VIDEOSTATION.")
+text_installgst_4=("Copy gstomx.conf to VIDEOSTATION." "Copiar gstomx.conf a VIDEOSTATION." "Copie o gstomx.conf para VIDEOSTATION." "Copier gstomx.conf vers VIDEOSTATION." "Kopieren Sie die gstomx.conf nach VIDEOSTATION." "Copia gstomx.conf in VIDEOSTATION.")
+text_installgst_5=("Download the Wrapper for GStreamer and installing it." "Descargar el Wrapper para GStreamer e instalarlo." "Baixe o Wrapper para o GStreamer e instale-o." "Télécharger le Wrapper pour GStreamer et l'installer." "Laden Sie den Wrapper für GStreamer herunter und installieren Sie ihn." "Scarica il Wrapper per GStreamer e installalo.")
+text_installgst_6=("Converting the Simplest to a Gstreamer's Wrapper and do links." "Convirtiendo el Wrapper más simple en un Wrapper de Gstreamer y hacer enlaces." "Convertendo o mais simples em um Wrapper do Gstreamer e fazendo links." "Conversion du plus simple en un Wrapper Gstreamer et création de liens." "Umwandeln des Einfachsten in einen Gstreamer-Wrapper und Erstellen von Verknüpfungen." "Conversione del più semplice in un Wrapper di Gstreamer e creazione di collegamenti.")
+text_installgst_7=("Installed correctly the GStreamer's Wrapper." "Instalado correctamente el Wrapper de GStreamer" "Wrapper do GStreamer instalado corretamente" "Wrapper GStreamer installé correctement" "GStreamer-Wrapper erfolgreich installiert" "Wrapper GStreamer installato correttamente")
+
+info "${YELLOW}${text_installgst_1[$LANG]}"  
+info "${YELLOW}Backup the originals GStreamer's binaries." >> $logfile
+mv -n $vs_path/bin/gst-inspect-1.0 $vs_path/bin/gst-inspect-1.0.orig
+mv -n $vs_path/bin/gst-launch-1.0 $vs_path/bin/gst-launch-1.0.orig
+mv -n $cp_bin_path/gst-inspect-1.0 $cp_bin_path/gst-inspect-1.0.orig
+mv -n $cp_bin_path/gst-launch-1.0 $cp_bin_path/gst-launch-1.0.orig
+mv -n $vs_path/etc/gstomx.conf $vs_path/etc/gstomx.conf.orig
+
+info "${YELLOW}${text_installgst_2[$LANG]}"  
+info "${YELLOW}Download the additionals libraries for GStreamer." >> $logfile
+wget -q $repo_url/main/aux_GStreamer.tar -O /tmp/aux_GStreamer.tar 2>> $logfile
+sleep 3
+
+info "${YELLOW}${text_installgst_3[$LANG]}"  
+info "${YELLOW}Patching GStreamer in VIDEOSTATION." >> $logfile
+tar xf /tmp/aux_GStreamer.tar -C $vs_path/lib/ 2>> $logfile
+
+chown -R VideoStation:VideoStation "$vs_path/lib/patch" 2>> $logfile
+
+info "${YELLOW}${text_installgst_4[$LANG]}"  
+info "${YELLOW}Copy gstomx.conf to VIDEOSTATION." >> $logfile
+cp $cp_path/etc/gstomx.conf $vs_path/etc/gstomx.conf 2>> $logfile
+chown VideoStation:VideoStation "$vs_path/etc/gstomx.conf" 2>> $logfile
+
+info "${YELLOW}${text_installgst_5[$LANG]}"  
+info "${YELLOW}Download the Wrapper for GStreamer and installing it." >> $logfile
+wget -q $repo_url/main/ffmpeg41-wrapper-DSM7_X-Simplest -O $vs_path/bin/gst-launch-1.0 2>> $logfile
+sleep 3
+chown root:VideoStation "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+chmod 750 "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+chmod u+s "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+cp -p "$vs_path/bin/gst-launch-1.0" "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
+
+info "${YELLOW}${text_installgst_6[$LANG]}"  
+info "${YELLOW}Converting the Simplest to a Gstreamer's Wrapper and do links." >> $logfile
+sed -i 's/^# export/export/g' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+sed -i 's/^# export/export/g' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
+sed -i 's|stderrfile="/tmp/ffmpeg-${streamid}.stderr"|stderrfile="/tmp/gst-launch-1.0.stderr"|' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+sed -i 's|stderrfile="/tmp/ffmpeg-${streamid}.stderr"|stderrfile="/tmp/gst-inspect-1.0.stderr"|' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
+sed -i 's|bin1=/var/packages/ffmpeg6/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-launch-1.0.orig|' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+sed -i 's|bin1=/var/packages/ffmpeg6/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-inspect-1.0.orig|' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
+sed -i "s/FFmpeg $pid/GST-launch $pid/g" "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+sed -i "s/FFmpeg $pid/GST-inspect $pid/g" "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
+
+ln -s $vs_path/bin/gst-launch-1.0 $cp_bin_path/gst-launch-1.0 2>> $logfile
+ln -s $vs_path/bin/gst-inspect-1.0 $cp_bin_path/gst-inspect-1.0 2>> $logfile
+
+rm /tmp/aux_GStreamer.tar 2>> $logfile
+info "${GREEN}${text_installgst_7[$LANG]}"  
+info "${GREEN}Installed correctly the GStreamer's Wrapper." >> $logfile
+}
+
 ################################
 # PROCEDIMIENTOS DEL PATCH
 ################################
@@ -1129,6 +1223,12 @@ else
 		
 fi
 
+if [ "$GST_comp" == "YES" ]; then
+    if [[ -f "$vs_path/bin/gst-launch-1.0" && ! -d "$vs_path/lib/patch" ]]; then
+        install_gstreamer
+    fi
+fi
+
 if [ ! -f "$ms_path/bin/ffmpeg.KEY" ] && [ -d "$ms_path" ]; then
 text_install_23=("Adding of the KEY of this Wrapper in DLNA MediaServer." "Añadiendo la CLAVE de este Wrapper en DLNA MediaServer." "Adicionando a KEY deste Wrapper no DLNA MediaServer." "Ajout de la CLÉ de ce wrapper dans DLNA MediaServer." "Hinzufügen des SCHLÜSSEL dieses Wrappers in DLNA MediaServer." "Aggiunta della CHIAVE di questo wrapper in DLNA MediaServer.")
 text_install_24=("Installed correctly the KEY in $ms_path/bin" "Instalada correctamente la CLAVE en $ms_path/bin" "KEY instalado com sucesso em $ms_path/bin" "CLÉ installé avec succès dans $ms_path/bin" "SCHLÜSSEL erfolgreich in $ms_path/bin installiert" "CHIAVE installata correttamente in $ms_path/bin")
@@ -1210,6 +1310,7 @@ function uninstall() {
   text_uninstall_16=("==================== Uninstallation the Simplest or the Advanced Wrapper: COMPLETE ====================" "==================== Desinstalación del Wrapper más simple o del avanzado: COMPLETADO ====================" "==================== Desinstalando o Wrapper mais simples ou avançado: COMPLETED =====================" "==================== Désinstallation du Wrapper plus simple ou avancé : TERMINÉ ====================" "==================== Deinstallation des einfacheren oder erweiterten Wrappers: ABGESCHLOSSEN ====================" "===================== Disinstallazione del wrapper più semplice o avanzato: COMPLETATO ====================")
   text_uninstall_17=("Actually You HAVEN'T ANY Wrapper Installed. The Uninstaller CAN'T do anything." "Actualmente NO TIENES NINGÚN Wrapper Instalado. El Desinstalador NO PUEDE hacer nada." "Atualmente você NÃO TEM NENHUM Wrapper instalado. O Desinstalador NÃO PODE fazer nada." "Vous N'AVEZ actuellement AUCUN wrapper installé. Le programme de désinstallation ne peut rien faire." "Sie haben derzeit KEINEN Wrapper installiert. Das Deinstallationsprogramm kann NICHTS tun." "Attualmente NON HAI ALCUN Wrapper installato. Il programma di disinstallazione NON PUÒ fare nulla.")
   text_uninstall_18=("Remove of the KEY of this Wrapper in /tmp." "Eliminar la CLAVE de este Wrapper en /tmp." "Exclua a KEY deste Wrapper no /tmp." "Supprimez la clé de ce wrapper dans /tmp." "Löschen Sie den SCHLÜSSEL dieses Wrappers im /tmp." "Eliminare la CHIAVE di questo wrapper in /tmp.")
+  text_uninstall_19=("Removing the aux libraries for GStreamer and restoring gstomx.conf." "Eliminando las bibliotecas auxiliares para GStreamer y restaurando gstomx.conf." "Removendo as bibliotecas auxiliares do GStreamer e restaurando o gstomx.conf." "Suppression des bibliothèques aux pour GStreamer et restauration de gstomx.conf." "Entfernen der Aux-Bibliotheken für GStreamer und Wiederherstellen von gstomx.conf." "Rimozione delle librerie ausiliarie per GStreamer e ripristino di gstomx.conf.")
   
 if [[ "$unmode" == "Old" ]]; then  
   info "${BLUE}${text_uninstall_1[$LANG]}"
@@ -1274,6 +1375,13 @@ if [[ "$unmode" == "Old" ]]; then
    info "${YELLOW}${text_uninstall_18[$LANG]}"
    info "${YELLOW}Remove of the KEY of this Wrapper in /tmp." >> $logfile
    rm /tmp/wrapper.KEY 2>> $logfile
+   
+   if [[ -f "$vs_path/bin/gst-launch-1.0" && -d "$vs_path/lib/patch" ]]; then
+	info "${YELLOW}${text_uninstall_19[$LANG]}"
+    info "${YELLOW}Removing the aux libraries for GStreamer and restoring gstomx.conf." >> $logfile
+    rm -r "$vs_path/lib/patch" 2>> $logfile
+	mv -T -f $vs_path/etc/gstomx.conf.orig $vs_path/etc/gstomx.conf 2>> $logfile
+   fi
      
   info "${GREEN}${text_uninstall_10[$LANG]}"
   echo ""
@@ -1321,6 +1429,20 @@ if [[ "$unmode" == "New" ]]; then
   info "${YELLOW}${text_uninstall_8[$LANG]}"
   mv -T -f "$filename" "${filename::-5}"
   done
+  
+  if [[ "$GST_comp" == "YES" ]]; then
+    find "$vs_path/bin" -type f -name "*.orig" | while read -r filename; do
+  text_uninstall_7=("Restoring VideoStation's $filename" "Restaurando el $filename de VideoStation" "Restaurando o VideoStation $filename" "Restauration de la VideoStation $filename" "Wiederherstellen der VideoStation $filename" "Ripristino di VideoStation $filename")
+    info "${YELLOW}${text_uninstall_7[$LANG]}"
+    info "${YELLOW}Restoring VideoStation's $filename" >> $logfile
+    mv -T -f "$filename" "${filename::-5}" 2>> $logfile
+    done
+	
+	info "${YELLOW}${text_uninstall_19[$LANG]}"
+    info "${YELLOW}Removing the aux libraries for GStreamer and restoring gstomx.conf." >> $logfile
+    rm -r "$vs_path/lib/patch" 2>> $logfile
+	mv -T -f $vs_path/etc/gstomx.conf.orig $vs_path/etc/gstomx.conf
+  fi
   
   info "${YELLOW}${text_uninstall_18[$LANG]}"
   rm /tmp/wrapper.KEY 2>> $logfile
@@ -1452,6 +1574,8 @@ check_licence_AME
 check_versions
 
 check_firmas
+
+other_checks
 
 
 case "$setup" in
