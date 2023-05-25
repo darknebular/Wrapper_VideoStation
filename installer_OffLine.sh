@@ -1378,8 +1378,8 @@ if [[ "$unmode" == "Old" ]]; then
    
    if [[ -f "$vs_path/bin/gst-launch-1.0" && -d "$vs_path/lib/patch" ]]; then
 	info "${YELLOW}${text_uninstall_19[$LANG]}"
-    info "${YELLOW}Removing the aux libraries for GStreamer and restoring gstomx.conf." >> $logfile
-    rm -r "$vs_path/lib/patch" 2>> $logfile
+    	info "${YELLOW}Removing the aux libraries for GStreamer and restoring gstomx.conf." >> $logfile
+   	rm -r "$vs_path/lib/patch" 2>> $logfile
 	mv -T -f $vs_path/etc/gstomx.conf.orig $vs_path/etc/gstomx.conf 2>> $logfile
    fi
      
@@ -1438,10 +1438,10 @@ if [[ "$unmode" == "New" ]]; then
     mv -T -f "$filename" "${filename::-5}" 2>> $logfile
     done
 	
-	info "${YELLOW}${text_uninstall_19[$LANG]}"
+    info "${YELLOW}${text_uninstall_19[$LANG]}"
     info "${YELLOW}Removing the aux libraries for GStreamer and restoring gstomx.conf." >> $logfile
     rm -r "$vs_path/lib/patch" 2>> $logfile
-	mv -T -f $vs_path/etc/gstomx.conf.orig $vs_path/etc/gstomx.conf
+    mv -T -f $vs_path/etc/gstomx.conf.orig $vs_path/etc/gstomx.conf 2>> $logfile
   fi
   
   info "${YELLOW}${text_uninstall_18[$LANG]}"
