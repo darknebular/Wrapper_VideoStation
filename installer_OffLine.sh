@@ -1094,7 +1094,7 @@ sed -i "s/FFmpeg $pid/GST-inspect $pid/g" "$vs_path/bin/gst-inspect-1.0" 2>> $lo
 
 ln -s $vs_path/bin/gst-launch-1.0 $cp_bin_path/gst-launch-1.0 2>> $logfile
 ln -s $vs_path/bin/gst-inspect-1.0 $cp_bin_path/gst-inspect-1.0 2>> $logfile
-
+rm -rf /var/packages/CodecPack/etc/gstreamer-1.0/registry.aarch64.bin
 rm /tmp/aux_GStreamer.tar 2>> $logfile
 info "${GREEN}${text_installgst_7[$LANG]}"  
 info "${GREEN}Installed correctly the GStreamer's Wrapper." >> $logfile
