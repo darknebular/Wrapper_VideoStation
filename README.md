@@ -8,7 +8,7 @@
 ## THE MOST ADVANCED WRAPPER, THE FIRST AND UNIQUE WRAPPER IN INTERNET HAVING 5.1 TRANSCODING. YOU WILL HAVE FULL CONTROL OF THE CODEC USING THE CONFIGURATOR TOOL INTO THE INSTALLER.
 
 # Wrapper for VideoStation and DLNA MediaServer for DTS, EAC3 and TrueHD with 5.1 support:
-Synology VideoStation and MediaServer ffmpeg Wrapper with DTS, EAC3 and TrueHD support. It enables hardware transcoding from Synology´s ffmpeg for video and transcoding DTS, HEVC, EAC3, AAC, True HD from the ffmpeg of the SynoCommunity. When you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround and another audio track MP3 2.0 256kbps Stereo for Chromecast or GoogleTV or other clients that don´t accept 5.1 AAC.
+Synology VideoStation and MediaServer ffmpeg Wrapper with DTS, EAC3 and TrueHD support (and GStreamer). It enables hardware transcoding from Synology´s ffmpeg for video and transcoding DTS, HEVC, EAC3, AAC, True HD from the ffmpeg of the SynoCommunity. When you use this SynoCommunity´s ffmpeg, you will have AAC 5.1 512kbps Surround and another audio track MP3 2.0 256kbps Stereo for Chromecast or GoogleTV or other clients that don´t accept 5.1 AAC.
 
 
 Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI... Works fine the thumbnails in VideoStation.
@@ -42,7 +42,7 @@ This patcher enables Advanced Media Extensions 3.0 for you, without having to lo
 - no DTS, no EAC3, no TrueHD + HEVC: ✅
 - DTS or EAC3 or TrueHD + HEVC: ✅
 - DSM 7.X: ✅
-- With DS-XXX PLAY Appliances or Low Powered Devices: ✅ *(I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for ffmpeg binary for HEVC decoding.)*
+- With DS-XXX PLAY Appliances or Low Powered Devices: ✅ *(I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for FFmpeg binary for HEVC decoding.)*
 - DSM 6.2: ⚠️ The installer doesn´t support this version.
 
 *(In low powered devices you only will have remux of the audio or only be able to play it without transcoding.)*
