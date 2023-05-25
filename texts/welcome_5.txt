@@ -3,7 +3,7 @@
 Wrapper Synology VideoStation e MediaServer ffmpeg con supporto DTS, EAC3 e TrueHD.
 Supporta la transcodifica hardware da ffmpeg di Synology per video e la transcodifica DTS, HEVC, EAC3, AAC, True HD da ffmpeg di SynoCommunity.
 
-Quando il Wrapper deve transcodificare, avrà 2 flussi audio della STESSA traccia:
+Quando il Wrapper FFmpeg deve transcodificare, avrà 2 flussi audio della STESSA traccia:
 - In DLNA MediaServer = [1) AAC 5.1 512 kbps E 2) MP3 2.0 256 kbps.] (predefinito)
 - In VIDEO-STATION = [1) MP3 2.0 256kbps E 2) AAC 5.1 512kbps.] (predefinito)*
 *(Per Chromecast o Google TV o altri client che non accettano il supporto 5.1 AAC o multi streaming audio).
@@ -13,8 +13,7 @@ utilizzando lo STRUMENTO di configurazione integrato nel programma di installazi
 (AC3 è più compatibile con i vecchi dispositivi 5.1).
 
 La transcodifica offline funziona bene e lo streaming di estensioni tipiche come: MKV, MP4, AVI... Le miniature funzionano bene in VideoStation.
-
-Con DS-XXX PLAY o dispositivi a basso consumo: ⚠️  Consiglio di installare Simplest Wrapper. L'Advanced ha bisogno di una CPU migliore o di avere una GPU disponibile per il binario ffmpeg.
-Avrai il pieno controllo di ogni parametro dei codec audio utilizzando il TOOL di configurazione per Advanced Wrapper. L'unico Internet Wrapper con supporto 5.1 AAC e STRUMENTO di configurazione integrato.
+Avrai il pieno controllo di ogni parametro dei codec audio utilizzando il TOOL di configurazione per Advanced Wrapper. 
+L'unico Internet Wrapper con supporto 5.1 AAC e STRUMENTO di configurazione integrato.
 
 =================================================================== DIVERTITI!!!!! ===================================================================
