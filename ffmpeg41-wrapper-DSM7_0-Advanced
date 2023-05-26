@@ -83,7 +83,8 @@ case "$1" in
         ;;
         -y)
                 shift
-                y="OffEnable"
+		y="$1"
+                yoff="OffEnable"
                 args+=("-y" "$1")
         ;;
         pipe:4)
@@ -300,7 +301,7 @@ sed -i -e "s/{\"PID\":${pid},\"hardware_transcode\":true,/{\"PID\":${pid},\"hard
 
 startexectime=`date +%s`
 
-if [ "$y" = "OffEnable" ]; then
+if [ "$yoff" = "OffEnable" ]; then
 	_log "${BLUE}VCODEC   = $vcodec ($vcodecprofile)"
         _log "${BLUE}ACODEC   = $acodec"
         _log "${BLUE}PARAM_ORIG  =${BLUE}"
