@@ -50,7 +50,7 @@ This patcher enables Advanced Media Extensions 3.0 for you, without having to lo
 ## Instructions:
 - Check that you meet the required dependencies
 - Install SynoCommunity ffmpeg ([help](https://synocommunity.com/#easy-install))
-- Connect to your NAS using SSH (admin user required) ([help](https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General_Setup/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet))
+- Connect to your NAS using SSH (admin user required) *(I recommend maximizing the window to read it better.)* ([help](https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General_Setup/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet))
 - Use the command `sudo -i` to switch to root user
 - Use the following command (Basic command) to execute the patch
 - You'll have to re-run the patcher everytime you update VideoStation, Advanced Media Extensions and DSM
