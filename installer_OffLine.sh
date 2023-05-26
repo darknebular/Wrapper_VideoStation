@@ -879,7 +879,7 @@ reloadstart
 function other_checks() {
 #Para comprobar el rendimiento y recomendar un Wrapper u otro.
 text_otherchecks_1=("Your system has a low performance, I recommend to you install the Simplest Wrapper." "Tu sistema tiene un rendimiento bajo, te recomiendo instalar el Wrapper más simple." "Seu sistema está com baixo desempenho, eu recomendo que você instale o Wrapper mais simples." "Votre système a des performances faibles, je vous recommande d'installer le Wrapper le plus simple." "Ihr System hat eine geringe Leistung, ich empfehle Ihnen, den einfachsten Wrapper zu installieren." "Il tuo sistema ha una bassa performance, ti consiglio di installare il Wrapper più semplice.")
-text_otherchecks_2=("Your system is a 'Play' device, I recommend to you install the Simplest Wrapper." "Tu sistema es un dispositivo 'Play', te recomiendo que instales el Wrapper más simple." "Seu sistema é um dispositivo 'Play', eu recomendo que você instale o Wrapper mais simples." "Votre système est un appareil 'Play', je vous recommande d'installer le Wrapper le plus simple." "Ihr System ist ein 'Play'-Gerät, ich empfehle Ihnen, den einfachsten Wrapper zu installieren." "Il tuo sistema è un dispositivo 'Play', ti consiglio di installare il Wrapper più semplice.")
+text_otherchecks_2=("Your system is a 'ARMv8' device, I recommend to you install the Simplest Wrapper." "Tu sistema es un dispositivo 'ARMv8', te recomiendo que instales el Wrapper más simple." "Seu sistema é um dispositivo 'ARMv8', eu recomendo que você instale o Wrapper mais simples." "Votre système est un appareil 'ARMv8', je vous recommande d'installer le Wrapper le plus simple." "Ihr System ist ein 'ARMv8'-Gerät, ich empfehle Ihnen, den einfachsten Wrapper zu installieren." "Il tuo sistema è un dispositivo 'ARMv8', ti consiglio di installare il Wrapper più semplice.")
 cpu_model=$(cat /proc/cpuinfo | grep "model name")
 
 if ! cat /proc/cpuinfo | grep processor | grep -q "3"; then
@@ -890,7 +890,7 @@ fi
 
 if [[ $cpu_model == *"ARMv8"* ]]; then
 	echo -e "${YELLOW}${text_otherchecks_2[$LANG]}"
-	info "${YELLOW}Your system is a 'Play' device, I recommend to you install the Simplest Wrapper." >> $logfile
+	info "${YELLOW}Your system is a 'ARMv8' device, I recommend to you install the Simplest Wrapper." >> $logfile
     BLUEGSLP="\u001b[33m"
 	if [[ -f "$vs_path/bin/gst-launch-1.0" ]]; then
 	GST_comp="YES"
