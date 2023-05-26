@@ -129,7 +129,7 @@ function intro() {
   fi
 }
 function welcome() {
-  text_welcome_1=("FFMPEG WRAPPER INSTALLER version: $version" "INSTALADOR DEL FFMPEG WRAPPER version: $version" "FFMPEG WRAPPER INSTALLER versão: $version" "Version de l'INSTALLATEUR D'EMBALLAGE FFMPEG : $version" "FFMPEG WRAPPER INSTALLER-Version: $version" "FFMPEG WRAPPER INSTALLER versione: $version")
+  text_welcome_1=("FFMPEG (or GStreamer) WRAPPER INSTALLER version: $version" "INSTALADOR DEL WRAPPER DE FFMPEG (o GStreamer) versión: $version" "INSTALADOR DE ENVOLTÓRIO FFMPEG (ou GStreamer) versão: $version" "INSTALLATEUR DE WRAPPER FFMPEG (ou GStreamer) version: $version" "FFMPEG (oder GStreamer) WRAPPER INSTALLER Version: $version" "INSTALLATORE WRAPPER FFMPEG (o GStreamer) versione: $version")
   echo -e "${YELLOW}${text_welcome_1[$LANG]}"
 
   welcome=$(curl -s -L "$repo_url/main/texts/welcome_$LANG.txt")
