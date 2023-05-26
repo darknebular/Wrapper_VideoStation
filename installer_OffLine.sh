@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.6"
+version="SCPT_3.7"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -11,7 +11,8 @@ version="SCPT_3.6"
 # SCPT_3.3: Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
 # SCPT_3.4: Improvements in checking for future releases of DSM's versions. Creation of installer_OffLine to avoid the 128KB limit and to be able to create more logic in the script and new fuctions. (Deprecated migrated to SCPT_3.5)
 # SCPT_3.5: Added an Installer for the License's CRACK for the AME 3.0. Improvements in autoinstall, now the autoinstall will installs the type of Wrapper that you had installed. (Deprecated migrated to SCPT_3.6)
-# SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper (BETA). Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system.
+# SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper. Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system. (Deprecated migrated to SCPT_3.7)
+# SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installation that doesn't clear the plugin's cache in AME.
 
 ##############################################################
 
@@ -1047,6 +1048,7 @@ text_installgst_4=("Copy gstomx.conf to VIDEOSTATION." "Copiar gstomx.conf a VID
 text_installgst_5=("Download the Wrapper for GStreamer and installing it." "Descargar el Wrapper para GStreamer e instalarlo." "Baixe o Wrapper para o GStreamer e instale-o." "Télécharger le Wrapper pour GStreamer et l'installer." "Laden Sie den Wrapper für GStreamer herunter und installieren Sie ihn." "Scarica il Wrapper per GStreamer e installalo.")
 text_installgst_6=("Converting the Simplest to a Gstreamer's Wrapper and do links." "Convirtiendo el Wrapper más simple en un Wrapper de Gstreamer y hacer enlaces." "Convertendo o mais simples em um Wrapper do Gstreamer e fazendo links." "Conversion du plus simple en un Wrapper Gstreamer et création de liens." "Umwandeln des Einfachsten in einen Gstreamer-Wrapper und Erstellen von Verknüpfungen." "Conversione del più semplice in un Wrapper di Gstreamer e creazione di collegamenti.")
 text_installgst_7=("Installed correctly the GStreamer's Wrapper." "Instalado correctamente el Wrapper de GStreamer" "Wrapper do GStreamer instalado corretamente" "Wrapper GStreamer installé correctement" "GStreamer-Wrapper erfolgreich installiert" "Wrapper GStreamer installato correttamente")
+text_installgst_8=("Forcing to refresh the plugincache deleting the GStreamer registry." "Forzando la actualización de la caché de complementos eliminando el registro de GStreamer." "Forçando a atualização do cache de plugins, excluindo o registro do GStreamer." "Forcer la mise à jour du cache des plugins en supprimant le registre de GStreamer." "Erzwingen Sie das Aktualisieren des Plugincache, indem Sie das GStreamer-Registrierung löschen." "Forzare il refresh della cache dei plugin eliminando il registro di GStreamer.")
 
 info "${YELLOW}${text_installgst_1[$LANG]}"  
 info "${YELLOW}Backup the originals GStreamer's binaries." >> $logfile
@@ -1094,6 +1096,9 @@ sed -i "s/FFmpeg $pid/GST-inspect $pid/g" "$vs_path/bin/gst-inspect-1.0" 2>> $lo
 
 ln -s $vs_path/bin/gst-launch-1.0 $cp_bin_path/gst-launch-1.0 2>> $logfile
 ln -s $vs_path/bin/gst-inspect-1.0 $cp_bin_path/gst-inspect-1.0 2>> $logfile
+
+info "${YELLOW}${text_installgst_8[$LANG]}"  
+info "${YELLOW}Forcing to refresh the plugincache deleting the GStreamer registry." >> $logfile
 rm -rf /var/packages/CodecPack/etc/gstreamer-1.0/registry.aarch64.bin
 rm /tmp/aux_GStreamer.tar 2>> $logfile
 info "${GREEN}${text_installgst_7[$LANG]}"  
