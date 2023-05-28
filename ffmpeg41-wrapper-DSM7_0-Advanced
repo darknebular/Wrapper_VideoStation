@@ -154,9 +154,9 @@ case "$1" in
                 args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args2vsms+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
 				
-				if [ "$cfr" = "YES" ]; then
-				args2vs+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
-				fi
+		if [ "$cfr" = "YES" ]; then
+			args2vs+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+		fi
         ;;
         -vf)
                 shift
@@ -184,19 +184,17 @@ case "$1" in
         ;;
 		-vsync)
                 shift
-				if [ "$cfr" = "YES" ]; then
-						argsnew+=()
-               			args1vs+=()
-                		args2vs+=()
-                		args2vsms+=()
-				
-				else
-						argsnew+=("-vsync" "$1")
-               			args1vs+=("-vsync" "$1")
-               			args2vs+=("-vsync" "$1")
-                		args2vsms+=("-vsync" "$1")
-				
-				fi
+		if [ "$cfr" = "YES" ]; then
+			argsnew+=()
+               		args1vs+=()
+                	args2vs+=()
+                	args2vsms+=()
+		else
+			argsnew+=("-vsync" "$1")
+               		args1vs+=("-vsync" "$1")
+               		args2vs+=("-vsync" "$1")
+                	args2vsms+=("-vsync" "$1")
+		fi
         ;;
         -vcodec)
                 shift
@@ -320,12 +318,12 @@ case "$1" in
                         
                 fi
 		
-				if [ "$cfr" = "YES" ]; then
-				args1vs+=("-bufsize" "8192k" "$1")
-				fi
+		if [ "$cfr" = "YES" ]; then
+		args1vs+=("-bufsize" "8192k" "$1")
+		fi
 				
-				args2vs+=("$1")
-				args2vsms+=("$1")
+		args2vs+=("$1")
+		args2vsms+=("$1")
         ;;
 esac
 shift
