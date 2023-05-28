@@ -2,7 +2,7 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.4.2"
+rev="AME_12.4.3"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
@@ -20,7 +20,8 @@ rev="AME_12.4.2"
 # AME_12.3.8: Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process. Fixed a piping problem with the new versions of FFMPEG. (Deprecated, migrate to 12.3.9)
 # AME_12.3.9: Improved the removing of the stderr's temporals to specific PID. Fixed a bug with AVBR movies using DLNA transcoding. I remove the buffer 8M for DLNA. It must be only for ChromeCast or Browsers. (Deprecated, migrate to 12.4.1)
 # AME_12.4.1: Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X. (Deprecated, migrate to 12.4.2)
-# AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec.
+# AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
+# AME_12.4.3: Improved the behaviour of the Wrapper when the movie has CFR.
 
 
 WHITE="\u001B[37m"
@@ -68,6 +69,12 @@ case "$1" in
                 movie="$1"
                 args+=("-i" "$1")
         ;;
+		-r)
+                shift
+				r="$1"
+                cfr="YES"
+                args+=("-r" "$1")
+        ;;
         -hwaccel)
                 shift
                 hwaccel="$1"
@@ -85,7 +92,7 @@ case "$1" in
         ;;
         -y)
                 shift
-		y="$1"
+				y="$1"
                 yoff="OffEnable"
                 args+=("-y" "$1")
         ;;
@@ -147,8 +154,8 @@ case "$1" in
                 args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args2vsms+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
 				
-		if [ "$vcodec" = "hevc" ] && [ "$acodec" = "truehd" ]; then
-		args2vs+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+		if [ "$cfr" = "YES" ]; then
+			args2vs+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
 		fi
         ;;
         -vf)
@@ -177,19 +184,17 @@ case "$1" in
         ;;
 		-vsync)
                 shift
-			if [ "$vcodec" = "hevc" ] && [ "$acodec" = "truehd" ]; then
-				argsnew+=()
-               			args1vs+=()
-                		args2vs+=()
-                		args2vsms+=()
-				
-			else
-				argsnew+=("-vsync" "$1")
-               			args1vs+=("-vsync" "$1")
-               			args2vs+=("-vsync" "$1")
-                		args2vsms+=("-vsync" "$1")
-				
-			fi
+		if [ "$cfr" = "YES" ]; then
+			argsnew+=()
+               		args1vs+=()
+                	args2vs+=()
+                	args2vsms+=()
+		else
+			argsnew+=("-vsync" "$1")
+               		args1vs+=("-vsync" "$1")
+               		args2vs+=("-vsync" "$1")
+                	args2vsms+=("-vsync" "$1")
+		fi
         ;;
         -vcodec)
                 shift
@@ -313,12 +318,12 @@ case "$1" in
                         
                 fi
 		
-		if [ "$vcodec" = "hevc" ] && [ "$acodec" = "truehd" ]; then
+		if [ "$cfr" = "YES" ]; then
 		args1vs+=("-bufsize" "8192k" "$1")
 		fi
 				
 		args2vs+=("$1")
-                args2vsms+=("$1")
+		args2vsms+=("$1")
         ;;
 esac
 shift
