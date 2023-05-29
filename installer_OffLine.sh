@@ -885,8 +885,8 @@ text_otherchecks_2=("Your system is a 'ARMv8' device, I recommend to you install
 cpu_model=$(cat /proc/cpuinfo | grep "model name")
 
 if ! cat /proc/cpuinfo | grep processor | grep -q "3"; then
-  echo -e "${RED}${text_otherchecks_1[$LANG]}"
-  info "${RED}Your system has a low performance, I recommend to you install the Simplest Wrapper." >> $logfile
+  echo -e "${YELLOW}${text_otherchecks_1[$LANG]}"
+  info "${YELLOW}Your system has a low performance, I recommend to you install the Simplest Wrapper." >> $logfile
   BLUEGSLP="\u001b[33m"	
 fi
 
