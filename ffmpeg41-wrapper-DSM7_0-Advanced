@@ -149,14 +149,15 @@ case "$1" in
         ;;
         -i)
                 shift
+		if [ "$cfr" = "YES" ]; then
+		args2vs+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+		else
                 argsnew+=("-i" "$1")
                 args1vs+=("-i" "$1")
                 args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
                 args2vsms+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
-				
-		if [ "$cfr" = "YES" ]; then
-			args2vs+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
-		fi
+		fi		
+		
         ;;
         -vf)
                 shift
@@ -311,15 +312,11 @@ case "$1" in
         *)
                 argsnew+=("$1")
                 if [ "$stream" = "$1" ]; then
-                        args1vs+=("-bufsize" "8192k" "pipe:")
-						
-                else
-                        args1vs+=("$1")
-                        
-                fi
-		
-		if [ "$cfr" = "YES" ]; then
-		args1vs+=("-bufsize" "8192k" "$1")
+    			args1vs+=("-bufsize" "8192k" "pipe:")
+		elif [ "$cfr" = "YES" ]; then
+    			args1vs+=("-bufsize" "8192k" "$1")
+		else
+    			args1vs+=("$1")
 		fi
 				
 		args2vs+=("$1")
