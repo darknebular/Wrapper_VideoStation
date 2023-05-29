@@ -69,9 +69,9 @@ case "$1" in
                 movie="$1"
                 args+=("-i" "$1")
         ;;
-		-r)
+	-r)
                 shift
-				r="$1"
+		r="$1"
                 cfr="YES"
                 args+=("-r" "$1")
         ;;
