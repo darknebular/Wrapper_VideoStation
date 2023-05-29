@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.7"
+version="SCPT_3.8"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -12,7 +12,8 @@ version="SCPT_3.7"
 # SCPT_3.4: Improvements in checking for future releases of DSM's versions. Creation of installer_OffLine to avoid the 128KB limit and to be able to create more logic in the script and new fuctions. (Deprecated migrated to SCPT_3.5)
 # SCPT_3.5: Added an Installer for the License's CRACK for the AME 3.0. Improvements in autoinstall, now the autoinstall will installs the type of Wrapper that you had installed. (Deprecated migrated to SCPT_3.6)
 # SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper. Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system. (Deprecated migrated to SCPT_3.7)
-# SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME.
+# SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME. (Deprecated migrated to SCPT_3.8)
+# SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME.
 
 ##############################################################
 
@@ -50,7 +51,8 @@ cpu_model=$(cat /proc/cpuinfo | grep "model name")
 GST_comp="NO"
 
 r=('669066909066906690' 'B801000000' '30')
-s=(('0x1F28' 0) ('0x48F5' 1) ('0x4921' 1) ('0x4953' 1) ('0x4975' 1) ('0x9AC8' 2))
+hex_values=('0x1F28' '0x48F5' '0x4921' '0x4953' '0x4975' '0x9AC8')
+indices=(0 1 1 1 1 2)
 cp_usr_path='/var/packages/CodecPack/target/usr'
 so="$cp_usr_path/lib/libsynoame-license.so"
 so_backup="$cp_usr_path/lib/libsynoame-license.so.orig"
@@ -790,7 +792,7 @@ fi
    info "${YELLOW}${text_patchame_7[$LANG]}"
    info "${YELLOW}Applying the patch." >> $logfile
 
-
+# Comprobar que el fichero a parchear sea exactamente la misma versión que se estudió.
 expected_checksum='fcc1084f4eadcf5855e6e8494fb79e23'
 
 if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
@@ -798,10 +800,10 @@ if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
     exit 1
 fi
 
-    for ((i = 0; i < ${#s[@]}; i++)); do
-        offset=$((s[i][0] + 0x8000))
-        value=${r[s[i][1]]}
-        printf '\x%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2> $logfile
+    for ((i = 0; i < ${#hex_values[@]}; i++)); do
+    offset=$((16#${hex_values[i]} + 0x8000))
+    value=${r[indices[i]]}
+    printf '\x%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
     done
 
     lic='/usr/syno/etc/license/data/ame/offline_license.json'
