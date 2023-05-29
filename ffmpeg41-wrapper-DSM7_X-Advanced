@@ -183,7 +183,7 @@ case "$1" in
                 args2vs+=("-vb" "$1")
                 args2vsms+=("-vb" "$1")
         ;;
-		-vsync)
+	-vsync)
                 shift
 		if [ "$cfr" = "YES" ]; then
 			argsnew+=()
