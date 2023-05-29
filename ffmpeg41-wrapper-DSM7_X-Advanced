@@ -311,10 +311,10 @@ case "$1" in
         ;;
         *)
                 argsnew+=("$1")
-                if [ "$stream" = "$1" ]; then
-    			args1vs+=("-bufsize" "8192k" "pipe:")
-		elif [ "$cfr" = "YES" ]; then
+                if [ "$stream" = "$1" ] && [ "$cfr" = "YES" ]; then
     			args1vs+=("-bufsize" "8192k" "$1")
+		elif [ "$stream" = "$1" ]; then
+    			args1vs+=("-bufsize" "8192k" "pipe:")
 		else
     			args1vs+=("$1")
 		fi
