@@ -1319,7 +1319,11 @@ function uninstall() {
   text_uninstall_18=("Remove of the KEY of this Wrapper in /tmp." "Eliminar la CLAVE de este Wrapper en /tmp." "Exclua a KEY deste Wrapper no /tmp." "Supprimez la clé de ce wrapper dans /tmp." "Löschen Sie den SCHLÜSSEL dieses Wrappers im /tmp." "Eliminare la CHIAVE di questo wrapper in /tmp.")
   text_uninstall_19=("Removing the aux libraries for GStreamer and restoring gstomx.conf." "Eliminando las bibliotecas auxiliares para GStreamer y restaurando gstomx.conf." "Removendo as bibliotecas auxiliares do GStreamer e restaurando o gstomx.conf." "Suppression des bibliothèques aux pour GStreamer et restauration de gstomx.conf." "Entfernen der Aux-Bibliotheken für GStreamer und Wiederherstellen von gstomx.conf." "Rimozione delle librerie ausiliarie per GStreamer e ripristino di gstomx.conf.")
   
-if [[ "$unmode" == "Old" ]]; then  
+if [[ "$unmode" == "Old" ]]; then
+  info "${YELLOW}${text_uninstall_14[$LANG]}"
+  touch "$logfile"
+  rm "$logfile"
+  touch "$logfile"
   info "${BLUE}${text_uninstall_1[$LANG]}"
   info "${BLUE}==================== Uninstallation of OLD wrappers in the system: START ====================" >> $logfile
 
