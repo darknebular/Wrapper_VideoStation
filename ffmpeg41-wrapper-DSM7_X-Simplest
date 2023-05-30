@@ -70,7 +70,7 @@ trap handle_error ERR
 newline
 info "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
 info "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
-info "${BLUE}FFMPEG   = $bin1${WHITE}"
+info "${BLUE}BINARY   = $bin1${WHITE}"
 info "${BLUE}DEFAULT_ARGS: $*${WHITE}"
 
 $bin1 "$@" 2> $stderrfile
