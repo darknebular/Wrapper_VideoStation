@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Download the script called installer_OffLine.sh in /tmp/
-curl -L --max-filesize 512000 -o /tmp/installer_OffLine.sh "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/testing_OffLine.sh"
+curl -L --max-filesize 512000 -o /tmp/testing_OffLine.sh "https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation/main/testing_OffLine.sh"
 
 # Give execution permissions to the downloaded script
 chmod +x /tmp/testing_OffLine.sh
