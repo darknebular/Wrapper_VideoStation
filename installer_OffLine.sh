@@ -801,7 +801,7 @@ if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
 fi
 
     for ((i = 0; i < ${#hex_values[@]}; i++)); do
-    offset=$((16#${hex_values[i]} + 0x8000))
+    offset=$(printf "%d" "$((0x${hex_values[i]} + 0x8000))")
     value=${r[indices[i]]}
     printf '\x%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
     done
