@@ -14,7 +14,7 @@ version="SCPT_3.9"
 # SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper. Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system. (Deprecated migrated to SCPT_3.7)
 # SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME. (Deprecated migrated to SCPT_3.8)
 # SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME. (Deprecated migrated to SCPT_3.9)
-# SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding.
+# SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding. Added the word BETA for the cracker of the AME's license.
 
 ##############################################################
 
@@ -52,7 +52,7 @@ cpu_model=$(cat /proc/cpuinfo | grep "model name")
 GST_comp="NO"
 
 r=('669066909066906690' 'B801000000' '30')
-hex_values=('0x1F28' '0x48F5' '0x4921' '0x4953' '0x4975' '0x9AC8')
+hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
 indices=(0 1 1 1 1 2)
 cp_usr_path='/var/packages/CodecPack/target/usr'
 so="$cp_usr_path/lib/libsynoame-license.so"
