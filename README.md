@@ -38,10 +38,10 @@ This patcher enables Advanced Media Extensions 3.0 for you, without having to lo
 - MediaServer 1.1.0-0201 (and above) (OPTIONAL)
 
 ## Supported / Unsupported scenarios:
-- DTS or EAC3 or TrueHD + Any non standard video format: ✅
-- no DTS, no EAC3, no TrueHD + HEVC: ✅
-- DTS or EAC3 or TrueHD + HEVC: ✅
-- DSM 7.X: ✅
+- DTS or EAC3 or TrueHD or AAC + Any non standard video format: ✅
+- no DTS, no EAC3, no TrueHD, no AAC + HEVC: ✅
+- DTS or EAC3 or TrueHD or AAC + HEVC: ✅
+- DSM 7.X.X: ✅
 - With DS-XXX PLAY Appliances or Low Powered Devices: ✅ *(I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for FFmpeg binary for HEVC decoding.)*
 - DSM 6.2: ⚠️ The installer doesn´t support this version.
 
