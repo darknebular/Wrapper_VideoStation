@@ -750,6 +750,7 @@ text_patchame_9=("Successful, updating codecs..." "Correcto, actualizando códec
 text_patchame_10=("Crack installed correctly." "Crack instalado correctamente." "Crack instalado com sucesso." "Crack installé avec succès." "Crack erfolgreich installiert." "Crack installato con successo.")	
 text_patchame_11=("Patch is unsuccessful." "El parche no tiene éxito." "O patch não foi bem-sucedido." "Le patch échoue." "Der Patch ist nicht erfolgreich." "La patch non ha successo.")	
 text_patchame_12=("Please do an uninstallation of the Wrapper first." "Por favor, primero desinstale el Wrapper." "Faça uma desinstalação do Wrapper primeiro." "Veuillez d'abord désinstaller le Wrapper." "Bitte deinstallieren Sie zunächst den Wrapper." "Eseguire prima una disinstallazione del Wrapper.")	
+text_patchame_13=("Error occurred while writing to the file." "Se produjo un error al escribir en el archivo." "Ocorreu um erro ao escrever no arquivo." "Une erreur s'est produite lors de l'écriture dans le fichier." "Beim Schreiben in die Datei ist ein Fehler aufgetreten." "Si è verificato un errore durante la scrittura nel file.")
 
 if [[ -f "/tmp/wrapper.KEY" ]]; then
 info "${RED}${text_patchame_12[$LANG]}"
@@ -806,6 +807,12 @@ fi
     offset=$(printf "%d" "$((0x${hex_values[i]} + 0x8000))")
     value=${r[indices[i]]}
     printf '\x%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
+    if [[ $? -ne 0 ]]; then
+        info "${RED}${text_patchame_13[$LANG]}"
+	# Llama a la función unpatch_ame_license en caso de error
+        unpatch_ame_license  
+        exit 1
+    fi
     done
 
     lic='/usr/syno/etc/license/data/ame/offline_license.json'
