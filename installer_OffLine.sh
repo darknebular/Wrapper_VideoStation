@@ -1064,7 +1064,7 @@ mv -n $vs_path/etc/gstomx.conf $vs_path/etc/gstomx.conf.orig
 info "${YELLOW}${text_installgst_2[$LANG]}"  
 info "${YELLOW}Download the additionals libraries for GStreamer." >> $logfile
 wget -q $repo_url/main/aux_GStreamer.tar -O /tmp/aux_GStreamer.tar 2>> $logfile
-sleep 3
+sleep 6
 
 info "${YELLOW}${text_installgst_3[$LANG]}"  
 info "${YELLOW}Patching GStreamer in VIDEOSTATION." >> $logfile
