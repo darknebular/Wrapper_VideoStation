@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.8"
+version="SCPT_3.9"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -13,7 +13,8 @@ version="SCPT_3.8"
 # SCPT_3.5: Added an Installer for the License's CRACK for the AME 3.0. Improvements in autoinstall, now the autoinstall will installs the type of Wrapper that you had installed. (Deprecated migrated to SCPT_3.6)
 # SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper. Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system. (Deprecated migrated to SCPT_3.7)
 # SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME. (Deprecated migrated to SCPT_3.8)
-# SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME.
+# SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME. (Deprecated migrated to SCPT_3.9)
+# SCPT_3.9: Added the possibility to transcode AAC codec in VideoStation and MediaServer. Added new libraries for GStreamer 1.6.3. for this AAC decoding.
 
 ##############################################################
 
@@ -1216,7 +1217,7 @@ else
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}${text_install_20[$LANG]}"
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
+	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $vs_libsynovte_file 2>> $logfile
 	info "${GREEN}${text_install_21[$LANG]}"
 	
 	if [[ "$mode" == "Simplest" ]]; then
@@ -1260,7 +1261,7 @@ text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado c
 		chmod 644 $ms_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}${text_install_27[$LANG]}"
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
+		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $ms_libsynovte_file 2>> $logfile
 		info "${GREEN}${text_install_28[$LANG]}"
 		
 		if [[ "$mode" == "Simplest" ]]; then
