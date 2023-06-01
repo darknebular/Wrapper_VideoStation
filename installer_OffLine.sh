@@ -14,7 +14,7 @@ version="SCPT_3.9"
 # SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper. Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system. (Deprecated migrated to SCPT_3.7)
 # SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME. (Deprecated migrated to SCPT_3.8)
 # SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME. (Deprecated migrated to SCPT_3.9)
-# SCPT_3.9: Added the possibility to transcode AAC codec in VideoStation and MediaServer. Added new libraries for GStreamer 1.6.3. for this AAC decoding.
+# SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Add new libraries for GStreamer 1.6.3. for this AAC decoding.
 
 ##############################################################
 
