@@ -641,8 +641,8 @@ error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Pleas
 exit 1
 fi
 if grep "false" /usr/syno/etc/codec/activation.conf >> $logfile; then
-error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer."
-error "YOU HAVEN'T THE LICENCE LOADED in Advanced Media Extension package. Please, LOAD this licence and try again with the Installer." >> $logfile
+error "YOU HAVEN'T THE LICENCE ACTIVATED in Advanced Media Extension package. Please, try to transcode something in VideoStation for activate It and try again with the Installer."
+error "YOU HAVEN'T THE LICENCE ACTIVATED in Advanced Media Extension package. Please, try to transcode something in VideoStation for activate It and try again with the Installer." >> $logfile
 exit 1
 fi
 }
