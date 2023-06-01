@@ -584,7 +584,7 @@ text_start_6=("Change the LANGUAGE in this Installer." "Cambiar el IDIOMA en est
 text_start_7=("EXIT from this Installer." "SALIR de este Instalador." "SAIR deste instalador." "QUITTER ce programme d'installation." "BEENDEN Sie dieses Installationsprogramm." "ESCI da questo programma di installazione.")
 text_start_8=("Please, What option wish to use?" "Por favor, ¿Qué opción desea utilizar?" "Por favor, qual opção você quer usar?" "S'il vous plaît, quelle option voulez-vous utiliser ?" "Bitte, welche Option möchten Sie verwenden?" "Per favore, quale opzione vuoi usare?")
 text_start_9=("Please answer I or Install | S or Simple | U or Uninstall | C or Config | L or Language | P or Patch | Z for Exit." "Por favor responda I o Instalar | S o Simple | U o Uninstall | C o Configuración | L o Lengua | P o Patch | Z para Salir." "Por favor, responda I ou Instalar | S ou Simples | U ou Uninstall | C ou Configuração | L ou Língua | P ou Patch | Z para Sair." "Veuillez répondre I ou Installer | S ou Simple | U ou Uninstall | C ou Configuration | L ou Langue | P ou patch | Z pour quitter." "Bitte antworten Sie I oder Installieren Sie | S oder Simple | U oder Uninstall | C oder Config | L oder Language | P oder Patch | Z zum Beenden." "Per favore rispondi I o Installa | S o Semplice | U o Uninstall | C o Configurazione | L o Lingua | P o Patch | Z per uscire.")
-text_start_10=("Menu for the CRACK of the AME's License." "Menú para el CRACK de la Licencia AME." "Menu para o CRACK da Licença AME." "Menu pour le CRACK de la licence AME." "Menü für den AME-Lizenz-CRACK." "Menu per il CRACK della licenza AME.")
+text_start_10=("Menu for the CRACK of the AME's License. (BETA)" "Menú para el CRACK de la Licencia AME. (BETA)" "Menu para o CRACK da Licença AME. (BETA)" "Menu pour le CRACK de la licence AME. (BETA)" "Menü für den AME-Lizenz-CRACK. (BETA)" "Menu per il CRACK della licenza AME. (BETA)")
 
    echo ""
    echo ""
@@ -798,6 +798,7 @@ expected_checksum='fcc1084f4eadcf5855e6e8494fb79e23'
 
 if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
     echo "MD5 mismatch"
+    unpatch_ame_license
     exit 1
 fi
 
