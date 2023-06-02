@@ -51,7 +51,7 @@ LANG="0"
 cpu_model=$(cat /proc/cpuinfo | grep "model name")
 GST_comp="NO"
 
-r=('669066909066906690' 'B801000000' '30')
+valores=('669066909066906690' 'B801000000' '30')
 hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
 indices=(0 1 1 1 1 2)
 cp_usr_path='/var/packages/CodecPack/target/usr'
@@ -746,7 +746,7 @@ text_patchame_5=("The backup file $licsig_backup already exists. A new backup wi
 text_patchame_6=("$licsig backup created as $licsig_backup." "Copia de seguridad de $licsig creada como $licsig_backup." "$licsig backup criado como $licsig_backup." "Sauvegarde $licsig créée en tant que $licsig_backup." "$licsig-Backup erstellt als $licsig_backup." "$licsig backup creato come $licsig_backup.")
 text_patchame_7=("Applying the patch." "Aplicando el patch." "Aplicando o remendo." "Application du patch." "Anbringen des Patches." "Applicazione del cerotto.")	
 text_patchame_8=("Checking whether patch is successful..." "Comprobando si el parche es exitoso..." "Verificando se o patch foi bem-sucedido..." "Vérification du succès du correctif..." "Überprüfen, ob der Patch erfolgreich ist..." "Verifica se la patch ha esito positivo...")	
-text_patchame_9=("Successful, updating codecs..." "Correcto, actualizando códecs..." "Certo, atualizando codecs..." "Bon, mise à jour des codecs..." "Richtig, Codecs aktualisieren ..." "Giusto, aggiornando i codec...")	
+text_patchame_9=("Successful, updating codecs." "Correcto, actualizando códecs." "Certo, atualizando codecs." "Bon, mise à jour des codecs." "Richtig, Codecs aktualisieren." "Giusto, aggiornando i codec.")	
 text_patchame_10=("Crack installed correctly." "Crack instalado correctamente." "Crack instalado com sucesso." "Crack installé avec succès." "Crack erfolgreich installiert." "Crack installato con successo.")	
 text_patchame_11=("Patch is unsuccessful." "El parche no tiene éxito." "O patch não foi bem-sucedido." "Le patch échoue." "Der Patch ist nicht erfolgreich." "La patch non ha successo.")	
 text_patchame_12=("Please do an uninstallation of the Wrapper first." "Por favor, primero desinstale el Wrapper." "Faça uma desinstalação do Wrapper primeiro." "Veuillez d'abord désinstaller le Wrapper." "Bitte deinstallieren Sie zunächst den Wrapper." "Eseguire prima una disinstallazione del Wrapper.")	
@@ -805,7 +805,7 @@ fi
 
     for ((i = 0; i < ${#hex_values[@]}; i++)); do
     offset=$(printf "%d" "$((0x${hex_values[i]} + 0x8000))")
-    value=${r[indices[i]]}
+    value=${valores[indices[i]]}
     printf '\x%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
     if [[ $? -ne 0 ]]; then
         info "${RED}${text_patchame_13[$LANG]}"
@@ -815,7 +815,6 @@ fi
     fi
     done
 
-    lic='/usr/syno/etc/license/data/ame/offline_license.json'
     mkdir -p "$(dirname "$lic")"
     echo '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]' > "$lic"
 
@@ -824,18 +823,18 @@ fi
     
 	if "$cp_usr_path/bin/synoame-bin-check-license"; then
 	info "${YELLOW}${text_patchame_9[$LANG]}"
-  	info "${YELLOW}Successful, updating codecs..." >> $logfile
+  	info "${YELLOW}Successful, updating codecs." >> $logfile
         "$cp_usr_path/bin/synoame-bin-auto-install-needed-codec" 2>> "$logfile"
 	info "${GREEN}${text_patchame_10[$LANG]}"
         info "${GREEN}Crack installed correctly." >> $logfile
 		sleep 4
 		reloadstart
-    else
+    	else
 	info "${YELLOW}${text_patchame_11[$LANG]}"
         info "${YELLOW}Patch is unsuccessful." >> $logfile
 
         exit 1
-    fi
+   	fi
 }
 unpatch_ame_license() {
 
