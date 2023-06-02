@@ -748,7 +748,7 @@ text_patchame_7=("Applying the patch." "Aplicando el patch." "Aplicando o remend
 text_patchame_8=("Checking whether patch is successful..." "Comprobando si el parche es exitoso..." "Verificando se o patch foi bem-sucedido..." "Vérification du succès du correctif..." "Überprüfen, ob der Patch erfolgreich ist..." "Verifica se la patch ha esito positivo...")	
 text_patchame_9=("Successful, updating codecs." "Correcto, actualizando códecs." "Certo, atualizando codecs." "Bon, mise à jour des codecs." "Richtig, Codecs aktualisieren." "Giusto, aggiornando i codec.")	
 text_patchame_10=("Crack installed correctly." "Crack instalado correctamente." "Crack instalado com sucesso." "Crack installé avec succès." "Crack erfolgreich installiert." "Crack installato con successo.")	
-text_patchame_11=("Patch is unsuccessful." "El parche no tiene éxito." "O patch não foi bem-sucedido." "Le patch échoue." "Der Patch ist nicht erfolgreich." "La patch non ha successo.")	
+text_patchame_11=("Patched but unsuccessful." "Parcheado pero sin éxito." "Parcheado, mas sem sucesso." "Patché mais sans succès." "Gepatcht, aber ohne Erfolg." "Patched ma senza successo.")	
 text_patchame_12=("Please do an uninstallation of the Wrapper first." "Por favor, primero desinstale el Wrapper." "Faça uma desinstalação do Wrapper primeiro." "Veuillez d'abord désinstaller le Wrapper." "Bitte deinstallieren Sie zunächst den Wrapper." "Eseguire prima una disinstallazione del Wrapper.")	
 text_patchame_13=("Error occurred while writing to the file." "Se produjo un error al escribir en el archivo." "Ocorreu um erro ao escrever no arquivo." "Une erreur s'est produite lors de l'écriture dans le fichier." "Beim Schreiben in die Datei ist ein Fehler aufgetreten." "Si è verificato un errore durante la scrittura nel file.")
 
@@ -832,7 +832,7 @@ done
 		reloadstart
     	else
 	info "${YELLOW}${text_patchame_11[$LANG]}"
-        info "${YELLOW}Patch is unsuccessful." >> $logfile
+        info "${YELLOW}Patched but unsuccessful." >> $logfile
 
         exit 1
    	fi
