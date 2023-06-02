@@ -806,8 +806,7 @@ fi
 for ((i = 0; i < ${#hex_values[@]}; i++)); do
     offset=$(( 0x${hex_values[i]} + 0x8000 ))
     value=${values[indices[i]]}
-    printf -v byte_value "\\x${value}"
-    echo -n -e "$byte_value" | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
+    printf '%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
     if [[ $? -ne 0 ]]; then
         info "${RED}${text_patchame_13[$LANG]}"
 	# Llama a la función unpatch_ame_license en caso de error
