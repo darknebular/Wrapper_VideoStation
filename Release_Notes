@@ -1,0 +1,122 @@
+### CHANGES:
+
+### SCPT_3.X:
+****SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding. Added the word BETA for the cracker of the AME's license.**
+
+**SCPT_3.8:** Fixed a bug in declaration of the variables for the licenses fix for AME. (Deprecated migrated to SCPT_3.9)
+
+**SCPT_3.7:** Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME. Fixed a bug when the movie has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec in the Advance Wrapper, this bug will be there in Simplest Wrapper, because VS send bad arguments and the Simplest doesn't change any arguments. (Deprecated migrated to SCPT_3.8)
+
+**SCPT_3.6:** Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper. Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system. (Deprecated migrated to SCPT_3.7)
+
+**SCPT_3.5:** Added an Installer for the License's CRACK for the AME 3.0. Improvements in autoinstall, now the autoinstall will installs the type of Wrapper that you had installed. (Deprecated migrated to SCPT_3.6)
+
+**SCPT_3.4:** Improvements in checking for future releases of DSM's versions. Creation of installer_OffLine to avoid the 128KB limit and to be able to create more logic in the script and new fuctions. (Deprecated migrated to SCPT_3.5)
+
+**SCPT_3.3:** Support for the new versions of FFMPEG 6.0.X and deprecate the use of ffmpeg 4.X.X. (Deprecated migrated to SCPT_3.4)
+
+**SCPT_3.2:** Reflect the new Wrapper change in the installation script. (Deprecated migrated to SCPT_3.3)
+
+**SCPT_3.1:** Add compatibility to DSXXX-Play appliances using ffmpeg27. Change the name of the injectors. (Deprecated migrated to SCPT_3.2)
+
+**SCPT_3.0:** Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_3.1)
+
+
+
+### SCPT_2.X:
+**SCPT_2.9.1:** Make the installation script compatible with the new version of DSM 7.2. Thanks to sunnyxiong2020. (Deprecated migrated to SCPT_3.0)
+
+**SCPT_2.9:** Change the injectors for the new Wrapper's version. (Deprecated migrated to SCPT_2.9.1)
+
+**SCPT_2.8:** Fixed a bug when you are in 7.0.X the scripts doesn't take the conditional correctly in check_versions fuction. (Deprecated migrated to SCPT_2.9)
+
+**SCPT_2.7:** Save space in the Installer script in some function that mustn't be translated. (Deprecated migrated to SCPT_2.8)
+
+**SCPT_2.6:** Added a Flag for automatic installation in the case that the Wrapper was installed previously and you don't want to write YES for uninstall the older Wrapper. (Deprecated migrated to SCPT_2.7)
+
+**SCPT_2.5:** Fixed a bug in the Uninstallation process. Improvements in checks in the Uninstallation for older Wrappers. (Deprecated migrated to SCPT_2.6)
+
+**SCPT_2.4:** Save space in the script. Consider the possibility that another installer has made links in CodecPack path. This is applied  in the Uninstaller Old. (Deprecated migrated to SCPT_2.5)
+
+**SCPT_2.3:** Improvements in the AME'S License checker. (Deprecated migrated to SCPT_2.4)
+
+**SCPT_2.2:** Added new info texts. (Deprecated migrated to SCPT_2.3)
+
+**SCPT_2.1:** Added Multi-Language Support (English, Spanish, Portuguese, French, German, Italian). Aesthetic improvements in the logging of the Wrappers. Adding a ASCII Intro. (Deprecated migrated to SCPT_2.2)
+
+**SCPT_2.0:** Initial new major Release. Clean the code from last versions. (Deprecated migrated to SCPT_2.1)
+
+
+### SCPT_1.X:
+**SCPT_1.X:** Initial version in Alpha (Deprecated)
+
+
+
+
+### ADVANCED WRAPPER FOR AME_12.X.X:
+****AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec.**
+
+**AME_12.4.1:** Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X. (Deprecated, migrate to 12.4.2)
+
+**AME_12.3.9:** Improved the removing of the stderr's temporals to specific PID. Fixed a bug with AVBR movies using DLNA transcoding. I remove the buffer 8M for DLNA. It must be only for ChromeCast or Browsers. (Deprecated, migrate to 12.4.1)
+
+**AME_12.3.8:** Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process. Fixed a piping problem with the new versions of FFMPEG. (Deprecated, migrate to 12.3.9)
+
+**AME_12.3.7:** Fixed a bug in Offline Transcoding. (Deprecated, migrate to 12.3.8)
+
+**AME_12.3.6:** Adding a new pipe in arguments used by the DLNA server in the new versions of Media Server. (Deprecated, migrate to 12.3.7)
+
+**AME_12.3.5:** Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station. (Deprecated, migrate to 12.3.6)
+
+**AME_12.3.4:** Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.3.5)
+
+**AME_12.3.3:** Now you will can select between two audio streams in clients in the case that the wrapper needs to recode from DTS, EAC3, TrueHD. One in MP3 Stereo and other with 5.1 AAC. Fix the Chromecast Support. (Deprecated, migrate to 12.3.4)
+
+**AME_12.3.2:** Now you will have always AAC 5.1 512kbps in DS-Video (mobile), Web-Browsers and Apple-TV. This version is NOT supported for Chromecast streaming. (Deprecated, migrate to 12.3.3)
+
+**AME_12.3.1:** Initial release for DSM 7.1. Compatible with the new paths of this DSM. (Deprecated, migrate to 12.3.2)
+
+**AME_12.2.4:** Logging options when all is derived to Community's ffmpeg. Prioritize the use of native ffmpeg in Video Station.
+
+**AME_12.2.3:** Now the audio's codecs are independent between VideoStation and Media Station. Clean the wrapper code. (Deprecated, migrate to 12.2.4)
+
+**AME_12.2.2:** Now with 2 audio streamS for DSM 7.0 (One in MP3 Stereo and other with 5.1 AAC). Chromecast Supported. (Deprecated, migrate to 12.2.3)
+
+**AME_12.2.1:** Initial release for DSM 7.0. Compatible with the new paths of this DSM. Fix the order and the use of the binaries. Added some missing variables in the wrapper and improvements. (Deprecated, migrate to 12.2.2)
+
+**AME_12.1.1:** Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated, migrate to 12.2.1)
+
+**VS_12.1:** Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
+
+
+
+### SIMPLEST WRAPPER FOR AME_S.X.X:
+****AME_S_2.2: Added support for GStreamer libraries.**
+
+**AME_S_2.1:** Added support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X. (Deprecated, migrate to AME_S_2.2)
+
+**AME_S_1.3:** Fixed a bug that doesn't remove the stderr file due a misconfiguration. (Deprecated, migrate to AME_S_2.1)
+
+**AME_S_1.2:** Improved the viewing of logs. (Deprecated, migrate to AME_S_1.3)
+
+**AME_S_1.1:** Correcting the log file. (Deprecated, migrate to AME_S_1.2)
+
+**AME_S_1.0:** Initial release of the simplest wrapper. Fork from AlexPresso. (Deprecated, migrate to AME_S_1.1)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
