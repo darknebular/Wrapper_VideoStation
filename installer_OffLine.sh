@@ -51,7 +51,7 @@ LANG="0"
 cpu_model=$(cat /proc/cpuinfo | grep "model name")
 GST_comp="NO"
 
-valores=('669066909066906690' 'B801000000' '30')
+values=('669066909066906690' 'B801000000' '30')
 hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
 indices=(0 1 1 1 1 2)
 cp_usr_path='/var/packages/CodecPack/target/usr'
@@ -803,17 +803,19 @@ if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
     exit 1
 fi
 
-    for ((i = 0; i < ${#hex_values[@]}; i++)); do
-    offset=$(printf "%d" "$((0x${hex_values[i]} + 0x8000))")
-    value=${valores[indices[i]]}
-    printf '\x%s' "$value" | xxd -r -p | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
+for ((i = 0; i < ${#hex_values[@]}; i++)); do
+    offset=$(( 0x${hex_values[i]} + 0x8000 ))
+    value=${values[indices[i]]}
+    printf -v byte_value "\\x${value}"
+    echo -n -e "$byte_value" | dd of="$so" bs=1 seek="$offset" conv=notrunc 2>> "$logfile"
     if [[ $? -ne 0 ]]; then
         info "${RED}${text_patchame_13[$LANG]}"
 	# Llama a la función unpatch_ame_license en caso de error
         unpatch_ame_license  
         exit 1
     fi
-    done
+done
+
 
     mkdir -p "$(dirname "$lic")"
     echo '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]' > "$lic"
