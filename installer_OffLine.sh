@@ -1225,7 +1225,11 @@ else
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}${text_install_20[$LANG]}"
 	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-	sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $vs_libsynovte_file 2>> $logfile
+	if grep "aac_dec" /usr/syno/etc/codec/activation.conf >> $logfile; then
+		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
+	else
+		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $vs_libsynovte_file 2>> $logfile
+	fi
 	info "${GREEN}${text_install_21[$LANG]}"
 	
 	if [[ "$mode" == "Simplest" ]]; then
@@ -1269,7 +1273,11 @@ text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado c
 		chmod 644 $ms_libsynovte_file.orig 2>> $logfile
 	  info "${YELLOW}${text_install_27[$LANG]}"
 	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
-		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $ms_libsynovte_file 2>> $logfile
+		if grep "aac_dec" /usr/syno/etc/codec/activation.conf >> $logfile; then
+			sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
+		else
+			sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $ms_libsynovte_file 2>> $logfile
+		fi
 		info "${GREEN}${text_install_28[$LANG]}"
 		
 		if [[ "$mode" == "Simplest" ]]; then
