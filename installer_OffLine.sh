@@ -1151,7 +1151,6 @@ fi
   text_install_17=("Installed correctly the wrapper41 in $cp_bin_path" "Instalado correctamente el wrapper41 en $cp_bin_path" "Wrapper41 instalado com sucesso em $cp_bin_path" "Wrapper41 installé avec succès dans $cp_bin_path" "Wrapper41 erfolgreich in $cp_bin_path installiert" "Wrapper41 installato correttamente in $cp_bin_path")
   text_install_18=("Backup the original libsynovte.so in VideoStation as libsynovte.so.orig." "Copia de seguridad del fichero libsynovte.so como libsynovte.so.orig en VideoStation." "Faça backup do arquivo libsynovte.so como libsynovte.so.orig no VideoStation." "Sauvegardez le fichier libsynovte.so sous libsynovte.so.orig sur VideoStation." "Sichern Sie die Datei libsynovte.so als libsynovte.so.orig auf VideoStation." "Eseguire il backup del file libsynovte.so come libsynovte.so.orig su VideoStation.")
   text_install_19=("Fixing permissions of $vs_libsynovte_file.orig" "Arreglando los permisos de $vs_libsynovte_file.orig" "Corrigindo as permissões de $vs_libsynovte_file.orig" "Correction des autorisations de $vs_libsynovte_file.orig" "Korrigieren der Berechtigungen von $vs_libsynovte_file.orig" "Correzione dei permessi di $vs_libsynovte_file.orig")
-  text_install_20=("Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $vs_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $vs_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $vs_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $vs_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $vs_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
   text_install_21=("Modified correctly the file $vs_libsynovte_file" "Modificado correctamente el fichero $vs_libsynovte_file" "Modificou corretamente o arquivo $vs_libsynovte_file" "Correctement modifié le fichier $vs_libsynovte_file" "Die Datei $vs_libsynovte_file wurde korrekt geändert" "Modificato correttamente il file $vs_libsynovte_file")
   text_install_23=("Adding of the KEY of this Wrapper in /tmp." "Añadiendo la CLAVE de este Wrapper en /tmp." "Adicionando a KEY deste Wrapper no /tmp." "Ajout de la CLÉ de ce wrapper dans /tmp." "Hinzufügen des SCHLÜSSEL dieses Wrappers in /tmp." "Aggiunta della CHIAVE di questo wrapper in /tmp.")
   text_install_24=("Installed correctly the KEY in /tmp" "Instalada correctamente la CLAVE en /tmp" "KEY instalado com sucesso em /tmp" "CLÉ installé avec succès dans /tmp" "SCHLÜSSEL erfolgreich in /tmp installiert" "CHIAVE installata correttamente in /tmp")
@@ -1168,7 +1167,7 @@ if [[ -f "/tmp/wrapper.KEY" ]] && [[ $setup == autoinstall ]]; then
 	break
 fi
 
-if [[ -f "/tmp/wrapper.KEY" ]]; then
+if [[ -f "/tmp/wrapper.KEY" || -f "$vs_libsynovte_file.orig" ]]; then
 
         info "${RED}${text_install_6[$LANG]}"
         info "${RED}Actually you have a OLD or OTHER patch applied in your system, please UNINSTALL OLDER Wrapper first." >> $logfile
@@ -1223,11 +1222,16 @@ else
 	  info "${YELLOW}${text_install_19[$LANG]}"
 	  info "${YELLOW}Fixing permissions of $vs_libsynovte_file.orig" >> $logfile
 	chown VideoStation:VideoStation $vs_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}${text_install_20[$LANG]}"
-	  info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
+	  
 	if grep -q "aac_dec" /usr/syno/etc/codec/activation.conf; then
+	text_install_20a=("Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $vs_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $vs_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $vs_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $vs_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $vs_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
+		info "${YELLOW}${text_install_20a[$LANG]}"
+	  	info "${YELLOW}Patching $vs_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $vs_libsynovte_file 2>> $logfile
 	else
+	text_install_20b=("Patching $vs_libsynovte_file for compatibility with AAC, DTS, EAC3 and TrueHD" "Parcheando $vs_libsynovte_file para compatibilidad con AAC, DTS, EAC3 y TrueHD" "Corrigindo $vs_libsynovte_file para compatibilidade com AAC, DTS, EAC3 e TrueHD" "Correction de $vs_libsynovte_file pour la compatibilité AAC, DTS, EAC3 et TrueHD" "Patchen von $vs_libsynovte_file für AAC-, DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $vs_libsynovte_file per la compatibilità AAC, DTS, EAC3 e TrueHD")
+		info "${YELLOW}${text_install_20b[$LANG]}"
+	  	info "${YELLOW}Patching $vs_libsynovte_file for compatibility with AAC, DTS, EAC3 and TrueHD" >> $logfile
 		sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $vs_libsynovte_file 2>> $logfile
 	fi
 	info "${GREEN}${text_install_21[$LANG]}"
