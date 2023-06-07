@@ -1258,7 +1258,6 @@ text_install_23=("Adding of the KEY of this Wrapper in DLNA MediaServer." "Añad
 text_install_24=("Installed correctly the KEY in $ms_path/bin" "Instalada correctamente la CLAVE en $ms_path/bin" "KEY instalado com sucesso em $ms_path/bin" "CLÉ installé avec succès dans $ms_path/bin" "SCHLÜSSEL erfolgreich in $ms_path/bin installiert" "CHIAVE installata correttamente in $ms_path/bin")
 text_install_25=("Backup the original libsynovte.so in MediaServer as libsynovte.so.orig." "Copia de seguridad del fichero libsynovte.so como libsynovte.so.orig en MediaServer." "Faça backup do arquivo libsynovte.so como libsynovte.so.orig no MediaServer." "Sauvegardez le fichier libsynovte.so sous libsynovte.so.orig sur MediaServer." "Sichern Sie die Datei libsynovte.so als libsynovte.so.orig auf MediaServer." "Eseguire il backup del file libsynovte.so come libsynovte.so.orig su MediaServer.")
 text_install_26=("Fixing permissions of $ms_libsynovte_file.orig" "Arreglando los permisos de $ms_libsynovte_file.orig" "Corrigindo as permissões de $ms_libsynovte_file.orig" "Correction des autorisations de $ms_libsynovte_file.orig" "Korrigieren der Berechtigungen von $ms_libsynovte_file.orig" "Correzione dei permessi di $ms_libsynovte_file.orig")
-text_install_27=("Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $ms_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $ms_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $ms_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $ms_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $ms_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
 text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado correctamente el fichero $ms_libsynovte_file" "Modificou corretamente o arquivo $ms_libsynovte_file" "Correctement modifié le fichier $ms_libsynovte_file" "Die Datei $ms_libsynovte_file wurde korrekt geändert" "Modificato correttamente il file $ms_libsynovte_file")
     
 
@@ -1275,11 +1274,16 @@ text_install_28=("Modified correctly the file $ms_libsynovte_file" "Modificado c
 	  info "${YELLOW}Fixing permissions of $ms_libsynovte_file.orig" >> $logfile
 		chown MediaServer:MediaServer $ms_libsynovte_file.orig 2>> $logfile
 		chmod 644 $ms_libsynovte_file.orig 2>> $logfile
-	  info "${YELLOW}${text_install_27[$LANG]}"
-	  info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
+	  
 		if grep -q "aac_dec" /usr/syno/etc/codec/activation.conf; then
+		text_install_27a=("Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" "Parcheando $ms_libsynovte_file para compatibilidad con DTS, EAC3 y TrueHD" "Corrigindo $ms_libsynovte_file para compatibilidade com DTS, EAC3 e TrueHD" "Correction de $ms_libsynovte_file pour la compatibilité DTS, EAC3 et TrueHD" "Patchen von $ms_libsynovte_file für DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $ms_libsynovte_file per la compatibilità DTS, EAC3 e TrueHD")
+			info "${YELLOW}${text_install_27a[$LANG]}"
+	  		info "${YELLOW}Patching $ms_libsynovte_file for compatibility with DTS, EAC3 and TrueHD" >> $logfile
 			sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' $ms_libsynovte_file 2>> $logfile
 		else
+		text_install_27b=("Patching $ms_libsynovte_file for compatibility with AAC, DTS, EAC3 and TrueHD" "Parcheando $ms_libsynovte_file para compatibilidad con AAC, DTS, EAC3 y TrueHD" "Corrigindo $ms_libsynovte_file para compatibilidade com AAC, DTS, EAC3 e TrueHD" "Correction de $ms_libsynovte_file pour la compatibilité AAC, DTS, EAC3 et TrueHD" "Patchen von $ms_libsynovte_file für AAC-, DTS-, EAC3- und TrueHD-Kompatibilität" "Patching $ms_libsynovte_file per la compatibilità AAC, DTS, EAC3 e TrueHD")
+			info "${YELLOW}${text_install_27b[$LANG]}"
+	  		info "${YELLOW}Patching $ms_libsynovte_file for compatibility with AAC, DTS, EAC3 and TrueHD" >> $logfile
 			sed -i -e 's/eac3/3cae/' -e 's/dts/std/' -e 's/truehd/dheurt/' -e 's/aac/caa/' $ms_libsynovte_file 2>> $logfile
 		fi
 		info "${GREEN}${text_install_28[$LANG]}"
