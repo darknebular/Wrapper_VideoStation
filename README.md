@@ -32,7 +32,7 @@ This patcher enables Advanced Media Extensions 3.0 for you, without having to lo
 - DSM 7.0-41890 (and above)
 - Video Station 2.4.6-1594 (and above)
 - SynoCommunity FFMPEG 6.0.2. (and above) ([help](https://synocommunity.com/#easy-install))
-- Advanced Media Extensions 1.0.0-50001 (and above). (The licence in AME must be LOADED.)
+- Advanced Media Extensions 1.0.0-50001 (and above). (The licence in AME must be LOADED and ACTIVATED.)
 
 ## Optional Packages:
 - MediaServer 1.1.0-0201 (and above) (OPTIONAL)
