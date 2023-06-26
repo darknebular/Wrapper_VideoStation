@@ -23,8 +23,9 @@ You will can change the order of the audio codecs in the Wrapper, install the mo
 The Installer has Multi Language support (English, Spanish, Portuguese, French, German, Italian).
 
 # Now the Installer has the AME's License Fix: 
-This enables the AAC and HEVC codecs and its license in the AME package, until DSM 7.1.1.
+This enables the AAC and HEVC codecs and its license in the AME package, until DSM 7.2.
 This patcher enables Advanced Media Extensions 3.0 for you, without having to login account. When you install this License's patch, the Wrapper must be uninstalled and you must to re-install it again.
+This is not mandatory to have it installed for installing the Wrapper.
 
 *(Use at your own risk, although it has been done to be as safe as possible, there could be errors. (Crack for XPenelogy and Synology without AME's license).*
 
