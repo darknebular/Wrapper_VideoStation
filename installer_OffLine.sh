@@ -15,7 +15,7 @@ version="SCPT_3.9.1"
 # SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME. (Deprecated migrated to SCPT_3.8)
 # SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME. (Deprecated migrated to SCPT_3.9)
 # SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding. Added the word BETA for the cracker of the AME's license. (Deprecated migrated to SCPT_3.9.1)
-# SCPT_3.9.1: Added in the license crack for the DSM 7.2.
+# SCPT_3.9.1: Added in the license's crack the patch for the DSM 7.2.
 
 ##############################################################
 
