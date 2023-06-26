@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.9"
+version="SCPT_3.9.1"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -14,7 +14,8 @@ version="SCPT_3.9"
 # SCPT_3.6: Added full support for DS21X-Play devices with ARMv8 using a GStreamer's Wrapper. Now the installer recommends to you the Simplest or the Advanced in function of the performance of your system. (Deprecated migrated to SCPT_3.7)
 # SCPT_3.7: Fixed a bug in the GStreamer's Wrapper installer that doesn't clear the plugin's cache in AME. (Deprecated migrated to SCPT_3.8)
 # SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME. (Deprecated migrated to SCPT_3.9)
-# SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding. Added the word BETA for the cracker of the AME's license.
+# SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding. Added the word BETA for the cracker of the AME's license. (Deprecated migrated to SCPT_3.9.1)
+# SCPT_3.9.1: Added in the license crack for the DSM 7.2.
 
 ##############################################################
 
@@ -698,7 +699,7 @@ function crackmenu() {
  text_crackmenu_6=("INSTALL the AME's License Crack" "INSTALAR el crack de licencia de AME" "INSTALE o crack da licença AME" "INSTALLER le crack de la licence AME" "INSTALLIEREN Sie den AME-Lizenz-Crack" "INSTALLA il crack della licenza AME")
  text_crackmenu_7=("UNINSTALL the AME's License Crack" "DESINSTALAR el crack de licencia de AME" "DESINSTALAR crack de licença AME" "DÉSINSTALLER le crack de la licence AME" "AME-Lizenz-Crack DEINSTALLIEREN" "DISINSTALLA il crack della licenza AME")	
  text_crackmenu_8=("This patcher enables Advanced Media Extensions 3.0 for you, without having to login account." "Este parche habilita Advanced Media Extensions 3.0 para usted, sin tener que iniciar sesión en la cuenta." "Este patch habilita o Advanced Media Extensions 3.0 para você, sem ter que entrar em sua conta." "Ce correctif active Advanced Media Extensions 3.0 pour vous, sans avoir à vous connecter à votre compte." "Dieser Patch aktiviert Advanced Media Extensions 3.0 für Sie, ohne dass Sie sich bei Ihrem Konto anmelden müssen." "Questa patch abilita Advanced Media Extensions 3.0 per te, senza dover accedere al tuo account.")	
- text_crackmenu_9=("This enables the AAC and HEVC codecs and its license in the AME package, until DSM 7.1.1." "Esto habilita los códecs AAC y HEVC y su licencia en el paquete AME, hasta DSM 7.1.1." "Isso habilita os codecs AAC e HEVC e suas licenças no pacote AME, até DSM 7.1.1." "Cela active les codecs AAC et HEVC et leur licence dans le package AME, jusqu'à DSM 7.1.1." "Dadurch werden die AAC- und HEVC-Codecs und deren Lizenz im AME-Paket bis DSM 7.1.1 aktiviert." "Ciò abilita i codec AAC e HEVC e la relativa licenza nel pacchetto AME, fino a DSM 7.1.1.")	
+ text_crackmenu_9=("This enables the AAC and HEVC codecs and its license in the AME package, until DSM 7.2." "Esto habilita los códecs AAC y HEVC y su licencia en el paquete AME, hasta DSM 7.2." "Isso habilita os codecs AAC e HEVC e suas licenças no pacote AME, até DSM 7.2." "Cela active les codecs AAC et HEVC et leur licence dans le package AME, jusqu'à DSM 7.2." "Dadurch werden die AAC- und HEVC-Codecs und deren Lizenz im AME-Paket bis DSM 7.2 aktiviert." "Ciò abilita i codec AAC e HEVC e la relativa licenza nel pacchetto AME, fino a DSM 7.2.")	
  text_crackmenu_10=("When you install this License crack, the Wrapper will be deleted and you must to re-install it again." "Cuando instale este crack de licencia, el Wrapper se eliminará y deberá volver a instalarlo." "Ao instalar este crack de licença, o contêiner será removido e você precisará reinstalá-lo." "Lorsque vous installez ce crack de licence, le conteneur sera supprimé et vous devrez le réinstaller." "Wenn Sie diesen Lizenz-Crack installieren, wird der Container entfernt und Sie müssen ihn neu installieren." "Quando installi questo crack della licenza, il contenitore verrà rimosso e dovrai reinstallarlo.")
  text_crackmenu_11=("Note that in order to use this, you will have to use a valid SN (but doesn't have to login synology account with that SN)." "Tenga en cuenta que para usar esto, deberá usar un SN válido (pero no tiene que iniciar sesión en una cuenta de Synology con ese SN)." "Observe que, para usá-lo, você precisará usar um SN válido (mas não precisa entrar em uma conta Synology com esse SN)." "Veuillez noter que pour l'utiliser, vous devrez utiliser un SN valide (mais vous n'avez pas besoin de vous connecter à un compte Synology avec ce SN)." "Bitte beachten Sie, dass Sie zur Nutzung eine gültige SN verwenden müssen (Sie müssen sich jedoch nicht mit dieser SN bei einem Synology-Konto anmelden)." "Si noti che per utilizzare questo, sarà necessario utilizzare un SN valido (ma non è necessario accedere a un account Synology con quel SN).")	
  text_crackmenu_12=("DISCLAIMER:" "DESCARGO DE RESPONSABILIDAD:" "ISENÇÃO DE RESPONSABILIDADE:" "CLAUSE DE NON-RESPONSABILITÉ:" "HAFTUNGSAUSSCHLUSS:" "DISCLAIMER:")	
@@ -794,8 +795,16 @@ fi
    info "${YELLOW}${text_patchame_7[$LANG]}"
    info "${YELLOW}Applying the patch." >> $logfile
 
-# Comprobar que el fichero a parchear sea exactamente la misma versión que se estudió.
-expected_checksum='fcc1084f4eadcf5855e6e8494fb79e23'
+# Comprobar que el fichero a parchear sea exactamente la misma versión que se estudió. 
+if [[ "$majorversion" -eq "7" && "$minorversion" -le "1" ]]; then
+  expected_checksum='fcc1084f4eadcf5855e6e8494fb79e23'
+  hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
+  content= '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]'
+elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "2" ]]; then
+  expected_checksum='09e3adeafe85b353c9427d93ef0185e9'
+  hex_values=('3718' '60A5' '60D1' '6111' '6137' 'B5F0')
+  content='[{"attribute": {"codec": "hevc", "type": "free"}, "status": "valid", "extension_gid": null, "expireTime": 0, "appName": "ame", "follow": ["device"], "duration": 1576800000, "appType": 14, "licenseContent": 1, "registered_at": 1649315995, "server_time": 1685421618, "firstActTime": 1649315995, "licenseCode": "0"}, {"attribute": {"codec": "aac", "type": "free"}, "status": "valid", "extension_gid": null, "expireTime": 0, "appName": "ame", "follow": ["device"], "duration": 1576800000, "appType": 14, "licenseContent": 1, "registered_at": 1649315995, "server_time": 1685421618, "firstActTime": 1649315995, "licenseCode": "0"}]'
+fi
 
 if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
     echo "MD5 mismatch"
@@ -817,7 +826,7 @@ done
 
 
     mkdir -p "$(dirname "$lic")"
-    echo '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]' > "$lic"
+    echo "$content" > "$lic"
 
     info "${YELLOW}${text_patchame_8[$LANG]}"
     info "${YELLOW}Checking whether patch is successful..." >> $logfile
