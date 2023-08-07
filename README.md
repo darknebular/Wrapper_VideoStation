@@ -41,7 +41,7 @@ This is not mandatory to have it installed for installing the Wrapper.
 ## Supported / Unsupported scenarios:
 - DTS or EAC3 or TrueHD or AAC + Any non standard video format: ✅
 - no DTS, no EAC3, no TrueHD, no AAC + HEVC: ✅
-- DTS or EAC3 or TrueHD or AAC + HEVC: ✅
+- DTS or EAC3 or TrueHD or AAC (5.1 or 7.1) + HEVC: ✅
 - DSM 7.X.X: ✅
 - With DS-XXX PLAY Appliances or Low Powered Devices: ✅ *(I recommend install the Simplest Wrapper. The Advanced needs better CPU or have a GPU available for FFmpeg binary for HEVC decoding.)*
 - DSM 6.2: ⚠️ The installer doesn´t support this version.
