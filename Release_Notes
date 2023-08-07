@@ -2,7 +2,7 @@
 
 ### SCPT_3.X:
 
-****SCPT_3.9.2: Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code.**
+****SCPT_3.9.2: Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code. The Advanced Wrapper was and is working fine and don't need fix it.**
 
 **SCPT_3.9.1:** Added in the license's crack the patch for the DSM 7.2. (Deprecated migrated to SCPT_3.9.2)
 
