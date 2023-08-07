@@ -2,7 +2,9 @@
 
 ### SCPT_3.X:
 
-****SCPT_3.9.1: Added in the license's crack the patch for the DSM 7.2.**
+****SCPT_3.9.2: Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code.**
+
+**SCPT_3.9.1:** Added in the license's crack the patch for the DSM 7.2. (Deprecated migrated to SCPT_3.9.2)
 
 **SCPT_3.9 (LTS):** Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding. Added the word BETA for the cracker of the AME's license. (Deprecated migrated to SCPT_3.9.1)
 
@@ -94,7 +96,9 @@
 
 
 ### SIMPLEST WRAPPER FOR AME_S.X.X:
-****AME_S_2.2: Added support for GStreamer libraries.**
+****AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code.**
+
+**AME_S_2.2:** Added support for GStreamer libraries. (Deprecated, migrate to AME_S_2.3)
 
 **AME_S_2.1:** Added support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X. (Deprecated, migrate to AME_S_2.2)
 
