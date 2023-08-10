@@ -2,7 +2,7 @@
 
 ### SCPT_3.X:
 
-****SCPT_3.9.3: Fix the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system.**
+****SCPT_3.9.3: Fixed the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system.**
 
 **SCPT_3.9.2:** Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code. The Advanced Wrapper was and is working fine and don't need fix it. (Deprecated migrated to SCPT_3.9.3)
 
