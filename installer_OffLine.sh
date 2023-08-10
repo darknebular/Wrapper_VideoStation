@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.9.2"
+version="SCPT_3.9.3"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -16,7 +16,8 @@ version="SCPT_3.9.2"
 # SCPT_3.8: Fixed a bug in declaration of the variables for the licenses fix for AME. (Deprecated migrated to SCPT_3.9)
 # SCPT_3.9: Added the possibility to transcode AAC codec in Video Station and Media Server. Added new libraries for GStreamer 1.6.3. for this AAC decoding. Added the word BETA for the cracker of the AME's license. (Deprecated migrated to SCPT_3.9.1)
 # SCPT_3.9.1: Added in the license's crack the patch for the DSM 7.2. (Deprecated migrated to SCPT_3.9.2)
-# SCPT_3.9.2: Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code.
+# SCPT_3.9.2: Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated migrated to SCPT_3.9.3)
+# SCPT_3.9.3: Fix the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system.
 
 ##############################################################
 
@@ -925,7 +926,6 @@ clear
 titulo
 welcome
 check_dependencias
-check_licence_AME
 check_versions
 check_firmas
 other_checks
@@ -1131,6 +1131,8 @@ info "${GREEN}Installed correctly the GStreamer's Wrapper." >> $logfile
 ################################
 
 function install() {
+check_licence_AME
+
 if [[ "$mode" == "Simplest" ]]; then
 text_install_1=("==================== Installation of the Simplest Wrapper: START ====================" "==================== Instalación del Wrapper más Simple: INICIO ====================" "==================== Instalando o wrapper mais simples: START =====================" "==================== Installation de l'encapsuleur le plus simple : DÉMARRER ====================" "==================== Installation des einfachsten Wrappers: START ====================" "===================== Installazione del wrapper più semplice: START ====================")
 info "${BLUE}==================== Installation of the Simplest Wrapper: START ====================" >> $logfile
@@ -1614,8 +1616,6 @@ check_root
 welcome
 
 check_dependencias
-
-check_licence_AME
 
 check_versions
 
