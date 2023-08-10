@@ -925,7 +925,6 @@ function reloadstart() {
 clear
 titulo
 welcome
-check_dependencias
 check_versions
 check_firmas
 other_checks
@@ -1131,6 +1130,7 @@ info "${GREEN}Installed correctly the GStreamer's Wrapper." >> $logfile
 ################################
 
 function install() {
+check_dependencias
 check_licence_AME
 
 if [[ "$mode" == "Simplest" ]]; then
@@ -1614,8 +1614,6 @@ titulo
 check_root
 
 welcome
-
-check_dependencias
 
 check_versions
 
