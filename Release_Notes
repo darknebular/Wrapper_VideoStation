@@ -2,7 +2,9 @@
 
 ### SCPT_3.X:
 
-****SCPT_3.9.3: Fixed the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system.**
+****SCPT_3.9.4: Changed the installer version for the new Advanced Wrapper version.**
+
+**SCPT_3.9.3:** Fixed the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system. (Deprecated migrated to SCPT_3.9.4)
 
 **SCPT_3.9.2:** Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code. The Advanced Wrapper was and is working fine and don't need fix it. (Deprecated migrated to SCPT_3.9.3)
 
@@ -61,7 +63,9 @@
 
 
 ### ADVANCED WRAPPER FOR AME_12.X.X:
-****AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec.**
+****AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled.**
+
+**AME_12.4.2:** Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
 
 **AME_12.4.1:** Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X. (Deprecated, migrate to 12.4.2)
 
