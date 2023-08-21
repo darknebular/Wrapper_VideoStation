@@ -2,7 +2,7 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.4.2"
+rev="AME_12.4.3"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
@@ -20,7 +20,8 @@ rev="AME_12.4.2"
 # AME_12.3.8: Improved the viewing of logs. Improved DLNA processing to use only one binary. Fixed a problem to close the process. Fixed a piping problem with the new versions of FFMPEG. (Deprecated, migrate to 12.3.9)
 # AME_12.3.9: Improved the removing of the stderr's temporals to specific PID. Fixed a bug with AVBR movies using DLNA transcoding. I remove the buffer 8M for DLNA. It must be only for ChromeCast or Browsers. (Deprecated, migrate to 12.4.1)
 # AME_12.4.1: Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X. (Deprecated, migrate to 12.4.2)
-# AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec.
+# AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
+# AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled.
 
 
 WHITE="\u001B[37m"
@@ -397,7 +398,7 @@ childpid=$!
 _log "${BLUE}CHILDPID = $childpid"
 wait $childpid
 
-if grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && [ "$pipe" = "pipe_MS" ]; then
+if grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Unknown encoder" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && [ "$pipe" = "pipe_MS" ]; then
 
     _log "${BLUE}*** CHILD END ***"
     startexectime=`date +%s`
@@ -425,7 +426,7 @@ if grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Err
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Unknown encoder" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:" /tmp/ffmpeg-${streamid}.stderr; then
 
         _log "${BLUE}*** CHILD END ***"
         startexectime=`date +%s`
@@ -450,7 +451,7 @@ if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found f
 
 fi
 
-if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:" /tmp/ffmpeg-${streamid}.stderr; then
+if grep "Conversion failed!" /tmp/ffmpeg-${streamid}.stderr || grep "Unknown encoder" /tmp/ffmpeg-${streamid}.stderr || grep "not found for input stream" /tmp/ffmpeg-${streamid}.stderr || grep "Error opening filters!" /tmp/ffmpeg-${streamid}.stderr || grep "Unrecognized option" /tmp/ffmpeg-${streamid}.stderr || grep "Invalid data found when processing input" /tmp/ffmpeg-${streamid}.stderr && ! grep "Error writing trailer of pipe:" /tmp/ffmpeg-${streamid}.stderr; then
 
         _log "${BLUE}*** CHILD END ***"
         startexectime=`date +%s`
