@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.9.4"
+version="SCPT_3.9.5"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -18,7 +18,8 @@ version="SCPT_3.9.4"
 # SCPT_3.9.1: Added in the license's crack the patch for the DSM 7.2. (Deprecated migrated to SCPT_3.9.2)
 # SCPT_3.9.2: Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated migrated to SCPT_3.9.3)
 # SCPT_3.9.3: Fixed the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system. (Deprecated migrated to SCPT_3.9.4)
-# SCPT_3.9.4: Changed the installer version for the new Advanced Wrapper version.
+# SCPT_3.9.4: Changed the installer version for the new Advanced Wrapper version. (Deprecated migrated to SCPT_3.9.5)
+# SCPT_3.9.5: Added a new hash for the AME License Patch.
 
 ##############################################################
 
@@ -739,7 +740,7 @@ function crackmenu() {
 	done
 }
 patch_ame_license() {
-
+# Adaptation, conversion and improvements made by me of Wangsiji's code
 touch "$logfile"
 
 text_patchame_1=("The backup file $so_backup already exists. A new backup will not be created." "El archivo de respaldo $so_backup ya existe. No se creará una nueva copia de seguridad." "O arquivo de backup $so_backup já existe. Um novo backup não será criado." "Le fichier de sauvegarde $so_backup existe déjà. Une nouvelle sauvegarde ne sera pas créée." "Die Sicherungsdatei $so_backup existiert bereits. Es wird kein neues Backup erstellt." "Il file di backup $so_backup esiste già. Non verrà creato un nuovo backup.")
@@ -799,21 +800,24 @@ fi
    info "${YELLOW}Applying the patch." >> $logfile
 
 # Comprobar que el fichero a parchear sea exactamente la misma versión que se estudió. 
-if [[ "$majorversion" -eq "7" && "$minorversion" -le "1" ]]; then
-  expected_checksum='fcc1084f4eadcf5855e6e8494fb79e23'
-  hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
-  content= '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]'
-elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "2" ]]; then
-  expected_checksum='09e3adeafe85b353c9427d93ef0185e9'
-  hex_values=('3718' '60A5' '60D1' '6111' '6137' 'B5F0')
-  content='[{"attribute": {"codec": "hevc", "type": "free"}, "status": "valid", "extension_gid": null, "expireTime": 0, "appName": "ame", "follow": ["device"], "duration": 1576800000, "appType": 14, "licenseContent": 1, "registered_at": 1649315995, "server_time": 1685421618, "firstActTime": 1649315995, "licenseCode": "0"}, {"attribute": {"codec": "aac", "type": "free"}, "status": "valid", "extension_gid": null, "expireTime": 0, "appName": "ame", "follow": ["device"], "duration": 1576800000, "appType": 14, "licenseContent": 1, "registered_at": 1649315995, "server_time": 1685421618, "firstActTime": 1649315995, "licenseCode": "0"}]'
-fi
+hash_to_check="$(md5sum -b "$so" | awk '{print $1}')"
 
-if [ "$(md5sum -b "$so" | awk '{print $1}')" != "$expected_checksum" ]; then
+if [ "$hash_to_check" = "fcc1084f4eadcf5855e6e8494fb79e23" ]; then
+    hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
+  content= '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]'
+elif [ "$hash_to_check" = "923fd0d58e79b7dc0f6c377547545930" ]; then
+    hex_values=('1F28' '48F5' '4921' '4953' '4975' '9AC8')
+  content= '[{"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "hevc", "type": "free"}, "licenseContent": 1}, {"appType": 14, "appName": "ame", "follow": ["device"], "server_time": 1666000000, "registered_at": 1651000000, "expireTime": 0, "status": "valid", "firstActTime": 1651000001, "extension_gid": null, "licenseCode": "0", "duration": 1576800000, "attribute": {"codec": "aac", "type": "free"}, "licenseContent": 1}]'
+elif [ "$hash_to_check" = "09e3adeafe85b353c9427d93ef0185e9" ]; then
+    hex_values=('3718' '60A5' '60D1' '6111' '6137' 'B5F0')
+  content='[{"attribute": {"codec": "hevc", "type": "free"}, "status": "valid", "extension_gid": null, "expireTime": 0, "appName": "ame", "follow": ["device"], "duration": 1576800000, "appType": 14, "licenseContent": 1, "registered_at": 1649315995, "server_time": 1685421618, "firstActTime": 1649315995, "licenseCode": "0"}, {"attribute": {"codec": "aac", "type": "free"}, "status": "valid", "extension_gid": null, "expireTime": 0, "appName": "ame", "follow": ["device"], "duration": 1576800000, "appType": 14, "licenseContent": 1, "registered_at": 1649315995, "server_time": 1685421618, "firstActTime": 1649315995, "licenseCode": "0"}]'
+  
+else
     echo "MD5 mismatch"
     unpatch_ame_license
     exit 1
 fi
+
 
 for ((i = 0; i < ${#hex_values[@]}; i++)); do
     offset=$(( 0x${hex_values[i]} + 0x8000 ))
