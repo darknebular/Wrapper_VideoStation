@@ -2,7 +2,9 @@
 
 ### SCPT_3.X:
 
-****SCPT_3.9.5: Added a new hash for the AME License Patch.**
+****SCPT_3.9.6: Added into the Uninstall Old function the possibility to delete Orphan files generated from others wrappers, like Alex's one.**
+
+**SCPT_3.9.5:** Added a new hash for the AME License Patch. (Deprecated migrated to SCPT_3.9.6)
 
 **SCPT_3.9.4:** Changed the installer version for the new Advanced Wrapper version. (Deprecated migrated to SCPT_3.9.5)
 
