@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.9.5"
+version="SCPT_3.9.6"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -19,7 +19,8 @@ version="SCPT_3.9.5"
 # SCPT_3.9.2: Homogenize the closing of processes in the Simplest Wrapper with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated migrated to SCPT_3.9.3)
 # SCPT_3.9.3: Fixed the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system. (Deprecated migrated to SCPT_3.9.4)
 # SCPT_3.9.4: Changed the installer version for the new Advanced Wrapper version. (Deprecated migrated to SCPT_3.9.5)
-# SCPT_3.9.5: Added a new hash for the AME License Patch.
+# SCPT_3.9.5: Added a new hash for the AME License Patch. (Deprecated migrated to SCPT_3.9.6)
+# SCPT_3.9.6: Added into the Uninstall Old function the possibility to delete Orphan files generated from others wrappers, like Alex's one.
 
 ##############################################################
 
@@ -739,7 +740,7 @@ function crackmenu() {
         esac
 	done
 }
-patch_ame_license() {
+function patch_ame_license() {
 # Adaptation, conversion and improvements made by me of Wangsiji's code
 touch "$logfile"
 
@@ -853,7 +854,7 @@ done
         exit 1
    	fi
 }
-unpatch_ame_license() {
+function unpatch_ame_license() {
 
 touch "$logfile"
 
@@ -924,6 +925,19 @@ if [[ $cpu_model == *"ARMv8"* ]]; then
 	fi
 fi
 
+}
+function cleanorphan() {
+  text_cleanorphan=("Cleaning orphan files..." "Limpiando archivos huérfanos..." "Limpando arquivos órfãos..." "Nettoyage des fichiers orphelins..." "Bereinigung von verwaisten Dateien..." "Pulizia dei file orfani...")
+# Delete Orphan files from other wrappers, like the Alex's one. 
+  rm -f /tmp/tmp.wget
+  rm -f /tmp/ffmpeg.stderr
+  rm -f /tmp/ffmpeg.stderr.prev
+  rm -f /tmp/gstreamer.log
+  rm -f /tmp/gst.stderr
+  rm -f /tmp/gst.stderr.prev
+  
+  info "${YELLOW}${text_cleanorphan[$LANG]}"  
+  info "${YELLOW}Cleaning orphan files..." >> $logfile
 }
 
 function reloadstart() {
@@ -1435,6 +1449,8 @@ if [[ "$unmode" == "Old" ]]; then
    	rm -r "$vs_path/lib/patch" 2>> $logfile
 	mv -T -f $vs_path/etc/gstomx.conf.orig $vs_path/etc/gstomx.conf 2>> $logfile
    fi
+
+  cleanorphan
      
   info "${GREEN}${text_uninstall_10[$LANG]}"
   echo ""
