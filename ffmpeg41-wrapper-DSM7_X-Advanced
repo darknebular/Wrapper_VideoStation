@@ -2,7 +2,7 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.4.3"
+rev="AME_12.4.4"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
@@ -21,7 +21,8 @@ rev="AME_12.4.3"
 # AME_12.3.9: Improved the removing of the stderr's temporals to specific PID. Fixed a bug with AVBR movies using DLNA transcoding. I remove the buffer 8M for DLNA. It must be only for ChromeCast or Browsers. (Deprecated, migrate to 12.4.1)
 # AME_12.4.1: Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X. (Deprecated, migrate to 12.4.2)
 # AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
-# AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled.
+# AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled. (Deprecated, migrate to 12.4.4)
+# AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding.
 
 
 WHITE="\u001B[37m"
@@ -128,6 +129,7 @@ argsnew=()
 args1vs=()
 args2vs=()
 args2vsms=()
+args2trans=()
 
 
 while [[ $# -gt 0 ]]
@@ -143,6 +145,7 @@ case "$1" in
 		fi
                 args2vs+=("-analyzeduration" "10000000")
 		args2vsms+=("-ss" "$1")
+		args2trans+=("-ss" "$1")
         ;;
         -i)
                 shift
@@ -154,6 +157,7 @@ case "$1" in
                   args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
 		fi
                 args2vsms+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2trans+=("-i" "$1" "-map" "0:0" "-map" "0:1")
         ;;
         -r)
                 shift
@@ -177,6 +181,7 @@ case "$1" in
                   args2vs+=("-vf" "$1")
 		fi
                 args2vsms+=("-vf" "$1")
+                args2trans+=("-vf" "$1")
         ;;
         # Para activar los límites de Bitrate que trae el VideoStation. Si se quieren fijar siempre a un valor, cambiar el $1 y poner 8M por ejemplo.
         -vb)
@@ -185,6 +190,7 @@ case "$1" in
                 args1vs+=("-vb" "$1")
                 args2vs+=("-vb" "$1")
                 args2vsms+=("-vb" "$1")
+                args2trans+=("-vb" "$1")
         ;;
         -vcodec)
                 shift
@@ -196,6 +202,7 @@ case "$1" in
                   args2vs+=("-vcodec" "copy")
 		fi
                 args2vsms+=("-vcodec" "$1")
+                args2trans+=("-vcodec" "$1")
         ;;
         -vsync)
                 shift
@@ -207,6 +214,7 @@ case "$1" in
                   args2vs+=("-vsync" "$1")
 		fi
                 args2vsms+=("-vsync" "$1")
+                args2trans+=("-vsync" "$1")
         ;;
         # En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se convertirá a AAC Surround 5.1 Y MP3 Stereo
         -acodec)
@@ -215,10 +223,12 @@ case "$1" in
                         argsnew+=("-acodec" "aac")
                         args2vs+=("-acodec" "aac")
                         args2vsms+=("-acodec" "aac")
+                        args2trans+=("-acodec" "aac")
                 else
                         argsnew+=("-acodec" "libfdk_aac")
                         args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")
                         args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")
+                        args2trans+=("-c:a" "$1")
 
                 fi
                 args1vs+=("-acodec" "copy")
@@ -230,6 +240,7 @@ case "$1" in
                 argsnew+=("-b:a" "512k")
                 args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")
                 args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")
+                args2trans+=("-b:a" "256k")
 
         ;;
         # Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos stream de audio (MP3 y AAC) de la misma pista de audio, siendo el primero a elegir la pista de Stereo MP3.
@@ -239,6 +250,7 @@ case "$1" in
                 argsnew+=("-ac" "$1")
                 args2vs+=("-ac:1" "$1" "-ac:2" "6")
                 args2vsms+=("-ac:1" "6" "-ac:2" "$1")
+                args2trans+=("-ac" "$1")
 
         ;;
         -f)
@@ -247,65 +259,76 @@ case "$1" in
                 args1vs+=("-f" "mpegts")
                 args2vs+=("-f" "$1")
                 args2vsms+=("-f" "$1")
+                args2trans+=("-f" "$1")
         ;;
         -segment_format)
                 shift
                 argsnew+=("-segment_format" "$1")
                 args2vs+=("-segment_format" "$1")
                 args2vsms+=("-segment_format" "$1")
+                args2trans+=("-segment_format" "$1")
         ;;
         -segment_list_type)
                 shift
                 argsnew+=("-segment_list_type" "$1")
                 args2vs+=("-segment_list_type" "$1")
                 args2vsms+=("-segment_list_type" "$1")
+                args2trans+=("-segment_list_type" "$1")
         ;;
         -hls_seek_time)
                 shift
                 argsnew+=("-hls_seek_time" "$1")
                 args2vs+=("-hls_seek_time" "$1")
                 args2vsms+=("-hls_seek_time" "$1")
+                args2trans+=("-hls_seek_time" "$1")
         ;;
         -segment_time)
                 shift
                 argsnew+=("-segment_time" "$1")
                 args2vs+=("-segment_time" "$1")
                 args2vsms+=("-segment_time" "$1")
+                args2trans+=("-segment_time" "$1")
         ;;
         -segment_time_delta)
                 shift
                 argsnew+=("-segment_time_delta" "$1")
                 args2vs+=("-segment_time_delta" "$1")
                 args2vsms+=("-segment_time_delta" "$1")
+                args2trans+=("-segment_time_delta" "$1")
         ;;
         -segment_start_number)
                 shift
                 argsnew+=("-segment_start_number" "$1")
                 args2vs+=("-segment_start_number" "$1")
                 args2vsms+=("-segment_start_number" "$1")
+                args2trans+=("-segment_start_number" "$1")
         ;;
         -individual_header_trailer)
                 shift
                 argsnew+=("-individual_header_trailer" "$1")
                 args2vs+=("-individual_header_trailer" "$1")
                 args2vsms+=("-individual_header_trailer" "$1")
+                args2trans+=("-individual_header_trailer" "$1")
         ;;
         -avoid_negative_ts)
                 shift
                 argsnew+=("-avoid_negative_ts" "$1")
                 args2vs+=("-avoid_negative_ts" "$1")
                 args2vsms+=("-avoid_negative_ts" "$1")
+                args2trans+=("-avoid_negative_ts" "$1")
         ;;
         -break_non_keyframes)
                 shift
                 argsnew+=("-break_non_keyframes" "$1")
                 args2vs+=("-break_non_keyframes" "$1")
                 args2vsms+=("-break_non_keyframes" "$1")
+                args2trans+=("-break_non_keyframes" "$1")
         ;;
         -max_muxing_queue_size)
                 shift
                 args2vs+=("-max_muxing_queue_size" "$1")
                 args2vsms+=("-max_muxing_queue_size" "$1")
+                args2trans+=("-max_muxing_queue_size" "$1")
         ;;
         -map)
                 shift
@@ -326,6 +349,7 @@ case "$1" in
 		  fi
                 args2vs+=("$1")
                 args2vsms+=("$1")
+                args2trans+=("$1")
         ;;
 esac
 shift
@@ -343,10 +367,10 @@ if [ "$yoff" = "OffEnable" ]; then
         _log "${YELLOW}MODE     = MP4_TRANSCO-VS"
         _log "${BLUE}FFMPEG   = $bin2"
         _log "${GREEN}PARAM_WRAP  =${WHITE}"
-        param1=${args[@]}
+        param1=${args2trans[@]}
         _log_para "$param1"
 
-        $bin2 "${args[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
+        $bin2 "${args2trans[@]}" 2> /tmp/ffmpeg-${streamid}.stderr &
 
 childpid=$!
 _log "${BLUE}CHILDPID = $childpid"
