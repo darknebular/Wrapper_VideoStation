@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.9.6"
+version="SCPT_3.9.7"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -20,7 +20,8 @@ version="SCPT_3.9.6"
 # SCPT_3.9.3: Fixed the possibility to enter to the Start menu if you haven't got the AME License and you want to install the patch for the license in a XPEnology system. (Deprecated migrated to SCPT_3.9.4)
 # SCPT_3.9.4: Changed the installer version for the new Advanced Wrapper version. (Deprecated migrated to SCPT_3.9.5)
 # SCPT_3.9.5: Added a new hash for the AME License Patch. (Deprecated migrated to SCPT_3.9.6)
-# SCPT_3.9.6: Added into the Uninstall Old function the possibility to delete Orphan files generated from others wrappers, like Alex's one.
+# SCPT_3.9.6: Added into the Uninstall Old function the possibility to delete Orphan files generated from others wrappers, like Alex's one. (Deprecated migrated to SCPT_3.9.7)
+# SCPT_3.9.7: Added the possibility of changing the number of audio channels in the OffLine transcoding of the Video Station in the Configuration menu.
 
 ##############################################################
 
