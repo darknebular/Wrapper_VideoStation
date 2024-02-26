@@ -582,15 +582,15 @@ fi
 }
 
 function config_I() {
-text_configI_1=("Changing the number of audio channels in the VIDEO-STATION OffLine transcoding." "Cambiando el número de canales de audio en la transcodificación OffLine del VIDEO-STATION." "Alterando o número de canais de áudio na transcodificação VIDEO-STATION OffLine." "Modification du nombre de canaux audio dans le transcodage VIDEO-STATION OffLine." "Ändern der Anzahl der Audiokanäle bei der VIDEO-STATION OffLine-Transkodierung." "Modifica del numero di canali audio nella transcodifica OffLine di VIDEO-STATION.")
-text_configI_2=("Correctly changed the number of audio channels in the OffLine transcoding of the VIDEO-STATION." "Cambiado correctamente el número de canales de audio en la transcodificación OffLine del VIDEO-STATION." "Alterado corretamente o número de canais de áudio na transcodificação OffLine da VIDEO-STATION." "Correction correcte du nombre de canaux audio dans le transcodage hors ligne de la VIDEO-STATION." "Die Anzahl der Audiokanäle bei der Offline-Transkodierung der VIDEO-STATION wurde korrekt geändert." "Modificato correttamente il numero di canali audio nella transcodifica OffLine della VIDEO-STATION.")
+text_configI_1=("Changing the number of audio channels in the VIDEO-STATION OffLine transcoding. (2.0)" "Cambiando el número de canales de audio en la transcodificación OffLine del VIDEO-STATION. (2.0)" "Alterando o número de canais de áudio na transcodificação VIDEO-STATION OffLine. (2.0)" "Modification du nombre de canaux audio dans le transcodage VIDEO-STATION OffLine. (2.0)" "Ändern der Anzahl der Audiokanäle bei der VIDEO-STATION OffLine-Transkodierung. (2.0)" "Modifica del numero di canali audio nella transcodifica OffLine di VIDEO-STATION. (2.0)")
+text_configI_2=("Correctly changed the number of audio channels in the OffLine transcoding of the VIDEO-STATION. (2.0)" "Cambiado correctamente el número de canales de audio en la transcodificación OffLine del VIDEO-STATION. (2.0)" "Alterado corretamente o número de canais de áudio na transcodificação OffLine da VIDEO-STATION. (2.0)" "Correction correcte du nombre de canaux audio dans le transcodage hors ligne de la VIDEO-STATION. (2.0)" "Die Anzahl der Audiokanäle bei der Offline-Transkodierung der VIDEO-STATION wurde korrekt geändert. (2.0)" "Modificato correttamente il numero di canali audio nella transcodifica OffLine della VIDEO-STATION. (2.0)")
 text_configI_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
 text_configI_4=("Actually you HAVEN'T INSTALLED THE ADVANCED WRAPPER so this codec configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
 text_configI_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
 
 if [[ "$check_amrif" == "$firma2" ]]; then 
 info "${YELLOW}${text_configI_1[$LANG]}"
-info "${YELLOW}Changing the number of audio channels in the VIDEO-STATION OffLine transcoding." >> $logfile
+info "${YELLOW}Changing the number of audio channels in the VIDEO-STATION OffLine transcoding. (2.0)" >> $logfile
     sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -616,7 +616,7 @@ fi
 
 if [[ "$check_amrif" == "$firma" ]]; then  
 info "${YELLOW}${text_configI_1[$LANG]}"
-info "${YELLOW}Changing the number of audio channels in the VIDEO-STATION OffLine transcoding." >> $logfile
+info "${YELLOW}Changing the number of audio channels in the VIDEO-STATION OffLine transcoding. (2.0)" >> $logfile
     sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
     
     sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
@@ -639,6 +639,68 @@ info "${YELLOW}Changing the number of audio channels in the VIDEO-STATION OffLin
    info "${RED}${text_configI_4[$LANG]}"
    info "${RED}Actually you HAVEN'T INSTALLED THE ADVANCED WRAPPER so this codec configurator CAN'T change anything." >> $logfile
    info "${BLUE}${text_configI_5[$LANG]}"
+   start
+fi  
+}
+
+function config_J() {
+text_configJ_1=("Changing the number of audio channels in the VIDEO-STATION OffLine transcoding. (5.1)" "Cambiando el número de canales de audio en la transcodificación OffLine del VIDEO-STATION. (5.1)" "Alterando o número de canais de áudio na transcodificação VIDEO-STATION OffLine. (5.1)" "Modification du nombre de canaux audio dans le transcodage VIDEO-STATION OffLine. (5.1)" "Ändern der Anzahl der Audiokanäle bei der VIDEO-STATION OffLine-Transkodierung. (5.1)" "Modifica del numero di canali audio nella transcodifica OffLine di VIDEO-STATION. (5.1)")
+text_configJ_2=("Correctly changed the number of audio channels in the OffLine transcoding of the VIDEO-STATION. (5.1)" "Cambiado correctamente el número de canales de audio en la transcodificación OffLine del VIDEO-STATION. (5.1)" "Alterado corretamente o número de canais de áudio na transcodificação OffLine da VIDEO-STATION. (5.1)" "Correction correcte du nombre de canaux audio dans le transcodage hors ligne de la VIDEO-STATION. (5.1)" "Die Anzahl der Audiokanäle bei der Offline-Transkodierung der VIDEO-STATION wurde korrekt geändert. (5.1)" "Modificato correttamente il numero di canali audio nella transcodifica OffLine della VIDEO-STATION. (5.1)")
+text_configJ_3=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
+text_configJ_4=("Actually you HAVEN'T INSTALLED THE ADVANCED WRAPPER so this codec configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configJ_5=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+
+if [[ "$check_amrif" == "$firma2" ]]; then 
+info "${YELLOW}${text_configJ_1[$LANG]}"
+info "${YELLOW}Changing the number of audio channels in the VIDEO-STATION OffLine transcoding. (5.1)" >> $logfile
+    sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "ac3")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-c:a:0" "ac3" "-c:a:1" "$1")/args2vs+=("-c:a" "ac3")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/args2vs+=("-b:a" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256")/args2vs+=("-b:a" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "640k" "-b:a:1" "256")/args2vs+=("-b:a" "640k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}${text_configJ_2[$LANG]}"
+    echo ""
+    echo -e "${BLUE}${text_configJ_3[$LANG]}"
+    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
+    exit 0  
+fi
+
+if [[ "$check_amrif" == "$firma" ]]; then  
+info "${YELLOW}${text_configJ_1[$LANG]}"
+info "${YELLOW}Changing the number of audio channels in the VIDEO-STATION OffLine transcoding. (5.1)" >> $logfile
+    sed -i 's/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1" "-map" "0:1")/args2vs+=("-i" "pipe:0" "-map" "0:0" "-map" "0:1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-c:a:0" "$1" "-c:a:1" "ac3")/args2vs+=("-c:a" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")/args2vs+=("-c:a" "libfdk_aac")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-c:a:0" "ac3" "-c:a:1" "$1")/args2vs+=("-c:a" "ac3")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")/args2vs+=("-b:a" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "256k" "-b:a:1" "640k")/args2vs+=("-b:a" "256k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "512k" "-b:a:1" "256k")/args2vs+=("-b:a" "512k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-b:a:0" "640k" "-b:a:1" "256k")/args2vs+=("-b:a" "640k")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "6")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "$1" "-ac:2" "")/args2vs+=("-ac" "$1")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "6" "-ac:2" "$1")/args2vs+=("-ac" "6")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    sed -i 's/args2vs+=("-ac:1" "" "-ac:2" "$1")/args2vs+=("-ac" "")/gi' ${cp_bin_path}/ffmpeg41 2>> $logfile
+    info "${GREEN}${text_configJ_2[$LANG]}"
+    echo ""
+ else
+   info "${RED}${text_configJ_4[$LANG]}"
+   info "${RED}Actually you HAVEN'T INSTALLED THE ADVANCED WRAPPER so this codec configurator CAN'T change anything." >> $logfile
+   info "${BLUE}${text_configJ_5[$LANG]}"
    start
 fi  
 }
@@ -1616,12 +1678,14 @@ text_configura_7=(" ( E ) FIRST STREAM= MP3 2.0 256kbps, SECOND STREAM= AAC 5.1 
 text_configura_8=(" ( F ) Change the 5.1 audio's codec from AC3 640kbps to AAC 512kbps independently of its audio's streams order in both." " ( F ) Cambiar el codec de audio 5.1 de AC3 640kbps a AAC 512 kbps independientemente del orden de los flujos de audio en ambos." " ( F ) Altere o codec de áudio 5.1 de AC3 640kbps para AAC 512kbps, independentemente da ordem dos fluxos de áudio em ambos." " ( F ) Modifiez le codec audio 5.1 de AC3 640kbps à AAC 512kbps quel que soit l'ordre des flux audio dans les deux." " ( F ) Ändern Sie den 5.1-Audiocodec von AC3 640 kbps auf AAC 512 kbps, unabhängig von der Reihenfolge der Audiostreams in beiden." " ( F ) Modificare il codec audio 5.1 da AC3 640 kbps a AAC 512 kbps indipendentemente dall'ordine dei flussi audio in entrambi.")
 text_configura_9=(" ( G ) Use only an Unique Audio's Stream in VIDEO-STATION (the first stream you had selected before) for save the system resources in low powered devices." " ( G ) Usar un único flujo de audio en VIDEO-STATION (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." " ( G ) Use um único fluxo de áudio no VIDEO-STATION (o primeiro fluxo selecionado acima) para economizar recursos do sistema em dispositivos menos potentes." " ( G ) Utilisez un seul flux audio sur VIDEO-STATION (le premier flux sélectionné ci-dessus) pour économiser les ressources système sur les appareils moins puissants." " ( G ) Verwenden Sie einen einzelnen Audiostream auf VIDEO-STATION (den ersten oben ausgewählten Stream), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." " ( G ) Utilizzare un unico flusso audio su VIDEO-STATION (il primo flusso selezionato sopra) per risparmiare risorse di sistema su dispositivi meno potenti.")
 text_configura_10=(" ( H ) Use only an Unique Audio's Stream in DLNA MediaServer (the first stream you had selected before) for save the system resources in low powered devices." " ( H ) Usar un único flujo de audio en DLNA MediaServer (el primer flujo que se haya seleccionado antes) para ahorrar recursos de sistema en dispositivos poco potentes." " ( H ) Use um único fluxo de áudio no DLNA MediaServer (o primeiro fluxo selecionado acima) para economizar recursos do sistema em dispositivos menos potentes." " ( H ) Utilisez un seul flux audio sur DLNA MediaServer (le premier flux sélectionné ci-dessus) pour économiser les ressources système sur les appareils moins puissants." " ( H ) Verwenden Sie einen einzelnen Audiostream auf DLNA MediaServer (den ersten oben ausgewählten Stream), um Systemressourcen auf weniger leistungsstarken Geräten zu sparen." " ( H ) Utilizzare un unico flusso audio su DLNA MediaServer (il primo flusso selezionato sopra) per risparmiare risorse di sistema su dispositivi meno potenti.")
-text_configura_11=(" ( Z ) RETURN to MAIN menu." " ( Z ) VOLVER al menú PRINCIPAL." " ( Z ) VOLTAR ao menu PRINCIPAL." " ( Z ) RETOUR au menu PRINCIPAL." " ( Z ) ZURÜCK zum HAUPTMENÜ." " ( Z ) TORNA al menu PRINCIPALE.")
-text_configura_12=("Do you wish to change the order of these audio's streams in the Advanced wrapper?" "¿Deseas cambiar el orden de estos flujos de audio en el Wrapper Avanzado?" "Deseja alterar a ordem desses fluxos de áudio no Advanced Wrapper?" "Voulez-vous modifier l'ordre de ces flux audio dans Advanced Wrapper?" "Möchten Sie die Reihenfolge dieser Audiostreams im Advanced Wrapper ändern?" "Vuoi cambiare l'ordine di questi flussi audio nel Wrapper avanzato?")
-text_configura_13=("Please answer with the correct option writing: A or B or C or D or E or F or G or H. Write Z (for return to MAIN menu)." "Responda con la opción correcta escribiendo: A o B o C o D o E o F o G o H. Escriba Z (para volver al menú PRINCIPAL)." "Responda com a opção correta digitando: A ou B ou C ou D ou E ou F ou G ou H. Digite Z (para retornar ao menu PRINCIPAL)." "Répondez par l'option correcte en tapant : A ou B ou C ou D ou E ou F ou G ou H. Tapez Z (pour revenir au menu PRINCIPAL)." "Antworten Sie mit der richtigen Option, indem Sie Folgendes eingeben: A oder B oder C oder D oder E oder F oder G oder H. Geben Sie Z ein (um zum HAUPTMENÜ zurückzukehren)." "Rispondi con l'opzione corretta digitando: A o B o C o D o E o F o G o H. Digita Z (per tornare al menu PRINCIPALE).")
-text_configura_14=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
-text_configura_15=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED so this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
-text_configura_16=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
+text_configura_11=(" ( I ) Change the number of audio channels (2.0) in the VIDEO-STATION's OffLine transcoding. (DEFAULT)" " ( I ) Cambiar el número de canales de audio (2.0) en la transcodificación OffLine del VIDEO-STATION. (POR DEFECTO)" " ( I ) Altere o número de canais de áudio (2.0) na transcodificação OffLine do VIDEO-STATION. (POR PADRÃO)" " ( I ) Modifiez le nombre de canaux audio (2.0) dans le transcodage hors ligne de la VIDEO-STATION. (PAR DÉFAUT)" " ( I ) Ändern Sie die Anzahl der Audiokanäle (2.0) in der Offline-Transkodierung der VIDEO-STATION. (STANDARD)" " ( I ) Modificare il numero di canali audio (2.0) nella transcodifica OffLine della VIDEO-STATION. (PREDEFINITO)")
+text_configura_12=(" ( J ) Change the number of audio channels (5.1) in the VIDEO-STATION's OffLine transcoding." " ( J ) Cambiar el número de canales de audio (5.1) en la transcodificación OffLine del VIDEO-STATION." " ( J ) Altere o número de canais de áudio (5.1) na transcodificação OffLine do VIDEO-STATION." " ( J ) Modifiez le nombre de canaux audio (5.1) dans le transcodage hors ligne de la VIDEO-STATION." " ( J ) Ändern Sie die Anzahl der Audiokanäle (5.1) in der Offline-Transkodierung der VIDEO-STATION." " ( J ) Modificare il numero di canali audio (5.1) nella transcodifica OffLine della VIDEO-STATION.")
+text_configura_21=(" ( Z ) RETURN to MAIN menu." " ( Z ) VOLVER al menú PRINCIPAL." " ( Z ) VOLTAR ao menu PRINCIPAL." " ( Z ) RETOUR au menu PRINCIPAL." " ( Z ) ZURÜCK zum HAUPTMENÜ." " ( Z ) TORNA al menu PRINCIPALE.")
+text_configura_22=("Do you wish to change the order of these audio's streams in the Advanced wrapper?" "¿Deseas cambiar el orden de estos flujos de audio en el Wrapper Avanzado?" "Deseja alterar a ordem desses fluxos de áudio no Advanced Wrapper?" "Voulez-vous modifier l'ordre de ces flux audio dans Advanced Wrapper?" "Möchten Sie die Reihenfolge dieser Audiostreams im Advanced Wrapper ändern?" "Vuoi cambiare l'ordine di questi flussi audio nel Wrapper avanzato?")
+text_configura_23=("Please answer with the correct option writing: A or B or C or D or E or F or G or H or I or J. Write Z (for return to MAIN menu)." "Responda con la opción correcta escribiendo: A o B o C o D o E o F o G o H o I o J. Escriba Z (para volver al menú PRINCIPAL)." "Responda com a opção correta digitando: A ou B ou C ou D ou E ou F ou G ou H ou I ou J. Digite Z (para retornar ao menu PRINCIPAL)." "Répondez par l'option correcte en tapant : A ou B ou C ou D ou E ou F ou G ou H ou I ou J. Tapez Z (pour revenir au menu PRINCIPAL)." "Antworten Sie mit der richtigen Option, indem Sie Folgendes eingeben: A oder B oder C oder D oder E oder F oder G oder H oder I oder J. Geben Sie Z ein (um zum HAUPTMENÜ zurückzukehren)." "Rispondi con l'opzione corretta digitando: A o B o C o D o E o F o G o H o I o J. Digita Z (per tornare al menu PRINCIPALE).")
+text_configura_24=("==================== Configuration of the Advanced Wrapper: COMPLETE ====================" "==================== Configuración del Wrapper Avanzado: COMPLETADA ====================" "==================== Configuração avançada do wrapper: CONCLUÍDO ====================" "==================== Configuration avancée de l'encapsuleur : TERMINÉE ====================" "==================== Erweiterte Wrapper-Konfiguration: ABGESCHLOSSEN ====================" "==================== Configurazione avanzata del wrapper: COMPLETATA ====================")
+text_configura_25=("Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED so this codec Configurator CAN'T change anything." "Actualmente NO TIENES EL WRAPPER AVANZADO INSTALADO y este Configurador de codec NO PUEDE cambiar nada." "Atualmente, você NÃO TEM O WRAPPER AVANÇADO INSTALADO e este Configurador de Codec NÃO PODE alterar nada." "Actuellement, vous N'AVEZ PAS INSTALLÉ LE WRAPPER AVANCÉ et ce configurateur de codec NE PEUT PAS changer quoi que ce soit." "Sie haben derzeit den ADVANCED WRAPPER NICHT INSTALLIERT und dieser Codec-Konfigurator kann NICHTS ändern." "Al momento NON HAI INSTALLATO IL WRAPPER AVANZATO e questo configuratore di codec NON PUÒ modificare nulla.")
+text_configura_26=("Please, Install the Advanced Wrapper first and then you will can change the config for audio's streams." "Por favor, Instala el Wrapper Avanzado y después podrás cambiar la configuración de los flujos de audio." "Por favor, instale o Advanced Wrapper e então você pode alterar as configurações dos fluxos de áudio." "Veuillez installer Advanced Wrapper et vous pourrez ensuite modifier les paramètres des flux audio." "Bitte installieren Sie den Advanced Wrapper und dann können Sie die Einstellungen der Audiostreams ändern." "Si prega di installare il wrapper avanzato e quindi è possibile modificare le impostazioni dei flussi audio.")
 
 if [[ "$check_amrif" == "$firma2" ]]; then
 YELLOW_BLUEMS="\u001b[33m"
@@ -1650,12 +1714,14 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
         echo -e "${YELLOW_BLUEMS}${text_configura_8[$LANG]}"
 	echo -e "${BLUE}${text_configura_9[$LANG]}"
 	echo -e "${RED_BLUEMS}${text_configura_10[$LANG]}"
+ 	echo -e "${BLUE}${text_configura_11[$LANG]}"
+ 	echo -e "${BLUE}${text_configura_12[$LANG]}"
         echo ""
-        echo -e "${PURPLE}${text_configura_11[$LANG]}"
+        echo -e "${PURPLE}${text_configura_21[$LANG]}"
    	while true; do
 	echo -e "${GREEN}"
-        read -p "${text_configura_12[$LANG]}" abcdefghz
-        case $abcdefghz in
+        read -p "${text_configura_22[$LANG]}" abcdefghijz
+        case $abcdefghijz in
         [Aa] ) config_A; break;;
         [Bb] ) config_B; break;;
 	[Cc] ) config_C; break;;
@@ -1664,19 +1730,21 @@ if [[ "$check_amrif_1" == "$firma_cp" ]]; then
 	[Ff] ) config_F; break;;
 	[Gg] ) config_G; break;;
 	[Hh] ) config_H; break;;
+ 	[Ii] ) config_I; break;;
+ 	[Jj] ) config_J; break;;
 	[Zz] ) reloadstart; break;;
-        * ) echo -e "${YELLOW}${text_configura_13[$LANG]}";;
+        * ) echo -e "${YELLOW}${text_configura_23[$LANG]}";;
         esac
         done
    
-   echo -e "${BLUE}${text_configura_14[$LANG]}"
+   echo -e "${BLUE}${text_configura_24[$LANG]}"
    info "${BLUE}==================== Configuration of the Advanced Wrapper: COMPLETE ====================" >> $logfile
    exit 0
 
 else
-   info "${RED}${text_configura_15[$LANG]}"
+   info "${RED}${text_configura_25[$LANG]}"
    info "${RED}Actually You HAVEN'T THE ADVANCED WRAPPER INSTALLED so this codec Configurator CAN'T change anything." >> $logfile
-   info "${BLUE}${text_configura_16[$LANG]}"
+   info "${BLUE}${text_configura_26[$LANG]}"
    start
 fi
 }
