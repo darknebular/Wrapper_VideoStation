@@ -22,7 +22,7 @@ rev="AME_12.4.4"
 # AME_12.4.1: Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X. (Deprecated, migrate to 12.4.2)
 # AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
 # AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled. (Deprecated, migrate to 12.4.4)
-# AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for transcoding.
+# AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding.
 
 
 WHITE="\u001B[37m"
