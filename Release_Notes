@@ -1,8 +1,9 @@
 ### CHANGES:
 
 ### SCPT_3.X:
+****SCPT_3.9.7: Added the possibility of changing the number of audio channels in the OffLine transcoding of the Video Station in the Configuration menu.**
 
-****SCPT_3.9.6: Added into the Uninstall Old function the possibility to delete Orphan files generated from others wrappers, like Alex's one.**
+**SCPT_3.9.6:** Added into the Uninstall Old function the possibility to delete Orphan files generated from others wrappers, like Alex's one. (Deprecated migrated to SCPT_3.9.7)
 
 **SCPT_3.9.5:** Added a new hash for the AME License Patch. (Deprecated migrated to SCPT_3.9.6)
 
@@ -67,7 +68,9 @@
 
 
 ### ADVANCED WRAPPER FOR AME_12.X.X:
-****AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled.**
+****AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding.**
+
+**AME_12.4.3:** Added a new error code for the new DSM Versions, now this can be controlled. (Deprecated, migrate to 12.4.4)
 
 **AME_12.4.2:** Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
 
