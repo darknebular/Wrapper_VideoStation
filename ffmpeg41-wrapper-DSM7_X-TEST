@@ -145,6 +145,7 @@ case "$1" in
 		fi
                 args2vs+=("-analyzeduration" "10000000")
 		args2vsms+=("-ss" "$1")
+		args2trans+=("-ss" "$1")
         ;;
         -i)
                 shift
@@ -156,7 +157,7 @@ case "$1" in
                   args2vs+=("-i" "pipe:" "-map" "0:0" "-map" "0:1" "-map" "0:1")
 		fi
                 args2vsms+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
-                args2trans+=("-i" "$1" "-map" "0:0" "-map" "0:1" "-map" "0:1")
+                args2trans+=("-i" "$1" "-map" "0:0" "-map" "0:1")
         ;;
         -r)
                 shift
@@ -227,7 +228,7 @@ case "$1" in
                         argsnew+=("-acodec" "libfdk_aac")
                         args2vs+=("-c:a:0" "$1" "-c:a:1" "libfdk_aac")
                         args2vsms+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")
-                        args2trans+=("-c:a:0" "libfdk_aac" "-c:a:1" "$1")
+                        args2trans+=("-c:a" "$1")
 
                 fi
                 args1vs+=("-acodec" "copy")
@@ -239,7 +240,7 @@ case "$1" in
                 argsnew+=("-b:a" "512k")
                 args2vs+=("-b:a:0" "256k" "-b:a:1" "512k")
                 args2vsms+=("-b:a:0" "512k" "-b:a:1" "256k")
-                args2trans+=("-b:a:0" "512k" "-b:a:1" "256k")
+                args2trans+=("-b:a" "256k")
 
         ;;
         # Si tienes un Chromecast, debería enviarse en 2 canales. Para ello se mandan dos stream de audio (MP3 y AAC) de la misma pista de audio, siendo el primero a elegir la pista de Stereo MP3.
@@ -249,7 +250,7 @@ case "$1" in
                 argsnew+=("-ac" "$1")
                 args2vs+=("-ac:1" "$1" "-ac:2" "6")
                 args2vsms+=("-ac:1" "6" "-ac:2" "$1")
-                args2trans+=("-ac:1" "6" "-ac:2" "$1")
+                args2trans+=("-ac" "$1")
 
         ;;
         -f)
