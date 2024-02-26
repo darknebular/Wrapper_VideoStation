@@ -660,11 +660,11 @@ function check_versions() {
 if [[ "$majorversion" -ge "8" ]]; then
   cp_path="/var/packages/CodecPack/target/pack"
   cp_bin_path="$cp_path/bin"
-  injector="X-Advanced"
+  injector="X-TEST"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -ge "1" ]]; then
   cp_path="/var/packages/CodecPack/target/pack"
   cp_bin_path="$cp_path/bin"
-  injector="X-Advanced"
+  injector="X-TEST"
 elif [[ "$majorversion" -eq "7" && "$minorversion" -eq "0" ]]; then
   cp_path="/var/packages/CodecPack/target"
   cp_bin_path="$cp_path/bin"
