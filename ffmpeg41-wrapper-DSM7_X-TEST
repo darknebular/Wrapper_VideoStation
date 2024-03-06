@@ -83,7 +83,7 @@ case "$1" in
         -vcodec)
                 shift
                 vcodec="$1"
-                args+=("-vcodec" "hevc_vaapi")
+                args+=("-vcodec" "$1")
         ;;
         -f)
                 shift
