@@ -2,7 +2,7 @@
 
 # DarkNebular´s Advanced Wrapper
 # Fork from code of BenjaminPoncet rev.12 with some revisions and little fixes and improvements.
-rev="AME_12.4.4"
+rev="AME_12.4.5"
 # Changes:
 # VS_12.1: Initial release and changed some logging options and variables names for better understand. Fix the offline transcoding. (Deprecated)
 # AME_12.1.1: Changed from using VideoStation´s ffmpeg to Advance Media Extensions one. Change the buffering from 1024 to 8192k. Fix the problem with thumbnails are empty and some other little fixes. (Deprecated)
@@ -22,7 +22,8 @@ rev="AME_12.4.4"
 # AME_12.4.1: Added support for FFMPEG 6.X binaries and deprecate the use of FFMPEG 4.X. (Deprecated, migrate to 12.4.2)
 # AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
 # AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled. (Deprecated, migrate to 12.4.4)
-# AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding.
+# AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding. (Deprecated, migrate to 12.4.5)
+# AME_12.4.5: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station.
 
 
 WHITE="\u001B[37m"
@@ -90,6 +91,12 @@ case "$1" in
                 y="$1"
                 yoff="OffEnable"
                 args+=("-y" "$1")
+        ;;
+	-vframes)
+                shift
+                vframes="$1"
+                yoff="OffDisable"
+                args+=("-vframes" "$1")
         ;;
         pipe:4)
         shift
