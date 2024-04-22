@@ -25,7 +25,6 @@ rev="AME_12.4.5"
 # AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding. (Deprecated, migrate to 12.4.5)
 # AME_12.4.5: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station when the video is a .mp4
 
-
 WHITE="\u001B[37m"
 RED="\u001b[31m"
 BLUE="\u001b[36m"
