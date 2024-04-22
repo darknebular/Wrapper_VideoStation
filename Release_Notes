@@ -1,7 +1,7 @@
 ### CHANGES:
 
 ### SCPT_3.X:
-****SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station.**
+****SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. I did changes in the Advanced Wrapper.**
 
 **SCPT_3.9.7:** Added the possibility of changing the number of audio channels in the OffLine transcoding of the Video Station in the Configuration menu. Fixed a Typo in AME License, in two variables. (Deprecated migrated to SCPT_3.9.8)
 
