@@ -23,7 +23,7 @@ rev="AME_12.4.5"
 # AME_12.4.2: Fixed a bug when the movies has HEVC 4K HDR 10bits plus TrueHD 7.1 audio's codec. (Deprecated, migrate to 12.4.3)
 # AME_12.4.3: Added a new error code for the new DSM Versions, now this can be controlled. (Deprecated, migrate to 12.4.4)
 # AME_12.4.4: Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding. (Deprecated, migrate to 12.4.5)
-# AME_12.4.5: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station.
+# AME_12.4.5: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station when the video is a .mp4
 
 WHITE="\u001B[37m"
 RED="\u001b[31m"
@@ -94,7 +94,7 @@ case "$1" in
 	-vframes)
                 shift
                 vframes="$1"
-                yoff="OffDisable"
+                thumbnail="true"
                 args+=("-vframes" "$1")
         ;;
         pipe:4)
@@ -124,6 +124,11 @@ case "$1" in
 esac
 shift
 done
+
+# Verificar si Video Station quiere solamente generar los Thumbnails independientemente de la posición del argumento "-y"
+if [ "$thumbnail" = "true" ]; then
+    yoff="OffDisable"
+fi
 
 _log "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
 
