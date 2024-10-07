@@ -32,7 +32,8 @@ This is not mandatory to have it installed for installing the Wrapper.
 ## Dependencies:
 - DSM 7.0-41890 (and above)
 - Video Station 2.4.6-1594 (and above)
-- SynoCommunity FFMPEG 6.0.2. (and above) ([help](https://synocommunity.com/#easy-install))
+- SynoCommunity FFMPEG 7.0.2. (and above) ([help](https://synocommunity.com/#easy-install))
+- SynoCli Video Driver ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 1.0.0-50001 (and above). (The licence in AME must be LOADED and ACTIVATED.)
 
 ## Optional Packages:
@@ -50,6 +51,7 @@ This is not mandatory to have it installed for installing the Wrapper.
 
 ## Instructions:
 - Check that you meet the required dependencies
+- Install SynoCli Video Driver ([help](https://synocommunity.com/#easy-install))
 - Install SynoCommunity ffmpeg ([help](https://synocommunity.com/#easy-install))
 - Connect to your NAS using SSH (admin user required) *(I recommend maximizing the window to read it better.)* ([help](https://www.synology.com/en-global/knowledgebase/DSM/tutorial/General_Setup/How_to_login_to_DSM_with_root_permission_via_SSH_Telnet))
 - Use the command `sudo -i` to switch to root user
