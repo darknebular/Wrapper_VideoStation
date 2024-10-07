@@ -148,7 +148,7 @@ if [[ $errcode -eq 0 ]]; then
 fi
 
 errcode=0
-log "${YELLOW}Trying with DEFAULT_ARGS.${WHITE}"
+info "${YELLOW}Trying with DEFAULT_ARGS.${WHITE}"
 $bin1 "$@" 2> $stderrfile
 childpid=$!
 wait "$childpid"
