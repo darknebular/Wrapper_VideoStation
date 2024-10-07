@@ -117,7 +117,9 @@
 
 
 ### SIMPLEST WRAPPER FOR AME_S.X.X:
-****AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X.**
+****AME_S_3.2: Fixed a bug that doesn't log the actions using the Simplest one. Added few parameters changes to work properly with FFmpeg 7.0.**
+
+**AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X. (Deprecated, migrate to AME_S_3.2)
 
 **AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated, migrate to AME_S_3.1)
 
