@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.9.8"
+version="SCPT_3.9.9"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -22,7 +22,8 @@ version="SCPT_3.9.8"
 # SCPT_3.9.5: Added a new hash for the AME License Patch. (Deprecated migrated to SCPT_3.9.6)
 # SCPT_3.9.6: Added into the Uninstall Old function the possibility to delete Orphan files generated from others wrappers, like Alex's one. (Deprecated migrated to SCPT_3.9.7)
 # SCPT_3.9.7: Added the possibility of changing the number of audio channels in the OffLine transcoding of the Video Station in the Configuration menu. Fixed a Typo in AME License, in two variables. (Deprecated migrated to SCPT_3.9.8)
-# SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. I did changes in the Advanced Wrapper.**
+# SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. I did changes in the Advanced Wrapper. (Deprecated migrated to SCPT_3.9.9)
+# SCPT_3.9.9: Support for the new versions of FFMPEG 7.0.X and deprecate the use of ffmpeg 6.X.X. 
 
 ##############################################################
 
@@ -36,7 +37,7 @@ majorversion=$(cat /etc.defaults/VERSION | grep majorversion | sed 's/majorversi
 minorversion=$(cat /etc.defaults/VERSION | grep minorversion | sed 's/minorversion=//' | tr -d '"')
 repo_url="https://raw.githubusercontent.com/darknebular/Wrapper_VideoStation"
 setup="start"
-dependencias=("VideoStation" "ffmpeg6" "CodecPack")
+dependencias=("VideoStation" "ffmpeg7" "CodecPack")
 RED="\u001b[31m"
 BLUE="\u001b[36m"
 BLUEGSLP="\u001b[36m"
@@ -1202,8 +1203,8 @@ sed -i 's/^# export/export/g' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
 sed -i 's/^# export/export/g' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
 sed -i 's|stderrfile="/tmp/ffmpeg-${streamid}.stderr"|stderrfile="/tmp/gst-launch-1.0.stderr"|' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
 sed -i 's|stderrfile="/tmp/ffmpeg-${streamid}.stderr"|stderrfile="/tmp/gst-inspect-1.0.stderr"|' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
-sed -i 's|bin1=/var/packages/ffmpeg6/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-launch-1.0.orig|' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
-sed -i 's|bin1=/var/packages/ffmpeg6/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-inspect-1.0.orig|' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
+sed -i 's|bin1=/var/packages/ffmpeg7/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-launch-1.0.orig|' "$vs_path/bin/gst-launch-1.0" 2>> $logfile
+sed -i 's|bin1=/var/packages/ffmpeg7/target/bin/ffmpeg|bin1=/var/packages/VideoStation/target/bin/gst-inspect-1.0.orig|' "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
 sed -i "s/FFmpeg $pid/GST-launch $pid/g" "$vs_path/bin/gst-launch-1.0" 2>> $logfile
 sed -i "s/FFmpeg $pid/GST-inspect $pid/g" "$vs_path/bin/gst-inspect-1.0" 2>> $logfile
 
