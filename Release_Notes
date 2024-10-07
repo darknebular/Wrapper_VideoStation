@@ -1,7 +1,9 @@
 ### CHANGES:
 
 ### SCPT_3.X:
-****SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. I did changes in the Advanced Wrapper.**
+****SCPT_3.9.9: Support for the new versions of FFMPEG 7.0.X and deprecate the use of ffmpeg 6.X.X.**
+
+**SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. I did changes in the Advanced Wrapper. (Deprecated migrated to SCPT_3.9.9)
 
 **SCPT_3.9.7:** Added the possibility of changing the number of audio channels in the OffLine transcoding of the Video Station in the Configuration menu. Fixed a Typo in AME License, in two variables. (Deprecated migrated to SCPT_3.9.8)
 
@@ -70,7 +72,9 @@
 
 
 ### ADVANCED WRAPPER FOR AME_12.X.X:
-****AME_12.4.5: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station.**
+****AME_12.5.1: Added support for FFMPEG 7.X binaries and deprecate the use of FFMPEG 6.X. **
+
+**AME_12.4.5: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. (Deprecated, migrate to 12.5.1)
 
 **AME_12.4.4:** Improvements in the VideoStation OffLine Transcoding. Now you can select 2.0 or 5.1 for OffLine transcoding. (Deprecated, migrate to 12.4.5)
 
@@ -113,7 +117,9 @@
 
 
 ### SIMPLEST WRAPPER FOR AME_S.X.X:
-****AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code.**
+****AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X.**
+
+**AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated, migrate to AME_S_3.1)
 
 **AME_S_2.2:** Added support for GStreamer libraries. (Deprecated, migrate to AME_S_2.3)
 
