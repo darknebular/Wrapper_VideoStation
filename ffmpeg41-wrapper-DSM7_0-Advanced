@@ -246,6 +246,14 @@ case "$1" in
                 args1vs+=("-acodec" "copy")
 
         ;;
+	-vbsf)
+                shift
+                argsnew+=("-bsf:v" "$1")
+                args1vs+=("-vbsf" "$1")
+                args2vs+=("-bsf:v" "$1")
+                args2vsms+=("-bsf:v" "$1")
+                args2trans+=("-bsf:v" "$1")
+        ;;
         # En caso de necesitar hacer decoder de DTS,TrueHD o E-AC3 se usará bitrate constante a 512k para AAC y 256k para MP3 Stereo
         -ab)
                 shift
