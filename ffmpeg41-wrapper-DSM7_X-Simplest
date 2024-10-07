@@ -4,7 +4,7 @@
 # Simplest wrapper. This wrapper works with the Video Station´s Transcoding Profiles and always will be using MP3 2.0 96kbps or 128kbps when transcoding.
 # It derives all parameters to the SynoCommunity´s ffmpeg.
 
-rev="AME_S_3.1"
+rev="AME_S_3.2"
 # Changes:
 # AME_S_1.0: Initial release of the simplest wrapper. Fork from AlexPresso. (Deprecated, migrate to AME_S_1.1)
 # AME_S_1.1: Correcting the log file. (Deprecated, migrate to AME_S_1.2)
@@ -13,7 +13,8 @@ rev="AME_S_3.1"
 # AME_S_2.1: Added support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X. (Deprecated, migrate to AME_S_2.2)
 # AME_S_2.2: Added support for GStreamer libraries. (Deprecated, migrate to AME_S_2.3)
 # AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated, migrate to AME_S_3.1)
-# AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X.
+# AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X. (Deprecated, migrate to AME_S_3.2)
+# AME_S_3.2: Fixed a bug that doesn't log the actions using the Simplest one. Added few parameters changes to work properly with FFmpeg 7.0.
 
 ##################################################
 # VARIABLES
@@ -24,6 +25,7 @@ PURPLE="\u001B[35m"
 GREEN="\u001b[32m"
 YELLOW="\u001b[33m"
 pid=$$
+childpid=""
 streamid="FFM$pid"
 stderrfile="/tmp/ffmpeg-${streamid}.stderr"
 logfile="/tmp/wrapper_ffmpeg.log"
@@ -31,6 +33,7 @@ errcode=0
 arch=`uname -a | sed 's/.*synology_//' | cut -d '_' -f 1`
 nas=`uname -a | sed 's/.*synology_//' | cut -d '_' -f 2`
 bin1=/var/packages/ffmpeg7/target/bin/ffmpeg
+args=()
 
 ##################################################
 # FUNCIONES
@@ -44,6 +47,11 @@ function newline() {
 function info() {
   log "${BLUE}INFO" "${WHITE}$1"
 }
+function kill_child() {
+  if [[ "$childpid" != "" ]]; then
+    kill "$childpid" > /dev/null 2> /dev/null || :
+  fi
+}
 
 function handle_error() {
   log "${RED}ERROR" "${RED}An error occurred, here is the $stderrfile content:${WHITE}"
@@ -51,34 +59,98 @@ function handle_error() {
   cat "$stderrfile" >> $logfile
   newline
   errcode=1
-  endprocess
+  kill_child
 }
 
 function _term() {
   info "${PURPLE}========================================[END FFmpeg $pid]${WHITE}"
   newline
   rm -f "$stderrfile"
-  kill -TERM "$childpid" 2>/dev/null
-  exit $errcode
+  kill -TERM "$childpid" 2> /dev/null
+  exit "$errcode"
+}
+function fix_args() {
+  while [[ $# -gt 0 ]]; do
+    case "$1" in
+      -ss)
+        shift
+        args+=("-ss" "$1" "-noaccurate_seek")
+      ;;
+	  
+	  -vbsf)
+        shift
+        args+=("-bsf:v" "$1")
+      ;;
+	  
+      -acodec)
+        shift
+        if [[ "$1" = "libfaac" ]]; then
+          args+=("-acodec" "aac")
+        else
+          args+=("-acodec" "libfdk_aac")
+        fi
+      ;;
+
+      -vf)
+        shift
+        arg="$1"
+
+        if [[ "$arg" =~ "scale_vaapi" ]]; then
+          scale_w=$(echo "$arg" | sed -n 's/.*w=\([0-9]\+\):h=\([0-9]\+\).*/\1/p')
+          scale_h=$(echo "$arg" | sed -n 's/.*w=\([0-9]\+\):h=\([0-9]\+\).*/\2/p')
+
+          if (( scale_w && scale_h )); then
+            arg="format=nv12|vaapi,hwupload,scale_vaapi=w=$scale_w:h=$scale_h:format=nv12,setsar=sar=1"
+          else
+            arg="format=nv12|vaapi,hwupload,scale_vaapi=format=nv12,setsar=sar=1"
+          fi
+        fi
+
+        args+=("-vf" "$arg")
+      ;;
+
+      -r)
+        shift
+      ;;
+
+      *) args+=("$1") ;;
+    esac
+
+    shift
+  done
 }
 #########################
 # EJECUCION
 
-trap _term SIGTERM
+trap _term SIGINT SIGTERM
 trap handle_error ERR
 
 # export LD_LIBRARY_PATH=/var/packages/VideoStation/target/lib/patch/lib/
 # export GST_PLUGIN_PATH=/var/packages/VideoStation/target/lib/patch/plugins/
 
-newline
-info "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
-info "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
-info "${BLUE}BINARY   = $bin1${WHITE}"
-info "${BLUE}DEFAULT_ARGS: $*${WHITE}"
+fix_args "$@"
 
-$bin1 "$@" 2> $stderrfile
+newline
+log "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
+log "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
+log "${BLUE}BINARY   = $bin1${WHITE}"
+log "${BLUE}DEFAULT_ARGS: $*${WHITE}"
+log "${BLUE}UPDATED_ARGS: ${args[*]}${WHITE}"
+
+log "${YELLOW}Trying with UPDATED_ARGS.${WHITE}"
+$bin1 "${args[@]}" 2> $stderrfile
 
 childpid=$!
-wait $childpid
+wait "$childpid"
+
+if [[ $errcode -eq 0 ]]; then
+  _term
+fi
+
+errcode=0
+log "${YELLOW}Trying with DEFAULT_ARGS.${WHITE}"
+$bin1 "$@" 2> $stderrfile
+childpid=$!
+wait "$childpid"
 
 _term
