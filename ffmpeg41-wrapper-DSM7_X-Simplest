@@ -4,7 +4,7 @@
 # Simplest wrapper. This wrapper works with the Video Station´s Transcoding Profiles and always will be using MP3 2.0 96kbps or 128kbps when transcoding.
 # It derives all parameters to the SynoCommunity´s ffmpeg.
 
-rev="AME_S_2.3"
+rev="AME_S_3.1"
 # Changes:
 # AME_S_1.0: Initial release of the simplest wrapper. Fork from AlexPresso. (Deprecated, migrate to AME_S_1.1)
 # AME_S_1.1: Correcting the log file. (Deprecated, migrate to AME_S_1.2)
@@ -12,7 +12,8 @@ rev="AME_S_2.3"
 # AME_S_1.3: Fixed a bug that doesn't remove the stderr file due a misconfiguration. (Deprecated, migrate to AME_S_2.1)
 # AME_S_2.1: Added support for FFMPEG 6.X binaries and deprecate the FFMPEG 4.X. (Deprecated, migrate to AME_S_2.2)
 # AME_S_2.2: Added support for GStreamer libraries. (Deprecated, migrate to AME_S_2.3)
-# AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code.
+# AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated, migrate to AME_S_3.1)
+# AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X.
 
 ##################################################
 # VARIABLES
@@ -29,7 +30,7 @@ logfile="/tmp/wrapper_ffmpeg.log"
 errcode=0
 arch=`uname -a | sed 's/.*synology_//' | cut -d '_' -f 1`
 nas=`uname -a | sed 's/.*synology_//' | cut -d '_' -f 2`
-bin1=/var/packages/ffmpeg6/target/bin/ffmpeg
+bin1=/var/packages/ffmpeg7/target/bin/ffmpeg
 
 ##################################################
 # FUNCIONES
