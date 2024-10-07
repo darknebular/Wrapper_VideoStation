@@ -134,8 +134,8 @@ newline
 info "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
 info "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
 info "${BLUE}BINARY   = ${WHITE}$bin1${WHITE}"
-info "${BLUE}DEFAULT_ARGS: ${WHITE}$*${WHITE}"
-info "${BLUE}UPDATED_ARGS: ${WHITE}${args[*]}${WHITE}"
+info "${GREEN}DEFAULT_ARGS: ${WHITE}$*${WHITE}"
+info "${GREEN}UPDATED_ARGS: ${WHITE}${args[*]}${WHITE}"
 
 info "${YELLOW}Trying with UPDATED_ARGS.${WHITE}"
 $bin1 "${args[@]}" 2> $stderrfile
