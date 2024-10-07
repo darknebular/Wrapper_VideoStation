@@ -131,13 +131,13 @@ trap handle_error ERR
 fix_args "$@"
 
 newline
-log "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
-log "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
-log "${BLUE}BINARY   = $bin1${WHITE}"
-log "${BLUE}DEFAULT_ARGS: $*${WHITE}"
-log "${BLUE}UPDATED_ARGS: ${args[*]}${WHITE}"
+info "${PURPLE}*** PROCESS START REV $rev DS$nas ($arch) PID $pid ***"
+info "${PURPLE}========================================[START FFmpeg $pid]${WHITE}"
+info "${BLUE}BINARY   = $bin1${WHITE}"
+info "${BLUE}DEFAULT_ARGS: $*${WHITE}"
+info "${BLUE}UPDATED_ARGS: ${args[*]}${WHITE}"
 
-log "${YELLOW}Trying with UPDATED_ARGS.${WHITE}"
+info "${YELLOW}Trying with UPDATED_ARGS.${WHITE}"
 $bin1 "${args[@]}" 2> $stderrfile
 
 childpid=$!
