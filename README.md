@@ -33,7 +33,7 @@ This is not mandatory to have it installed for installing the Wrapper.
 - DSM 7.0-41890 (and above)
 - Video Station 2.4.6-1594 (and above)
 - SynoCommunity FFMPEG 7.0.2. (and above) ([help](https://synocommunity.com/#easy-install))
-- SynoCli Video Driver ([help](https://synocommunity.com/#easy-install))
+- SynoCli Video Driver (Only if your system has an Intel GPU) ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 1.0.0-50001 (and above). (The licence in AME must be LOADED and ACTIVATED.)
 
 ## Optional Packages:
