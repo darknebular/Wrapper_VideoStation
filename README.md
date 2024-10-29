@@ -31,7 +31,7 @@ This is not mandatory to have it installed for installing the Wrapper.
 
 ## Dependencies:
 - DSM 7.0-41890 (and above)
-- Video Station 2.4.6-1594 (and above)
+- Video Station 2.4.6-1594 (and above) ([How to Install in DSM 7.2.2](https://github.com/007revad/Video_Station_for_DSM_722))
 - SynoCommunity FFMPEG 7.0.2. (and above) ([help](https://synocommunity.com/#easy-install))
 - SynoCli Video Driver (Only if your system has an Intel GPU) ([help](https://synocommunity.com/#easy-install))
 - Advanced Media Extensions 1.0.0-50001 (and above). (The licence in AME must be LOADED and ACTIVATED.)
