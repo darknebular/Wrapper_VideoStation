@@ -14,6 +14,7 @@ Synology VideoStation and MediaServer FFmpeg (and GStreamer) Wrapper with DTS, E
 Works fine the OffLine transcoding and the streaming of tipical extensions like: MKV, MP4, AVI... Works fine the thumbnails in VideoStation.
 
 The Advanced Wrapper is a fork of BenjaminPoncet rev.12 with a some changes, fixes and some improvements in his code.
+
 The Simplest Wrapper is a fork of Alex Presso v.1 with a some changes, fixes and some improvements in his code, like the fix for the new arguments FFMPEG 7.0.
 Very Thanks to both!!!
 
