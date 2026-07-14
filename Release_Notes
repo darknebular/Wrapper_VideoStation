@@ -1,7 +1,9 @@
 ### CHANGES:
 
 ### SCPT_3.X:
-****SCPT_3.9.9: Support for the new versions of FFMPEG 7.0.X and deprecate the use of ffmpeg 6.X.X.**
+****SCPT_3.9.10 Added a parameters changes to work properly with FFmpeg 7.1.**
+
+**SCPT_3.9.9: Support for the new versions of FFMPEG 7.0.X and deprecate the use of ffmpeg 6.X.X.
 
 **SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. I did changes in the Advanced Wrapper. (Deprecated migrated to SCPT_3.9.9)
 
@@ -72,7 +74,9 @@
 
 
 ### ADVANCED WRAPPER FOR AME_12.X.X:
-****AME_12.5.1: Added support for FFMPEG 7.X binaries and deprecate the use of FFMPEG 6.X. **
+****AME_12.5.2: Added a parameter change to work properly with FFmpeg 7.1.**
+
+**AME_12.5.1: Added support for FFMPEG 7.X binaries and deprecate the use of FFMPEG 6.X. 
 
 **AME_12.4.5: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. (Deprecated, migrate to 12.5.1)
 
@@ -117,7 +121,9 @@
 
 
 ### SIMPLEST WRAPPER FOR AME_S.X.X:
-****AME_S_3.2: Fixed a bug that doesn't log the actions using the Simplest one. Added few parameters changes to work properly with FFmpeg 7.0.**
+****AME_S_3.3: Added a parameter change to work properly with FFmpeg 7.1.**
+
+**AME_S_3.2: Fixed a bug that doesn't log the actions using the Simplest one. Added few parameters changes to work properly with FFmpeg 7.0.
 
 **AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X. (Deprecated, migrate to AME_S_3.2)
 
