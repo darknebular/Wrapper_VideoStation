@@ -4,7 +4,7 @@
 # Simplest wrapper. This wrapper works with the Video Station´s Transcoding Profiles and always will be using MP3 2.0 96kbps or 128kbps when transcoding.
 # It derives all parameters to the SynoCommunity´s ffmpeg.
 
-rev="AME_S_3.2"
+rev="AME_S_3.3"
 # Changes:
 # AME_S_1.0: Initial release of the simplest wrapper. Fork from AlexPresso. (Deprecated, migrate to AME_S_1.1)
 # AME_S_1.1: Correcting the log file. (Deprecated, migrate to AME_S_1.2)
@@ -15,6 +15,7 @@ rev="AME_S_3.2"
 # AME_S_2.3: Homogenize the closing of processes with the Advanced Wrapper, to correct a bug carried over from Alex's code. (Deprecated, migrate to AME_S_3.1)
 # AME_S_3.1: Added support for FFMPEG 7.X binaries and deprecate the FFMPEG 6.X. (Deprecated, migrate to AME_S_3.2)
 # AME_S_3.2: Fixed a bug that doesn't log the actions using the Simplest one. Added few parameters changes to work properly with FFmpeg 7.0.
+# AME_S_3.3: Added few parameters changes to work properly with FFmpeg 7.1.
 
 ##################################################
 # VARIABLES
@@ -81,7 +82,12 @@ function fix_args() {
         shift
         args+=("-bsf:v" "$1")
       ;;
-	  
+
+      -hls_seek_time)
+        shift
+        args+=()
+      ;;
+
       -acodec)
         shift
         if [[ "$1" = "libfaac" ]]; then
@@ -111,6 +117,12 @@ function fix_args() {
 
       -r)
         shift
+      ;;
+
+	  -vsync)
+        shift
+        # Esto ignora el vsync viejo y evita el error en FFmpeg 7
+        args+=("-fps_mode" "$1")
       ;;
 
       *) args+=("$1") ;;
