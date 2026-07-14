@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ##############################################################
-version="SCPT_3.9.9"
+version="SCPT_3.9.10"
 # Changes:
 # SCPT_1.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
 # SCPT_2.X: See these changes in the releases notes in my Repository in Github. (Deprecated)
@@ -24,6 +24,7 @@ version="SCPT_3.9.9"
 # SCPT_3.9.7: Added the possibility of changing the number of audio channels in the OffLine transcoding of the Video Station in the Configuration menu. Fixed a Typo in AME License, in two variables. (Deprecated migrated to SCPT_3.9.8)
 # SCPT_3.9.8: Fixed a bug that did not make thumbnails of .mp4 videos in Video Station. I did changes in the Advanced Wrapper. (Deprecated migrated to SCPT_3.9.9)
 # SCPT_3.9.9: Support for the new versions of FFMPEG 7.0.X and deprecate the use of ffmpeg 6.X.X. Fixed a bug that doesn't log the actions using the Simplest one. Added few parameters changes to work properly with FFmpeg 7.0.
+# SCPT_3.9.10 Added a parameters changes to work properly with FFmpeg 7.1.
 
 ##############################################################
 
