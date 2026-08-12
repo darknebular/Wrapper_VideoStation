@@ -298,10 +298,10 @@ case "$1" in
         ;;
         -hls_seek_time)
                 shift
-                argsnew+=()
-                args2vs+=()
-                args2vsms+=()
-                args2trans+=()
+                argsnew+=("-hls_seek_time" "$1")
+                args2vs+=("-hls_seek_time" "$1")
+                args2vsms+=("-hls_seek_time" "$1")
+                args2trans+=("-hls_seek_time" "$1")
         ;;
         -segment_time)
                 shift
