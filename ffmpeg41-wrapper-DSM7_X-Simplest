@@ -85,7 +85,7 @@ function fix_args() {
 
       -hls_seek_time)
         shift
-        args+=()
+        args+=("-hls_seek_time" "$1")
       ;;
 
       -acodec)
